@@ -61,7 +61,7 @@ public class MensalidadeDAO {
                     String nomeDoPlano = rs.getString("nomeDoPlano");
                     double valor = rs.getDouble("valor");
                     double desconto = rs.getDouble("desconto");
-                    String vencimento = rs.getString("vencimento");
+                    String vencimento = Utilitario.converteDateParaString(rs.getDate("vencimento"));
                     String pagamento = rs.getString("pagamento");
                     con.close();
                     m = new Mensalidade(codMensalidade,nomeDoPlano,valor,desconto,vencimento,pagamento);
@@ -127,7 +127,7 @@ public class MensalidadeDAO {
                     String nomeDoPlano = rs.getString("nomeDaModalidade");
                     double valor = rs.getDouble("valor");
                     double desconto = rs.getDouble("desconto");
-                    String vencimento = rs.getString("vencimento");
+                    String vencimento = Utilitario.converteDateParaString(rs.getDate("vencimento"));
                     String pagamento =rs.getString("pagamento");
                     m = new Mensalidade(codMensalidade,nomeDoPlano,valor,desconto,vencimento,pagamento);
                     mensalidade.add(m);
