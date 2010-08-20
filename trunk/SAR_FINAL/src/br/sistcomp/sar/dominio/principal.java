@@ -15,8 +15,8 @@ public class principal {
 //
         String nome = "Thiago Ramalho Pacheco";
         String[] conjunto = nome.split(" ");
-
-        System.out.println(AlunoDAO.getInstance().pesquisarPorNome("THIAGO").get(0).getNome());
+        String teste = AlunoDAO.getInstance().pesquisarPorNome("THIAGO").get(0).getNascimento();
+        System.out.println(teste.substring(3,5));
 
         
     }

@@ -12,13 +12,9 @@ import br.sistcomp.sar.dominio.Utilitario;
 import br.sistcomp.sar.fachada.Fachada;
 import java.awt.Image;
 import java.util.Vector;
-import java.util.regex.PatternSyntaxException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -402,6 +398,11 @@ public class TelaFinanceiro extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabelaContasReceber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaContasReceberMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaContasReceber);
 
         jXTitledSeparator1.setFont(new java.awt.Font("sansserif", 1, 11));
@@ -467,7 +468,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
                 .addGroup(painelContasReceberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelContasReceberLayout.createSequentialGroup()
                         .addGroup(painelContasReceberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                             .addGroup(painelContasReceberLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -485,28 +486,28 @@ public class TelaFinanceiro extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(campoNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
-                                    .addComponent(campoEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
+                                        .addComponent(campoNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                                    .addComponent(campoEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)))
                             .addGroup(painelContasReceberLayout.createSequentialGroup()
                                 .addGroup(painelContasReceberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel10))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(painelContasReceberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campoDebito, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                                    .addComponent(campoTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
+                                    .addComponent(campoDebito, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                                    .addComponent(campoTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
+                                .addComponent(campoCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelContasReceberLayout.createSequentialGroup()
                         .addComponent(botaoReceber)
                         .addGap(18, 18, 18)
                         .addComponent(botaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jXTitledSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))
+                    .addComponent(jXTitledSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelContasReceberLayout.setVerticalGroup(
@@ -589,6 +590,11 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tabelaPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaPesquisarMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(tabelaPesquisar);
@@ -765,6 +771,8 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         campoVencimentoConfirma.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel18.setText("Valor");
+
+        campoValorConfirma.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel19.setText("Pagamento");
 
@@ -1471,6 +1479,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoContasReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoContasReceberActionPerformed
+        zerarCampo();
         painelContasReceber.setVisible(true);
     }//GEN-LAST:event_botaoContasReceberActionPerformed
 
@@ -1507,6 +1516,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void botaoPesquisa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisa1ActionPerformed
+        zerarCampo();
         painelPesquisar.setVisible(true);
     }//GEN-LAST:event_botaoPesquisa1ActionPerformed
 
@@ -1515,7 +1525,44 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoSairActionPerformed
 
     private void botaoReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoReceberActionPerformed
-        painelConfirmaPagamento.setVisible(true);
+       String mes = null;
+        if(tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(), 3) == "PAGO"){
+            JOptionPane.showMessageDialog(null, "Essa mensalidade já está PAGA");
+        }else{
+            painelConfirmaPagamento.setVisible(true);
+            campoAlunoConfirma.setText(campoNome.getText());
+            campoDescricaoConfirma.setText((String) tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(),0));
+            String vencimento = (String) tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(), 1);
+            if(vencimento.substring(3, 5).equals("01")){
+                mes = "Janeiro";
+            } else if(vencimento.substring(3, 5).equals("02")){
+                mes = "Fevereiro";
+            }else if(vencimento.substring(3, 5).equals("03")){
+                mes = "Março";
+            }else if(vencimento.substring(3, 5).equals("04")){
+                mes = "Abril";
+            }else if(vencimento.substring(3, 5).equals("05")){
+                mes = "Maio";
+            }else if(vencimento.substring(3, 5).equals("06")){
+                mes = "Junho";
+            }else if(vencimento.substring(3, 5).equals("07")){
+                mes = "Julho";
+            }else if(vencimento.substring(3, 5).equals("08")){
+                mes = "Agosto";
+            }else if(vencimento.substring(3, 5).equals("09")){
+                mes = "Setembro";
+            }else if(vencimento.substring(3, 5).equals("10")){
+                mes = "Outubro";
+            }else if(vencimento.substring(3, 5).equals("11")){
+                mes = "Novembro";
+            }else if(vencimento.substring(3, 5).equals("12")){
+                mes = "Dezembro";
+            }
+            campoMesConfirma.setText(mes);
+            campoVencimentoConfirma.setText(vencimento);
+            campoValorConfirma.setText(Double.toString((Double) tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(), 2)));
+            campoPagamentoConfirma.setText(Utilitario.dataDoSistema());
+        }
     }//GEN-LAST:event_botaoReceberActionPerformed
 
     private void campoNomePesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNomePesquisarKeyPressed
@@ -1567,68 +1614,79 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         painelFecharCaixa.setVisible(true);
     }//GEN-LAST:event_botaoFinalizaCaixaActionPerformed
 
-    public void zerarCampo(){
+    public void zerarCampo() {
+        campoMatricula.setText("");
+        campoNomePesquisar.setText("");
         campoNome.setText("");
         campoTelefone.setText("");
         campoDebito.setText("");
         campoEndereco.setText("");
         campoCelular.setText("");
         campoNascimento.setText("");
+        labelFoto.setIcon(new ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/semFoto.png")));
+        DefaultTableModel modelo = (DefaultTableModel) tabelaPesquisar.getModel();
+        modelo.setNumRows(0);
+        DefaultTableModel tabela = (DefaultTableModel) tabelaContasReceber.getModel();
+        tabela.setNumRows(0);
     }
     private void campoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoMatriculaActionPerformed
         String status;
         double valor = 0, debito = 0;
         int matricula = Integer.parseInt(campoMatricula.getText());
-        tabelaContasReceber.getColumnModel().getColumn(0);
-        tabelaContasReceber.getColumnModel().getColumn(1);
-        tabelaContasReceber.getColumnModel().getColumn(2);
-        tabelaContasReceber.getColumnModel().getColumn(3);
-        DefaultTableModel modelo = (DefaultTableModel) tabelaContasReceber.getModel();
-        modelo.setNumRows(0);
+        Aluno aluno = fachada.pesquisarAluno(matricula);
+        if (aluno != null) {
+            tabelaContasReceber.getColumnModel().getColumn(0);
+            tabelaContasReceber.getColumnModel().getColumn(1);
+            tabelaContasReceber.getColumnModel().getColumn(2);
+            tabelaContasReceber.getColumnModel().getColumn(3);
+            DefaultTableModel modelo = (DefaultTableModel) tabelaContasReceber.getModel();
+            modelo.setNumRows(0);
 
-        Vector<Mensalidade> mensalidades = fachada.pesquisaTodosAsMensalidadesDoAluno(matricula);
-        if (mensalidades != null) {
-            for (int i = 0; i < mensalidades.size(); i++) {
-                //String primeiroNome[] = pessoa.getNome().split(" ");
-                String parcela = (i + 1) + "ª  Mensalidade";
-                String vencimento = mensalidades.get(i).getVencimento();
-                valor = mensalidades.get(i).getValor();
-                String Pagamento = mensalidades.get(i).getPagamento();
-                if (Pagamento != null) {
-                    status = "PAGO";
-                } else {
-                    status = "a pagar";
-                    debito = debito + valor;
+            Vector<Mensalidade> mensalidades = fachada.pesquisaTodosAsMensalidadesDoAluno(matricula);
+            if (mensalidades != null) {
+                for (int i = 0; i < mensalidades.size(); i++) {
+                    String parcela = (i + 1) + "ª  Mensalidade";
+                    String vencimento = mensalidades.get(i).getVencimento();
+                    valor = mensalidades.get(i).getValor();
+                    String Pagamento = mensalidades.get(i).getPagamento();
+                    if (Pagamento != null) {
+                        status = "PAGO";
+                    } else {
+                        status = "a pagar";
+                        debito = debito + valor;
+                    }
+
+                    modelo.addRow(new Object[]{parcela, vencimento, valor, status});
+
                 }
 
-                modelo.addRow(new Object[]{parcela, vencimento, valor, status});
+
+                campoNome.setEnabled(true);
+                campoTelefone.setEnabled(true);
+                campoDebito.setEnabled(true);
+                campoEndereco.setEnabled(true);
+                campoCelular.setEnabled(true);
+                campoNascimento.setEnabled(true);
+
+                String nome = aluno.getNome();
+                String[] nomeESobreNome = nome.split(" ");
+                campoNome.setText(nomeESobreNome[0] + " " + nomeESobreNome[1]);
+                campoTelefone.setText(aluno.getTelefone());
+                campoDebito.setText(Double.toString(debito));
+                campoEndereco.setText(aluno.getEndereco());
+                campoCelular.setText(aluno.getCelular());
+                campoNascimento.setText(aluno.getNascimento());
+
+                image = fachada.pesquisarFoto(matricula);
+                i = image.getImage();
+                labelFoto.setIcon(new ImageIcon(i.getScaledInstance(labelFoto.getWidth(), labelFoto.getHeight(), i.SCALE_DEFAULT)));
+                painelPesquisar.setVisible(false);
 
             }
-
-            Aluno aluno = fachada.pesquisarAluno(matricula);
-            campoNome.setEnabled(true);
-            campoTelefone.setEnabled(true);
-            campoDebito.setEnabled(true);
-            campoEndereco.setEnabled(true);
-            campoCelular.setEnabled(true);
-            campoNascimento.setEnabled(true);
-
-            String nome = aluno.getNome();
-            String[] nomeESobreNome = nome.split(" ");
-            campoNome.setText(nomeESobreNome[0] + " " + nomeESobreNome[1]);
-            campoTelefone.setText(aluno.getTelefone());
-            campoDebito.setText(Double.toString(debito));
-            campoEndereco.setText(aluno.getEndereco());
-            campoCelular.setText(aluno.getCelular());
-            campoNascimento.setText(aluno.getNascimento());
-
-            image = fachada.pesquisarFoto(matricula);
-            i = image.getImage();
-            labelFoto.setIcon(new ImageIcon(i.getScaledInstance(labelFoto.getWidth(), labelFoto.getHeight(), i.SCALE_DEFAULT)));
-            painelPesquisar.setVisible(false);
-
+        } else {
+            JOptionPane.showMessageDialog(null, "Não existe aluno com essa matricula");
+            campoMatricula.setText("");
         }
-
     }//GEN-LAST:event_campoMatriculaActionPerformed
 
     private void botaoPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisarActionPerformed
@@ -1651,9 +1709,10 @@ public class TelaFinanceiro extends javax.swing.JFrame {
                 modelo.addRow(new Object[]{matricula, novoNome[0] + " " + novoNome[1], telefone, celular});
 
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Nao existe aluno cadastrado com esse nome!");
         }
-        else JOptionPane.showMessageDialog(null, "Nao existe aluno cadastrado com esse nome!");
-        
+
 
     }//GEN-LAST:event_botaoPesquisarActionPerformed
 
@@ -1667,6 +1726,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         tabelaContasReceber.getColumnModel().getColumn(3);
         DefaultTableModel modelo = (DefaultTableModel) tabelaContasReceber.getModel();
         modelo.setNumRows(0);
+        campoMatricula.setText(Integer.toString(matricula));
 
         Vector<Mensalidade> mensalidades = fachada.pesquisaTodosAsMensalidadesDoAluno(matricula);
         if (mensalidades != null) {
@@ -1712,6 +1772,19 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         }
         painelPesquisar.setVisible(false);
     }//GEN-LAST:event_botaoConfirmarActionPerformed
+
+    private void tabelaPesquisarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPesquisarMousePressed
+        if (evt.getClickCount() == 2) {
+            botaoConfirmar.doClick();
+        }
+    }//GEN-LAST:event_tabelaPesquisarMousePressed
+
+    private void tabelaContasReceberMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaContasReceberMousePressed
+        if (evt.getClickCount() == 2) {
+            botaoReceber.doClick();
+        }
+    }//GEN-LAST:event_tabelaContasReceberMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAbreCaixa;
     private javax.swing.JButton botaoAbreCaixaAberturaDoCaixa;

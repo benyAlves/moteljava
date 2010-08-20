@@ -313,7 +313,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jSeparator2" alignment="0" pref="422" max="32767" attributes="0"/>
+                                  <Component id="jSeparator2" alignment="0" pref="369" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="1">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -333,9 +333,9 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="campoNascimento" pref="133" max="32767" attributes="0"/>
+                                              <Component id="campoNascimento" pref="80" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="campoEndereco" alignment="0" pref="363" max="32767" attributes="0"/>
+                                          <Component id="campoEndereco" alignment="0" pref="310" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -345,25 +345,25 @@
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="campoDebito" alignment="0" pref="155" max="32767" attributes="0"/>
-                                          <Component id="campoTelefone" alignment="0" pref="155" max="32767" attributes="0"/>
+                                          <Component id="campoDebito" alignment="0" pref="129" max="32767" attributes="0"/>
+                                          <Component id="campoTelefone" alignment="0" pref="129" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="campoCelular" pref="155" max="32767" attributes="0"/>
+                                      <Component id="campoCelular" pref="128" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="labelFoto" min="-2" pref="141" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane1" alignment="1" pref="569" max="32767" attributes="1"/>
+                          <Component id="jScrollPane1" alignment="1" pref="516" max="32767" attributes="1"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="botaoReceber" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="botaoSair" min="-2" pref="83" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jXTitledSeparator1" alignment="1" pref="569" max="32767" attributes="0"/>
+                          <Component id="jXTitledSeparator1" alignment="1" pref="516" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -494,6 +494,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabelaContasReceberMousePressed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
@@ -693,6 +696,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabelaPesquisarMousePressed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1010,6 +1016,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="campoValorConfirma">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel19">
               <Properties>
