@@ -456,14 +456,8 @@ public class TelaAcessoCadastroAluno extends javax.swing.JFrame {
             String nomeModalidade = planos.getModalidade().getNome();
             String nomePlano = planos.getNome();
             double valor = planos.getValor();
-            String nomeProfessor = fachada.pesquisarProfessorPorMatricula(fachada.pesquidaMatriculaPorCodModalidade(planos.getModalidade().getCodigo())).getNome();
-//            Turma turma = null;
-//            for (Turma t : aluno.getTurma()){
-//                if(t.getProfessor().getNome().equals(nomeProfessor)){
-//                    
-//                }
-//            }
-            Turma turma = fachada.turmaAtravesDaMatriculaDoProfessor(fachada.pesquidaMatriculaPorCodModalidade(planos.getModalidade().getCodigo()));
+            Turma turma = planos.getTurma();
+            String nomeProfessor = turma.getProfessor().getNome();
             String diaEhorario = TelaCadastroAluno.getHorarioTurmas(turma);
             modelo.addRow(new Object[]{nomeModalidade, nomeProfessor, nomePlano, diaEhorario, valor});
 

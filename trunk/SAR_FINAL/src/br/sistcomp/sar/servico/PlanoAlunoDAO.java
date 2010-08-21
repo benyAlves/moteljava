@@ -6,6 +6,7 @@ package br.sistcomp.sar.servico;
 
 import br.sistcomp.sar.conexao.ConexaoDB;
 import br.sistcomp.sar.dominio.Plano;
+import br.sistcomp.sar.dominio.Turma;
 import br.sistcomp.sar.dominio.Utilitario;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -37,7 +38,7 @@ public class PlanoAlunoDAO {
         try {
             int mat = (int) matricula;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("INSERT INTO ALUNO_PLANO (matricula, codPlano, dataAdesao, valor, desconto, parcelas, formaPagamento) VALUES (?,?,?,?,?,?,?)");
+            ps = (PreparedStatement) con.prepareStatement("INSERT INTO ALUNO_PLANO (matricula, codPlano, dataAdesao, valor, desconto, parcelas, formaPagamento, codTurma) VALUES (?,?,?,?,?,?,?,?)");
             ps.setInt(1, mat);
             ps.setInt(2, plano.getCodigo());
             ps.setString(3, Utilitario.dataParaBanco(Utilitario.dataDoSistema()));
@@ -45,6 +46,7 @@ public class PlanoAlunoDAO {
             ps.setDouble(5, plano.getDesconto());
             ps.setInt(6, plano.getNumeroDeParcelas());
             ps.setString(7, plano.getFormaPagamento());
+            ps.setInt(8, plano.getTurma().getCodigo());
             ps.execute();
             con.close();
             return codAdesao;
@@ -99,10 +101,11 @@ public class PlanoAlunoDAO {
 
         ResultSet rs;
         PreparedStatement ps;
-        int codigo = -1, numeroDeParcelas = -1;
+        int codigo = -1, numeroDeParcelas = -1, codTurma = -1;
         Double valor = -1.0, desconto = -1.0;
         String formaPagamento = "", diaDoPagamento = "";
         List<Plano> planosAderidos = new ArrayList<Plano>();
+        Turma turma = null;
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
@@ -115,7 +118,9 @@ public class PlanoAlunoDAO {
                 numeroDeParcelas = rs.getInt("parcelas");
                 formaPagamento = rs.getString("formaPagamento");
                 diaDoPagamento = Utilitario.converteDateParaString(rs.getDate("dataAdesao"));
-                Plano plano = new Plano(codigo,valor,numeroDeParcelas,desconto,formaPagamento,diaDoPagamento);
+                codTurma = rs.getInt("codTurma");
+                turma = TurmaDAO.getInstance().pesquisar(codTurma);
+                Plano plano = new Plano(codigo,valor,numeroDeParcelas,desconto,formaPagamento,diaDoPagamento,turma);
                 planosAderidos.add(plano);
             }
             con.close();
@@ -210,10 +215,11 @@ public class PlanoAlunoDAO {
 
         ResultSet rs;
         PreparedStatement ps;
-        int codigo = -1, numeroDeParcelas = -1;
+        int codigo = -1, numeroDeParcelas = -1, codTurma = -1;
         Double valor = -1.0, desconto = -1.0;
         String formaPagamento = "", diaDoPagamento = "";
         Plano plano = null;
+        Turma turma = null;
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
@@ -226,7 +232,9 @@ public class PlanoAlunoDAO {
                 numeroDeParcelas = rs.getInt("parcelas");
                 formaPagamento = rs.getString("formaPagamento");
                 diaDoPagamento = Utilitario.converteDateParaString(rs.getDate("dataAdesao"));
-                plano = new Plano(codigo,valor,numeroDeParcelas,desconto,formaPagamento,diaDoPagamento);
+                codTurma = rs.getInt("codTurma");
+                turma = TurmaDAO.getInstance().pesquisar(codTurma);
+                plano = new Plano(codigo,valor,numeroDeParcelas,desconto,formaPagamento,diaDoPagamento,turma);
             }
             con.close();
             return plano;

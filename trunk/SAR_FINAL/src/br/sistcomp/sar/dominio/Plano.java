@@ -17,6 +17,7 @@ public class Plano {
     private Double desconto;
     private List<Mensalidade> mensalidades;
     private String formaPagamento;
+    private Turma turma;
 
 
     public Plano(int codigo, String nome, int duracao, double valor, Modalidade modalidade, String status) {
@@ -28,7 +29,7 @@ public class Plano {
         this.status = status;
     }
 
-    public Plano(int codigo, String nome, int duracao, double valor, Modalidade modalidade, String status, String diaDoPagamento, int numeroDeParcelas, Double desconto) {
+    public Plano(int codigo, String nome, int duracao, double valor, Modalidade modalidade, String status, String diaDoPagamento, int numeroDeParcelas, Double desconto, Turma turma) {
         this.codigo = codigo;
         this.nome = nome;
         this.duracao = duracao;
@@ -38,6 +39,7 @@ public class Plano {
         this.diaDoPagamento = diaDoPagamento;
         this.numeroDeParcelas = numeroDeParcelas;
         this.desconto = desconto;
+        this.turma = turma;
     }
 
     public Plano(int codigo, String nome, int duracao, double valor, Modalidade modalidade, String status, String diaDoPagamento, int numeroDeParcelas, Double desconto, List<Mensalidade> mensalidades, String formaPagamento) {
@@ -54,13 +56,22 @@ public class Plano {
         this.formaPagamento = formaPagamento;
     }
 
-    public Plano(int codigo, double valor, int numeroDeParcelas, Double desconto, String formaPagamento, String diaDoPagamento) {
+    public Plano(int codigo, double valor, int numeroDeParcelas, Double desconto, String formaPagamento, String diaDoPagamento, Turma turma) {
         this.codigo = codigo;
         this.valor = valor;
         this.numeroDeParcelas = numeroDeParcelas;
         this.desconto = desconto;
         this.formaPagamento = formaPagamento;
         this.diaDoPagamento = diaDoPagamento;
+        this.turma = turma;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
 
     public String getFormaPagamento() {
