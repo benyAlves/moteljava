@@ -31,23 +31,28 @@ public class PlanoAlunoDAO {
         return plano_alunosDAO;
     }
 
-    public void inserirCodigoDoPlanoAoAluno(int matricula, String nomePlano) {
+    public int inserirCodigoDoPlanoAoAluno(int matricula, Plano plano) {
         PreparedStatement ps;
+        int codAdesao = proximoCodigo();
         try {
             int mat = (int) matricula;
-            String nplan = (String) nomePlano;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("INSERT INTO aluno_plano (matricula,codPlano,dataAdesao) VALUES (?,?,?)");
+            ps = (PreparedStatement) con.prepareStatement("INSERT INTO ALUNO_PLANO (matricula, codPlano, dataAdesao, valor, desconto, parcelas, formaPagamento) VALUES (?,?,?,?,?,?,?)");
             ps.setInt(1, mat);
-            ps.setInt(2, pesquisaCodigoDoPlano(nplan));
-            ps.setString(3, Utilitario.dataParaBanco(Utilitario.dataDoSistema())); // o que é essa dataAdesao?
-            //R: é a data que o cliente assina um plano. o método dataDoSistema retorna a data do sistema, porem no formato dd/mm/aaaa e o BD aceita aaaa-mm-dd
+            ps.setInt(2, plano.getCodigo());
+            ps.setString(3, Utilitario.dataParaBanco(Utilitario.dataDoSistema()));
+            ps.setDouble(4, plano.getValor());
+            ps.setDouble(5, plano.getDesconto());
+            ps.setInt(6, plano.getNumeroDeParcelas());
+            ps.setString(7, plano.getFormaPagamento());
             ps.execute();
             con.close();
+            return codAdesao;
         } catch (Exception e) {
             e.printStackTrace(); // salvando vidas :D
-            
+
         }
+        return -1;
     }
 
     public int pesquisaCodigoDoPlano(String nomePlano) {
@@ -56,7 +61,7 @@ public class PlanoAlunoDAO {
         int codigo = -1;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT codPlano FROM planos WHERE nome =   '" + nomePlano + "'");
+            ps = (PreparedStatement) con.prepareStatement("SELECT codPlano FROM PLANOS WHERE nome =   '" + nomePlano + "'");
             rs = ps.executeQuery();
             while (rs.next()) {
                 codigo = rs.getInt("codPlano");
@@ -65,7 +70,7 @@ public class PlanoAlunoDAO {
             return codigo;
         } catch (Exception e) {
             e.printStackTrace();
-            
+
         }
         return codigo;
     }
@@ -85,35 +90,41 @@ public class PlanoAlunoDAO {
             return qtde;
         } catch (Exception e) {
             e.printStackTrace();
-            
+
         }
         return qtde;
     }
 
-    public List<Integer> pesquisaListaDeCodigosDoPlanoDoAluno(int matricula) {
+    public List<Plano> pesquisaPlanosAderidos(int matricula) {
 
         ResultSet rs;
         PreparedStatement ps;
-        int codigo = -1;
-        List<Integer> cod_plano = new ArrayList<Integer>();
+        int codigo = -1, numeroDeParcelas = -1;
+        Double valor = -1.0, desconto = -1.0;
+        String formaPagamento = "", diaDoPagamento = "";
+        List<Plano> planosAderidos = new ArrayList<Plano>();
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT codPlano FROM aluno_plano WHERE matricula = '" + matricula + "'");
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ALUNO_PLANO WHERE matricula = '" + matricula + "'");
             rs = ps.executeQuery();
             while (rs.next()) {
                 codigo = rs.getInt("codPlano");
-                cod_plano.add(codigo);
+                valor = rs.getDouble("valor");
+                desconto = rs.getDouble("desconto");
+                numeroDeParcelas = rs.getInt("parcelas");
+                formaPagamento = rs.getString("formaPagamento");
+                diaDoPagamento = Utilitario.converteDateParaString(rs.getDate("dataAdesao"));
+                Plano plano = new Plano(codigo,valor,numeroDeParcelas,desconto,formaPagamento,diaDoPagamento);
+                planosAderidos.add(plano);
             }
             con.close();
-
-            return cod_plano;
+            return planosAderidos;
         } catch (Exception e) {
             e.printStackTrace();
-            
-        }
-        return cod_plano;
 
+        }
+        return planosAderidos;
     }
 
     public String pesquisaNomeDoPlano(int matricula) {
@@ -132,19 +143,27 @@ public class PlanoAlunoDAO {
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
-            
+
         }
         return nome;
     }
 
-    public void removerCod_Plano(int matricula) {
+    public void remover(int matricula, int codPlano) {
         PreparedStatement ps;
+        ResultSet rs;
+        int codAdesao = -1;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("DELETE FROM aluno_plano WHERE matricula ='" + matricula + "'");
+            ps = (PreparedStatement) con.prepareStatement("SELECT codAdesao FROM ALUNO_PLANO WHERE matricula ='" + matricula + "' AND codPlano='" + codPlano + "'");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                codAdesao = rs.getInt("codAdesao");
+            }
+            MensalidadeDAO.getInstance().remover(matricula, codAdesao);
+            ps = (PreparedStatement) con.prepareStatement("DELETE FROM ALUNO_PLANO WHERE matricula ='" + matricula + "' AND codAdesao='" + codAdesao + "'");
             ps.execute();
             con.close();
-           
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -165,7 +184,56 @@ public class PlanoAlunoDAO {
             JOptionPane.showInternalMessageDialog(null, "Atualização realizada com sucesso");
         } catch (Exception e) {
             e.printStackTrace();
-            
+
         }
+    }
+
+        public int proximoCodigo(){
+        int codigo = -1;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            PreparedStatement ps = (PreparedStatement) con.prepareStatement("SHOW TABLE STATUS LIKE 'ALUNO_PLANO'");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                codigo = rs.getInt("Auto_increment");
+            }
+            con.close();
+            return codigo;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       return codigo;
+    }
+
+    public Plano planoAderido(int codPlano, int matricula) {
+
+        ResultSet rs;
+        PreparedStatement ps;
+        int codigo = -1, numeroDeParcelas = -1;
+        Double valor = -1.0, desconto = -1.0;
+        String formaPagamento = "", diaDoPagamento = "";
+        Plano plano = null;
+
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ALUNO_PLANO WHERE matricula = '" + matricula + "' AND codPlano = '"+codPlano+"'");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                codigo = rs.getInt("codPlano");
+                valor = rs.getDouble("valor");
+                desconto = rs.getDouble("desconto");
+                numeroDeParcelas = rs.getInt("parcelas");
+                formaPagamento = rs.getString("formaPagamento");
+                diaDoPagamento = Utilitario.converteDateParaString(rs.getDate("dataAdesao"));
+                plano = new Plano(codigo,valor,numeroDeParcelas,desconto,formaPagamento,diaDoPagamento);
+            }
+            con.close();
+            return plano;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return plano;
     }
 }

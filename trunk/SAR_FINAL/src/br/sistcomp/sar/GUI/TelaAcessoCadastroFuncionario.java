@@ -425,8 +425,6 @@ public class TelaAcessoCadastroFuncionario extends javax.swing.JFrame {
 }//GEN-LAST:event_botaoCadastrarActionPerformed
 
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
-        setVisible(false);
-        new TelaEditarFuncionario().setVisible(true);
 
         Funcionario funcionario;
         int matricula = 0;
@@ -440,7 +438,7 @@ public class TelaAcessoCadastroFuncionario extends javax.swing.JFrame {
         matricula = Integer.parseInt(TelaEditarFuncionario.campoMatriculaSecretaria.getText());
         funcionario = fachada.pesquisaFuncionarioPelaMatricula(matricula);
         TelaEditarFuncionario.campoNomeSecretaria.setText(funcionario.getNome());
-        TelaEditarFuncionario.campoSenhaSecretaria.setText(funcionario.getSenha());
+        TelaEditarFuncionario.campoSenhaSecretaria.setText(funcionario.getFuncao());
         TelaEditarFuncionario.campoEnderecoSecretaria.setText(funcionario.getEndereco());
         TelaEditarFuncionario.campoBairroSecretaria.setText(funcionario.getBairro());
         TelaEditarFuncionario.campoCepSecretaria.setText(funcionario.getCep());

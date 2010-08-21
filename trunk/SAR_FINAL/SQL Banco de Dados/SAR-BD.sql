@@ -6,7 +6,7 @@
 -- OBS: a necessidade é por não conseguir executar alguns comandos SQL através do NetBeans
 
 CREATE TABLE PESSOAS (
-	idPessoa int unsigned not null auto_increment,
+	idPessoa int not null auto_increment,
 	nome varchar(75) not null,
 	email varchar(50),
 	nascimento date not null,
@@ -29,15 +29,19 @@ CREATE TABLE PESSOAS (
 
 
 CREATE TABLE ALUNOS (
+        idPessoa int not null,
         matricula int not null,
-        indicacao varchar(75),
+	indicacao varchar(75),
         bolsista varchar(8),
+        FOREIGN KEY(idPessoa) REFERENCES PESSOAS(idPessoa),
 	PRIMARY KEY(matricula)
 );
 
-CREATE TABLE SECRETARIAS (
+CREATE TABLE FUNCIONARIOS (
+        idPessoa int not null,
         matricula int not null,
-	senha varchar(10) not null,
+	funcao varchar(15) not null,
+        FOREIGN KEY(idPessoa) REFERENCES PESSOAS(idPessoa),
         PRIMARY KEY(matricula)
 );
 
@@ -46,7 +50,8 @@ CREATE TABLE MODALIDADES(
 	nome varchar(45) not null,
 	ambiente varchar(30) not null,
         alunosPorTurma int not null,
-	PRIMARY KEY (codModalidade)
+	PRIMARY KEY (codModalidade),
+        UNIQUE(nome)
 );
 
 CREATE TABLE PLANOS (
@@ -57,36 +62,44 @@ CREATE TABLE PLANOS (
 	codModalidade int not null,
         status varchar(7) not null,
 	PRIMARY KEY (codPlano),
-	FOREIGN KEY (codModalidade) REFERENCES modalidades(codModalidade)
+	FOREIGN KEY (codModalidade) REFERENCES modalidades(codModalidade),
+        UNIQUE(nome)
 );
 
 CREATE TABLE ALUNO_PLANO (
+        codAdesao int not null auto_increment,
 	matricula int not null,
 	codPlano int not null,
 	dataAdesao date not null,
+        valor numeric(5,2),
+        desconto numeric(5,2),
+        parcelas int,
+        formaPagamento varchar(17),
 	FOREIGN KEY (matricula) REFERENCES alunos(matricula),
 	FOREIGN KEY (codPlano) REFERENCES planos(codPlano),
-	CONSTRAINT codAlunoPlano PRIMARY KEY (matricula, codPlano)
+	PRIMARY KEY (codAdesao)
 );
 
 CREATE TABLE MENSALIDADES (
 	codMensalidade int unsigned not null auto_increment,
         matricula int not null,
-        nomeDoPlano varchar(45),
-        nomeDaModalidade varchar(45),
 	valor numeric(7,2) not null,
 	desconto numeric(7,2) not null,
 	vencimento date not null,
 	pagamento date,
+        codAdesao int not null,
+        FOREIGN KEY (codAdesao) REFERENCES ALUNO_PLANO(codAdesao),
 	PRIMARY KEY (codMensalidade),
         FOREIGN KEY (matricula) REFERENCES alunos(matricula)
 );
 
 CREATE TABLE PROFESSORES (
+        idPessoa int not null,
 	matricula int not null,
 	codModalidade int not null,
 	PRIMARY KEY (matricula),
-	FOREIGN KEY (codModalidade) REFERENCES modalidades(codModalidade)
+	FOREIGN KEY (codModalidade) REFERENCES modalidades(codModalidade),
+        FOREIGN KEY(idPessoa) REFERENCES PESSOAS(idPessoa)
 );
 
 CREATE TABLE TURMAS (
@@ -107,7 +120,7 @@ CREATE TABLE ALUNO_TURMA(
 );
 
 CREATE TABLE IMAGENS(
-        idPessoa int unsigned not null,
+        idPessoa int not null,
         foto longblob not null,
         FOREIGN KEY (idPessoa) REFERENCES pessoas(idPessoa),
         PRIMARY KEY (idPessoa)

@@ -3,11 +3,14 @@ package br.sistcomp.sar.servico;
 import br.sistcomp.sar.conexao.ConexaoDB;
 import br.sistcomp.sar.dominio.Aluno;
 import br.sistcomp.sar.dominio.Pessoa;
+import br.sistcomp.sar.dominio.Turma;
 import br.sistcomp.sar.dominio.Utilitario;
 import br.sistcomp.sar.fachada.Fachada;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 
@@ -30,14 +33,15 @@ public class AlunoDAO {
 
         try {
             Aluno alunoOK = (Aluno) aluno;
-            PessoaDAO.getInstance().cadastrar(aluno);
+            int idPessoa = PessoaDAO.getInstance().cadastrar(aluno);
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO ALUNOS "
-                    + "(matricula, indicacao, bolsista)"
-                    + " VALUES (?,?,?)");
-            ps.setInt(1, alunoOK.getIdPessoa());
-            ps.setString(2, alunoOK.getIndicacao());
-            ps.setString(3, alunoOK.getBolsista());
+                    + "(idPessoa, matricula, indicacao, bolsista)"
+                    + " VALUES (?,?,?,?)");
+            ps.setInt(1, idPessoa);
+            ps.setInt(2, alunoOK.getIdPessoa());
+            ps.setString(3, alunoOK.getIndicacao());
+            ps.setString(4, alunoOK.getBolsista());
             ps.execute();
             con.close();
             JOptionPane.showMessageDialog(null, "Aluno Cadastrado com Sucesso!\nAnote sua matricula: " + alunoOK.getIdPessoa());
@@ -59,24 +63,25 @@ public class AlunoDAO {
         Pessoa p = pessoaDAO.pesquisar(Utilitario.retornaIdPessoa(matricula));
         ResultSet rs;
         PreparedStatement ps;
-        String dataCadastro = null, indicacao = null, bolsista = null;
+        String indicacao = null, bolsista = null;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             ps = (PreparedStatement) con.prepareStatement("SELECT indicacao, bolsista "
-                    + "FROM alunos a WHERE a.matricula = '" + matricula + "'");
+                    + "FROM ALUNOS a WHERE a.matricula = '" + matricula + "'");
             rs = ps.executeQuery();
             while (rs.next()) {
                 indicacao = rs.getString("indicacao");
                 bolsista = rs.getString("bolsista");
                 con.close();
                 Aluno aluno = new Aluno(matricula, p.getNome(), p.getEmail(),
-                        p.getNascimento(), p.getSexo(), p.getCpf(), p.getRgNumero(),
-                        p.getRgUf(), p.getEndereco(), p.getBairro(), p.getCidade(),
-                        p.getEstado(), p.getCep(), p.getTelefone(), p.getCelular(),
-                        p.getObservacoes(),
-                        PlanoDAO.getInstance().pesquisaTodosOsPlanosDoAluno(matricula),
-                        MensalidadeDAO.getInstance().pesquisaTodosAsMensalidadesDoAluno(matricula),
-                        p.getDataCadastro(), indicacao, bolsista);
+                p.getNascimento(), p.getSexo(), p.getCpf(), p.getRgNumero(),
+                p.getRgUf(), p.getEndereco(), p.getBairro(), p.getCidade(),
+                p.getEstado(), p.getCep(), p.getTelefone(), p.getCelular(),
+                p.getObservacoes(),
+                PlanoDAO.getInstance().pesquisaTodosOsPlanosDoAluno(matricula),
+                MensalidadeDAO.getInstance().pesquisaTodosAsMensalidadesDoAluno(matricula),
+                turmasDoAluno(matricula),
+                p.getDataCadastro(), indicacao, bolsista);
                 return aluno;
             }
         } catch (Exception e) {
@@ -111,6 +116,7 @@ public class AlunoDAO {
                             pessoa.getObservacoes(),
                             PlanoDAO.getInstance().pesquisaTodosOsPlanosDoAluno(Utilitario.retornaMatricula(pessoa.getIdPessoa(), pessoa.getDataCadastro())),
                             MensalidadeDAO.getInstance().pesquisaTodosAsMensalidadesDoAluno(Utilitario.retornaMatricula(pessoa.getIdPessoa(), pessoa.getDataCadastro())),
+                            turmasDoAluno(matricula),
                             pessoa.getDataCadastro(), indicacao, bolsista);
                             todosAlunos.add(aluno);
 
@@ -198,4 +204,16 @@ public class AlunoDAO {
         }
         return pessoas;
     }
+
+    public List<Turma> turmasDoAluno(int matricula){
+        List<Integer> codTurmas = AlunoTurmaDAO.getInstance().turmasDoAluno(matricula);
+        List<Turma> turmas = new ArrayList<Turma>();
+        Turma turma;
+        for (int i: codTurmas){
+            turma = TurmaDAO.getInstance().pesquisar(i);
+            turmas.add(turma);
+        }
+        return turmas;
+    }
+
 }

@@ -32,12 +32,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaEditarAluno extends javax.swing.JFrame {
 
-    private boolean entrou;
+    private boolean entrou, visualizar = false;
     private File file;
     Fachada fachada = new Fachada();
-    List<Plano> planosAluno = new ArrayList<Plano>();
+    static List<Plano> planosAluno = new ArrayList<Plano>();
+    static List<Turma> turmasAluno = new ArrayList<Turma>();
+    List<Plano> planosAremover = new ArrayList<Plano>();
+    List<Turma> turmasAremover = new ArrayList<Turma>();
     List<Mensalidade> mensalidadesAluno = new ArrayList<Mensalidade>();
-    List<Turma> turmasAluno = new ArrayList<Turma>();
+    List<Mensalidade> mensalidadesPorPlano = new ArrayList<Mensalidade>();
 
     /** Creates new form TelaCadastroAluno */
     public TelaEditarAluno() {
@@ -48,6 +51,27 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         campoMatricula.setText(Integer.toString(fachada.getProximaMatricula()));
         campoDataMatricula.setText(Utilitario.dataDoSistema());
         //selecaoHorario.setModel(new DefaultComboBoxModel(getTurmas()));
+    }
+
+    public void preenchePlanos(){
+        tabelaModalidadeAluno.getColumnModel().getColumn(0);
+        tabelaModalidadeAluno.getColumnModel().getColumn(1);
+        tabelaModalidadeAluno.getColumnModel().getColumn(2);
+        tabelaModalidadeAluno.getColumnModel().getColumn(3);
+        tabelaModalidadeAluno.getColumnModel().getColumn(4);
+        DefaultTableModel modelo = (DefaultTableModel) tabelaModalidadeAluno.getModel();
+        modelo.setNumRows(0);
+
+        for (Plano planos : planosAluno) {
+            String nomeModalidade = planos.getModalidade().getNome();
+            String nomePlano = planos.getNome();
+            double valor = planos.getValor();
+            String nomeProfessor = fachada.pesquisarProfessorPorMatricula(fachada.pesquidaMatriculaPorCodModalidade(planos.getModalidade().getCodigo())).getNome();
+            Turma turma = fachada.turmaAtravesDaMatriculaDoProfessor(fachada.pesquidaMatriculaPorCodModalidade(planos.getModalidade().getCodigo()));
+            String diaEhorario = TelaCadastroAluno.getHorarioTurmas(turma);
+            modelo.addRow(new Object[]{nomeModalidade, nomeProfessor, nomePlano, diaEhorario, valor});
+
+        }
     }
 
     public void caixaAlta() {
@@ -75,6 +99,50 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         Vector<String> planos = fachada.planoPorModalidade(modalidade);
         planos.add(0, "- Selecione -");
         selecaoPlano.setModel(new DefaultComboBoxModel(planos));
+    }
+
+    public void travaCampos(){
+        selecaoModalidade.setEnabled(false);
+        selecaoProfessor.setEnabled(false);
+        selecaoPlano.setEnabled(false);
+        campoDiaPagamento.setEnabled(false);
+        campoVencimento.setEnabled(false);
+        campoValor.setEnabled(false);
+        campoDesconto.setEnabled(false);
+        selecaoPagamento.setEnabled(false);
+        campoParcelas.setEnabled(false);
+        //selecaoHorario.setEnabled(false);
+    }
+
+    public void ativaCampos(){
+        selecaoModalidade.setEnabled(true);
+        selecaoProfessor.setEnabled(true);
+        selecaoPlano.setEnabled(true);
+        campoDiaPagamento.setEnabled(true);
+        campoVencimento.setEnabled(true);
+        campoValor.setEnabled(true);
+        campoDesconto.setEnabled(true);
+        selecaoPagamento.setEnabled(true);
+        campoParcelas.setEnabled(true);
+        selecaoHorario.setEnabled(true);
+    }
+
+    public void preenchePagamentos(){
+        selecaoPagamento.addItem("A Vista");
+        selecaoPagamento.addItem("Parcelado");
+        selecaoPagamento.addItem("Bolsista Parcial");
+        selecaoPagamento.addItem("Bolsista Integral");
+    }
+
+    public void zeraCamposModalidades(){
+        selecaoModalidade.setSelectedIndex(0);
+        selecaoHorario.setSelectedIndex(0);
+        campoValor.setText("");
+        campoIndicacao.setText("");
+        campoParcelas.setText("");
+        campoDesconto.setText("");
+        campoVencimento.setText("");
+        campoDiaPagamento.setText("");
     }
 
     public List<Turma> retornaTurma(String professor) {
@@ -195,7 +263,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         botaoVoltar = new javax.swing.JButton();
-        botaoCadastrar = new javax.swing.JButton();
+        botaoSalvar = new javax.swing.JButton();
 
         jLabel5.setText("jLabel5");
 
@@ -777,10 +845,10 @@ public class TelaEditarAluno extends javax.swing.JFrame {
             }
         });
 
-        botaoCadastrar.setText("Salvar");
-        botaoCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        botaoSalvar.setText("Salvar");
+        botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCadastrarActionPerformed(evt);
+                botaoSalvarActionPerformed(evt);
             }
         });
 
@@ -795,7 +863,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(botaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(botaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -808,7 +876,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoCadastrar))
+                    .addComponent(botaoSalvar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -867,7 +935,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botaoInserirFotoAlunoActionPerformed
 
-    private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarActionPerformed
+    private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         if (campoNomeAluno.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Digite o Nome");
         } else {
@@ -910,22 +978,16 @@ public class TelaEditarAluno extends javax.swing.JFrame {
                             }
                         }
 
-                        for (Plano plano : planosAluno) {
-                            double mensalidade = plano.getValor() / plano.getNumeroDeParcelas();
-                            for (int i = 0; i < plano.getNumeroDeParcelas(); i++) {
-                                Mensalidade m = new Mensalidade(plano.getModalidade().getNome(), mensalidade, 0, Utilitario.somaDoMesParaVencimentoDoPlano(i));
-                                mensalidadesAluno.add(m);
-                            }
-                        }
+
 
                         Aluno a = new Aluno(matricula, nomeAluno, email, dataNascimento,
                                 sexo, cpf, identidade, orgaoEmissor,
                                 endereco, bairro, cidade, estado,
                                 cep, telefone, celular, observacoes,
-                                planosAluno, mensalidadesAluno,
+                                planosAluno, turmasAluno,
                                 indicacao, bolsista);
 
-                        fachada.editarAluno(a, turmasAluno);
+                        fachada.editarAluno(a, planosAremover, turmasAremover);
                         setVisible(false);
                         new TelaAcessoCadastroAluno().setVisible(true);
 
@@ -934,10 +996,20 @@ public class TelaEditarAluno extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_botaoCadastrarActionPerformed
+    }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
-        //
+        for (Plano plano: planosAluno){
+            if (plano.getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))){
+                planosAluno.remove(plano);
+                planosAremover.add(plano);
+                preenchePlanos();
+                ativaCampos();
+                zeraCamposModalidades();
+                visualizar = false;
+                break;
+            }
+        }
     }//GEN-LAST:event_botaoExcluirActionPerformed
 
     private void campoDescontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDescontoKeyReleased
@@ -968,10 +1040,8 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         campoDiaPagamento.setText(Utilitario.dataDoSistema());
         campoParcelas.setText(Integer.toString(plano.getDuracao()));
         campoVencimento.setText(Utilitario.somaDoMesParaVencimentoDoPlano(plano.getDuracao()));
-        selecaoPagamento.addItem("A Vista");
-        selecaoPagamento.addItem("Parcelado");
-        selecaoPagamento.addItem("Bolsista Parcial");
-        selecaoPagamento.addItem("Bolsista Integral");
+        campoDesconto.setText("0");
+        preenchePagamentos();
 
     }//GEN-LAST:event_selecaoPlanoActionPerformed
 
@@ -1021,71 +1091,63 @@ public class TelaEditarAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_selecaoPagamentoActionPerformed
 
     private void botaoAdicionar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionar1ActionPerformed
-        if (selecaoModalidade.getSelectedItem().toString().equals("- Selecione -")) {
-            JOptionPane.showMessageDialog(null, "Selecione uma Modalidade!");
-        } else {
-            if (selecaoProfessor.getSelectedItem().toString().equals("- Selecione -")) {
-                JOptionPane.showMessageDialog(null, "Selecione um Professor!");
+        if (visualizar){
+            JOptionPane.showMessageDialog(null, "Preencha os Campos!");
+            visualizar = false;
+            ativaCampos();
+            zeraCamposModalidades();
+        }
+     else {
+            if (selecaoModalidade.getSelectedItem().toString().equals("- Selecione -")) {
+                JOptionPane.showMessageDialog(null, "Selecione uma Modalidade!");
             } else {
-                if (selecaoPlano.getSelectedItem().toString().equals("- Selecione -")) {
-                    JOptionPane.showMessageDialog(null, "Selecione um Plano!");
+                if (selecaoProfessor.getSelectedItem().toString().equals("- Selecione -")) {
+                    JOptionPane.showMessageDialog(null, "Selecione um Professor!");
                 } else {
-                    if (selecaoPagamento.getSelectedItem().toString().equals("- Selecione -")) {
-                        JOptionPane.showMessageDialog(null, "Selecione uma Forma de Pagamento!");
+                    if (selecaoPlano.getSelectedItem().toString().equals("- Selecione -")) {
+                        JOptionPane.showMessageDialog(null, "Selecione um Plano!");
                     } else {
-                        if (selecaoHorario.getSelectedItem().toString().equals("- Selecione -")) {
-                            JOptionPane.showMessageDialog(null, "Selecione um Horário!");
+                        if (selecaoPagamento.getSelectedItem().toString().equals("- Selecione -")) {
+                            JOptionPane.showMessageDialog(null, "Selecione uma Forma de Pagamento!");
                         } else {
-                            int duracao = fachada.duracaoPorNome(selecaoPlano.getSelectedItem().toString());
-                            if (duracao < Integer.parseInt(campoParcelas.getText())) {
-                                JOptionPane.showMessageDialog(null, "A quantidade parcelas não pode ser\n maior que a duração do plano!");
-                                campoParcelas.setText(Integer.toString(duracao));
+                            if (selecaoHorario.getSelectedItem().toString().equals("- Selecione -")) {
+                                JOptionPane.showMessageDialog(null, "Selecione um Horário!");
                             } else {
-                                String codigoString = "";
-                                int codTurma;
-                                String[] codigoArray = selecaoHorario.getSelectedItem().toString().split("\\|");
-                                codigoString += codigoArray[0];
-                                codTurma = Integer.parseInt(codigoString);
-                                Turma t = fachada.pesquisarTurma(codTurma);
-                                turmasAluno.add(t);
+                                int duracao = fachada.duracaoPorNome(selecaoPlano.getSelectedItem().toString());
+                                if (duracao < Integer.parseInt(campoParcelas.getText())) {
+                                    JOptionPane.showMessageDialog(null, "A quantidade parcelas não pode ser\n maior que a duração do plano!");
+                                    campoParcelas.setText(Integer.toString(duracao));
+                                } else {
+                                    String codigoString = "";
+                                    int codTurma;
+                                    String[] codigoArray = selecaoHorario.getSelectedItem().toString().split("\\|");
+                                    codigoString += codigoArray[0];
+                                    codTurma = Integer.parseInt(codigoString);
+                                    Turma t = fachada.pesquisarTurma(codTurma);
+                                    turmasAluno.add(t);
 
-                                Plano p = fachada.pesquisarPlano(selecaoPlano.getSelectedItem().toString());
-                                String valor = campoValor.getText();
-                                p.setValor(Double.parseDouble(valor));
-                                p.setDiaDoPagamento(campoVencimento.getText());
-                                String parcelas = campoParcelas.getText();
-                                p.setNumeroDeParcelas(Integer.parseInt(parcelas));
-                                planosAluno.add(p);
-
-                                String nomeModalidade = p.getModalidade().getNome();
-                                String nomePlano = p.getNome();
-                                double v = p.getValor();
-                                String nomeProfessor = fachada.pesquisarProfessorPorMatricula(fachada.pesquidaMatriculaPorCodModalidade(p.getModalidade().getCodigo())).getNome();
-                                Turma turma = fachada.turmaAtravesDaMatriculaDoProfessor(fachada.pesquidaMatriculaPorCodModalidade(p.getModalidade().getCodigo()));
-                                String diaEhorario = TelaCadastroAluno.getHorarioTurmas(turma);
-
-                                try {
-                                    if (p.getModalidade().getNome().equals(tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0))) {
-                                        tabelaModalidadeAluno.setValueAt(nomeModalidade, tabelaModalidadeAluno.getSelectedRow(), 0);
-                                        tabelaModalidadeAluno.setValueAt(nomeProfessor, tabelaModalidadeAluno.getSelectedRow(), 1);
-                                        tabelaModalidadeAluno.setValueAt(nomePlano, tabelaModalidadeAluno.getSelectedRow(), 2);
-                                        tabelaModalidadeAluno.setValueAt(diaEhorario, tabelaModalidadeAluno.getSelectedRow(), 3);
-                                        tabelaModalidadeAluno.setValueAt(v, tabelaModalidadeAluno.getSelectedRow(), 4);
-
+                                    Plano p = fachada.pesquisarPlano(selecaoPlano.getSelectedItem().toString());
+                                    String valor = campoValor.getText();
+                                    p.setValor(Double.parseDouble(valor));
+                                    p.setDiaDoPagamento(campoVencimento.getText());
+                                    String desconto = campoDesconto.getText();
+                                    p.setDesconto(Double.parseDouble(desconto));
+                                    String parcelas = campoParcelas.getText();
+                                    p.setNumeroDeParcelas(Integer.parseInt(parcelas));
+                                    p.setFormaPagamento(selecaoPagamento.getSelectedItem().toString());
+                                    double valorMensalidade = p.getValor() / p.getNumeroDeParcelas();
+                                    for (int i = 0; i < p.getNumeroDeParcelas(); i++) {
+                                        Mensalidade m = new Mensalidade(valorMensalidade, 0, Utilitario.somaDoMesParaVencimentoDoPlano(i));
+                                        mensalidadesPorPlano.add(m);
                                     }
-                                } catch (Exception e) {
-                                    tabelaModalidadeAluno.getColumnModel().getColumn(0);
-                                    tabelaModalidadeAluno.getColumnModel().getColumn(1);
-                                    tabelaModalidadeAluno.getColumnModel().getColumn(2);
-                                    tabelaModalidadeAluno.getColumnModel().getColumn(3);
-                                    tabelaModalidadeAluno.getColumnModel().getColumn(4);
-                                    DefaultTableModel modelo = (DefaultTableModel) TelaEditarAluno.tabelaModalidadeAluno.getModel();
-                                    modelo.addRow(new Object[]{nomeModalidade, nomeProfessor, nomePlano, diaEhorario, v});
+                                    p.setMensalidades(mensalidadesPorPlano);
+                                    planosAluno.add(p);
 
+                                    preenchePlanos();
 
-
+                                    JOptionPane.showMessageDialog(null, "Plano Adicionado com Sucesso");
+                                    zeraCamposModalidades();
                                 }
-
                             }
                         }
                     }
@@ -1099,26 +1161,59 @@ public class TelaEditarAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_selecaoHorarioActionPerformed
 
     private void tabelaModalidadeAlunoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaModalidadeAlunoKeyReleased
+        Plano p = null;
+        for (Plano plano: planosAluno){
+            if (plano.getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))){
+                p = plano;
+                break;
+            }
+        }
         selecaoModalidade.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0)));
         selecaoProfessor.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 1)));
         selecaoPlano.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)));
         selecaoHorario.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 3)));
-        campoValor.setText(Double.toString((Double) tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 4)));
+        campoDesconto.setText(Double.toString(p.getDesconto()));
+        preenchePagamentos();
+        selecaoPagamento.setSelectedItem(p.getFormaPagamento());
+        campoParcelas.setText(Integer.toString(p.getNumeroDeParcelas()));
+        campoValor.setText(Double.toString(p.getValor()));
+        //campoVencimento.setText(p.getDiaDoPagamento())
+        visualizar = true;
+        travaCampos();
     }//GEN-LAST:event_tabelaModalidadeAlunoKeyReleased
 
     private void tabelaModalidadeAlunoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaModalidadeAlunoMousePressed
+        Plano p = null;
+        for (Plano plano: planosAluno){
+            if (plano.getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))){
+                p = plano;
+                break;
+            }
+        }
+//        Turma t = null;
+//        for (Turma turma: turmasAluno){
+//            if (turma.getProfessor().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 1))));
+//            t = turma;
+//            break;
+//        }
         selecaoModalidade.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0)));
         selecaoProfessor.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 1)));
         selecaoPlano.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)));
         selecaoHorario.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 3)));
-        campoValor.setText(Double.toString((Double) tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 4)));
-
+        campoDesconto.setText(Double.toString(p.getDesconto()));
+        preenchePagamentos();
+        selecaoPagamento.setSelectedItem(p.getFormaPagamento());
+        campoParcelas.setText(Integer.toString(p.getNumeroDeParcelas()));
+        campoValor.setText(Double.toString(p.getValor()));
+        //campoVencimento.setText(p.getDiaDoPagamento())
+        visualizar = true;
+        travaCampos();
     }//GEN-LAST:event_tabelaModalidadeAlunoMousePressed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAdicionar1;
-    private javax.swing.JButton botaoCadastrar;
     private javax.swing.JButton botaoExcluir;
     public static javax.swing.JButton botaoInserirFotoAluno;
+    private javax.swing.JButton botaoSalvar;
     private javax.swing.JButton botaoVoltar;
     public static javax.swing.JTextPane caixaObservacoesAluno;
     public static javax.swing.JTextField campoBairroAluno;

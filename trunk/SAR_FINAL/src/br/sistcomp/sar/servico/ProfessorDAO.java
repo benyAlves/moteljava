@@ -31,10 +31,11 @@ public class ProfessorDAO {
             int idPessoa = PessoaDAO.getInstance().cadastrar(professorOK);
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             ps = (PreparedStatement) con.prepareStatement("INSERT INTO PROFESSORES "
-                    + "(matricula, codModalidade)"
-                    + " VALUES (?,?)");
-            ps.setInt(1, professorOK.getIdPessoa());
-            ps.setInt(2, professorOK.getModalidade().getCodigo());
+                    + "(idPessoa, matricula, codModalidade)"
+                    + " VALUES (?,?,?)");
+            ps.setInt(1, idPessoa);
+            ps.setInt(2, professorOK.getIdPessoa());
+            ps.setInt(3, professorOK.getModalidade().getCodigo());
             ps.execute();
             con.close();
             JOptionPane.showMessageDialog(null, "Professor Cadastrado com Sucesso!");
@@ -283,7 +284,7 @@ public class ProfessorDAO {
             return pessoas;
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro no banco ao pesquisar alunos");
+            JOptionPane.showMessageDialog(null, "Erro no BD ao pesquisar!");
         }
         return pessoas;
     }

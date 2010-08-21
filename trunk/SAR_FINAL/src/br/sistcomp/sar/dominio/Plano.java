@@ -1,6 +1,8 @@
 
 package br.sistcomp.sar.dominio;
 
+import java.util.List;
+
 
 public class Plano {
 
@@ -12,6 +14,9 @@ public class Plano {
     private String status;
     private String diaDoPagamento;
     private int numeroDeParcelas;
+    private Double desconto;
+    private List<Mensalidade> mensalidades;
+    private String formaPagamento;
 
 
     public Plano(int codigo, String nome, int duracao, double valor, Modalidade modalidade, String status) {
@@ -23,7 +28,7 @@ public class Plano {
         this.status = status;
     }
 
-    public Plano(int codigo, String nome, int duracao, double valor, Modalidade modalidade, String status, String diaDoPagamento, int numeroDeParcelas) {
+    public Plano(int codigo, String nome, int duracao, double valor, Modalidade modalidade, String status, String diaDoPagamento, int numeroDeParcelas, Double desconto) {
         this.codigo = codigo;
         this.nome = nome;
         this.duracao = duracao;
@@ -32,6 +37,54 @@ public class Plano {
         this.status = status;
         this.diaDoPagamento = diaDoPagamento;
         this.numeroDeParcelas = numeroDeParcelas;
+        this.desconto = desconto;
+    }
+
+    public Plano(int codigo, String nome, int duracao, double valor, Modalidade modalidade, String status, String diaDoPagamento, int numeroDeParcelas, Double desconto, List<Mensalidade> mensalidades, String formaPagamento) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.duracao = duracao;
+        this.valor = valor;
+        this.modalidade = modalidade;
+        this.status = status;
+        this.diaDoPagamento = diaDoPagamento;
+        this.numeroDeParcelas = numeroDeParcelas;
+        this.desconto = desconto;
+        this.mensalidades = mensalidades;
+        this.formaPagamento = formaPagamento;
+    }
+
+    public Plano(int codigo, double valor, int numeroDeParcelas, Double desconto, String formaPagamento, String diaDoPagamento) {
+        this.codigo = codigo;
+        this.valor = valor;
+        this.numeroDeParcelas = numeroDeParcelas;
+        this.desconto = desconto;
+        this.formaPagamento = formaPagamento;
+        this.diaDoPagamento = diaDoPagamento;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    public List<Mensalidade> getMensalidades() {
+        return mensalidades;
+    }
+
+    public void setMensalidades(List<Mensalidade> mensalidades) {
+        this.mensalidades = mensalidades;
+    }
+
+    public Double getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(Double desconto) {
+        this.desconto = desconto;
     }
 
     public String getDiaDoPagamento() {
