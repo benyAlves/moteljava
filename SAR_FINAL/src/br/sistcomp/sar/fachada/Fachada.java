@@ -41,7 +41,10 @@ public class Fachada {
         Aluno alunoAuxiliar = pesquisarAluno(aluno.getIdPessoa());
         List<Plano> planosAuxiliares = alunoAuxiliar.getPlano();
 
+        AlunoTurmaDAO.getInstance().removerTurmas(aluno.getIdPessoa());
+
         for (Plano plano : aluno.getPlano()) {
+            AlunoTurmaDAO.getInstance().insereAlunoNaTurma(aluno.getIdPessoa(), plano.getTurma().getCodigo());
             if(planosAuxiliares.contains(plano) == false){
                 if(plano.getMensalidades() != null){
                     int codAdesao = PlanoAlunoDAO.getInstance().inserirCodigoDoPlanoAoAluno(aluno.getIdPessoa(), plano);
@@ -51,6 +54,7 @@ public class Fachada {
                     }
                 }
             }
+            PlanoAlunoDAO.getInstance().alterarCodTurma(aluno.getIdPessoa(), plano.getCodigo(), plano.getTurma().getCodigo());
         }
 
         if (planosAremover.isEmpty() == false){
