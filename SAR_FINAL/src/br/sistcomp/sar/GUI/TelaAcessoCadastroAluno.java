@@ -391,7 +391,7 @@ public class TelaAcessoCadastroAluno extends javax.swing.JFrame {
         tabelaCadastroDeAluno.getColumnModel().getColumn(2);
         DefaultTableModel modelo = (DefaultTableModel) tabelaCadastroDeAluno.getModel();
         modelo.setNumRows(0);
-        
+
         Vector<Pessoa> pessoas = fachada.todosAlunos();
         if (pessoas != null) {
             for (Pessoa pessoa : pessoas) {
@@ -457,11 +457,19 @@ public class TelaAcessoCadastroAluno extends javax.swing.JFrame {
             String nomePlano = planos.getNome();
             double valor = planos.getValor();
             String nomeProfessor = fachada.pesquisarProfessorPorMatricula(fachada.pesquidaMatriculaPorCodModalidade(planos.getModalidade().getCodigo())).getNome();
+//            Turma turma = null;
+//            for (Turma t : aluno.getTurma()){
+//                if(t.getProfessor().getNome().equals(nomeProfessor)){
+//                    
+//                }
+//            }
             Turma turma = fachada.turmaAtravesDaMatriculaDoProfessor(fachada.pesquidaMatriculaPorCodModalidade(planos.getModalidade().getCodigo()));
             String diaEhorario = TelaCadastroAluno.getHorarioTurmas(turma);
             modelo.addRow(new Object[]{nomeModalidade, nomeProfessor, nomePlano, diaEhorario, valor});
-            
+
         }
+        TelaEditarAluno.planosAluno = aluno.getPlano();
+        TelaEditarAluno.turmasAluno = aluno.getTurma();
     }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void campoBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarKeyPressed

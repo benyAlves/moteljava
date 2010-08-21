@@ -38,6 +38,8 @@ public class TurmaDAO {
             ps.setInt(1, turmaOK.getProfessor().getIdPessoa());
             ps.setString(2, turmaOK.getHoraInicio());
             ps.setString(3, turmaOK.getHoraFinal());
+            System.out.println(turmaOK.getProfessor().getIdPessoa());
+            System.out.println(turmaOK.getHoraInicio());
             ps.execute();
             cadastrarDias(turmaOK.getDias());
             con.close();

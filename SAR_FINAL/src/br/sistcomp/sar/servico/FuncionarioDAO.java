@@ -12,27 +12,28 @@ import javax.swing.JOptionPane;
 
 public class FuncionarioDAO {
 
-    private static FuncionarioDAO secretariaDAO;
+    private static FuncionarioDAO funcionarioDAO;
 
     public static FuncionarioDAO getInstance() {
         synchronized (FuncionarioDAO.class) {
-            if (secretariaDAO == null) {
-                secretariaDAO = new FuncionarioDAO();
+            if (funcionarioDAO == null) {
+                funcionarioDAO = new FuncionarioDAO();
             }
         }
-        return secretariaDAO;
+        return funcionarioDAO;
     }
 
-    public void cadastrarSenhaSecretaria(Pessoa pessoa, String senha) {
+    public void cadastrar(Funcionario funcionario) {
         PreparedStatement ps;
         try {
-            int idPessoa = PessoaDAO.getInstance().cadastrar(pessoa);
+            int idPessoa = PessoaDAO.getInstance().cadastrar(funcionario);
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("INSERT INTO SECRETARIAS "
-                    + "(matricula, senha)"
-                    + " VALUES (?,?)");
-            ps.setInt(1, pessoa.getIdPessoa());
-            ps.setString(2, senha);
+            ps = (PreparedStatement) con.prepareStatement("INSERT INTO FUNCIONARIOS "
+                    + "(idPessoa, matricula, funcao)"
+                    + " VALUES (?,?,?)");
+            ps.setInt(1, idPessoa);
+            ps.setInt(2, funcionario.getIdPessoa());
+            ps.setString(3, funcionario.getFuncao());
             ps.execute();
             con.close();
             JOptionPane.showMessageDialog(null, "Funcionário(a) Cadastrado(a) com Sucesso!");
@@ -50,10 +51,10 @@ public class FuncionarioDAO {
         String senha = null;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT senha FROM secretarias s WHERE s.matricula = '" + matricula + "'");
+            ps = (PreparedStatement) con.prepareStatement("SELECT funcao FROM FUNCIONARIOS WHERE matricula = '" + matricula + "'");
             rs = ps.executeQuery();
             while (rs.next()) {
-                senha = rs.getString("senha");
+                senha = rs.getString("funcao");
                 if (senha.equals("")) {
                     break;
                 }
@@ -74,7 +75,7 @@ public class FuncionarioDAO {
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("DELETE FROM secretarias WHERE matricula ='" + matricula + "'");
+            ps = (PreparedStatement) con.prepareStatement("DELETE FROM FUNCIONARIOS WHERE matricula ='" + matricula + "'");
             ps.execute();
             con.close();
             JOptionPane.showMessageDialog(null, "Senha removido com sucesso");
@@ -84,18 +85,18 @@ public class FuncionarioDAO {
         }
     }
 
-    public String alterarSenhaSecretaria(int matricula, String senha) {
+    public String alterarSenhaSecretaria(int matricula, String funcao) {
         PreparedStatement ps;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("UPDATE secretarias set senha = ? WHERE matricula = '" + matricula + "' ");
-            ps.setString(1, senha);
+            ps = (PreparedStatement) con.prepareStatement("UPDATE FUNCIONARIOS set funcao = ? WHERE matricula = '" + matricula + "' ");
+            ps.setString(1, funcao);
             ps.execute();
             con.close();
-            return "Senha alterado com sucesso";
+            return "Dados alterados com sucesso";
         } catch (Exception e) {
             e.printStackTrace();
-            return "Erro ao alterar o senha";
+            return "Erro ao alterar dados";
         }
     }
 
@@ -106,7 +107,7 @@ public class FuncionarioDAO {
         int matricula = 0;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT matricula FROM secretarias ");
+            ps = (PreparedStatement) con.prepareStatement("SELECT matricula FROM FUNCIONARIOS ");
             rs = ps.executeQuery();
             while (rs.next()) {
                 matricula = rs.getInt("matricula");
@@ -121,16 +122,16 @@ public class FuncionarioDAO {
         return funcionarios;
     }
 
-   
+
     //Método que remove senha da secretaria
     public void removerSecretaria(int matricula) {
         removerSenhaSecretaria(matricula);
         PessoaDAO.getInstance().remover(matricula);
     }
 
-    public void alteraFuncionario(Pessoa pessoa, String senha) {
-        alterarSenhaSecretaria(pessoa.getIdPessoa(), senha);
-        PessoaDAO.getInstance().alterar(pessoa);
+    public void alteraFuncionario(Funcionario funcionario) {
+        alterarSenhaSecretaria(funcionario.getIdPessoa(), funcionario.getFuncao());
+        PessoaDAO.getInstance().alterar(funcionario);
     }
 
     public Funcionario pesquisaFuncionario(int matricula) {
@@ -153,7 +154,7 @@ public class FuncionarioDAO {
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             ps = (PreparedStatement) con.prepareStatement("SELECT matricula "
-                    + "FROM secretarias ");
+                    + "FROM FUNCIONARIOS ");
             rs = ps.executeQuery();
             while (rs.next()) {
                 matricula = rs.getInt("matricula");
@@ -185,5 +186,5 @@ public class FuncionarioDAO {
         return pessoas;
     }
 
-    
+
 }

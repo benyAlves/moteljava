@@ -48,7 +48,7 @@
                   <Component id="jLabel1" alignment="0" pref="731" max="32767" attributes="0"/>
                   <Component id="jSeparator1" alignment="1" pref="731" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="botaoCadastrar" min="-2" pref="83" max="-2" attributes="0"/>
+                      <Component id="botaoSalvar" min="-2" pref="83" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="botaoVoltar" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -65,7 +65,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="botaoVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botaoCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botaoSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="2" max="-2" attributes="0"/>
@@ -1143,12 +1143,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoVoltarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botaoCadastrar">
+    <Component class="javax.swing.JButton" name="botaoSalvar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCadastrarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoSalvarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

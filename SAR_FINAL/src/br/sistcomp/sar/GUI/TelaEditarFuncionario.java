@@ -520,10 +520,10 @@ public class TelaEditarFuncionario extends javax.swing.JFrame {
                             String dataNascimento = campoDataNascimentoSecretaria.getText();
                             String observacoes = caixaObservacoesSecretaria.getText();
 
-                            Funcionario secrataria = new Funcionario(matricula, nomeSecretaria, email, dataNascimento, sexo, cpf,
+                            Funcionario funcionario = new Funcionario(matricula, nomeSecretaria, email, dataNascimento, sexo, cpf,
                                     identidade, orgaoEmissor, endereco, bairro, cidade, estado, cep, telefone, celular, observacoes, senha);
 
-                            fachada.alteraFuncionario(secrataria, senha);
+                            fachada.alteraFuncionario(funcionario);
                             TelaAcessoCadastroFuncionario.tabelaAcessoFuncionario.setValueAt(matricula, TelaAcessoCadastroFuncionario.tabelaAcessoFuncionario.getSelectedRow(),0);
                             TelaAcessoCadastroFuncionario.tabelaAcessoFuncionario.setValueAt(nomeSecretaria, TelaAcessoCadastroFuncionario.tabelaAcessoFuncionario.getSelectedRow(),1);
                             TelaAcessoCadastroFuncionario.tabelaAcessoFuncionario.setValueAt(telefone, TelaAcessoCadastroFuncionario.tabelaAcessoFuncionario.getSelectedRow(),2);

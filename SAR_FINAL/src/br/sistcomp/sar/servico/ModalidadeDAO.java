@@ -153,10 +153,11 @@ public class ModalidadeDAO {
     public Modalidade getModalidades(String nome){
           ResultSet rs;
 	  PreparedStatement ps;
-          Modalidade modalidades = null;
+          //Modalidade modalidades = null;
           String ambiente = null;
           int  alunosPorTurma = -1;
-          int codigo = -1;
+          int codigo = 2000;
+          Modalidade modalidades = modalidades = new Modalidade(0,nome,ambiente, alunosPorTurma);
 
           try {
                 Connection con = (Connection) ConexaoDB.getInstance().getCon();

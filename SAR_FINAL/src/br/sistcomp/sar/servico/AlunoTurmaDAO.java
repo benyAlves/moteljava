@@ -6,8 +6,12 @@
 package br.sistcomp.sar.servico;
 
 import br.sistcomp.sar.conexao.ConexaoDB;
+import br.sistcomp.sar.dominio.Turma;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -72,4 +76,25 @@ public class AlunoTurmaDAO {
             System.out.println(e);
         }
     }
+
+    public List<Integer> turmasDoAluno(int matricula){
+        ResultSet rs;
+        PreparedStatement ps;
+        List<Integer> turmas = new ArrayList<Integer>();
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ALUNO_TURMA WHERE matricula='"+matricula+"' ");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                turmas.add(rs.getInt("codTurma"));
+            }
+            con.close();
+            return turmas;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return turmas;
+    }
+
 }

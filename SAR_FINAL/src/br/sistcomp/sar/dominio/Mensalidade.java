@@ -5,35 +5,42 @@ package br.sistcomp.sar.dominio;
 public class Mensalidade {
 
     private long codigo;
-    private String nomeDaModalidade;
     private double valor;
     private double desconto;
     private String vencimento;
     private String pagamento;
+    private int codAdesao;
 
-    public Mensalidade(long codigo, String nomeDaModalidade, double valor, double desconto, String vencimento, String pagamento) {
+    public Mensalidade(long codigo, double valor, double desconto, String vencimento, String pagamento, int codAdesao) {
         this.codigo = codigo;
-        this.nomeDaModalidade = nomeDaModalidade;
         this.valor = valor;
         this.desconto = desconto;
         this.vencimento = vencimento;
         this.pagamento = pagamento;
+        this.codAdesao = codAdesao;
     }
 
-    public Mensalidade(String nomeDaModalidade, double valor, double desconto, String vencimento) {
-        this.nomeDaModalidade = nomeDaModalidade;
+    public Mensalidade(double valor, double desconto, String vencimento, int codAdesao) {
+        this.valor = valor;
+        this.desconto = desconto;
+        this.vencimento = vencimento;
+        this.codAdesao = codAdesao;
+    }
+
+    public Mensalidade(double valor, double desconto, String vencimento) {
         this.valor = valor;
         this.desconto = desconto;
         this.vencimento = vencimento;
     }
 
-    public String getNomeDaModalidade() {
-        return nomeDaModalidade;
+    public int getCodAdesao() {
+        return codAdesao;
     }
 
-    public void setNomeDaModalidade(String nomeDaModalidade) {
-        this.nomeDaModalidade = nomeDaModalidade;
+    public void setCodAdesao(int codAdesao) {
+        this.codAdesao = codAdesao;
     }
+
 
     public long getCodigo() {
         return codigo;
