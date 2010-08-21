@@ -97,4 +97,16 @@ public class AlunoTurmaDAO {
         return turmas;
     }
 
+    public void removerTurmas(int matricula){
+        try{
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            PreparedStatement ps = (PreparedStatement) con.prepareStatement
+                    ("DELETE FROM ALUNO_TURMA WHERE matricula ='"+matricula+"'");
+            ps.execute();
+            con.close();
+        } catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
 }

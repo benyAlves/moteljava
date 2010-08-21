@@ -174,19 +174,15 @@ public class PlanoAlunoDAO {
         }
     }
 
-    public void alterarCod_Plano(int matricula, String nomePlano) {
+    public void alterarCodTurma(int matricula, int codPlano, int codTurma) {
         PreparedStatement ps;
         try {
-
-
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("UPDATE aluno_plano set codPlano = ? WHERE matricula = '" + matricula + "'");
-            ps.setInt(1, pesquisaCodigoDoPlano(nomePlano));
-
-
+            ps = (PreparedStatement) con.prepareStatement("UPDATE ALUNO_PLANO set codTurma = ? WHERE matricula = '" + matricula + "' and codPlano = '" +codPlano+ "'");
+            ps.setInt(1, codTurma);
             ps.execute();
             con.close();
-            JOptionPane.showInternalMessageDialog(null, "Atualização realizada com sucesso");
+            //JOptionPane.showMessageDialog(null, "Atualização realizada com sucesso");
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -244,4 +240,28 @@ public class PlanoAlunoDAO {
         }
         return plano;
     }
+
+    public List<Integer> turmasAderidas(int matricula){
+        ResultSet rs;
+        PreparedStatement ps;
+        List<Integer> turmas = new ArrayList<Integer>();
+
+
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT codTurma FROM ALUNO_PLANO WHERE matricula = '" + matricula + "' ");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                turmas.add(rs.getInt("codTurma"));
+            }
+
+            con.close();
+            return turmas;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return turmas;
+    }
+
 }

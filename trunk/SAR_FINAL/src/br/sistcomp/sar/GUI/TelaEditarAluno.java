@@ -35,6 +35,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
     private boolean entrou, visualizar = false;
     private File file;
     Fachada fachada = new Fachada();
+    Turma turmaSelecionada;
     static List<Plano> planosAluno = new ArrayList<Plano>();
     static List<Turma> turmasAluno = new ArrayList<Turma>();
     List<Plano> planosAremover = new ArrayList<Plano>();
@@ -264,6 +265,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         botaoVoltar = new javax.swing.JButton();
         botaoSalvar = new javax.swing.JButton();
+        alterarTurma = new javax.swing.JButton();
 
         jLabel5.setText("jLabel5");
 
@@ -852,6 +854,13 @@ public class TelaEditarAluno extends javax.swing.JFrame {
             }
         });
 
+        alterarTurma.setText("Alterar");
+        alterarTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alterarTurmaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -863,6 +872,8 @@ public class TelaEditarAluno extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(alterarTurma)
+                        .addGap(18, 18, 18)
                         .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(botaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -876,7 +887,8 @@ public class TelaEditarAluno extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoSalvar))
+                    .addComponent(botaoSalvar)
+                    .addComponent(alterarTurma))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1158,7 +1170,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoAdicionar1ActionPerformed
 
     private void selecaoHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecaoHorarioActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_selecaoHorarioActionPerformed
 
     private void tabelaModalidadeAlunoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaModalidadeAlunoKeyReleased
@@ -1191,12 +1203,6 @@ public class TelaEditarAluno extends javax.swing.JFrame {
                 break;
             }
         }
-//        Turma t = null;
-//        for (Turma turma: turmasAluno){
-//            if (turma.getProfessor().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 1))));
-//            t = turma;
-//            break;
-//        }
         selecaoModalidade.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0)));
         selecaoProfessor.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 1)));
         selecaoPlano.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)));
@@ -1210,7 +1216,28 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         visualizar = true;
         travaCampos();
     }//GEN-LAST:event_tabelaModalidadeAlunoMousePressed
+
+    private void alterarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarTurmaActionPerformed
+        String codigoString = "";
+        int codTurma;
+        String[] codigoArray = selecaoHorario.getSelectedItem().toString().split("\\|");
+        codigoString += codigoArray[0];
+        codTurma = Integer.parseInt(codigoString);
+        Turma t = fachada.pesquisarTurma(codTurma);
+
+        for (Plano plano: planosAluno){
+            if (plano.getNome().equals(selecaoPlano.getSelectedItem().toString())){
+                plano.setTurma(t);
+                JOptionPane.showMessageDialog(null,t.getCodigo());
+                break;
+            }
+        }
+        preenchePlanos();
+        JOptionPane.showMessageDialog(null, "Turma Alterada!");
+    }//GEN-LAST:event_alterarTurmaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton alterarTurma;
     private javax.swing.JButton botaoAdicionar1;
     private javax.swing.JButton botaoExcluir;
     public static javax.swing.JButton botaoInserirFotoAluno;
