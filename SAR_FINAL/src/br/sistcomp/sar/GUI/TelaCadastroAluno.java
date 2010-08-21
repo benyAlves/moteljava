@@ -228,8 +228,8 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
             String nomeModalidade = planos.getModalidade().getNome();
             String nomePlano = planos.getNome();
             double valor = planos.getValor();
-            String nomeProfessor = fachada.pesquisarProfessorPorMatricula(fachada.pesquidaMatriculaPorCodModalidade(planos.getModalidade().getCodigo())).getNome();
-            Turma turma = fachada.turmaAtravesDaMatriculaDoProfessor(fachada.pesquidaMatriculaPorCodModalidade(planos.getModalidade().getCodigo()));
+            Turma turma = planos.getTurma();
+            String nomeProfessor = turma.getProfessor().getNome();
             String diaEhorario = TelaCadastroAluno.getHorarioTurmas(turma);
             modelo.addRow(new Object[]{nomeModalidade, nomeProfessor, nomePlano, diaEhorario, valor});
 
@@ -1182,6 +1182,7 @@ if (visualizar){
                                     turmasAluno.add(t);
 
                                     Plano p = fachada.pesquisarPlano(selecaoPlano.getSelectedItem().toString());
+                                    p.setTurma(t);
                                     String valor = campoValor.getText();
                                     p.setValor(Double.parseDouble(valor));
                                     p.setDiaDoPagamento(campoVencimento.getText());
