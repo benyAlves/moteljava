@@ -225,7 +225,6 @@ public class TurmaDAO {
         PreparedStatement ps;
         Vector<Turma> turmas = new Vector<Turma>();
         Map<String, Boolean> dias = new HashMap<String, Boolean>();
-        List<Integer> turmasComVaga = turmasComVaga();
         Turma turma = null;
         Professor professor = null;
         int codigo;
@@ -233,18 +232,16 @@ public class TurmaDAO {
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            for (int i : turmasComVaga) {
-                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM TURMAS WHERE codTurma ='"+i+"' ");
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    codigo = rs.getInt("codTurma");
-                    professor = ProfessorDAO.getInstance().pesquisar(rs.getInt("matricula"));
-                    horaInicio = rs.getString("horaInicio");
-                    horaFinal = rs.getString("horaFinal");
-                    dias = pesquisarDias(codigo);
-                    turma = new Turma(codigo, professor, horaInicio, horaFinal, dias);
-                    turmas.add(turma);
-                }
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM TURMAS");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                codigo = rs.getInt("codTurma");
+                professor = ProfessorDAO.getInstance().pesquisar(rs.getInt("matricula"));
+                horaInicio = rs.getString("horaInicio");
+                horaFinal = rs.getString("horaFinal");
+                dias = pesquisarDias(codigo);
+                turma = new Turma(codigo, professor, horaInicio, horaFinal, dias);
+                turmas.add(turma);
             }
             con.close();
             return turmas;
@@ -259,30 +256,30 @@ public class TurmaDAO {
         ResultSet rs;
         PreparedStatement ps;
         List<Turma> turmas = new ArrayList<Turma>();
-        Turma turma = null;
-        int codigo;
-        String horaInicio, horaFinal;
-        Professor professor = null;
         Map<String, Boolean> dias = new HashMap<String, Boolean>();
+        List<Integer> turmasComVaga = turmasComVaga();
+        Turma turma = null;
+        Professor professor = ProfessorDAO.getInstance().pesquisar(nome);
+        int codigo;
+        String horaInicio, horaFinal, p;
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-
-            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM TURMAS WHERE matricula = '"
-                    + ProfessorDAO.getInstance().pesquisar(nome).getIdPessoa() + "'");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                codigo = rs.getInt("codTurma");
-                professor = ProfessorDAO.getInstance().pesquisar(nome);
-                horaInicio = rs.getString("horaInicio");
-                horaFinal = rs.getString("horaFinal");
-                dias = pesquisarDias(codigo);
-                turma = new Turma(codigo, professor, horaInicio, horaFinal, dias);
-                turmas.add(turma);
+            for (int i : turmasComVaga) {
+                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM TURMAS WHERE codTurma ='"+i+"' AND matricula= '"+professor.getIdPessoa()+"' ");
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    codigo = rs.getInt("codTurma");
+                    professor = ProfessorDAO.getInstance().pesquisar(rs.getInt("matricula"));
+                    horaInicio = rs.getString("horaInicio");
+                    horaFinal = rs.getString("horaFinal");
+                    dias = pesquisarDias(codigo);
+                    turma = new Turma(codigo, professor, horaInicio, horaFinal, dias);
+                    turmas.add(turma);
+                }
             }
             con.close();
             return turmas;
-
         } catch (Exception e) {
             e.printStackTrace();
 
