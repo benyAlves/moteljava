@@ -178,6 +178,26 @@ public class ModalidadeDAO {
           }
     }
 
+    public int alunosPorTurma(int codModalidade) {
+        ResultSet rs;
+        PreparedStatement ps;
+        int qtde = 0;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT alunosPorTurma FROM MODALIDADES WHERE codModalidade ='"+codModalidade+"' ");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                qtde = rs.getInt("alunosPorTurma");
+            }
+            con.close();
+            return qtde;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return qtde;
+    }
+
 }
 
 

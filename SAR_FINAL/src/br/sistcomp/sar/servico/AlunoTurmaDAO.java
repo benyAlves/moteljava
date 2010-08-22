@@ -109,4 +109,24 @@ public class AlunoTurmaDAO {
         }
     }
 
+    public int alunosNaTurma(int codTurma) {
+        ResultSet rs;
+        PreparedStatement ps;
+        int qtde = 0;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT count(codTurma) FROM ALUNO_TURMA WHERE codTurma ='"+codTurma+"' ");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                qtde = rs.getInt("count(codTurma)");
+            }
+            con.close();
+            return qtde;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return qtde;
+    }
+
 }
