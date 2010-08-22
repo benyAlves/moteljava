@@ -77,7 +77,6 @@ CREATE TABLE ALUNO_PLANO (
         formaPagamento varchar(17),
         codTurma int not null,
 	FOREIGN KEY (matricula) REFERENCES alunos(matricula),
-        FOREIGN KEY (codTurma) REFERENCES turmas(codTurma),
 	FOREIGN KEY (codPlano) REFERENCES planos(codPlano),
 	PRIMARY KEY (codAdesao)
 );
