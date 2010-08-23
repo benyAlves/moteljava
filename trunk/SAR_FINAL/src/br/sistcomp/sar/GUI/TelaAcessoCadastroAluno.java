@@ -5,6 +5,7 @@
  */
 package br.sistcomp.sar.GUI;
 
+import br.sistcomp.sar.dominio.Adesao;
 import br.sistcomp.sar.dominio.Aluno;
 import br.sistcomp.sar.dominio.CustonDocument;
 import br.sistcomp.sar.dominio.Pessoa;
@@ -452,18 +453,17 @@ public class TelaAcessoCadastroAluno extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) TelaEditarAluno.tabelaModalidadeAluno.getModel();
         modelo.setNumRows(0);
 
-        for (Plano planos : aluno.getPlano()) {
-            String nomeModalidade = planos.getModalidade().getNome();
-            String nomePlano = planos.getNome();
-            double valor = planos.getValor();
-            Turma turma = planos.getTurma();
+        for (Adesao adesao : aluno.getAdesoes()) {
+            String nomeModalidade = adesao.getPlano().getModalidade().getNome();
+            String nomePlano = adesao.getPlano().getNome();
+            double valor = adesao.getValor();
+            Turma turma = adesao.getTurma();
             String nomeProfessor = turma.getProfessor().getNome();
             String diaEhorario = TelaCadastroAluno.getHorarioTurmas(turma);
             modelo.addRow(new Object[]{nomeModalidade, nomeProfessor, nomePlano, diaEhorario, valor});
 
         }
-        TelaEditarAluno.planosAluno = aluno.getPlano();
-        TelaEditarAluno.turmasAluno = aluno.getTurma();
+        TelaEditarAluno.adesoes = aluno.getAdesoes();
     }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void campoBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarKeyPressed

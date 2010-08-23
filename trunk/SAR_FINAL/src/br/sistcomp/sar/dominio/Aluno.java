@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Aluno extends Pessoa {
 
-    private List<Plano> plano;
+    private List<Adesao> adesoes;
     private List<Mensalidade> mensalidade;
     private List<Turma> turma;
     private String indicacao;
@@ -16,27 +16,27 @@ public class Aluno extends Pessoa {
             String sexo, String cpf, String rgNumero, String rgUf,
             String endereco, String bairro, String cidade, String estado,
             String cep, String telefone, String celular, String observacoes,
-            List<Plano> plano, List<Mensalidade> mensalidade, List<Turma> turma,
+            List<Adesao> adesoes, List<Mensalidade> mensalidade, List<Turma> turma,
             String dataCadastro, String indicacao, String bolsista) {
         super(matricula,nome,email,nascimento,sexo,cpf,rgNumero,rgUf,endereco,bairro,cidade,estado,cep,telefone,celular,observacoes,dataCadastro);
-        this.plano = plano;
+        this.adesoes = adesoes;
         this.mensalidade = mensalidade;
         this.turma = turma;
         this.indicacao = indicacao;
         this.bolsista = bolsista;
     }
 
-    public Aluno(int matricula, String nome, String email, String nascimento, String sexo, String cpf, String rgNumero, String rgUf, String endereco, String bairro, String cidade, String estado, String cep, String telefone, String celular, String observacoes, List<Plano> plano, List<Turma> turma,String indicacao, String bolsista) {
-        super(matricula,nome,email,nascimento,sexo,cpf,rgNumero,rgUf,endereco,bairro,cidade,estado,cep,telefone,celular,observacoes);
-        this.plano = plano;
+    public Aluno(int matricula, String nome, String email, String nascimento, String sexo, String cpf, String rgNumero, String rgUf, String endereco, String bairro, String cidade, String estado, String cep, String telefone, String celular, String observacoes, List<Adesao> adesoes, String dataCadastro,String indicacao, String bolsista) {
+        super(matricula,nome,email,nascimento,sexo,cpf,rgNumero,rgUf,endereco,bairro,cidade,estado,cep,telefone,celular,observacoes,dataCadastro);
+        this.adesoes = adesoes;
         this.turma = turma;
         this.indicacao = indicacao;
         this.bolsista = bolsista;
     }
 
-    public Aluno(int matricula, String nome, String email, String nascimento, String sexo, String cpf, String rgNumero, String rgUf, String endereco, String bairro, String cidade, String estado, String cep, String telefone, String celular, String observacoes, List<Plano> plano,String indicacao, String bolsista) {
+    public Aluno(int matricula, String nome, String email, String nascimento, String sexo, String cpf, String rgNumero, String rgUf, String endereco, String bairro, String cidade, String estado, String cep, String telefone, String celular, String observacoes, List<Adesao> adesoes,String indicacao, String bolsista) {
         super(matricula,nome,email,nascimento,sexo,cpf,rgNumero,rgUf,endereco,bairro,cidade,estado,cep,telefone,celular,observacoes);
-        this.plano = plano;
+        this.adesoes = adesoes;
         this.indicacao = indicacao;
         this.bolsista = bolsista;
     }
@@ -73,12 +73,12 @@ public class Aluno extends Pessoa {
         this.mensalidade = mensalidade;
     }
 
-    public List<Plano> getPlano() {
-        return plano;
+    public List<Adesao> getAdesoes() {
+        return adesoes;
     }
 
-    public void setPlano(List<Plano> plano) {
-        this.plano = plano;
+    public void setAdesoes(List<Adesao> adesoes) {
+        this.adesoes = adesoes;
     }
 
 }

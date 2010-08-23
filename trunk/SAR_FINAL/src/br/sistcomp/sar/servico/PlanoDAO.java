@@ -74,6 +74,34 @@ public class PlanoDAO {
         }
         return plano;
     }
+    
+    public Plano pesquisar(int codPlano) {
+        ResultSet rs;
+        PreparedStatement ps;
+        Plano plano = null;
+        ModalidadeDAO modalidadeDAO = ModalidadeDAO.getInstance();
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM PLANOS WHERE codPlano = '" + codPlano + "' ");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int codigo = rs.getInt("codPlano");
+                String nome = rs.getString("nome");
+                Modalidade modalidade = modalidadeDAO.pesquisar(rs.getInt("codModalidade"));
+                int duracao = rs.getInt("duracao");
+                Double valor = rs.getDouble("valor");
+                String status = rs.getString("status");
+                con.close();
+                plano = new Plano(codigo, nome, duracao, valor, modalidade, status);
+                return plano;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            plano.setNome("erro");
+            return plano;
+        }
+        return plano;
+    }
 
     public String alterar(Plano plano) {
         PreparedStatement ps;
@@ -120,7 +148,7 @@ public class PlanoDAO {
         List<Plano> todosPlanos = new ArrayList<Plano>();
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            for (Plano plano : PlanoAlunoDAO.getInstance().pesquisaPlanosAderidos(matricula)) {
+            for (Plano plano : AdesaoDAO.getInstance().pesquisaPlanosAderidos(matricula)) {
                 ps = (PreparedStatement) con.prepareStatement("SELECT * FROM planos WHERE codPlano = '" + plano.getCodigo() + "'");
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -284,7 +312,7 @@ public class PlanoDAO {
 
     public Plano planoAderido(String nomePlano, int matricula){
         Plano plano = pesquisar(nomePlano);
-        plano = PlanoAlunoDAO.getInstance().planoAderido(plano.getCodigo(), matricula);
+        plano = AdesaoDAO.getInstance().planoAderido(plano.getCodigo(), matricula);
         return plano;
     }
 

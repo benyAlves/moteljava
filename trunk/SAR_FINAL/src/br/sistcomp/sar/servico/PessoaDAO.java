@@ -197,10 +197,10 @@ public class PessoaDAO {
             ps.setString(15, pessoaOK.getObservacoes());
             ps.execute();
             con.close();
-            JOptionPane.showMessageDialog(null, "Atualização realizada com sucesso");
+            //JOptionPane.showMessageDialog(null, "Atualização realizada com sucesso");
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar cadastro");
+            //JOptionPane.showMessageDialog(null, "Erro ao atualizar cadastro");
         }
     }
 

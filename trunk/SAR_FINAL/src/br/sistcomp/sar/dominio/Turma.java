@@ -13,6 +13,7 @@ public class Turma {
     private Professor professor;
     private String horaInicio;
     private String horaFinal;
+    private Adesao adesao;
     private Map <String,Boolean> dias = new HashMap<String, Boolean>();
     private List<Aluno> alunos = new ArrayList<Aluno>();
 
@@ -31,6 +32,14 @@ public class Turma {
         this.horaInicio = horaInicio;
         this.horaFinal = horaFinal;
         this.dias = dias;
+    }
+
+    public Adesao getAdesao() {
+        return adesao;
+    }
+
+    public void setAdesao(Adesao adesao) {
+        this.adesao = adesao;
     }
 
     public int getCodigo() {
