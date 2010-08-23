@@ -33,6 +33,10 @@ public class Mensalidade {
         this.vencimento = vencimento;
     }
 
+    public Mensalidade() {
+        
+    }
+
     public int getCodAdesao() {
         return codAdesao;
     }

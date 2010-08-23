@@ -111,12 +111,12 @@ public class MensalidadeDAO {
 		}
     }
 
-    public String remover(int matricula, int codAdesao){
+    public String remover(int codAdesao){
             PreparedStatement ps;
 
                 try{
                     Connection con = (Connection) ConexaoDB.getInstance().getCon();
-                    ps = (PreparedStatement) con.prepareStatement("DELETE FROM MENSALIDADES WHERE matricula ='"+matricula+"' AND codAdesao ='"+codAdesao+"' ");
+                    ps = (PreparedStatement) con.prepareStatement("DELETE FROM MENSALIDADES WHERE codAdesao ='"+codAdesao+"' ");
                     ps.execute();
                     con.close();
                     return "Mensalidade Removida com Sucesso";
@@ -155,6 +155,34 @@ public class MensalidadeDAO {
           }
 
           return mensalidade;
+    }
+
+    public List<Mensalidade> mensalidadesDaAdesao(int codAdesao){
+          ResultSet rs;
+	  PreparedStatement ps;
+          List<Mensalidade> mensalidades = new ArrayList<Mensalidade>();
+
+          try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM MENSALIDADES WHERE codAdesao = '"+codAdesao+"'" );
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    Mensalidade mensalidade = new Mensalidade();
+                    mensalidade.setValor(rs.getDouble("valor"));
+                    mensalidade.setDesconto(rs.getDouble("desconto"));
+                    mensalidade.setVencimento(rs.getString("vencimento"));
+                    mensalidade.setPagamento(rs.getString("pagamento"));
+                    mensalidade.setCodAdesao(rs.getInt("codAdesao"));
+                    mensalidades.add(mensalidade);
+                }
+                con.close();
+                return mensalidades;
+          }
+          catch (Exception e) {
+              e.printStackTrace();
+          }
+
+          return mensalidades;
     }
 
 }

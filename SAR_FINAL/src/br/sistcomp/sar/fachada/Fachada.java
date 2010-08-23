@@ -21,106 +21,110 @@ public class Fachada {
 
     public void cadastraAluno(Aluno aluno) {
         AlunoDAO.getInstance().cadastrar(aluno);
-        for (Plano plano : aluno.getPlano()) {
-            int codAdesao = PlanoAlunoDAO.getInstance().inserirCodigoDoPlanoAoAluno(aluno.getIdPessoa(), plano);
-            for (Mensalidade mensalidade : plano.getMensalidades()){
+        for (Adesao adesao : aluno.getAdesoes()) {
+            int codAdesao = AdesaoDAO.getInstance().aderirPlano(aluno.getIdPessoa(), adesao);
+            AlunoTurmaDAO.getInstance().insereAlunoNaTurma(aluno.getIdPessoa(), adesao.getTurma().getCodigo(), codAdesao);
+            for (Mensalidade mensalidade : adesao.getMensalidades()) {
                 mensalidade.setCodAdesao(codAdesao);
                 MensalidadeDAO.getInstance().cadastrar(mensalidade, aluno.getIdPessoa());
             }
         }
 
-        for (Turma turma : aluno.getTurma()) {
-            AlunoTurmaDAO.getInstance().insereAlunoNaTurma(aluno.getIdPessoa(), turma.getCodigo());
+        if (TelaWebCam.teste == true) {
+            ImagemDAO.getInstance().inserirFotoWeb(aluno.getIdPessoa());
+        } else {
+            ImagemDAO.getInstance().inserirFotoArquivo(aluno.getIdPessoa(), TelaCadastroAluno.file);
         }
-        if(TelaWebCam.teste == true)ImagemDAO.getInstance().inserirFotoWeb(aluno.getIdPessoa());
-           else ImagemDAO.getInstance().inserirFotoArquivo(aluno.getIdPessoa(), TelaCadastroAluno.file);
     }
 
-    public void editarAluno(Aluno aluno, List<Plano> planosAremover, List<Turma> turmasAremover) {
+    public void inserirAdesao(int matricula, Adesao adesao) {
+        int codAdesao = AdesaoDAO.getInstance().aderirPlano(matricula, adesao);
+        AlunoTurmaDAO.getInstance().insereAlunoNaTurma(matricula, adesao.getTurma().getCodigo(), codAdesao);
+        for (Mensalidade mensalidade : adesao.getMensalidades()) {
+            mensalidade.setCodAdesao(codAdesao);
+            MensalidadeDAO.getInstance().cadastrar(mensalidade, matricula);
+        }
+    }
+
+    public void removerAdesao(int codAdesao){
+        MensalidadeDAO.getInstance().remover(codAdesao);
+        AlunoTurmaDAO.getInstance().removeAlunoDaTurma(codAdesao);
+        AdesaoDAO.getInstance().remover(codAdesao);
+    }
+
+    public void trocarTurma(int codAdesao, int codTurma){
+        AlunoTurmaDAO.getInstance().editaAlunoNaTurma(codAdesao, codTurma);
+    }
+
+    public void editarAluno(Aluno aluno) {
         AlunoDAO.getInstance().alterar(aluno);
-        Aluno alunoAuxiliar = pesquisarAluno(aluno.getIdPessoa());
-        List<Plano> planosAuxiliares = alunoAuxiliar.getPlano();
 
-        AlunoTurmaDAO.getInstance().removerTurmas(aluno.getIdPessoa());
-
-        for (Plano plano : aluno.getPlano()) {
-            AlunoTurmaDAO.getInstance().insereAlunoNaTurma(aluno.getIdPessoa(), plano.getTurma().getCodigo());
-            if(planosAuxiliares.contains(plano) == false){
-                if(plano.getMensalidades() != null){
-                    int codAdesao = PlanoAlunoDAO.getInstance().inserirCodigoDoPlanoAoAluno(aluno.getIdPessoa(), plano);
-                    for (Mensalidade mensalidade : plano.getMensalidades()){
-                        mensalidade.setCodAdesao(codAdesao);
-                        MensalidadeDAO.getInstance().cadastrar(mensalidade, aluno.getIdPessoa());
-                    }
-                }
-            }
-            PlanoAlunoDAO.getInstance().alterarCodTurma(aluno.getIdPessoa(), plano.getCodigo(), plano.getTurma().getCodigo());
+        if(TelaWebCam.teste == true){
+            ImagemDAO.getInstance().alterarFoto(aluno.getIdPessoa());
         }
-
-        if (planosAremover.isEmpty() == false){
-            for (Plano plano : planosAremover){
-                    PlanoAlunoDAO.getInstance().remover(aluno.getIdPessoa(), plano.getCodigo());
-            }
-        }
-
-        if(TelaWebCam.teste == true)ImagemDAO.getInstance().alterarFoto(aluno.getIdPessoa());
-          // else ImagemDAO.getInstance().alterarFotoParaDefault(aluno.getIdPessoa());
+        // else ImagemDAO.getInstance().alterarFotoParaDefault(aluno.getIdPessoa());
     }
-
     public void cadastrarProfessor(Professor professor) {
         ProfessorDAO.getInstance().cadastrar(professor);
-        if(TelaWebCam.teste == true)ImagemDAO.getInstance().inserirFotoWeb(professor.getIdPessoa());
-           else ImagemDAO.getInstance().inserirFotoArquivo(professor.getIdPessoa(), TelaCadastroAluno.file);
+        if (TelaWebCam.teste == true) {
+            ImagemDAO.getInstance().inserirFotoWeb(professor.getIdPessoa());
+        } else {
+            ImagemDAO.getInstance().inserirFotoArquivo(professor.getIdPessoa(), TelaCadastroAluno.file);
+        }
     }
     // Pesquisa matricula do professor passando o codigo da modadlidade
-    public int pesquidaMatriculaPorCodModalidade(int codigo){
+
+    public int pesquidaMatriculaPorCodModalidade(int codigo) {
         return ProfessorDAO.getInstance().pesquisarMatricula(codigo);
     }
 
-    public void removerProfessor(int matricula){
+    public void removerProfessor(int matricula) {
         ProfessorDAO.getInstance().remover(matricula);
     }
 
-    public int alunosAtivos(){
-        return PlanoAlunoDAO.getInstance().pesquisaAlunosAtivos();
+    public int alunosAtivos() {
+        return AdesaoDAO.getInstance().pesquisaAlunosAtivos();
     }
 
-     public Vector<Integer> todosFuncionarioAtivos(){
+    public Vector<Integer> todosFuncionarioAtivos() {
         return FuncionarioDAO.getInstance().todosFuncionariosAtivos();
     }
 
-    public void removerPlano(String nome){
+    public void removerPlano(String nome) {
         PlanoDAO.getInstance().remover(nome);
     }
 
-    public int professoresAtivos(){
-       return ProfessorDAO.getInstance().pesquisaProfessoresAtivos();
+    public int professoresAtivos() {
+        return ProfessorDAO.getInstance().pesquisaProfessoresAtivos();
     }
 
-    public Vector<Pessoa> todosProfessores(){
+    public Vector<Pessoa> todosProfessores() {
         return ProfessorDAO.getInstance().todosProfessores();
     }
 
-    public Vector<Pessoa> todosFuncionarios(){
+    public Vector<Pessoa> todosFuncionarios() {
         return FuncionarioDAO.getInstance().todosFuncionario();
     }
 
-    public void removerTurma(Turma turma){
+    public void removerTurma(Turma turma) {
         TurmaDAO.getInstance().remover(turma);
     }
 
-    public Turma turmaAtravesDaMatriculaDoProfessor(int matricula){
+    public Turma turmaAtravesDaMatriculaDoProfessor(int matricula) {
         return TurmaDAO.getInstance().turmaAtravesDaMatriculaDoProfessor(matricula);
     }
 
-    public void removerModalidade(String nome){
+    public void removerModalidade(String nome) {
         ModalidadeDAO.getInstance().remover(nome);
     }
 
     public void cadastrarfuncionario(Funcionario funcionario) {
         FuncionarioDAO.getInstance().cadastrar(funcionario);
-        if(TelaWebCam.teste == true)ImagemDAO.getInstance().inserirFotoWeb(funcionario.getIdPessoa());
-           else ImagemDAO.getInstance().inserirFotoArquivo(funcionario.getIdPessoa(), TelaCadastroAluno.file);
+        if (TelaWebCam.teste == true) {
+            ImagemDAO.getInstance().inserirFotoWeb(funcionario.getIdPessoa());
+        } else {
+            ImagemDAO.getInstance().inserirFotoArquivo(funcionario.getIdPessoa(), TelaCadastroAluno.file);
+        }
     }
 
     public Professor pesquisarProfessorPorNome(String nome) {
@@ -131,41 +135,47 @@ public class Fachada {
         return ProfessorDAO.getInstance().pesquisar(matricula);
     }
 
-     public void editarProfessor(Professor professor) {
+    public void editarProfessor(Professor professor) {
         ProfessorDAO.getInstance().alterar(professor);
-        if(TelaWebCam.teste == true)ImagemDAO.getInstance().alterarFoto(professor.getIdPessoa());
-           //else ImagemDAO.getInstance().alterarFotoParaDefault(professor.getIdPessoa());
+        if (TelaWebCam.teste == true) {
+            ImagemDAO.getInstance().alterarFoto(professor.getIdPessoa());
+        }
+        //else ImagemDAO.getInstance().alterarFotoParaDefault(professor.getIdPessoa());
     }
-    public Aluno pesquisarAluno(int matricula){
+
+    public Aluno pesquisarAluno(int matricula) {
         return AlunoDAO.getInstance().pesquisar(matricula);
     }
 
-    public Vector<Aluno> pesquisarAlunoPorNome(String nome){
+    public Vector<Aluno> pesquisarAlunoPorNome(String nome) {
         return AlunoDAO.getInstance().pesquisarPorNome(nome);
     }
 
-    public Funcionario pesquisaFuncionarioPelaMatricula(int matricula){
+    public Funcionario pesquisaFuncionarioPelaMatricula(int matricula) {
         return FuncionarioDAO.getInstance().pesquisaFuncionario(matricula);
     }
 
     public void alteraFuncionario(Funcionario funcionario) {
         FuncionarioDAO.getInstance().alteraFuncionario(funcionario);
-        if(TelaWebCam.teste == true)ImagemDAO.getInstance().alterarFoto(Utilitario.retornaIdPessoa(funcionario.getIdPessoa()));
-           //else ImagemDAO.getInstance().alterarFotoParaDefault(pessoa.getIdPessoa());
+        if (TelaWebCam.teste == true) {
+            ImagemDAO.getInstance().alterarFoto(Utilitario.retornaIdPessoa(funcionario.getIdPessoa()));
+        }
+        //else ImagemDAO.getInstance().alterarFotoParaDefault(pessoa.getIdPessoa());
     }
 
-    public void editarTurma(Turma turma){
+    public void editarTurma(Turma turma) {
         TurmaDAO.getInstance().alterar(turma);
     }
+
     public Vector<Pessoa> todosAlunos() {
 
         return AlunoDAO.getInstance().todosAlunos();
     }
-     public Vector<Mensalidade> pesquisaTodosAsMensalidadesDoAluno(int matricula){
-         return MensalidadeDAO.getInstance().pesquisaTodosAsMensalidadesDoAluno(matricula);
-     }
 
-    
+    public Vector<Mensalidade> pesquisaTodosAsMensalidadesDoAluno(int matricula) {
+        return MensalidadeDAO.getInstance().pesquisaTodosAsMensalidadesDoAluno(matricula);
+    }
+
     public Vector<String> getNomesModalidades() {
         return ModalidadeDAO.getInstance().getNomesModalidades();
     }
@@ -194,16 +204,15 @@ public class Fachada {
         return PessoaDAO.getInstance().proximaMatricula();
     }
 
-    
     public ImageIcon pesquisarFoto(int matricula) {
         return ImagemDAO.getInstance().pesquisarFoto(matricula);
     }
 
     public void removerFoto(int matricula) {
-         ImagemDAO.getInstance().removerImagem(matricula);
+        ImagemDAO.getInstance().removerImagem(matricula);
     }
 
-    public Vector<Plano> todosOsPlanos(){
+    public Vector<Plano> todosOsPlanos() {
         return PlanoDAO.getInstance().TodosOsPlanos();
     }
 
@@ -251,16 +260,15 @@ public class Fachada {
         return PlanoDAO.getInstance().pesquisarDuracao(nomePlano);
     }
 
-    public int proximoCodigoModalidade(){
+    public int proximoCodigoModalidade() {
         return ModalidadeDAO.getInstance().proximoCodigo();
     }
 
-    public int proximoCodigoAdesao(){
-        return PlanoAlunoDAO.getInstance().proximoCodigo();
+    public int proximoCodigoAdesao() {
+        return AdesaoDAO.getInstance().proximoCodigo();
     }
 
-    public Plano planoAderido(String nomePlano, int matricula){
+    public Plano planoAderido(String nomePlano, int matricula) {
         return PlanoDAO.getInstance().planoAderido(nomePlano, matricula);
     }
-
 }

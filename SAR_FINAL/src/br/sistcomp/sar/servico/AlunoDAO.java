@@ -78,9 +78,7 @@ public class AlunoDAO {
                 p.getRgUf(), p.getEndereco(), p.getBairro(), p.getCidade(),
                 p.getEstado(), p.getCep(), p.getTelefone(), p.getCelular(),
                 p.getObservacoes(),
-                PlanoDAO.getInstance().pesquisaTodosOsPlanosDoAluno(matricula),
-                MensalidadeDAO.getInstance().pesquisaTodosAsMensalidadesDoAluno(matricula),
-                turmasDoAluno(matricula),
+                AdesaoDAO.getInstance().todasAdesoesDoAluno(matricula),
                 p.getDataCadastro(), indicacao, bolsista);
                 return aluno;
             }
@@ -114,9 +112,7 @@ public class AlunoDAO {
                             pessoa.getRgUf(), pessoa.getEndereco(), pessoa.getBairro(), pessoa.getCidade(),
                             pessoa.getEstado(), pessoa.getCep(), pessoa.getTelefone(), pessoa.getCelular(),
                             pessoa.getObservacoes(),
-                            PlanoDAO.getInstance().pesquisaTodosOsPlanosDoAluno(Utilitario.retornaMatricula(pessoa.getIdPessoa(), pessoa.getDataCadastro())),
-                            MensalidadeDAO.getInstance().pesquisaTodosAsMensalidadesDoAluno(Utilitario.retornaMatricula(pessoa.getIdPessoa(), pessoa.getDataCadastro())),
-                            turmasDoAluno(matricula),
+                            AdesaoDAO.getInstance().todasAdesoesDoAluno(Utilitario.retornaMatricula(pessoa.getIdPessoa(), pessoa.getDataCadastro())),
                             pessoa.getDataCadastro(), indicacao, bolsista);
                             todosAlunos.add(aluno);
 

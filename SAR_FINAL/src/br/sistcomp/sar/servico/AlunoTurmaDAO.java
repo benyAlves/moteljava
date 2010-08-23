@@ -31,15 +31,17 @@ public class AlunoTurmaDAO {
         return alunoTurmaDAO;
     }
 
-    public void insereAlunoNaTurma(int mat, int codTurma){
+    public void insereAlunoNaTurma(int matricula, int codTurma, int codAdesao){
         try{
-            int matricula = (int) mat;
-            int codigoTurma = (int) codTurma;
+            int m = (int) matricula;
+            int t = (int) codTurma;
+            int a = (int) codAdesao;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             PreparedStatement ps = (PreparedStatement) con.prepareStatement
-                    ("INSERT INTO ALUNO_TURMA(matricula,codTurma) VALUES(?,?)");
-            ps.setInt(1, matricula);
-            ps.setInt(2, codigoTurma);
+                    ("INSERT INTO ALUNO_TURMA(matricula,codTurma,codAdesao) VALUES(?,?,?)");
+            ps.setInt(1, m);
+            ps.setInt(2, t);
+            ps.setInt(3, a);
             ps.execute();
             con.close();
         } catch(Exception e){
@@ -47,14 +49,14 @@ public class AlunoTurmaDAO {
         }
     }
 
-    public void editaAlunoNaTurma(int mat, int codigo){
+    public void editaAlunoNaTurma(int codAdesao, int codTurma){
         try{
-            int matricula = (int) mat;
-            int codigoTurma = (int) codigo;
+            int a = (int) codAdesao;
+            int t = (int) codTurma;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             PreparedStatement ps = (PreparedStatement) con.prepareStatement
-                    ("UPDATE SET ALUNO_TURMA codTurma=? WHERE  matricula = '"+matricula+"'");
-            ps.setInt(1, codigo);
+                    ("UPDATE ALUNO_TURMA SET codTurma=? WHERE  codAdesao = '"+a+"'");
+            ps.setInt(1, t);
             ps.execute();
             con.close();
         } catch(Exception e){
@@ -71,6 +73,18 @@ public class AlunoTurmaDAO {
             ps.execute();
             TurmaDAO turmaDAO = TurmaDAO.getInstance();
             turmaDAO.pesquisar(codTurma);
+            con.close();
+        } catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void removeAlunoDaTurma(int codAdesao){
+        try{
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            PreparedStatement ps = (PreparedStatement) con.prepareStatement
+                    ("DELETE FROM ALUNO_TURMA WHERE codAdesao ='"+codAdesao+"'");
+            ps.execute();
             con.close();
         } catch(Exception e){
             System.out.println(e);
@@ -127,6 +141,28 @@ public class AlunoTurmaDAO {
 
         }
         return qtde;
+    }
+
+    public int turmaAderida(int codAdesao) {
+        ResultSet rs;
+        PreparedStatement ps;
+        int codTurma = -1;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT codTurma FROM ALUNO_TURMA WHERE codAdesao ='"+codAdesao+"' ");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                codTurma = rs.getInt("codTurma");
+                con.close();
+                return codTurma;
+            }
+            con.close();
+            return codTurma;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return codTurma;
     }
 
 }

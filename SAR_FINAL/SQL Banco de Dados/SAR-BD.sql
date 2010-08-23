@@ -66,16 +66,16 @@ CREATE TABLE PLANOS (
         UNIQUE(nome)
 );
 
-CREATE TABLE ALUNO_PLANO (
+CREATE TABLE ADESOES (
         codAdesao int not null auto_increment,
 	matricula int not null,
 	codPlano int not null,
-	dataAdesao date not null,
-        valor numeric(5,2),
-        desconto numeric(5,2),
-        parcelas int,
-        formaPagamento varchar(17),
-        codTurma int not null,
+        dataAdesao date not null,
+        valor numeric(5,2) not null,
+        desconto numeric(5,2) not null,
+        parcelas int not null,
+        formaPagamento varchar(17) not null,
+        status bool not null,
 	FOREIGN KEY (matricula) REFERENCES alunos(matricula),
 	FOREIGN KEY (codPlano) REFERENCES planos(codPlano),
 	PRIMARY KEY (codAdesao)
@@ -89,7 +89,7 @@ CREATE TABLE MENSALIDADES (
 	vencimento date not null,
 	pagamento date,
         codAdesao int not null,
-        FOREIGN KEY (codAdesao) REFERENCES ALUNO_PLANO(codAdesao),
+        FOREIGN KEY (codAdesao) REFERENCES ADESOES(codAdesao),
 	PRIMARY KEY (codMensalidade),
         FOREIGN KEY (matricula) REFERENCES alunos(matricula)
 );
@@ -115,8 +115,10 @@ CREATE TABLE TURMAS (
 CREATE TABLE ALUNO_TURMA(
 	matricula int not null,
 	codTurma int not null,
+        codAdesao int not null,
 	FOREIGN KEY (matricula) REFERENCES alunos(matricula),
 	FOREIGN KEY (codTurma) REFERENCES turmas(codTurma),
+        FOREIGN KEY (codAdesao) REFERENCES ADESOES(codAdesao),
 	CONSTRAINT codAlunoTurma PRIMARY KEY (matricula, codTurma)
 );
 

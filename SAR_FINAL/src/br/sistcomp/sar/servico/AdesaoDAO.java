@@ -5,6 +5,7 @@
 package br.sistcomp.sar.servico;
 
 import br.sistcomp.sar.conexao.ConexaoDB;
+import br.sistcomp.sar.dominio.Adesao;
 import br.sistcomp.sar.dominio.Plano;
 import br.sistcomp.sar.dominio.Turma;
 import br.sistcomp.sar.dominio.Utilitario;
@@ -19,34 +20,34 @@ import javax.swing.JOptionPane;
  *
  * @author Thiago Ramalho
  */
-public class PlanoAlunoDAO {
+public class AdesaoDAO {
 
-    private static PlanoAlunoDAO plano_alunosDAO;
+    private static AdesaoDAO plano_alunosDAO;
 
-    public static PlanoAlunoDAO getInstance() {
-        synchronized (PlanoAlunoDAO.class) {
+    public static AdesaoDAO getInstance() {
+        synchronized (AdesaoDAO.class) {
             if (plano_alunosDAO == null) {
-                plano_alunosDAO = new PlanoAlunoDAO();
+                plano_alunosDAO = new AdesaoDAO();
             }
         }
         return plano_alunosDAO;
     }
 
-    public int inserirCodigoDoPlanoAoAluno(int matricula, Plano plano) {
+    public int aderirPlano(int matricula, Adesao adesao) {
         PreparedStatement ps;
         int codAdesao = proximoCodigo();
         try {
             int mat = (int) matricula;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("INSERT INTO ALUNO_PLANO (matricula, codPlano, dataAdesao, valor, desconto, parcelas, formaPagamento, codTurma) VALUES (?,?,?,?,?,?,?,?)");
+            ps = (PreparedStatement) con.prepareStatement("INSERT INTO ADESOES (matricula, codPlano, dataAdesao, valor, desconto, parcelas, formaPagamento, status) VALUES (?,?,?,?,?,?,?,?)");
             ps.setInt(1, mat);
-            ps.setInt(2, plano.getCodigo());
+            ps.setInt(2, adesao.getPlano().getCodigo());
             ps.setString(3, Utilitario.dataParaBanco(Utilitario.dataDoSistema()));
-            ps.setDouble(4, plano.getValor());
-            ps.setDouble(5, plano.getDesconto());
-            ps.setInt(6, plano.getNumeroDeParcelas());
-            ps.setString(7, plano.getFormaPagamento());
-            ps.setInt(8, plano.getTurma().getCodigo());
+            ps.setDouble(4, adesao.getValor());
+            ps.setDouble(5, adesao.getDesconto());
+            ps.setInt(6, adesao.getParcelas());
+            ps.setString(7, adesao.getFormaDePagamento());
+            ps.setBoolean(8, adesao.getStatus());
             ps.execute();
             con.close();
             return codAdesao;
@@ -83,7 +84,7 @@ public class PlanoAlunoDAO {
         int qtde = 0;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT count(distinct matricula) FROM aluno_plano ");
+            ps = (PreparedStatement) con.prepareStatement("SELECT count(distinct matricula) FROM ADESOES ");
             rs = ps.executeQuery();
             while (rs.next()) {
                 qtde = rs.getInt("count(distinct matricula)");
@@ -109,7 +110,7 @@ public class PlanoAlunoDAO {
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ALUNO_PLANO WHERE matricula = '" + matricula + "'");
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ADESOES WHERE matricula = '" + matricula + "'");
             rs = ps.executeQuery();
             while (rs.next()) {
                 codigo = rs.getInt("codPlano");
@@ -153,19 +154,12 @@ public class PlanoAlunoDAO {
         return nome;
     }
 
-    public void remover(int matricula, int codPlano) {
+    public void remover(int codAdesao) {
         PreparedStatement ps;
         ResultSet rs;
-        int codAdesao = -1;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT codAdesao FROM ALUNO_PLANO WHERE matricula ='" + matricula + "' AND codPlano='" + codPlano + "'");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                codAdesao = rs.getInt("codAdesao");
-            }
-            MensalidadeDAO.getInstance().remover(matricula, codAdesao);
-            ps = (PreparedStatement) con.prepareStatement("DELETE FROM ALUNO_PLANO WHERE matricula ='" + matricula + "' AND codAdesao='" + codAdesao + "'");
+            ps = (PreparedStatement) con.prepareStatement("DELETE FROM ADESOES WHERE codAdesao='" + codAdesao + "'");
             ps.execute();
             con.close();
 
@@ -178,7 +172,7 @@ public class PlanoAlunoDAO {
         PreparedStatement ps;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("UPDATE ALUNO_PLANO set codTurma = ? WHERE matricula = '" + matricula + "' and codPlano = '" +codPlano+ "'");
+            ps = (PreparedStatement) con.prepareStatement("UPDATE ADESOES set codTurma = ? WHERE matricula = '" + matricula + "' and codPlano = '" +codPlano+ "'");
             ps.setInt(1, codTurma);
             ps.execute();
             con.close();
@@ -193,7 +187,7 @@ public class PlanoAlunoDAO {
         int codigo = -1;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            PreparedStatement ps = (PreparedStatement) con.prepareStatement("SHOW TABLE STATUS LIKE 'ALUNO_PLANO'");
+            PreparedStatement ps = (PreparedStatement) con.prepareStatement("SHOW TABLE STATUS LIKE 'ADESOES'");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 codigo = rs.getInt("Auto_increment");
@@ -219,7 +213,7 @@ public class PlanoAlunoDAO {
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ALUNO_PLANO WHERE matricula = '" + matricula + "' AND codPlano = '"+codPlano+"'");
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ADESOES WHERE matricula = '" + matricula + "' AND codPlano = '"+codPlano+"'");
             rs = ps.executeQuery();
             while (rs.next()) {
                 codigo = rs.getInt("codPlano");
@@ -249,7 +243,7 @@ public class PlanoAlunoDAO {
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT codTurma FROM ALUNO_PLANO WHERE matricula = '" + matricula + "' ");
+            ps = (PreparedStatement) con.prepareStatement("SELECT codTurma FROM ADESOES WHERE matricula = '" + matricula + "' ");
             rs = ps.executeQuery();
             while (rs.next()) {
                 turmas.add(rs.getInt("codTurma"));
@@ -262,6 +256,39 @@ public class PlanoAlunoDAO {
 
         }
         return turmas;
+    }
+
+    public List<Adesao> todasAdesoesDoAluno(int matricula){
+        ResultSet rs;
+        PreparedStatement ps;
+        List<Adesao> adesoes = new ArrayList<Adesao>();
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ADESOES WHERE matricula = '" + matricula + "'");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Adesao adesao = new Adesao();
+                adesao.setCodAdesao(rs.getInt("codAdesao"));
+                adesao.setMatriculaAluno(matricula);
+                adesao.setPlano(PlanoDAO.getInstance().pesquisar(rs.getInt("codPlano")));
+                adesao.setDataAdesao("");
+                adesao.setValor(rs.getDouble("valor"));
+                adesao.setDesconto(rs.getDouble("desconto"));
+                adesao.setParcelas(rs.getInt("parcelas"));
+                adesao.setFormaDePagamento(rs.getString("formaPagamento"));
+                adesao.setStatus(rs.getBoolean("status"));
+                adesao.setMensalidades(MensalidadeDAO.getInstance().mensalidadesDaAdesao(rs.getInt("codAdesao")));
+                adesao.setTurma(TurmaDAO.getInstance().pesquisar(AlunoTurmaDAO.getInstance().turmaAderida(rs.getInt("codAdesao"))));
+                adesoes.add(adesao);
+            }
+            con.close();
+            return adesoes;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao Pesquisar Adesões!");
+        }
+        return adesoes;
     }
 
 }
