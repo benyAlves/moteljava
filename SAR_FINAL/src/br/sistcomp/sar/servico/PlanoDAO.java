@@ -69,8 +69,6 @@ public class PlanoDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            plano.setNome("erro");
-            return plano;
         }
         return plano;
     }
@@ -97,8 +95,6 @@ public class PlanoDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            plano.setNome("erro");
-            return plano;
         }
         return plano;
     }
@@ -138,40 +134,6 @@ public class PlanoDAO {
             e.printStackTrace();
             return "Erro ao remover Plano";
         }
-    }
-
-    public List<Plano> pesquisaTodosOsPlanosDoAluno(int matricula) {
-        ResultSet rs;
-        PreparedStatement ps;
-        int codModalidade = 0, duracao = 0;
-        String nome = null;
-        List<Plano> todosPlanos = new ArrayList<Plano>();
-        try {
-            Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            for (Plano plano : AdesaoDAO.getInstance().pesquisaPlanosAderidos(matricula)) {
-                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM planos WHERE codPlano = '" + plano.getCodigo() + "'");
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    nome = rs.getString("nome");
-                    duracao = rs.getInt("duracao");
-                    codModalidade = rs.getInt("codModalidade");
-                    String status = rs.getString("status");
-                    plano.setNome(nome);
-                    plano.setDuracao(duracao);
-                    plano.setModalidade(ModalidadeDAO.getInstance().pesquisar(codModalidade));
-                    plano.setStatus(status);
-                    //plano = new Plano(cod_plano, nome, duracao, valor, modalidadeDAO.pesquisar(cod_modalidade),status);
-                    todosPlanos.add(plano);
-                }
-            }
-            con.close();
-            return todosPlanos;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao pesquisar todos os planos");
-        }
-        return todosPlanos;
     }
 
      public Vector<Plano> TodosOsPlanos() {
@@ -305,15 +267,8 @@ public class PlanoDAO {
          }
           catch (Exception e) {
               e.printStackTrace();
-
           }
           return duracao; //tratar exceÃ§Ã£o
-    }
-
-    public Plano planoAderido(String nomePlano, int matricula){
-        Plano plano = pesquisar(nomePlano);
-        plano = AdesaoDAO.getInstance().planoAderido(plano.getCodigo(), matricula);
-        return plano;
     }
 
 }

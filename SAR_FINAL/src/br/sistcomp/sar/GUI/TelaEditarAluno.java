@@ -66,7 +66,6 @@ public class TelaEditarAluno extends javax.swing.JFrame {
             String nomeProfessor = turma.getProfessor().getNome();
             String diaEhorario = TelaCadastroAluno.getHorarioTurmas(turma);
             modelo.addRow(new Object[]{nomeModalidade, nomeProfessor, nomePlano, diaEhorario, valor});
-
         }
     }
 
@@ -99,7 +98,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
 
     public void travaCampos() {
         selecaoModalidade.setEnabled(false);
-        selecaoProfessor.setEnabled(false);
+        //selecaoProfessor.setEnabled(false);
         selecaoPlano.setEnabled(false);
         campoDiaPagamento.setEnabled(false);
         campoVencimento.setEnabled(false);
@@ -1170,6 +1169,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_selecaoHorarioActionPerformed
 
     private void tabelaModalidadeAlunoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaModalidadeAlunoKeyReleased
+        ativaCampos();
         Adesao a = null;
         for (Adesao adesao: adesoes){
             if (adesao.getPlano().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))){
@@ -1189,9 +1189,15 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         //campoVencimento.setText(p.getDiaDoPagamento())
         visualizar = true;
         travaCampos();
+        if (a.getStatus() == false){
+            selecaoProfessor.setEnabled(false);
+            selecaoHorario.setEnabled(false);
+            JOptionPane.showMessageDialog(null,"Plano Vencido");
+        }
     }//GEN-LAST:event_tabelaModalidadeAlunoKeyReleased
 
     private void tabelaModalidadeAlunoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaModalidadeAlunoMousePressed
+        ativaCampos();
         Adesao a = null;
         for (Adesao adesao: adesoes){
             if (adesao.getPlano().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))){
@@ -1211,6 +1217,11 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         //campoVencimento.setText(p.getDiaDoPagamento())
         visualizar = true;
         travaCampos();
+        if (a.getStatus() == false){
+            selecaoProfessor.setEnabled(false);
+            selecaoHorario.setEnabled(false);
+            JOptionPane.showMessageDialog(null,"Plano Vencido");
+        }
     }//GEN-LAST:event_tabelaModalidadeAlunoMousePressed
 
     private void alterarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarTurmaActionPerformed
