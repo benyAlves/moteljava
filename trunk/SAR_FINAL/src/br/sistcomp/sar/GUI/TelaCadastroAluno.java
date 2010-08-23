@@ -2,7 +2,7 @@ package br.sistcomp.sar.GUI;
 
 import br.sistcomp.sar.dominio.Adesao;
 import br.sistcomp.sar.dominio.Aluno;
-import br.sistcomp.sar.dominio.CustonDocument;
+import br.sistcomp.sar.dominio.CaixaAlta;
 import br.sistcomp.sar.dominio.Mensalidade;
 import br.sistcomp.sar.dominio.MetodosWebCam;
 import br.sistcomp.sar.dominio.Plano;
@@ -56,11 +56,11 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
     }
 
     public void caixaAlta(){
-        campoNomeAluno.setDocument(new CustonDocument());
-        campoEnderecoAluno.setDocument(new CustonDocument());
-        campoBairroAluno.setDocument(new CustonDocument());
-        campoCidadeAluno.setDocument(new CustonDocument());
-        campoIndicacao.setDocument(new CustonDocument());
+        campoNomeAluno.setDocument(new CaixaAlta());
+        campoEnderecoAluno.setDocument(new CaixaAlta());
+        campoBairroAluno.setDocument(new CaixaAlta());
+        campoCidadeAluno.setDocument(new CaixaAlta());
+        campoIndicacao.setDocument(new CaixaAlta());
     }
 
     public void setModalidade() {

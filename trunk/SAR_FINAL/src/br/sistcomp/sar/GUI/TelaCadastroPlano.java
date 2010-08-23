@@ -7,7 +7,7 @@
 
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.CustonDocument;
+import br.sistcomp.sar.dominio.CaixaAlta;
 import br.sistcomp.sar.dominio.Plano;
 import br.sistcomp.sar.fachada.Fachada;
 import br.sistcomp.sar.servico.PlanoDAO;
@@ -28,7 +28,7 @@ public class TelaCadastroPlano extends javax.swing.JFrame {
     /** Creates new form TelaCadastroMensalidade */
     public TelaCadastroPlano() {
         initComponents();
-        campoNome.setDocument(new CustonDocument());
+        campoNome.setDocument(new CaixaAlta());
         setLocationRelativeTo(null);
         preencheTabela();
         campoCodigo.setText(Integer.toString(fachada.proximoCodigo()));

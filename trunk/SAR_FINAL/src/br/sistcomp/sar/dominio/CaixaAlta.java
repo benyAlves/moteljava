@@ -10,7 +10,7 @@ import javax.swing.text.PlainDocument;
  */
 
 
-public class CustonDocument extends PlainDocument {
+public class CaixaAlta extends PlainDocument {
 
  public void insertString(int offset, String str, AttributeSet attr)
   throws BadLocationException {

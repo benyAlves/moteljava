@@ -5,7 +5,7 @@
  */
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.CustonDocument;
+import br.sistcomp.sar.dominio.CaixaAlta;
 import br.sistcomp.sar.dominio.Modalidade;
 import br.sistcomp.sar.fachada.Fachada;
 import br.sistcomp.sar.servico.ModalidadeDAO;
@@ -27,8 +27,8 @@ public class TelaCadastroModalidade extends javax.swing.JFrame {
     /** Creates new form TelaCadastroModalidade */
     public TelaCadastroModalidade() {
         initComponents();
-        campoNome.setDocument(new CustonDocument());
-        campoAmbiente.setDocument(new CustonDocument());
+        campoNome.setDocument(new CaixaAlta());
+        campoAmbiente.setDocument(new CaixaAlta());
         setValorDoCodigo();
         preencheTabela();
         setLocationRelativeTo(null);

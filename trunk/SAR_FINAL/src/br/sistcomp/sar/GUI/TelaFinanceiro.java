@@ -6,7 +6,7 @@
 package br.sistcomp.sar.GUI;
 
 import br.sistcomp.sar.dominio.Aluno;
-import br.sistcomp.sar.dominio.CustonDocument;
+import br.sistcomp.sar.dominio.CaixaAlta;
 import br.sistcomp.sar.dominio.Mensalidade;
 import br.sistcomp.sar.dominio.Utilitario;
 import br.sistcomp.sar.fachada.Fachada;
@@ -31,7 +31,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     public TelaFinanceiro() {
         initComponents();
         setLocationRelativeTo(null);
-        campoNomePesquisar.setDocument(new CustonDocument());
+        campoNomePesquisar.setDocument(new CaixaAlta());
         utilitario.le_Data();
         utilitario.le_Hora();
         linkData.setText("Hoje é " + utilitario.dia + " de " + utilitario.mes + " de " + utilitario.ano);
