@@ -22,15 +22,15 @@ import javax.swing.JOptionPane;
  */
 public class AdesaoDAO {
 
-    private static AdesaoDAO plano_alunosDAO;
+    private static AdesaoDAO adesaoDAO;
 
     public static AdesaoDAO getInstance() {
         synchronized (AdesaoDAO.class) {
-            if (plano_alunosDAO == null) {
-                plano_alunosDAO = new AdesaoDAO();
+            if (adesaoDAO == null) {
+                adesaoDAO = new AdesaoDAO();
             }
         }
-        return plano_alunosDAO;
+        return adesaoDAO;
     }
 
     public int aderirPlano(int matricula, Adesao adesao) {
@@ -98,44 +98,8 @@ public class AdesaoDAO {
         return qtde;
     }
 
-    public List<Plano> pesquisaPlanosAderidos(int matricula) {
-
-        ResultSet rs;
-        PreparedStatement ps;
-        int codigo = -1, numeroDeParcelas = -1, codTurma = -1;
-        Double valor = -1.0, desconto = -1.0;
-        String formaPagamento = "", diaDoPagamento = "";
-        List<Plano> planosAderidos = new ArrayList<Plano>();
-        Turma turma = null;
-
-        try {
-            Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ADESOES WHERE matricula = '" + matricula + "'");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                codigo = rs.getInt("codPlano");
-                valor = rs.getDouble("valor");
-                desconto = rs.getDouble("desconto");
-                numeroDeParcelas = rs.getInt("parcelas");
-                formaPagamento = rs.getString("formaPagamento");
-                diaDoPagamento = Utilitario.converteDateParaString(rs.getDate("dataAdesao"));
-                codTurma = rs.getInt("codTurma");
-                turma = TurmaDAO.getInstance().pesquisar(codTurma);
-                Plano plano = new Plano(codigo,valor,numeroDeParcelas,desconto,formaPagamento,diaDoPagamento,turma);
-                planosAderidos.add(plano);
-            }
-            con.close();
-            return planosAderidos;
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return planosAderidos;
-    }
-
     public void remover(int codAdesao) {
         PreparedStatement ps;
-        ResultSet rs;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             ps = (PreparedStatement) con.prepareStatement("DELETE FROM ADESOES WHERE codAdesao='" + codAdesao + "'");
@@ -155,7 +119,6 @@ public class AdesaoDAO {
             ps.setInt(1, codTurma);
             ps.execute();
             con.close();
-            //JOptionPane.showMessageDialog(null, "Atualização realizada com sucesso");
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -180,45 +143,10 @@ public class AdesaoDAO {
        return codigo;
     }
 
-    public Plano planoAderido(int codPlano, int matricula) {
-
-        ResultSet rs;
-        PreparedStatement ps;
-        int codigo = -1, numeroDeParcelas = -1, codTurma = -1;
-        Double valor = -1.0, desconto = -1.0;
-        String formaPagamento = "", diaDoPagamento = "";
-        Plano plano = null;
-        Turma turma = null;
-
-        try {
-            Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ADESOES WHERE matricula = '" + matricula + "' AND codPlano = '"+codPlano+"'");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                codigo = rs.getInt("codPlano");
-                valor = rs.getDouble("valor");
-                desconto = rs.getDouble("desconto");
-                numeroDeParcelas = rs.getInt("parcelas");
-                formaPagamento = rs.getString("formaPagamento");
-                diaDoPagamento = Utilitario.converteDateParaString(rs.getDate("dataAdesao"));
-                codTurma = rs.getInt("codTurma");
-                turma = TurmaDAO.getInstance().pesquisar(codTurma);
-                plano = new Plano(codigo,valor,numeroDeParcelas,desconto,formaPagamento,diaDoPagamento,turma);
-            }
-            con.close();
-            return plano;
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return plano;
-    }
-
     public List<Integer> adesoesAtivas(){
         ResultSet rs;
         PreparedStatement ps;
         List<Integer> adesoesAtivas = new ArrayList<Integer>();
-
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
@@ -227,12 +155,10 @@ public class AdesaoDAO {
             while (rs.next()) {
                 adesoesAtivas.add(rs.getInt("codAdesao"));
             }
-
             con.close();
             return adesoesAtivas;
         } catch (Exception e) {
             e.printStackTrace();
-
         }
         return adesoesAtivas;
     }
@@ -262,12 +188,10 @@ public class AdesaoDAO {
             }
             con.close();
             return adesoes;
-
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao Pesquisar Adesões!");
         }
         return adesoes;
     }
-
 }
