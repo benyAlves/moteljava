@@ -7,7 +7,7 @@ package br.sistcomp.sar.GUI;
 
 import br.sistcomp.sar.dominio.Adesao;
 import br.sistcomp.sar.dominio.Aluno;
-import br.sistcomp.sar.dominio.CustonDocument;
+import br.sistcomp.sar.dominio.CaixaAlta;
 import br.sistcomp.sar.dominio.Pessoa;
 import br.sistcomp.sar.dominio.Plano;
 import br.sistcomp.sar.dominio.Turma;
@@ -39,7 +39,7 @@ public class TelaAcessoCadastroAluno extends javax.swing.JFrame {
     public TelaAcessoCadastroAluno() {
         teste = false;
         initComponents();
-        campoBuscar.setDocument(new CustonDocument());
+        campoBuscar.setDocument(new CaixaAlta());
         setLocationRelativeTo(null);
         preencheTabela();
         informacoes();

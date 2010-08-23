@@ -6,7 +6,7 @@
 
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.CustonDocument;
+import br.sistcomp.sar.dominio.CaixaAlta;
 import br.sistcomp.sar.dominio.Funcionario;
 import br.sistcomp.sar.dominio.Pessoa;
 import br.sistcomp.sar.dominio.Utilitario;
@@ -39,7 +39,7 @@ public class TelaAcessoCadastroFuncionario extends javax.swing.JFrame {
         preencheTabela();
         labelCadastrados.setText(Integer.toString(fachada.todosFuncionarioAtivos().size()));
         labelAtivos.setText(Integer.toString(fachada.todosFuncionarioAtivos().size()));
-        campoBuscar.setDocument(new CustonDocument());
+        campoBuscar.setDocument(new CaixaAlta());
         
     }
     @SuppressWarnings("unchecked")

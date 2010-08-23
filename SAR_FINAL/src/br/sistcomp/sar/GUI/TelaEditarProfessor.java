@@ -1,6 +1,6 @@
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.CustonDocument;
+import br.sistcomp.sar.dominio.CaixaAlta;
 import br.sistcomp.sar.dominio.MetodosWebCam;
 import br.sistcomp.sar.dominio.Professor;
 import br.sistcomp.sar.fachada.Fachada;
@@ -30,10 +30,10 @@ public class TelaEditarProfessor extends javax.swing.JFrame {
     }
 
      public void caixaAlta(){
-        campoNomeProfessor.setDocument(new CustonDocument());
-        campoEnderecoProfessor.setDocument(new CustonDocument());
-        campoBairroProfessor.setDocument(new CustonDocument());
-        campoCidadeProfessor.setDocument(new CustonDocument());
+        campoNomeProfessor.setDocument(new CaixaAlta());
+        campoEnderecoProfessor.setDocument(new CaixaAlta());
+        campoBairroProfessor.setDocument(new CaixaAlta());
+        campoCidadeProfessor.setDocument(new CaixaAlta());
         
     }
     @SuppressWarnings("unchecked")

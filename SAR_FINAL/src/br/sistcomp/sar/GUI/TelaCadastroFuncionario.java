@@ -1,6 +1,6 @@
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.CustonDocument;
+import br.sistcomp.sar.dominio.CaixaAlta;
 import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -35,10 +35,10 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
             campoMatriculaSecretaria.setText(Integer.toString(fachada.getProximaMatricula()));
     }
      public void caixaAlta(){
-        campoNomeSecretaria.setDocument(new CustonDocument());
-        campoEnderecoSecretaria.setDocument(new CustonDocument());
-        campoBairroSecretaria.setDocument(new CustonDocument());
-        campoCidadeSecretaria.setDocument(new CustonDocument());
+        campoNomeSecretaria.setDocument(new CaixaAlta());
+        campoEnderecoSecretaria.setDocument(new CaixaAlta());
+        campoBairroSecretaria.setDocument(new CaixaAlta());
+        campoCidadeSecretaria.setDocument(new CaixaAlta());
         
     }
 

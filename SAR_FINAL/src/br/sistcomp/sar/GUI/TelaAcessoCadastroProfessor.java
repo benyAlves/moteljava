@@ -5,7 +5,7 @@
  */
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.CustonDocument;
+import br.sistcomp.sar.dominio.CaixaAlta;
 import br.sistcomp.sar.dominio.Pessoa;
 import br.sistcomp.sar.dominio.Professor;
 import br.sistcomp.sar.dominio.Utilitario;
@@ -35,7 +35,7 @@ public class TelaAcessoCadastroProfessor extends javax.swing.JFrame {
     public TelaAcessoCadastroProfessor() {
         initComponents();
         setLocationRelativeTo(null);
-        campoBuscar.setDocument(new CustonDocument());
+        campoBuscar.setDocument(new CaixaAlta());
         setInformações();
         preencheTabela();
     }
