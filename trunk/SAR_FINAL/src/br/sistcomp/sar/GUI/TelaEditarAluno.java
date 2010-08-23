@@ -1137,7 +1137,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
 
                                     Double valorMensalidade = valor/parcelas;
                                     for (int i = 0; i < parcelas; i++) {
-                                        Mensalidade mensalidade = new Mensalidade(valorMensalidade, 0, Utilitario.somaDoMesParaVencimentoDoPlano(i));
+                                        Mensalidade mensalidade = new Mensalidade(valorMensalidade, Utilitario.somaDoMesParaVencimentoDoPlano(i));
                                         mensalidadesPorAdesao.add(mensalidade);
                                     }
 
@@ -1186,6 +1186,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         selecaoPagamento.setSelectedItem(a.getFormaDePagamento());
         campoParcelas.setText(Integer.toString(a.getParcelas()));
         campoValor.setText(Double.toString(a.getValor()));
+        campoDiaPagamento.setText(a.getDataAdesao());
         //campoVencimento.setText(p.getDiaDoPagamento())
         visualizar = true;
         travaCampos();
@@ -1214,7 +1215,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         selecaoPagamento.setSelectedItem(a.getFormaDePagamento());
         campoParcelas.setText(Integer.toString(a.getParcelas()));
         campoValor.setText(Double.toString(a.getValor()));
-        //campoVencimento.setText(p.getDiaDoPagamento())
+        campoDiaPagamento.setText(a.getDataAdesao());
         visualizar = true;
         travaCampos();
         if (a.getStatus() == false){

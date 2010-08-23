@@ -20,16 +20,8 @@ public class Mensalidade {
         this.codAdesao = codAdesao;
     }
 
-    public Mensalidade(double valor, double desconto, String vencimento, int codAdesao) {
+    public Mensalidade(double valor, String vencimento) {
         this.valor = valor;
-        this.desconto = desconto;
-        this.vencimento = vencimento;
-        this.codAdesao = codAdesao;
-    }
-
-    public Mensalidade(double valor, double desconto, String vencimento) {
-        this.valor = valor;
-        this.desconto = desconto;
         this.vencimento = vencimento;
     }
 

@@ -1,6 +1,5 @@
 package br.sistcomp.sar.dominio;
 
-import br.sistcomp.sar.servico.TurmaDAO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
