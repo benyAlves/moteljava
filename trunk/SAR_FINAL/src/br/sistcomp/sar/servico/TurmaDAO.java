@@ -102,8 +102,6 @@ public class TurmaDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            turma.setCodigo(-1);
-            return turma;
         }
         return turma;
     }
@@ -220,7 +218,7 @@ public class TurmaDAO {
         return codigo;
     }
 
-    public Vector<Turma> getTurmas() {
+    public Vector<Turma> todasTurmas() {
         ResultSet rs;
         PreparedStatement ps;
         Vector<Turma> turmas = new Vector<Turma>();
@@ -287,47 +285,10 @@ public class TurmaDAO {
         return turmas; //tratar exceção
     }
 
-    public Turma turmaAtravesDaMatriculaDoProfessor(int matricula) {
-        ResultSet rs;
-        PreparedStatement ps;
-        Turma turma = null;
-        int codigo;
-        String horaInicio, horaFinal;
-        Professor professor = null;
-        Map<String, Boolean> dias = new HashMap<String, Boolean>();
-
-        try {
-            Connection con = (Connection) ConexaoDB.getInstance().getCon();
-
-            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM TURMAS WHERE matricula = '" + matricula + "'");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                codigo = rs.getInt("codTurma");
-                professor = ProfessorDAO.getInstance().pesquisar(matricula);
-                horaInicio = rs.getString("horaInicio");
-                horaFinal = rs.getString("horaFinal");
-                dias = pesquisarDias(codigo);
-                turma = new Turma(codigo, professor, horaInicio, horaFinal, dias);
-
-            }
-            con.close();
-            return turma;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return turma; //tratar exceção
-    }
-
     public boolean pesquisaProfessorEmTurma(int matricula) {
         ResultSet rs;
         PreparedStatement ps;
-        Turma turma = null;
         int codigo;
-        String horaInicio, horaFinal;
-        Professor professor = null;
-        Map<String, Boolean> dias = new HashMap<String, Boolean>();
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();

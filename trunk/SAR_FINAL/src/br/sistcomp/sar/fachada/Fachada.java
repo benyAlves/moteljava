@@ -83,7 +83,7 @@ public class Fachada {
     }
 
     public int alunosAtivos() {
-        return AdesaoDAO.getInstance().pesquisaAlunosAtivos();
+        return AdesaoDAO.getInstance().alunosAtivos();
     }
 
     public Vector<Integer> todosFuncionarioAtivos() {
@@ -108,10 +108,6 @@ public class Fachada {
 
     public void removerTurma(Turma turma) {
         TurmaDAO.getInstance().remover(turma);
-    }
-
-    public Turma turmaAtravesDaMatriculaDoProfessor(int matricula) {
-        return TurmaDAO.getInstance().turmaAtravesDaMatriculaDoProfessor(matricula);
     }
 
     public void removerModalidade(String nome) {
@@ -185,7 +181,7 @@ public class Fachada {
     }
 
     public Vector<Turma> todasTumas() {
-        return TurmaDAO.getInstance().getTurmas();
+        return TurmaDAO.getInstance().todasTurmas();
     }
 
     public void cadastrarModalidade(Modalidade modalidade) {
@@ -268,7 +264,4 @@ public class Fachada {
         return AdesaoDAO.getInstance().proximoCodigo();
     }
 
-    public Plano planoAderido(String nomePlano, int matricula) {
-        return PlanoDAO.getInstance().planoAderido(nomePlano, matricula);
-    }
 }

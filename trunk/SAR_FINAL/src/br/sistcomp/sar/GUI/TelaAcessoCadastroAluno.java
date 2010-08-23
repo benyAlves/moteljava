@@ -461,7 +461,6 @@ public class TelaAcessoCadastroAluno extends javax.swing.JFrame {
             String nomeProfessor = turma.getProfessor().getNome();
             String diaEhorario = TelaCadastroAluno.getHorarioTurmas(turma);
             modelo.addRow(new Object[]{nomeModalidade, nomeProfessor, nomePlano, diaEhorario, valor});
-
         }
         TelaEditarAluno.adesoes = aluno.getAdesoes();
     }//GEN-LAST:event_botaoEditarActionPerformed

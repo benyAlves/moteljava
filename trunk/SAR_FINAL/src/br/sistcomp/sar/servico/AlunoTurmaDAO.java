@@ -127,12 +127,15 @@ public class AlunoTurmaDAO {
         ResultSet rs;
         PreparedStatement ps;
         int qtde = 0;
+        List<Integer> adesoesAtivas = AdesaoDAO.getInstance().adesoesAtivas();
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT count(codTurma) FROM ALUNO_TURMA WHERE codTurma ='"+codTurma+"' ");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                qtde = rs.getInt("count(codTurma)");
+            for (int codAdesao : adesoesAtivas){
+                ps = (PreparedStatement) con.prepareStatement("SELECT count(codTurma) FROM ALUNO_TURMA WHERE codTurma ='"+codTurma+"' AND codAdesao='"+codAdesao+"' ");
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    qtde = rs.getInt("count(codTurma)");
+                }
             }
             con.close();
             return qtde;
