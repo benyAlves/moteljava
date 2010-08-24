@@ -1173,36 +1173,49 @@ if (visualizar){
                                     campoParcelas.setText(Integer.toString(duracao));
                                 } else {
 
-                                    int codAdesao = fachada.proximoCodigoAdesao();
-                                    int matriculaAluno = Integer.parseInt(campoMatricula.getText());
-                                    Plano plano = fachada.pesquisarPlano(selecaoPlano.getSelectedItem().toString());
-                                    String dataAdesao = Utilitario.dataDoSistema();
-                                    Double valor = Double.parseDouble(campoValor.getText());
-                                    Double desconto = Double.parseDouble(campoDesconto.getText());
-                                    int parcelas = Integer.parseInt(campoParcelas.getText());
-                                    String formaDePagamento = selecaoPagamento.getSelectedItem().toString();
-                                    Boolean status = true;
-                                    List<Mensalidade> mensalidadesPorAdesao = new ArrayList<Mensalidade>();
-
-                                    Double valorMensalidade = valor/parcelas;
-                                    for (int i = 0; i < parcelas; i++) {
-                                        Mensalidade mensalidade = new Mensalidade(valorMensalidade, Utilitario.somaDoMesParaVencimentoDoPlano(i));
-                                        mensalidadesPorAdesao.add(mensalidade);
+                                    Boolean pode = true;
+                                    String modalidadeSelecionada = selecaoModalidade.getSelectedItem().toString();
+                                    String modalidadeAdesao = "";
+                                    for (Adesao adesao: adesoes){
+                                        modalidadeAdesao = adesao.getPlano().getModalidade().getNome();
+                                        if (modalidadeAdesao.equals(modalidadeSelecionada)){
+                                            pode = false;
+                                            JOptionPane.showMessageDialog(rootPane, "O Aluno já está matriculado nessa Modalidade!");
+                                            break;
+                                        }
                                     }
+                                    if (pode) {
+                                        int codAdesao = fachada.proximoCodigoAdesao();
+                                        int matriculaAluno = Integer.parseInt(campoMatricula.getText());
+                                        Plano plano = fachada.pesquisarPlano(selecaoPlano.getSelectedItem().toString());
+                                        String dataAdesao = Utilitario.dataDoSistema();
+                                        Double valor = Double.parseDouble(campoValor.getText());
+                                        Double desconto = Double.parseDouble(campoDesconto.getText());
+                                        int parcelas = Integer.parseInt(campoParcelas.getText());
+                                        String formaDePagamento = selecaoPagamento.getSelectedItem().toString();
+                                        Boolean status = true;
+                                        List<Mensalidade> mensalidadesPorAdesao = new ArrayList<Mensalidade>();
 
-                                    String codigoString = "";
-                                    int codTurma;
-                                    String[] codigoArray = selecaoHorario.getSelectedItem().toString().split("\\|");
-                                    codigoString += codigoArray[0];
-                                    codTurma = Integer.parseInt(codigoString);
-                                    Turma turma = fachada.pesquisarTurma(codTurma);
+                                        Double valorMensalidade = valor/parcelas;
+                                        for (int i = 0; i < parcelas; i++) {
+                                            Mensalidade mensalidade = new Mensalidade(valorMensalidade, Utilitario.somaDoMesParaVencimentoDoPlano(i));
+                                            mensalidadesPorAdesao.add(mensalidade);
+                                        }
 
-                                    Adesao adesao = new Adesao(codAdesao,matriculaAluno,plano,dataAdesao,valor,desconto,parcelas,formaDePagamento,status,mensalidadesPorAdesao,turma);
+                                        String codigoString = "";
+                                        int codTurma;
+                                        String[] codigoArray = selecaoHorario.getSelectedItem().toString().split("\\|");
+                                        codigoString += codigoArray[0];
+                                        codTurma = Integer.parseInt(codigoString);
+                                        Turma turma = fachada.pesquisarTurma(codTurma);
 
-                                    adesoes.add(adesao);
-                                    preencheAdesoes();
-                                    JOptionPane.showMessageDialog(null, "Plano Adicionado com Sucesso");
-                                    zeraCampoModalidade();
+                                        Adesao adesao = new Adesao(codAdesao,matriculaAluno,plano,dataAdesao,valor,desconto,parcelas,formaDePagamento,status,mensalidadesPorAdesao,turma);
+
+                                        adesoes.add(adesao);
+                                        preencheAdesoes();
+                                        JOptionPane.showMessageDialog(null, "Plano Adicionado com Sucesso");
+                                        zeraCampoModalidade();
+                                    }
                                 }
                             }
                         }
