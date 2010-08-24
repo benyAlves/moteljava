@@ -118,8 +118,7 @@ CREATE TABLE ALUNO_TURMA(
         codAdesao int not null,
 	FOREIGN KEY (matricula) REFERENCES alunos(matricula),
 	FOREIGN KEY (codTurma) REFERENCES turmas(codTurma),
-        FOREIGN KEY (codAdesao) REFERENCES ADESOES(codAdesao),
-	CONSTRAINT codAlunoTurma PRIMARY KEY (matricula, codTurma)
+        FOREIGN KEY (codAdesao) REFERENCES ADESOES(codAdesao)
 );
 
 CREATE TABLE IMAGENS(

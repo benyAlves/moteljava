@@ -55,17 +55,19 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         tabelaModalidadeAluno.getColumnModel().getColumn(2);
         tabelaModalidadeAluno.getColumnModel().getColumn(3);
         tabelaModalidadeAluno.getColumnModel().getColumn(4);
+        tabelaModalidadeAluno.getColumnModel().getColumn(5);
         DefaultTableModel modelo = (DefaultTableModel) tabelaModalidadeAluno.getModel();
         modelo.setNumRows(0);
 
         for (Adesao adesao : adesoes) {
+            int codAdesao = adesao.getCodAdesao();
             String nomeModalidade = adesao.getPlano().getModalidade().getNome();
             String nomePlano = adesao.getPlano().getNome();
             double valor = adesao.getValor();
             Turma turma = adesao.getTurma();
             String nomeProfessor = turma.getProfessor().getNome();
             String diaEhorario = TelaCadastroAluno.getHorarioTurmas(turma);
-            modelo.addRow(new Object[]{nomeModalidade, nomeProfessor, nomePlano, diaEhorario, valor});
+            modelo.addRow(new Object[]{ codAdesao, nomeModalidade, nomeProfessor, nomePlano, diaEhorario, valor});
         }
     }
 
@@ -634,14 +636,14 @@ public class TelaEditarAluno extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Modalidade", "Professor", "Plano", "Horário", "Valor"
+                "Código", "Modalidade", "Professor", "Plano", "Horário", "Valor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -664,13 +666,16 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabelaModalidadeAluno);
         tabelaModalidadeAluno.getColumnModel().getColumn(0).setResizable(false);
-        tabelaModalidadeAluno.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabelaModalidadeAluno.getColumnModel().getColumn(0).setPreferredWidth(4);
         tabelaModalidadeAluno.getColumnModel().getColumn(1).setResizable(false);
         tabelaModalidadeAluno.getColumnModel().getColumn(1).setPreferredWidth(100);
         tabelaModalidadeAluno.getColumnModel().getColumn(2).setResizable(false);
+        tabelaModalidadeAluno.getColumnModel().getColumn(2).setPreferredWidth(100);
         tabelaModalidadeAluno.getColumnModel().getColumn(3).setResizable(false);
-        tabelaModalidadeAluno.getColumnModel().getColumn(3).setPreferredWidth(100);
         tabelaModalidadeAluno.getColumnModel().getColumn(4).setResizable(false);
+        tabelaModalidadeAluno.getColumnModel().getColumn(4).setPreferredWidth(100);
+        tabelaModalidadeAluno.getColumnModel().getColumn(5).setResizable(false);
+        tabelaModalidadeAluno.getColumnModel().getColumn(5).setPreferredWidth(20);
 
         botaoAdicionar1.setText("Adicionar");
         botaoAdicionar1.addActionListener(new java.awt.event.ActionListener() {
@@ -1005,7 +1010,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
         for (Adesao adesao : adesoes) {
-            if (adesao.getPlano().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))) {
+            if (adesao.getCodAdesao() == (tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0))) {
                 fachada.removerAdesao(adesao.getCodAdesao());
                 adesoes.remove(adesao);
                 preencheAdesoes();
@@ -1124,37 +1129,50 @@ public class TelaEditarAluno extends javax.swing.JFrame {
                                     campoParcelas.setText(Integer.toString(duracao));
                                 } else {
 
-                                    int codAdesao = fachada.proximoCodigoAdesao();
-                                    int matriculaAluno = Integer.parseInt(campoMatricula.getText());
-                                    Plano plano = fachada.pesquisarPlano(selecaoPlano.getSelectedItem().toString());
-                                    String dataAdesao = Utilitario.dataDoSistema();
-                                    Double valor = Double.parseDouble(campoValor.getText());
-                                    Double desconto = Double.parseDouble(campoDesconto.getText());
-                                    int parcelas = Integer.parseInt(campoParcelas.getText());
-                                    String formaDePagamento = selecaoPagamento.getSelectedItem().toString();
-                                    Boolean status = true;
-                                    List<Mensalidade> mensalidadesPorAdesao = new ArrayList<Mensalidade>();
-
-                                    Double valorMensalidade = valor/parcelas;
-                                    for (int i = 0; i < parcelas; i++) {
-                                        Mensalidade mensalidade = new Mensalidade(valorMensalidade, Utilitario.somaDoMesParaVencimentoDoPlano(i));
-                                        mensalidadesPorAdesao.add(mensalidade);
+                                    Boolean pode = true;
+                                    String modalidadeSelecionada = selecaoModalidade.getSelectedItem().toString();
+                                    String modalidadeAdesao = "";
+                                    for (Adesao adesao: adesoes){
+                                        modalidadeAdesao = adesao.getPlano().getModalidade().getNome();
+                                        if (modalidadeAdesao.equals(modalidadeSelecionada) && adesao.getStatus() == true){
+                                            pode = false;
+                                            JOptionPane.showMessageDialog(rootPane, "O Aluno já está matriculado nessa Modalidade!");
+                                            break;
+                                        }
                                     }
+                                    if (pode) {
+                                        int codAdesao = fachada.proximoCodigoAdesao();
+                                        int matriculaAluno = Integer.parseInt(campoMatricula.getText());
+                                        Plano plano = fachada.pesquisarPlano(selecaoPlano.getSelectedItem().toString());
+                                        String dataAdesao = Utilitario.dataDoSistema();
+                                        Double valor = Double.parseDouble(campoValor.getText());
+                                        Double desconto = Double.parseDouble(campoDesconto.getText());
+                                        int parcelas = Integer.parseInt(campoParcelas.getText());
+                                        String formaDePagamento = selecaoPagamento.getSelectedItem().toString();
+                                        Boolean status = true;
+                                        List<Mensalidade> mensalidadesPorAdesao = new ArrayList<Mensalidade>();
 
-                                    String codigoString = "";
-                                    int codTurma;
-                                    String[] codigoArray = selecaoHorario.getSelectedItem().toString().split("\\|");
-                                    codigoString += codigoArray[0];
-                                    codTurma = Integer.parseInt(codigoString);
-                                    Turma turma = fachada.pesquisarTurma(codTurma);
+                                        Double valorMensalidade = valor/parcelas;
+                                        for (int i = 0; i < parcelas; i++) {
+                                            Mensalidade mensalidade = new Mensalidade(valorMensalidade, Utilitario.somaDoMesParaVencimentoDoPlano(i));
+                                            mensalidadesPorAdesao.add(mensalidade);
+                                        }
 
-                                    Adesao adesao = new Adesao(codAdesao,matriculaAluno,plano,dataAdesao,valor,desconto,parcelas,formaDePagamento,status,mensalidadesPorAdesao,turma);
+                                        String codigoString = "";
+                                        int codTurma;
+                                        String[] codigoArray = selecaoHorario.getSelectedItem().toString().split("\\|");
+                                        codigoString += codigoArray[0];
+                                        codTurma = Integer.parseInt(codigoString);
+                                        Turma turma = fachada.pesquisarTurma(codTurma);
 
-                                    fachada.inserirAdesao(Integer.parseInt(campoMatricula.getText()), adesao);
-                                    adesoes.add(adesao);
-                                    preencheAdesoes();
-                                    JOptionPane.showMessageDialog(null, "Plano Adicionado com Sucesso");
-                                    zeraCampoModalidade();
+                                        Adesao adesao = new Adesao(codAdesao,matriculaAluno,plano,dataAdesao,valor,desconto,parcelas,formaDePagamento,status,mensalidadesPorAdesao,turma);
+
+                                        fachada.inserirAdesao(Integer.parseInt(campoMatricula.getText()), adesao);
+                                        adesoes.add(adesao);
+                                        preencheAdesoes();
+                                        JOptionPane.showMessageDialog(null, "Plano Adicionado com Sucesso");
+                                        zeraCampoModalidade();
+                                    }
                                 }
                             }
                         }
@@ -1172,22 +1190,22 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         ativaCampos();
         Adesao a = null;
         for (Adesao adesao: adesoes){
-            if (adesao.getPlano().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))){
+            if (adesao.getCodAdesao() == tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0)){
                 a = adesao;
                 break;
             }
         }
-        selecaoModalidade.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0)));
-        selecaoProfessor.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 1)));
-        selecaoPlano.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)));
-        selecaoHorario.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 3)));
+        selecaoModalidade.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 1)));
+        selecaoProfessor.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)));
+        selecaoPlano.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 3)));
+        selecaoHorario.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 4)));
         campoDesconto.setText(Double.toString(a.getDesconto()));
         preenchePagamentos();
         selecaoPagamento.setSelectedItem(a.getFormaDePagamento());
         campoParcelas.setText(Integer.toString(a.getParcelas()));
         campoValor.setText(Double.toString(a.getValor()));
         campoDiaPagamento.setText(a.getDataAdesao());
-        //campoVencimento.setText(p.getDiaDoPagamento())
+        campoVencimento.setText(Utilitario.somaMesPlanoAderido(a.getPlano().getDuracao(), a.getDataAdesao()));
         visualizar = true;
         travaCampos();
         if (a.getStatus() == false){
@@ -1201,21 +1219,23 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         ativaCampos();
         Adesao a = null;
         for (Adesao adesao: adesoes){
-            if (adesao.getPlano().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))){
+            if (adesao.getCodAdesao() == tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0)){
                 a = adesao;
                 break;
             }
         }
-        selecaoModalidade.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0)));
-        selecaoProfessor.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 1)));
-        selecaoPlano.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)));
-        selecaoHorario.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 3)));
-        campoDesconto.setText(Double.toString(a.getDesconto()));
+        selecaoModalidade.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 1)));
+        selecaoProfessor.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)));
+        selecaoPlano.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 3)));
+        selecaoHorario.setSelectedItem((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 4)));
+        String desconto = Double.toString(a.getDesconto());
+        campoDesconto.setText(desconto);
         preenchePagamentos();
         selecaoPagamento.setSelectedItem(a.getFormaDePagamento());
         campoParcelas.setText(Integer.toString(a.getParcelas()));
         campoValor.setText(Double.toString(a.getValor()));
         campoDiaPagamento.setText(a.getDataAdesao());
+        campoVencimento.setText(Utilitario.somaMesPlanoAderido(a.getPlano().getDuracao(), a.getDataAdesao()));
         visualizar = true;
         travaCampos();
         if (a.getStatus() == false){
@@ -1235,7 +1255,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
             Turma turma = fachada.pesquisarTurma(codTurma);
 
             for (Adesao adesao : adesoes) {
-                if (adesao.getPlano().getNome().equals(selecaoPlano.getSelectedItem().toString())) {
+                if (adesao.getCodAdesao() == tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0)) {
                     fachada.trocarTurma(adesao.getCodAdesao(),codTurma);
                     JOptionPane.showMessageDialog(null, "Turma Alterada!");
                     adesao.setTurma(turma);

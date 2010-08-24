@@ -89,6 +89,15 @@ public class Utilitario {
        return dataFormatada.format(agora.getTime());
     }
 
+    public static String somaMesPlanoAderido(int duracao, String dataAdesao){
+        Date data = converteStringParaDate(dataAdesao);
+        Calendar vencimento = Calendar.getInstance();
+        DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+        vencimento.setTime(data);
+        vencimento.add(Calendar.MONTH, duracao);
+        return dataFormatada.format(vencimento.getTime());
+    }
+
     public void le_Data() {
         Date data = new Date();
         dia = "" + data.getDate();

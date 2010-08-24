@@ -450,17 +450,19 @@ public class TelaAcessoCadastroAluno extends javax.swing.JFrame {
         TelaEditarAluno.tabelaModalidadeAluno.getColumnModel().getColumn(2);
         TelaEditarAluno.tabelaModalidadeAluno.getColumnModel().getColumn(3);
         TelaEditarAluno.tabelaModalidadeAluno.getColumnModel().getColumn(4);
+        TelaEditarAluno.tabelaModalidadeAluno.getColumnModel().getColumn(5);
         DefaultTableModel modelo = (DefaultTableModel) TelaEditarAluno.tabelaModalidadeAluno.getModel();
         modelo.setNumRows(0);
 
         for (Adesao adesao : aluno.getAdesoes()) {
+            int codAdesao = adesao.getCodAdesao();
             String nomeModalidade = adesao.getPlano().getModalidade().getNome();
             String nomePlano = adesao.getPlano().getNome();
             double valor = adesao.getValor();
             Turma turma = adesao.getTurma();
             String nomeProfessor = turma.getProfessor().getNome();
             String diaEhorario = TelaCadastroAluno.getHorarioTurmas(turma);
-            modelo.addRow(new Object[]{nomeModalidade, nomeProfessor, nomePlano, diaEhorario, valor});
+            modelo.addRow(new Object[]{codAdesao, nomeModalidade, nomeProfessor, nomePlano, diaEhorario, valor});
         }
         TelaEditarAluno.adesoes = aluno.getAdesoes();
     }//GEN-LAST:event_botaoEditarActionPerformed
