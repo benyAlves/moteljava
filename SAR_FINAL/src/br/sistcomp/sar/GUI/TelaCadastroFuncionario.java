@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class TelaCadastroFuncionario extends javax.swing.JFrame {
 
     private boolean entrou;
-    private File file;
+    public static File file = new File(System.getProperty("user.dir") + "\\src\\br\\sistcomp\\sar\\imagens\\semFoto.png");
     private Fachada fachada = new Fachada();
 
     /** Creates new form TelaCadastroAluno */
@@ -221,7 +221,7 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
         }
         campoDataNascimentoSecretaria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        campoSenhaSecretaria.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        campoSenhaSecretaria.setFont(new java.awt.Font("sansserif", 1, 12));
         campoSenhaSecretaria.setForeground(new java.awt.Color(204, 0, 0));
         campoSenhaSecretaria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 

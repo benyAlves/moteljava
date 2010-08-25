@@ -20,8 +20,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Jefferson Araujo.
  */
 public class TelaCadastroProfessor extends javax.swing.JFrame {
-   private File file;
+  
     private boolean entrou;
+    public static File file = new File(System.getProperty("user.dir") + "\\src\\br\\sistcomp\\sar\\imagens\\semFoto.png");
     Fachada fachada = new Fachada();
     /** Creates new form TelaCadastroAluno */
     public TelaCadastroProfessor() {
