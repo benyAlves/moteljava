@@ -5,6 +5,8 @@
 package br.sistcomp.sar.fachada;
 
 import br.sistcomp.sar.GUI.TelaCadastroAluno;
+import br.sistcomp.sar.GUI.TelaCadastroFuncionario;
+import br.sistcomp.sar.GUI.TelaCadastroProfessor;
 import br.sistcomp.sar.GUI.TelaWebCam;
 import br.sistcomp.sar.dominio.*;
 import br.sistcomp.sar.servico.*;
@@ -69,7 +71,7 @@ public class Fachada {
         if (TelaWebCam.teste == true) {
             ImagemDAO.getInstance().inserirFotoWeb(professor.getIdPessoa());
         } else {
-            ImagemDAO.getInstance().inserirFotoArquivo(professor.getIdPessoa(), TelaCadastroAluno.file);
+            ImagemDAO.getInstance().inserirFotoArquivo(professor.getIdPessoa(), TelaCadastroProfessor.file);
         }
     }
     // Pesquisa matricula do professor passando o codigo da modadlidade
@@ -119,7 +121,7 @@ public class Fachada {
         if (TelaWebCam.teste == true) {
             ImagemDAO.getInstance().inserirFotoWeb(funcionario.getIdPessoa());
         } else {
-            ImagemDAO.getInstance().inserirFotoArquivo(funcionario.getIdPessoa(), TelaCadastroAluno.file);
+            ImagemDAO.getInstance().inserirFotoArquivo(funcionario.getIdPessoa(), TelaCadastroFuncionario.file);
         }
     }
 
