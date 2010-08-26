@@ -224,6 +224,28 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         labelReceitas = new javax.swing.JLabel();
         labelDespezas = new javax.swing.JLabel();
         labelSaldo = new javax.swing.JLabel();
+        painelSaldoDetalhado = new javax.swing.JInternalFrame();
+        jLabel58 = new javax.swing.JLabel();
+        jXTitledSeparator8 = new org.jdesktop.swingx.JXTitledSeparator();
+        jLabel59 = new javax.swing.JLabel();
+        campoSaldoDoCaixaFluxo = new javax.swing.JTextField();
+        jLabel60 = new javax.swing.JLabel();
+        jXTitledSeparator9 = new org.jdesktop.swingx.JXTitledSeparator();
+        jLabel61 = new javax.swing.JLabel();
+        campoDinheiroInicialFluxo = new javax.swing.JTextField();
+        jLabel62 = new javax.swing.JLabel();
+        campoDinheiroEntradaFluxo = new javax.swing.JTextField();
+        jLabel63 = new javax.swing.JLabel();
+        campoDinheiroSaidaFluxo = new javax.swing.JTextField();
+        jLabel64 = new javax.swing.JLabel();
+        jLabel65 = new javax.swing.JLabel();
+        painelFluxoCaixa = new javax.swing.JInternalFrame();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        botaoSairFluxoCaixa = new javax.swing.JButton();
+        botaoGeraRelatorioFluxo = new javax.swing.JButton();
+        jXPanel1 = new org.jdesktop.swingx.JXPanel();
+        jLabel66 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciamento Financeiro");
@@ -1151,11 +1173,18 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         jXTaskPane1.setTitle("Opções");
 
+        linkSaldoDetalhado.setClickedColor(new java.awt.Color(0, 51, 255));
         linkSaldoDetalhado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/detalhado.png"))); // NOI18N
         linkSaldoDetalhado.setText("Saldo Detalhado");
+        linkSaldoDetalhado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkSaldoDetalhadoActionPerformed(evt);
+            }
+        });
         jXTaskPane1.getContentPane().add(linkSaldoDetalhado);
         jXTaskPane1.getContentPane().add(jSeparator4);
 
+        linkRetirada.setClickedColor(new java.awt.Color(0, 51, 255));
         linkRetirada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/naoLegal.png"))); // NOI18N
         linkRetirada.setText("Retirada");
         linkRetirada.addActionListener(new java.awt.event.ActionListener() {
@@ -1165,6 +1194,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         });
         jXTaskPane1.getContentPane().add(linkRetirada);
 
+        linkSuprimentos.setClickedColor(new java.awt.Color(0, 51, 255));
         linkSuprimentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/legal.png"))); // NOI18N
         linkSuprimentos.setText("Suprimento");
         linkSuprimentos.addActionListener(new java.awt.event.ActionListener() {
@@ -1174,19 +1204,28 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         });
         jXTaskPane1.getContentPane().add(linkSuprimentos);
 
+        linkDetalhes.setClickedColor(new java.awt.Color(0, 51, 255));
         linkDetalhes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/detalhes.png"))); // NOI18N
         linkDetalhes.setText("Detalhes");
         jXTaskPane1.getContentPane().add(linkDetalhes);
 
+        linkExcluir.setClickedColor(new java.awt.Color(0, 51, 255));
         linkExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/excluir.png"))); // NOI18N
         linkExcluir.setText("Excluir");
         jXTaskPane1.getContentPane().add(linkExcluir);
         jXTaskPane1.getContentPane().add(jSeparator5);
 
+        linkFluxo.setClickedColor(new java.awt.Color(0, 51, 255));
         linkFluxo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/fluxo.png"))); // NOI18N
         linkFluxo.setText("Fluxo");
+        linkFluxo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkFluxoActionPerformed(evt);
+            }
+        });
         jXTaskPane1.getContentPane().add(linkFluxo);
 
+        linkRelatorio.setClickedColor(new java.awt.Color(0, 51, 255));
         linkRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/relatorio.png"))); // NOI18N
         linkRelatorio.setText("Relatório");
         jXTaskPane1.getContentPane().add(linkRelatorio);
@@ -1372,7 +1411,8 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         jLabel37.setFont(new java.awt.Font("sansserif", 1, 24));
         jLabel37.setText("Saldo do Caixa");
 
-        campoSaldoDoCaixa.setFont(new java.awt.Font("sansserif", 1, 24));
+        campoSaldoDoCaixa.setEditable(false);
+        campoSaldoDoCaixa.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         campoSaldoDoCaixa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoSaldoDoCaixa.setText("0.00");
         campoSaldoDoCaixa.setBackground(new java.awt.Color(0, 153, 0));
@@ -1386,7 +1426,8 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         jLabel39.setText("Dinheiro:");
 
-        campoDinheiroInicial.setFont(new java.awt.Font("sansserif", 1, 14));
+        campoDinheiroInicial.setEditable(false);
+        campoDinheiroInicial.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         campoDinheiroInicial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel40.setFont(new java.awt.Font("sansserif", 1, 18));
@@ -1395,12 +1436,14 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         jLabel40.setText("Entrada");
         jLabel40.setToolTipText("");
 
+        campoDinheiroEntrada.setEditable(false);
         campoDinheiroEntrada.setFont(new java.awt.Font("sansserif", 1, 14));
         campoDinheiroEntrada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel41.setText("Dinheiro:");
 
+        campoDinheiroSaida.setEditable(false);
         campoDinheiroSaida.setFont(new java.awt.Font("sansserif", 1, 14));
         campoDinheiroSaida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
@@ -1703,9 +1746,9 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         painelAnaliseFinanceira.setTitle("Análise Financeira");
 
         jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel54.setText("label");
+        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/logoAnalise.png"))); // NOI18N
 
-        jLabel55.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jLabel55.setFont(new java.awt.Font("sansserif", 1, 24));
         jLabel55.setText("Análise Financeira");
 
         jLabel56.setText("Mês");
@@ -1735,19 +1778,19 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP));
 
-        jLabel57.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel57.setFont(new java.awt.Font("sansserif", 1, 14));
         jLabel57.setForeground(new java.awt.Color(0, 0, 102));
         jLabel57.setText("Resultado do Mês:");
 
-        labelReceitas.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        labelReceitas.setFont(new java.awt.Font("sansserif", 1, 14));
         labelReceitas.setForeground(new java.awt.Color(0, 153, 0));
         labelReceitas.setText("R$ 0,00");
 
-        labelDespezas.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        labelDespezas.setFont(new java.awt.Font("sansserif", 1, 14));
         labelDespezas.setForeground(new java.awt.Color(204, 0, 0));
         labelDespezas.setText("R$ 0,00");
 
-        labelSaldo.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        labelSaldo.setFont(new java.awt.Font("sansserif", 1, 14));
         labelSaldo.setForeground(new java.awt.Color(0, 0, 102));
         labelSaldo.setText("R$ 0,00");
 
@@ -1815,6 +1858,224 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         painelAnaliseFinanceira.setBounds(10, 40, 780, 440);
         jDesktopPane1.add(painelAnaliseFinanceira, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        painelSaldoDetalhado.setClosable(true);
+        painelSaldoDetalhado.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        painelSaldoDetalhado.setIconifiable(true);
+        painelSaldoDetalhado.setTitle("Saldo Detalhado");
+
+        jLabel58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/fechaCaixaP.png"))); // NOI18N
+
+        jXTitledSeparator8.setTitle("");
+
+        jLabel59.setFont(new java.awt.Font("sansserif", 1, 24));
+        jLabel59.setText("Saldo do Caixa");
+
+        campoSaldoDoCaixaFluxo.setEditable(false);
+        campoSaldoDoCaixaFluxo.setFont(new java.awt.Font("sansserif", 1, 24));
+        campoSaldoDoCaixaFluxo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        campoSaldoDoCaixaFluxo.setText("0.00");
+        campoSaldoDoCaixaFluxo.setBackground(new java.awt.Color(0, 153, 0));
+
+        jLabel60.setFont(new java.awt.Font("sansserif", 1, 18));
+        jLabel60.setForeground(new java.awt.Color(0, 0, 102));
+        jLabel60.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel60.setText("Inicial");
+
+        jXTitledSeparator9.setTitle("");
+
+        jLabel61.setText("Dinheiro:");
+
+        campoDinheiroInicialFluxo.setEditable(false);
+        campoDinheiroInicialFluxo.setFont(new java.awt.Font("sansserif", 1, 14));
+        campoDinheiroInicialFluxo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel62.setFont(new java.awt.Font("sansserif", 1, 18));
+        jLabel62.setForeground(new java.awt.Color(0, 153, 0));
+        jLabel62.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel62.setText("Entrada");
+        jLabel62.setToolTipText("");
+
+        campoDinheiroEntradaFluxo.setEditable(false);
+        campoDinheiroEntradaFluxo.setFont(new java.awt.Font("sansserif", 1, 14));
+        campoDinheiroEntradaFluxo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel63.setText("Dinheiro:");
+
+        campoDinheiroSaidaFluxo.setEditable(false);
+        campoDinheiroSaidaFluxo.setFont(new java.awt.Font("sansserif", 1, 14));
+        campoDinheiroSaidaFluxo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel64.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel64.setText("Dinheiro:");
+
+        jLabel65.setFont(new java.awt.Font("sansserif", 1, 18));
+        jLabel65.setForeground(new java.awt.Color(204, 51, 0));
+        jLabel65.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel65.setText("Saída");
+
+        javax.swing.GroupLayout painelSaldoDetalhadoLayout = new javax.swing.GroupLayout(painelSaldoDetalhado.getContentPane());
+        painelSaldoDetalhado.getContentPane().setLayout(painelSaldoDetalhadoLayout);
+        painelSaldoDetalhadoLayout.setHorizontalGroup(
+            painelSaldoDetalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelSaldoDetalhadoLayout.createSequentialGroup()
+                .addGroup(painelSaldoDetalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelSaldoDetalhadoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jXTitledSeparator9, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelSaldoDetalhadoLayout.createSequentialGroup()
+                        .addGroup(painelSaldoDetalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelSaldoDetalhadoLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jXTitledSeparator8, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE))
+                            .addGroup(painelSaldoDetalhadoLayout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel59)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(campoSaldoDoCaixaFluxo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel58))
+                    .addGroup(painelSaldoDetalhadoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel61)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoDinheiroInicialFluxo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoDinheiroEntradaFluxo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoDinheiroSaidaFluxo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelSaldoDetalhadoLayout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(jLabel60)
+                        .addGap(117, 117, 117)
+                        .addComponent(jLabel62)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                        .addComponent(jLabel65)))
+                .addContainerGap())
+        );
+        painelSaldoDetalhadoLayout.setVerticalGroup(
+            painelSaldoDetalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelSaldoDetalhadoLayout.createSequentialGroup()
+                .addGroup(painelSaldoDetalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelSaldoDetalhadoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelSaldoDetalhadoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(painelSaldoDetalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel59)
+                            .addComponent(campoSaldoDoCaixaFluxo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addComponent(jXTitledSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(painelSaldoDetalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jXTitledSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painelSaldoDetalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel61)
+                    .addComponent(campoDinheiroInicialFluxo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel64)
+                    .addComponent(campoDinheiroSaidaFluxo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel63)
+                    .addComponent(campoDinheiroEntradaFluxo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        painelSaldoDetalhado.setBounds(130, 120, 540, 240);
+        jDesktopPane1.add(painelSaldoDetalhado, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        painelFluxoCaixa.setClosable(true);
+        painelFluxoCaixa.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        painelFluxoCaixa.setIconifiable(true);
+        painelFluxoCaixa.setTitle("Fluxo do Caixa");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Descrição", "Quantidade", "Total"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(jTable1);
+        jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(300);
+        jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jTable1.getColumnModel().getColumn(2).setResizable(false);
+
+        botaoSairFluxoCaixa.setText("Sair");
+        botaoSairFluxoCaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoSairFluxoCaixaActionPerformed(evt);
+            }
+        });
+
+        botaoGeraRelatorioFluxo.setText("Gerar Relatório");
+
+        javax.swing.GroupLayout painelFluxoCaixaLayout = new javax.swing.GroupLayout(painelFluxoCaixa.getContentPane());
+        painelFluxoCaixa.getContentPane().setLayout(painelFluxoCaixaLayout);
+        painelFluxoCaixaLayout.setHorizontalGroup(
+            painelFluxoCaixaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFluxoCaixaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelFluxoCaixaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+                    .addGroup(painelFluxoCaixaLayout.createSequentialGroup()
+                        .addComponent(botaoGeraRelatorioFluxo)
+                        .addGap(18, 18, 18)
+                        .addComponent(botaoSairFluxoCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        painelFluxoCaixaLayout.setVerticalGroup(
+            painelFluxoCaixaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFluxoCaixaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painelFluxoCaixaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoSairFluxoCaixa)
+                    .addComponent(botaoGeraRelatorioFluxo))
+                .addContainerGap())
+        );
+
+        painelFluxoCaixa.setBounds(40, 70, 720, 380);
+        jDesktopPane1.add(painelFluxoCaixa, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jXPanel1.setAlpha(0.5F);
+
+        jLabel66.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/logoAcademiaPequeno.png"))); // NOI18N
+
+        javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
+        jXPanel1.setLayout(jXPanel1Layout);
+        jXPanel1Layout.setHorizontalGroup(
+            jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel66, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+        );
+        jXPanel1Layout.setVerticalGroup(
+            jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel66, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+        );
+
+        jXPanel1.setBounds(200, 170, 410, 160);
+        jDesktopPane1.add(jXPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2170,6 +2431,18 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         painelAnaliseFinanceira.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void linkFluxoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkFluxoActionPerformed
+        painelFluxoCaixa.setVisible(true);
+    }//GEN-LAST:event_linkFluxoActionPerformed
+
+    private void linkSaldoDetalhadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkSaldoDetalhadoActionPerformed
+        painelSaldoDetalhado.setVisible(true);
+    }//GEN-LAST:event_linkSaldoDetalhadoActionPerformed
+
+    private void botaoSairFluxoCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairFluxoCaixaActionPerformed
+        painelFluxoCaixa.setVisible(false);
+    }//GEN-LAST:event_botaoSairFluxoCaixaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAbreCaixa;
     private javax.swing.JButton botaoAbreCaixaAberturaDoCaixa;
@@ -2182,6 +2455,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     private javax.swing.JButton botaoContasReceber;
     private javax.swing.JButton botaoFechamento;
     private javax.swing.JButton botaoFinalizaCaixa;
+    private javax.swing.JButton botaoGeraRelatorioFluxo;
     private javax.swing.JButton botaoLancar;
     private javax.swing.JButton botaoMovimentacao;
     private javax.swing.JButton botaoNao;
@@ -2192,6 +2466,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     private javax.swing.JButton botaoSair;
     private javax.swing.JButton botaoSairAberturaCaixa;
     private javax.swing.JButton botaoSairFinanceiro;
+    private javax.swing.JButton botaoSairFluxoCaixa;
     private javax.swing.JButton botaoSairMovimentacao;
     private javax.swing.JButton botaoSairRetirada;
     private javax.swing.JButton botaoSairSuprimento;
@@ -2204,8 +2479,11 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     private javax.swing.JTextField campoDescricao;
     private javax.swing.JTextField campoDescricaoConfirma;
     private javax.swing.JTextField campoDinheiroEntrada;
+    private javax.swing.JTextField campoDinheiroEntradaFluxo;
     private javax.swing.JTextField campoDinheiroInicial;
+    private javax.swing.JTextField campoDinheiroInicialFluxo;
     private javax.swing.JTextField campoDinheiroSaida;
+    private javax.swing.JTextField campoDinheiroSaidaFluxo;
     private javax.swing.JTextField campoEndereco;
     private javax.swing.JTextField campoEntrada;
     private javax.swing.JTextField campoHistoricoRetirada;
@@ -2221,6 +2499,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     private javax.swing.JTextField campoSaida;
     private javax.swing.JTextField campoSaldo;
     private javax.swing.JTextField campoSaldoDoCaixa;
+    private javax.swing.JTextField campoSaldoDoCaixaFluxo;
     private javax.swing.JFormattedTextField campoTelefone;
     private javax.swing.JTextField campoValor;
     private javax.swing.JTextField campoValorConfirma;
@@ -2285,7 +2564,16 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -2299,12 +2587,15 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private org.jdesktop.swingx.JXPanel jXPanel1;
     private org.jdesktop.swingx.JXTaskPane jXTaskPane1;
     private org.jdesktop.swingx.JXTaskPane jXTaskPane2;
     private org.jdesktop.swingx.JXTaskPaneContainer jXTaskPaneContainer1;
@@ -2316,6 +2607,8 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXTitledSeparator jXTitledSeparator5;
     private org.jdesktop.swingx.JXTitledSeparator jXTitledSeparator6;
     private org.jdesktop.swingx.JXTitledSeparator jXTitledSeparator7;
+    private org.jdesktop.swingx.JXTitledSeparator jXTitledSeparator8;
+    private org.jdesktop.swingx.JXTitledSeparator jXTitledSeparator9;
     private javax.swing.JLabel labelAbertura;
     private javax.swing.JLabel labelDataHora;
     private javax.swing.JLabel labelDespezas;
@@ -2337,9 +2630,11 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     private javax.swing.JInternalFrame painelContasPagar;
     private javax.swing.JInternalFrame painelContasReceber;
     private javax.swing.JInternalFrame painelFecharCaixa;
+    private javax.swing.JInternalFrame painelFluxoCaixa;
     private javax.swing.JInternalFrame painelMovimentacaoDoCaixa;
     private javax.swing.JInternalFrame painelPesquisar;
     private javax.swing.JInternalFrame painelRetiradaCaixa;
+    private javax.swing.JInternalFrame painelSaldoDetalhado;
     private javax.swing.JInternalFrame painelSuprimentoCaixa;
     private javax.swing.JInternalFrame quadroCalendario;
     private javax.swing.JComboBox selecaoFiltra;
