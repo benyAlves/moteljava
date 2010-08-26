@@ -1,24 +1,34 @@
 package br.sistcomp.sar.dominio;
 
+import br.sistcomp.sar.conexao.ConexaoDBRelatorio;
+import com.mysql.jdbc.Connection;
+import java.awt.Cursor;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import javax.swing.JOptionPane;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class Utilitario {
 
-    public static int retornaIdPessoa(int matricula){
+    public static int retornaIdPessoa(int matricula) {
         String idPessoa = Integer.toString(matricula);
-        return Integer.parseInt(idPessoa.substring(0,idPessoa.length()-4));
+        return Integer.parseInt(idPessoa.substring(0, idPessoa.length() - 4));
     }
 
-    public static int retornaMatricula(int idPessoa, String dataCadastro){
-        String matriculaCompleta = (idPessoa) + dataCadastro.substring(3,5) + dataCadastro.substring(8,10);
+    public static int retornaMatricula(int idPessoa, String dataCadastro) {
+        String matriculaCompleta = (idPessoa) + dataCadastro.substring(3, 5) + dataCadastro.substring(8, 10);
         return Integer.parseInt(matriculaCompleta);
     }
-
     public String mes, dia, ano, dia_semana, hora;
     SimpleDateFormat horaformatada = new SimpleDateFormat("HH:mm:ss");
 
@@ -39,11 +49,10 @@ public class Utilitario {
         novoFormato = new SimpleDateFormat("dd/MM/yyyy");
         String resultado;
         try {
-           resultado = formatoBrasil.format(novoFormato.parse(data));
-           //resultado = novoFormato.format(formatoBrasil.parse(data));
-           return resultado;
-        }
-        catch (ParseException ex) {
+            resultado = formatoBrasil.format(novoFormato.parse(data));
+            //resultado = novoFormato.format(formatoBrasil.parse(data));
+            return resultado;
+        } catch (ParseException ex) {
             ex.printStackTrace();
             return "Erro na conversão da data";
         }
@@ -53,49 +62,53 @@ public class Utilitario {
     public static Date converteStringParaDate(String data) {
         Date d = null;
         try {
-            data = data.substring(6) + "-" + data.substring(3, 5) + "-" +
-                    data.substring(0, 2);
+            data = data.substring(6) + "-" + data.substring(3, 5) + "-"
+                    + data.substring(0, 2);
             d = java.sql.Date.valueOf(data);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("Erro ao converter data");
         }
-         return d;
-     }
+        return d;
+    }
 
     // Metodo que transforma Date para String
-    public static String converteDateParaString(java.util.Date dtData){
+    public static String converteDateParaString(java.util.Date dtData) {
         SimpleDateFormat formatoBrasil, novoFormato;
         formatoBrasil = new SimpleDateFormat("yyyy-MM-dd");
         novoFormato = new SimpleDateFormat("dd/MM/yyyy");
         String resultado;
         try {
-           resultado = novoFormato.format(formatoBrasil.parse(dtData.toString()));
-           return resultado;
-        }
-        catch (ParseException ex) {
+            resultado = novoFormato.format(formatoBrasil.parse(dtData.toString()));
+            return resultado;
+        } catch (ParseException ex) {
             ex.printStackTrace();
             return "Erro na conversão da data";
         }
-     }     
-
-
-
-    public static String somaDoMesParaVencimentoDoPlano(int duracao){
-       Calendar agora = Calendar.getInstance();
-       DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-       agora.add(Calendar.MONTH, duracao);
-       return dataFormatada.format(agora.getTime());
     }
 
-    public static String somaMesPlanoAderido(int duracao, String dataAdesao){
+    public static String somaDoMesParaVencimentoDoPlano(int duracao) {
+        Calendar agora = Calendar.getInstance();
+        DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+        agora.add(Calendar.MONTH, duracao);
+        return dataFormatada.format(agora.getTime());
+    }
+
+    public static String somaMesPlanoAderido(int duracao, String dataAdesao) {
         Date data = converteStringParaDate(dataAdesao);
         Calendar vencimento = Calendar.getInstance();
         DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
         vencimento.setTime(data);
         vencimento.add(Calendar.MONTH, duracao);
         return dataFormatada.format(vencimento.getTime());
+    }
+
+    public static Cursor startCursor() {
+        return Cursor.getPredefinedCursor(3);
+    }
+
+    public static Cursor stopCursor() {
+        return Cursor.getDefaultCursor();
     }
 
     public void le_Data() {
@@ -164,5 +177,30 @@ public class Utilitario {
                 mes = "Dezembro";
                 break;
         }
+    }
+
+    public void geraRelatorio(String nome) {
+        String nomeRelatorio = "br/sistcomp/sar/impressao/" + nome;
+        URL urlFile = getClass().getClassLoader().getResource(nomeRelatorio);
+        if (urlFile == null) {
+            try {
+                // try {
+                throw new Exception("RelatÃ³rio de nome " + nomeRelatorio + " nÃ£o foi localizado");
+            } catch (Exception ex) {
+                Logger.getLogger(Utilitario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        try {
+            HashMap parametros = new HashMap();
+            Connection con = (Connection) new ConexaoDBRelatorio().getConnection();
+            JasperReport report = JasperManager.loadReport(urlFile.openStream());
+            JasperPrint jp = JasperFillManager.fillReport(report, parametros, con);
+            JasperViewer jrv = new JasperViewer(jp, false);
+            jrv.setVisible(true);
+
+        } catch (Exception e) {
+        }
+
     }
 }
