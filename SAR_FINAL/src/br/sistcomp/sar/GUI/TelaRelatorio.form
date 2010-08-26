@@ -12,9 +12,6 @@
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itemAlunos">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Alunos"/>
-              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAlunosActionPerformed"/>
               </Events>
@@ -81,13 +78,13 @@
                   <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="6" pref="6" max="6" attributes="0"/>
-                      <Component id="jLabel4" pref="490" max="32767" attributes="0"/>
+                      <Component id="jLabel4" pref="486" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel3" pref="490" max="32767" attributes="0"/>
+                          <Component id="jLabel3" pref="482" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -97,7 +94,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="208" max="32767" attributes="0"/>
+                      <EmptySpace pref="205" max="32767" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -148,7 +145,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jTabbedPane7" alignment="0" pref="490" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane7" alignment="0" pref="482" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="botaoGerarRelatorio" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -163,7 +160,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane7" pref="266" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane7" pref="261" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="botaoVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -179,6 +176,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerar Relat&#xf3;rio"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoGerarRelatorioActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botaoVoltar">
               <Properties>
@@ -219,7 +219,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="alunosAniversariantes" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="selecaoAniversariantes" pref="273" max="32767" attributes="1"/>
+                                      <Component id="selecaoAniversariantes" pref="252" max="32767" attributes="1"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="alunosIdadeEntre" min="-2" max="-2" attributes="0"/>
@@ -233,7 +233,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="alunosBolsistas" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="selecaoBolsistas" pref="320" max="32767" attributes="0"/>
+                                      <Component id="selecaoBolsistas" pref="300" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -243,13 +243,13 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="campoHorario" min="-2" pref="94" max="-2" attributes="1"/>
-                                          <Component id="selecaoRelacao" alignment="0" pref="304" max="32767" attributes="1"/>
+                                          <Component id="selecaoRelacao" alignment="0" pref="284" max="32767" attributes="1"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="alunosModalidade" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="selecaoModalidade" pref="274" max="32767" attributes="0"/>
+                                      <Component id="selecaoModalidade" pref="254" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="alunosPlanosVencidos" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -294,7 +294,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="alunosPlanosVencidos" min="-2" pref="22" max="-2" attributes="0"/>
-                              <EmptySpace pref="10" max="32767" attributes="0"/>
+                              <EmptySpace pref="40" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>

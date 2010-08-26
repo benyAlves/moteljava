@@ -73,19 +73,19 @@ public class TelaRelatorio extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(painelDaImagemLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(painelDaImagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(painelDaImagemLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         painelDaImagemLayout.setVerticalGroup(
             painelDaImagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelDaImagemLayout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addContainerGap())
             .addGroup(painelDaImagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,6 +98,11 @@ public class TelaRelatorio extends javax.swing.JFrame {
         painelPrincipal.add(painelDaImagem, "painelDaImagem");
 
         botaoGerarRelatorio.setText("Gerar Relatório");
+        botaoGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoGerarRelatorioActionPerformed(evt);
+            }
+        });
 
         botaoVoltar.setText("Voltar");
         botaoVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +208,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(alunosAniversariantes)
                         .addGap(18, 18, 18)
-                        .addComponent(selecaoAniversariantes, 0, 273, Short.MAX_VALUE))
+                        .addComponent(selecaoAniversariantes, 0, 252, Short.MAX_VALUE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(alunosIdadeEntre)
                         .addGap(18, 18, 18)
@@ -215,7 +220,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(alunosBolsistas)
                         .addGap(18, 18, 18)
-                        .addComponent(selecaoBolsistas, 0, 320, Short.MAX_VALUE))
+                        .addComponent(selecaoBolsistas, 0, 300, Short.MAX_VALUE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(relacaoAlunos)
@@ -223,11 +228,11 @@ public class TelaRelatorio extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(selecaoRelacao, 0, 304, Short.MAX_VALUE)))
+                            .addComponent(selecaoRelacao, 0, 284, Short.MAX_VALUE)))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(alunosModalidade)
                         .addGap(18, 18, 18)
-                        .addComponent(selecaoModalidade, 0, 274, Short.MAX_VALUE))
+                        .addComponent(selecaoModalidade, 0, 254, Short.MAX_VALUE))
                     .addComponent(alunosPlanosVencidos))
                 .addContainerGap())
         );
@@ -262,7 +267,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
                     .addComponent(selecaoModalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(alunosPlanosVencidos, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jTabbedPane7.addTab("Relatório de Alunos", jPanel9);
@@ -274,7 +279,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelRelatorioAlunosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelRelatorioAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
                     .addGroup(painelRelatorioAlunosLayout.createSequentialGroup()
                         .addComponent(botaoGerarRelatorio)
                         .addGap(18, 18, 18)
@@ -285,7 +290,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
             painelRelatorioAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelRelatorioAlunosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                .addComponent(jTabbedPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelRelatorioAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoVoltar)
@@ -297,7 +302,6 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
         menuRelatorios.setText("Relatórios"); // NOI18N
 
-        itemAlunos.setText("Alunos");
         itemAlunos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemAlunosActionPerformed(evt);
@@ -436,6 +440,53 @@ public class TelaRelatorio extends javax.swing.JFrame {
             campoIdadeInicio.setEnabled(false);
         }
     }//GEN-LAST:event_alunosPlanosVencidosMouseClicked
+
+    private void botaoGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarRelatorioActionPerformed
+        if (alunosBolsistas.isSelected() && selecaoBolsistas.getSelectedItem().equals("Todos")) {
+            u.geraRelatorio("relatorioAlunosBolsistas.jasper");
+        } else if (alunosBolsistas.isSelected() && selecaoBolsistas.getSelectedItem().equals("Parcial")) {
+            u.geraRelatorio("relatorioAlunosBolsistasParcial.jasper");
+        } else if (alunosBolsistas.isSelected() && selecaoBolsistas.getSelectedItem().equals("Integral")) {
+            u.geraRelatorio("relatorioAlunosBolsistasIntegral.jasper");
+        } else if (relacaoAlunos.isSelected() && selecaoRelacao.getSelectedItem().equals("Todos")) {
+            u.geraRelatorio("relatorioAlunos.jasper");
+        } else if (relacaoAlunos.isSelected() && selecaoRelacao.getSelectedItem().equals("Masculino")) {
+            u.geraRelatorio("relatorioAlunosSexoMasculino.jasper");
+        } else if (relacaoAlunos.isSelected() && selecaoRelacao.getSelectedItem().equals("Feminino")) {
+            u.geraRelatorio("relatorioAlunosSexoFeminino.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Janeiro")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesJaneiro.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Fevereiro")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesFevereiro.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Março")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesMarco.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Abril")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesAbril.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Maio")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesMaio.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Junho")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesJunho.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Julho")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesJulho.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Agosto")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesAgosto.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Setembro")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesSetembro.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Outubro")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesOutubro.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Novembro")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesNovembro.jasper");
+        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.equals("Dezembro")) {
+            u.geraRelatorio("relatorioAlunosAniversariantesDezembro.jasper");
+        } else if (alunosModalidade.isSelected()) {
+            u.geraRelatorio("relatorioAlunosPorModalidade.jasper");
+        } else if (alunosPlanosVencidos.isSelected()) {
+            u.geraRelatorio("relatorioAlunoComPlanosVencidos.jasper");
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoGerarRelatorioActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton alunosAniversariantes;
     private javax.swing.JRadioButton alunosBolsistas;
