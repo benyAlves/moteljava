@@ -916,15 +916,15 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="campoDescricaoConfirma" alignment="0" pref="194" max="32767" attributes="0"/>
-                                  <Component id="campoAlunoConfirma" alignment="0" pref="194" max="32767" attributes="0"/>
+                                  <Component id="campoDescricaoConfirma" alignment="0" pref="198" max="32767" attributes="0"/>
+                                  <Component id="campoAlunoConfirma" alignment="0" pref="198" max="32767" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="campoPagamentoConfirma" alignment="0" max="32767" attributes="1"/>
                                       <Component id="campoValorConfirma" alignment="0" max="32767" attributes="1"/>
                                       <Component id="campoVencimentoConfirma" alignment="0" max="32767" attributes="1"/>
                                       <Component id="campoMesConfirma" alignment="0" pref="107" max="32767" attributes="1"/>
                                   </Group>
-                                  <Component id="campoObservacaoRecebe" alignment="0" pref="194" max="32767" attributes="0"/>
+                                  <Component id="campoObservacaoRecebe" alignment="0" pref="198" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -1006,6 +1006,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="campoMesConfirma">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
@@ -1024,7 +1027,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoValorConfirma">
               <Properties>
-                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel19">
@@ -1048,6 +1051,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Confirmar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoConfirmaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botaoCancelar">
               <Properties>

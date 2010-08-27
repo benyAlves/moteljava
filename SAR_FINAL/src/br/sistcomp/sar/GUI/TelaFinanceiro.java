@@ -14,6 +14,7 @@ import java.awt.Image;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,6 +36,8 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         utilitario.le_Data();
         utilitario.le_Hora();
         linkData.setText("Hoje é " + utilitario.dia + " de " + utilitario.mes + " de " + utilitario.ano);
+        tabelaContasReceber.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -829,13 +832,15 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         jLabel16.setText("Mês");
 
+        campoMesConfirma.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jLabel17.setText("Vencimento");
 
         campoVencimentoConfirma.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel18.setText("Valor");
 
-        campoValorConfirma.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        campoValorConfirma.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel19.setText("Pagamento");
 
@@ -844,6 +849,11 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         jLabel20.setText("Observação");
 
         botaoConfirma.setText("Confirmar");
+        botaoConfirma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoConfirmaActionPerformed(evt);
+            }
+        });
 
         botaoCancelar.setText("Cancelar");
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -870,14 +880,14 @@ public class TelaFinanceiro extends javax.swing.JFrame {
                             .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(painelConfirmaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoDescricaoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                            .addComponent(campoAlunoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                            .addComponent(campoDescricaoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                            .addComponent(campoAlunoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                             .addGroup(painelConfirmaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(campoPagamentoConfirma, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(campoValorConfirma, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(campoVencimentoConfirma, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(campoMesConfirma, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-                            .addComponent(campoObservacaoRecebe, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)))
+                            .addComponent(campoObservacaoRecebe, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelConfirmaPagamentoLayout.createSequentialGroup()
                         .addComponent(botaoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2095,7 +2105,6 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void botaoContasReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoContasReceberActionPerformed
         zerarCampo();
         painelContasReceber.setVisible(true);
@@ -2143,43 +2152,48 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoSairActionPerformed
 
     private void botaoReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoReceberActionPerformed
-       String mes = null;
-        if(tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(), 3) == "PAGO"){
-            JOptionPane.showMessageDialog(null, "Essa mensalidade já está PAGA");
-        }else{
-            painelConfirmaPagamento.setVisible(true);
-            campoAlunoConfirma.setText(campoNome.getText());
-            campoDescricaoConfirma.setText((String) tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(),0));
-            String vencimento = (String) tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(), 1);
-            if(vencimento.substring(3, 5).equals("01")){
-                mes = "Janeiro";
-            } else if(vencimento.substring(3, 5).equals("02")){
-                mes = "Fevereiro";
-            }else if(vencimento.substring(3, 5).equals("03")){
-                mes = "Março";
-            }else if(vencimento.substring(3, 5).equals("04")){
-                mes = "Abril";
-            }else if(vencimento.substring(3, 5).equals("05")){
-                mes = "Maio";
-            }else if(vencimento.substring(3, 5).equals("06")){
-                mes = "Junho";
-            }else if(vencimento.substring(3, 5).equals("07")){
-                mes = "Julho";
-            }else if(vencimento.substring(3, 5).equals("08")){
-                mes = "Agosto";
-            }else if(vencimento.substring(3, 5).equals("09")){
-                mes = "Setembro";
-            }else if(vencimento.substring(3, 5).equals("10")){
-                mes = "Outubro";
-            }else if(vencimento.substring(3, 5).equals("11")){
-                mes = "Novembro";
-            }else if(vencimento.substring(3, 5).equals("12")){
-                mes = "Dezembro";
+        String mes = null;
+        if (tabelaContasReceber.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione um mensalidade a ser paga.");
+        } else {
+
+            if (tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(), 3) == "PAGO") {
+                JOptionPane.showMessageDialog(null, "Essa mensalidade já está PAGA");
+            } else {
+                painelConfirmaPagamento.setVisible(true);
+                campoAlunoConfirma.setText(campoNome.getText());
+                campoDescricaoConfirma.setText((String) tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(), 0));
+                String vencimento = (String) tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(), 1);
+                if (vencimento.substring(3, 5).equals("01")) {
+                    mes = "Janeiro";
+                } else if (vencimento.substring(3, 5).equals("02")) {
+                    mes = "Fevereiro";
+                } else if (vencimento.substring(3, 5).equals("03")) {
+                    mes = "Março";
+                } else if (vencimento.substring(3, 5).equals("04")) {
+                    mes = "Abril";
+                } else if (vencimento.substring(3, 5).equals("05")) {
+                    mes = "Maio";
+                } else if (vencimento.substring(3, 5).equals("06")) {
+                    mes = "Junho";
+                } else if (vencimento.substring(3, 5).equals("07")) {
+                    mes = "Julho";
+                } else if (vencimento.substring(3, 5).equals("08")) {
+                    mes = "Agosto";
+                } else if (vencimento.substring(3, 5).equals("09")) {
+                    mes = "Setembro";
+                } else if (vencimento.substring(3, 5).equals("10")) {
+                    mes = "Outubro";
+                } else if (vencimento.substring(3, 5).equals("11")) {
+                    mes = "Novembro";
+                } else if (vencimento.substring(3, 5).equals("12")) {
+                    mes = "Dezembro";
+                }
+                campoMesConfirma.setText(mes);
+                campoVencimentoConfirma.setText(vencimento);
+                campoValorConfirma.setText(Double.toString((Double) tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(), 2)));
+                campoPagamentoConfirma.setText(Utilitario.dataDoSistema());
             }
-            campoMesConfirma.setText(mes);
-            campoVencimentoConfirma.setText(vencimento);
-            campoValorConfirma.setText(Double.toString((Double) tabelaContasReceber.getValueAt(tabelaContasReceber.getSelectedRow(), 2)));
-            campoPagamentoConfirma.setText(Utilitario.dataDoSistema());
         }
     }//GEN-LAST:event_botaoReceberActionPerformed
 
@@ -2247,9 +2261,10 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         DefaultTableModel tabela = (DefaultTableModel) tabelaContasReceber.getModel();
         tabela.setNumRows(0);
     }
+
     private void campoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoMatriculaActionPerformed
-        String status;
         double valor = 0, debito = 0;
+        String status;
         int matricula = Integer.parseInt(campoMatricula.getText());
         Aluno aluno = fachada.pesquisarAluno(matricula);
         if (aluno != null) {
@@ -2263,7 +2278,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
             Vector<Mensalidade> mensalidades = fachada.pesquisaTodosAsMensalidadesDoAluno(matricula);
             if (mensalidades != null) {
                 for (int i = 0; i < mensalidades.size(); i++) {
-                    String parcela = (i + 1) + "ª  Mensalidade";
+                    String parcela = (i + 1) + "ª    Mensalidade";
                     String vencimento = mensalidades.get(i).getVencimento();
                     valor = mensalidades.get(i).getValor();
                     String Pagamento = mensalidades.get(i).getPagamento();
@@ -2330,13 +2345,11 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Nao existe aluno cadastrado com esse nome!");
         }
-
-
     }//GEN-LAST:event_botaoPesquisarActionPerformed
 
     private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
-        String status;
         double valor = 0, debito = 0;
+        String status;
         int matricula = (Integer) tabelaPesquisar.getValueAt(tabelaPesquisar.getSelectedRow(), 0);
         tabelaContasReceber.getColumnModel().getColumn(0);
         tabelaContasReceber.getColumnModel().getColumn(1);
@@ -2402,6 +2415,35 @@ public class TelaFinanceiro extends javax.swing.JFrame {
             botaoReceber.doClick();
         }
     }//GEN-LAST:event_tabelaContasReceberMousePressed
+
+
+    private void botaoConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmaActionPerformed
+        double valor = 0, debito = 0;
+        String status;
+        DefaultTableModel modelo = (DefaultTableModel) tabelaContasReceber.getModel();
+        modelo.setNumRows(0);
+        fachada.alterarMensalidadeAposPagamento(tabelaContasReceber.getSelectedRow()+1);
+        Vector<Mensalidade> mensalidades = fachada.pesquisaTodosAsMensalidadesDoAluno(Integer.parseInt(campoMatricula.getText()));
+        if (mensalidades != null) {
+            for (int i = 0; i < mensalidades.size(); i++) {
+                //String primeiroNome[] = pessoa.getNome().split(" ");
+                String parcela = (i + 1) + "ª  Mensalidade";
+                String vencimento = mensalidades.get(i).getVencimento();
+                valor = mensalidades.get(i).getValor();
+                String Pagamento = mensalidades.get(i).getPagamento();
+                if (Pagamento != null) {
+                    status = "PAGO";
+                } else {
+                    status = "a pagar";
+                    debito = debito + valor;
+                }
+
+                modelo.addRow(new Object[]{parcela, vencimento, valor, status});
+
+            }
+        }
+        painelConfirmaPagamento.setVisible(false);
+    }//GEN-LAST:event_botaoConfirmaActionPerformed
 
     private void botaoSairRetiradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairRetiradaActionPerformed
         painelRetiradaCaixa.setVisible(false);
