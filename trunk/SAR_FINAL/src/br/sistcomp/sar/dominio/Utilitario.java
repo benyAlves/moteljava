@@ -3,6 +3,7 @@ package br.sistcomp.sar.dominio;
 import br.sistcomp.sar.conexao.ConexaoDBRelatorio;
 import com.mysql.jdbc.Connection;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -197,8 +198,9 @@ public class Utilitario {
             JasperReport report = JasperManager.loadReport(urlFile.openStream());
             JasperPrint jp = JasperFillManager.fillReport(report, parametros, con);
             JasperViewer jrv = new JasperViewer(jp, false);
+            jrv.resize(800, 600);
+            jrv.setLocationRelativeTo(null);
             jrv.setVisible(true);
-
         } catch (Exception e) {
         }
 

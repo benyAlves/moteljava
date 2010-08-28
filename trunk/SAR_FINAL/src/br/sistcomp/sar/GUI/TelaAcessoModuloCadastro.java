@@ -45,6 +45,7 @@ public class TelaAcessoModuloCadastro extends javax.swing.JFrame {
         botaoAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/moduloAluno.png"))); // NOI18N
         botaoAluno.setText("Aluno");
         botaoAluno.setToolTipText("Módulo Aluno");
+        botaoAluno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoAlunoActionPerformed(evt);
@@ -54,6 +55,7 @@ public class TelaAcessoModuloCadastro extends javax.swing.JFrame {
         botaoProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/moduloProfessorr.png"))); // NOI18N
         botaoProfessor.setText("Professor");
         botaoProfessor.setToolTipText("Módulo Professor");
+        botaoProfessor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoProfessor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoProfessorActionPerformed(evt);
@@ -63,6 +65,7 @@ public class TelaAcessoModuloCadastro extends javax.swing.JFrame {
         botaoFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/moduloFuncionario.png"))); // NOI18N
         botaoFuncionario.setText("Funcionário");
         botaoFuncionario.setToolTipText("Módulo Funcionário");
+        botaoFuncionario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoFuncionarioActionPerformed(evt);
@@ -72,6 +75,7 @@ public class TelaAcessoModuloCadastro extends javax.swing.JFrame {
         botaoPlano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/moduloPlano.png"))); // NOI18N
         botaoPlano.setText("Plano");
         botaoPlano.setToolTipText("Módulo Plano");
+        botaoPlano.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoPlano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoPlanoActionPerformed(evt);
@@ -81,6 +85,7 @@ public class TelaAcessoModuloCadastro extends javax.swing.JFrame {
         botaoTurma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/moduloTurma.png"))); // NOI18N
         botaoTurma.setText("Turma");
         botaoTurma.setToolTipText("Módulo Turma");
+        botaoTurma.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoTurmaActionPerformed(evt);
@@ -90,6 +95,7 @@ public class TelaAcessoModuloCadastro extends javax.swing.JFrame {
         botaoModalidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/moduloModalidadee.png"))); // NOI18N
         botaoModalidade.setText("Modalidade");
         botaoModalidade.setToolTipText("Módulo Modalidade");
+        botaoModalidade.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoModalidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoModalidadeActionPerformed(evt);

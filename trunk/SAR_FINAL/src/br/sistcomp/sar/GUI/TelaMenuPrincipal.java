@@ -6,8 +6,13 @@
 package br.sistcomp.sar.GUI;
 
 import br.sistcomp.sar.dominio.Utilitario;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.RoundRectangle2D;
 import javax.swing.JOptionPane;
+import org.jdesktop.swingx.icon.EmptyIcon;
+import org.jdesktop.swingx.painter.BusyPainter;
 
 /**
  *
@@ -84,6 +89,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SAR - Gerenciador Fitness Versão 1.0 Beta");
         setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/fundoMenuCimaa.png"))); // NOI18N
@@ -97,11 +103,13 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jLabel17.setText("Pressione Alt + A para acessar o Módulo");
 
         botaoAcesso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/logoAcesso.png"))); // NOI18N
+        botaoAcesso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel3.setFont(new java.awt.Font("sansserif", 1, 19));
         jLabel3.setText("Cadastros");
 
         botaoRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/logoRelatorio.png"))); // NOI18N
+        botaoRelatorio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoRelatorioActionPerformed(evt);
@@ -117,6 +125,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jLabel19.setText("Ficha");
 
         botaoCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/logoCadastro.png"))); // NOI18N
+        botaoCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCadastroActionPerformed(evt);
@@ -126,8 +135,10 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jLabel6.setText("Cadastro de Alunos, Professores, Turmas e outros.");
 
         botaoFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/logoFicha.png"))); // NOI18N
+        botaoFicha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         botaoFinanceiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/logoFinanceiro.png"))); // NOI18N
+        botaoFinanceiro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoFinanceiro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoFinanceiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +161,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jLabel14.setText("Cadastro da Ficha de Série do Aluno.");
 
         botaoOperacional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/logoOperacional.png"))); // NOI18N
+        botaoOperacional.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel15.setFont(new java.awt.Font("sansserif", 1, 19));
         jLabel15.setText("Operacional");
@@ -326,6 +338,9 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         busy.setBusy(true);
         busy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        busy.setText("Carregando ...");
+        busy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        busy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -356,8 +371,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(261, Short.MAX_VALUE)
-                .addComponent(busy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(263, 263, 263)
+                .addComponent(busy, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(213, 213, 213)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -418,10 +433,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
             public void run() {
                 try {
-//                    busy.setVisible(true);
-//                    busy.setBusy(true);
                     painelTransparencia.setAlpha(0.1F);
-                    Thread.sleep(1500L);
+                    Thread.sleep(1000L);
                     new TelaAvisoInicial().setVisible(true);
                     busy.setVisible(false);
                     painelTransparencia.setAlpha(1.0F);

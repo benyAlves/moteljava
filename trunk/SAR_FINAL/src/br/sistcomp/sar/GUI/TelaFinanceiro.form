@@ -95,6 +95,9 @@
               <Image iconType="3" name="/br/sistcomp/sar/imagens/contasReceber.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Contas a Receber"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoContasReceberActionPerformed"/>
@@ -106,6 +109,9 @@
               <Image iconType="3" name="/br/sistcomp/sar/imagens/contasPagar.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Contas a Pagar"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoContasPagarActionPerformed"/>
@@ -117,6 +123,9 @@
               <Image iconType="3" name="/br/sistcomp/sar/imagens/fechaCaixa.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Fechar o Caixa"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoFinalizaCaixaActionPerformed"/>
@@ -128,6 +137,9 @@
               <Image iconType="3" name="/br/sistcomp/sar/imagens/abreCaixa.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Abrir o Caixa"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoAbreCaixaActionPerformed"/>
@@ -139,6 +151,9 @@
               <Image iconType="3" name="/br/sistcomp/sar/imagens/Home.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Voltar ao Menu Principal"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoSairFinanceiroActionPerformed"/>
@@ -150,6 +165,9 @@
               <Image iconType="3" name="/br/sistcomp/sar/imagens/movimentacao.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Movimenta&#xe7;&#xe3;o do Caixa"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoMovimentacaoActionPerformed"/>
@@ -161,6 +179,9 @@
               <Image iconType="3" name="/br/sistcomp/sar/imagens/analise.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="An&#xe1;lise Financeira"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -916,15 +937,15 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="campoDescricaoConfirma" alignment="0" pref="198" max="32767" attributes="0"/>
-                                  <Component id="campoAlunoConfirma" alignment="0" pref="198" max="32767" attributes="0"/>
+                                  <Component id="campoDescricaoConfirma" alignment="0" pref="194" max="32767" attributes="0"/>
+                                  <Component id="campoAlunoConfirma" alignment="0" pref="194" max="32767" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="campoPagamentoConfirma" alignment="0" max="32767" attributes="1"/>
                                       <Component id="campoValorConfirma" alignment="0" max="32767" attributes="1"/>
                                       <Component id="campoVencimentoConfirma" alignment="0" max="32767" attributes="1"/>
                                       <Component id="campoMesConfirma" alignment="0" pref="107" max="32767" attributes="1"/>
                                   </Group>
-                                  <Component id="campoObservacaoRecebe" alignment="0" pref="198" max="32767" attributes="0"/>
+                                  <Component id="campoObservacaoRecebe" alignment="0" pref="194" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
