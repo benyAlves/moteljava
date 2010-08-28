@@ -155,4 +155,23 @@ public class MensalidadeDAO {
         }
         return mensalidades;
     }
+
+    public Boolean liberarExclusaoAdesao(int codAdesao) {
+        ResultSet rs;
+        PreparedStatement ps;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM MENSALIDADES WHERE codAdesao = '" + codAdesao + "' ");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return false;
+            }
+            con.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }

@@ -288,4 +288,24 @@ public class ProfessorDAO {
         }
         return pessoas;
     }
+
+    public Boolean liberarExclusaoModalidade(int codModalidade){
+          ResultSet rs;
+	  PreparedStatement ps;
+          try {
+                Connection con = (Connection) ConexaoDB.getInstance().getCon();
+                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM PROFESSORES WHERE codModalidade = '"+ codModalidade +"' ");
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    return false;
+                }
+                con.close();
+                return true;
+         }
+          catch (Exception e) {
+              e.printStackTrace();
+          }
+          return true;
+    }
+
 }

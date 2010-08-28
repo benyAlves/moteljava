@@ -6,8 +6,6 @@ package br.sistcomp.sar.servico;
 
 import br.sistcomp.sar.conexao.ConexaoDB;
 import br.sistcomp.sar.dominio.Adesao;
-import br.sistcomp.sar.dominio.Plano;
-import br.sistcomp.sar.dominio.Turma;
 import br.sistcomp.sar.dominio.Utilitario;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -58,26 +56,6 @@ public class AdesaoDAO {
         return -1;
     }
 
-    public int pesquisaCodigoDoPlano(String nomePlano) {
-        ResultSet rs;
-        PreparedStatement ps;
-        int codigo = -1;
-        try {
-            Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT codPlano FROM PLANOS WHERE nome =   '" + nomePlano + "'");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                codigo = rs.getInt("codPlano");
-            }
-            con.close();
-            return codigo;
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return codigo;
-    }
-
     public int alunosAtivos() {
         ResultSet rs;
         PreparedStatement ps;
@@ -115,7 +93,7 @@ public class AdesaoDAO {
         PreparedStatement ps;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("UPDATE ADESOES set codTurma = ? WHERE matricula = '" + matricula + "' and codPlano = '" +codPlano+ "'");
+            ps = (PreparedStatement) con.prepareStatement("UPDATE ADESOES set codTurma = ? WHERE matricula = '" + matricula + "' and codPlano = '" + codPlano + "'");
             ps.setInt(1, codTurma);
             ps.execute();
             con.close();
@@ -125,7 +103,7 @@ public class AdesaoDAO {
         }
     }
 
-    public int proximoCodigo(){
+    public int proximoCodigo() {
         int codigo = -1;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
@@ -140,17 +118,17 @@ public class AdesaoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-       return codigo;
+        return codigo;
     }
 
-    public List<Integer> adesoesAtivas(){
+    public List<Integer> adesoesAtivas() {
         ResultSet rs;
         PreparedStatement ps;
         List<Integer> adesoesAtivas = new ArrayList<Integer>();
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT codAdesao FROM ADESOES WHERE status = 'true' ");
+            ps = (PreparedStatement) con.prepareStatement("SELECT codAdesao FROM ADESOES WHERE status = true ");
             rs = ps.executeQuery();
             while (rs.next()) {
                 adesoesAtivas.add(rs.getInt("codAdesao"));
@@ -163,7 +141,7 @@ public class AdesaoDAO {
         return adesoesAtivas;
     }
 
-    public List<Adesao> todasAdesoesDoAluno(int matricula){
+    public List<Adesao> todasAdesoesDoAluno(int matricula) {
         ResultSet rs;
         PreparedStatement ps;
         List<Adesao> adesoes = new ArrayList<Adesao>();
@@ -195,7 +173,7 @@ public class AdesaoDAO {
         return adesoes;
     }
 
-    public Adesao pesquisar(int codAdesao){
+    public Adesao pesquisar(int codAdesao) {
         ResultSet rs;
         PreparedStatement ps;
         Adesao adesao = new Adesao();
@@ -225,4 +203,21 @@ public class AdesaoDAO {
         return adesao;
     }
 
+    public Boolean liberarExclusaoPlano(int codPlano) {
+        ResultSet rs;
+        PreparedStatement ps;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ADESOES WHERE codPlano = '" + codPlano + "' ");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return false;
+            }
+            con.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 }

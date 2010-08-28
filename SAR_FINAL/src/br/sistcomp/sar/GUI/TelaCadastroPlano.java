@@ -4,7 +4,6 @@
  *
  * Created on 19/07/2010, 17:54:16
  */
-
 package br.sistcomp.sar.GUI;
 
 import br.sistcomp.sar.dominio.CaixaAlta;
@@ -21,10 +20,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Jefferson Araújo
  */
 public class TelaCadastroPlano extends javax.swing.JFrame {
+
     Fachada fachada = new Fachada();
     private int linha = 0;
     private int coluna = 0;
     private Boolean liberar = true, editar = false;
+
     /** Creates new form TelaCadastroMensalidade */
     public TelaCadastroPlano() {
         initComponents();
@@ -289,19 +290,18 @@ public class TelaCadastroPlano extends javax.swing.JFrame {
         setBounds((screenSize.width-750)/2, (screenSize.height-578)/2, 750, 578);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setModalidades(){
+    public void setModalidades() {
         Vector<String> nomes = fachada.getNomesModalidades();
-        nomes.add(0,"- Selecione -");
+        nomes.add(0, "- Selecione -");
         selecaoModalidade.setModel(new DefaultComboBoxModel(nomes));
     }
-
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
         setVisible(false);
         new TelaAcessoModuloCadastro().setVisible(true);
 }//GEN-LAST:event_botaoVoltarActionPerformed
 
-     public void preencheTabela() {
+    public void preencheTabela() {
 
         tabelaCadastroDePlano.getColumnModel().getColumn(0);
         tabelaCadastroDePlano.getColumnModel().getColumn(1);
@@ -325,48 +325,40 @@ public class TelaCadastroPlano extends javax.swing.JFrame {
         }
     }
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarActionPerformed
-        if(editar){
-            JOptionPane.showMessageDialog(null,"Salve as alterações antes de cadastrar um novo Plano!");
-        }
-        else {
-            if (liberar == false){
-                JOptionPane.showMessageDialog(null,"Preencha os campos do novo Plano!");
+        if (editar) {
+            JOptionPane.showMessageDialog(rootPane, "Salve as Alterações Antes de Cadastrar um Novo Plano!", "Erro!", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (liberar == false) {
+                JOptionPane.showMessageDialog(rootPane, "Preencha os Campos do Novo Plano!", "Novo!", JOptionPane.INFORMATION_MESSAGE);
                 ativaCampos();
                 zerarCampos();
                 liberar = true;
-            }
-            else{
-        if (campoNome.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Digite o Nome");
-        }
-        else{
-                    if (selecaoDuracao.getSelectedItem().equals("- Selecione -")){
-                        JOptionPane.showMessageDialog(null,"Selecione a Duração");
-                    }
-                    else {
-                        if (campoValor.getText().isEmpty()){
-                            JOptionPane.showMessageDialog(null,"Digite um Valor");
-                        }
-                        else {
-                            if (selecaoModalidade.getSelectedItem().equals("- Selecione -")){
-                                JOptionPane.showMessageDialog(null,"Selecione a Modalidade");
-                            }
-                            else {
-                                if (selecaoStatus.getSelectedItem().equals("Inativo")){
-                                    JOptionPane.showMessageDialog(null,"O Status no Cadastro não pode ser Inativo");
-                                }
-                                else{
-                                    if (campoValor.getText().contains(".") == false){
-                                        JOptionPane.showMessageDialog(null,"Digite o Valor no Seguinte formato: 10.00");
-                                    }
-                                    else {
+            } else {
+                if (campoNome.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(rootPane, "Digite o Nome!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    if (selecaoDuracao.getSelectedItem().equals("- Selecione -")) {
+                        JOptionPane.showMessageDialog(rootPane, "Selecione a Duração!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        if (campoValor.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(rootPane, "Digite um Valor!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            if (selecaoModalidade.getSelectedItem().equals("- Selecione -")) {
+                                JOptionPane.showMessageDialog(rootPane, "Selecione a Modalidade!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                if (selecaoStatus.getSelectedItem().equals("Inativo")) {
+                                    JOptionPane.showMessageDialog(rootPane, "O Status no cadastro não pode ser Inativo!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                                } else {
+                                    if (campoValor.getText().contains(".") == false) {
+                                        JOptionPane.showMessageDialog(rootPane, "Digite o valor no seguinte formato: 10.00!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                                    } else {
                                         int codigo = Integer.parseInt(campoCodigo.getText());
                                         String nome = campoNome.getText();
                                         int duracao = (selecaoDuracao.getSelectedIndex());
                                         double valor = Double.parseDouble(campoValor.getText());
                                         String modalidade = selecaoModalidade.getSelectedItem().toString();
                                         String status = selecaoStatus.getSelectedItem().toString();
-                                        Plano plano = new Plano(codigo, nome,duracao,valor,fachada.getModalidade(modalidade),status);
+                                        Plano plano = new Plano(codigo, nome, duracao, valor, fachada.getModalidade(modalidade), status);
                                         fachada.cadastrarPlano(plano);
                                         tabelaCadastroDePlano.getColumnModel().getColumn(0);
                                         tabelaCadastroDePlano.getColumnModel().getColumn(1);
@@ -377,6 +369,7 @@ public class TelaCadastroPlano extends javax.swing.JFrame {
                                         DefaultTableModel modelo = (DefaultTableModel) tabelaCadastroDePlano.getModel();
                                         modelo.addRow(new Object[]{codigo, nome, duracao, modalidade, valor, status});
                                         zerarCampos();
+                                        JOptionPane.showMessageDialog(rootPane, "Plano Cadastrado com Sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
                                     }
                                 }
                             }
@@ -389,44 +382,57 @@ public class TelaCadastroPlano extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCadastrarActionPerformed
 
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
-        int row = tabelaCadastroDePlano.getSelectedRow();
-        coluna=1;
-        try {
-            String nome = (String) tabelaCadastroDePlano.getValueAt(row, coluna);
-            ((DefaultTableModel) tabelaCadastroDePlano.getModel()).removeRow(tabelaCadastroDePlano.getSelectedRow());
-            PlanoDAO.getInstance().remover(nome);
-        }
-        catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Nao ha o que remover!");
+        if (tabelaCadastroDePlano.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione Um Plano", "Plano Não Selecionado!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int codPlano = (Integer) (tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 0));
+            if (fachada.liberarExclusaoPlano(codPlano)) {
+                int row = tabelaCadastroDePlano.getSelectedRow();
+                coluna = 1;
+                String nome = (String) tabelaCadastroDePlano.getValueAt(row, coluna);
+                ((DefaultTableModel) tabelaCadastroDePlano.getModel()).removeRow(tabelaCadastroDePlano.getSelectedRow());
+                fachada.removerPlano(nome);
+                JOptionPane.showMessageDialog(rootPane, "Plano Excluído com Sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Plano pertence há alguma Adesão!", "Impossivel Remover Plano!", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_botaoRemoverActionPerformed
 
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
-        liberar = false;
-        editar = true;
-        ativaCampos();
+        if (tabelaCadastroDePlano.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um Plano!", "Impossivel Editar Plano!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            liberar = false;
+            editar = true;
+            ativaCampos();
+        }
     }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-        liberar = true;
-        editar = false;
-        int codigo = Integer.parseInt(campoCodigo.getText());
-        String nome = campoNome.getText();
-        int duracao = (selecaoDuracao.getSelectedIndex());
-        String modalidade = selecaoModalidade.getSelectedItem().toString();
-        double valor = Double.parseDouble(campoValor.getText());
-        String status = selecaoStatus.getSelectedItem().toString();
+        if (editar) {
+            liberar = true;
+            editar = false;
+            int codigo = Integer.parseInt(campoCodigo.getText());
+            String nome = campoNome.getText();
+            int duracao = (selecaoDuracao.getSelectedIndex());
+            String modalidade = selecaoModalidade.getSelectedItem().toString();
+            double valor = Double.parseDouble(campoValor.getText());
+            String status = selecaoStatus.getSelectedItem().toString();
 
-
-        tabelaCadastroDePlano.setValueAt(codigo, tabelaCadastroDePlano.getSelectedRow(), 0);
-        tabelaCadastroDePlano.setValueAt(nome,  tabelaCadastroDePlano.getSelectedRow(), 1);
-        tabelaCadastroDePlano.setValueAt(duracao,  tabelaCadastroDePlano.getSelectedRow(),2);
-        tabelaCadastroDePlano.setValueAt(modalidade,  tabelaCadastroDePlano.getSelectedRow(),3);
-        tabelaCadastroDePlano.setValueAt(valor,  tabelaCadastroDePlano.getSelectedRow(), 4);
-        tabelaCadastroDePlano.setValueAt(status,  tabelaCadastroDePlano.getSelectedRow(), 5);
-        Plano plano = new Plano(codigo, nome,duracao,valor,fachada.getModalidade(modalidade),status);
-        fachada.editarPlano(plano);
-        zerarCampos();
+            tabelaCadastroDePlano.setValueAt(codigo, tabelaCadastroDePlano.getSelectedRow(), 0);
+            tabelaCadastroDePlano.setValueAt(nome, tabelaCadastroDePlano.getSelectedRow(), 1);
+            tabelaCadastroDePlano.setValueAt(duracao, tabelaCadastroDePlano.getSelectedRow(), 2);
+            tabelaCadastroDePlano.setValueAt(modalidade, tabelaCadastroDePlano.getSelectedRow(), 3);
+            tabelaCadastroDePlano.setValueAt(valor, tabelaCadastroDePlano.getSelectedRow(), 4);
+            tabelaCadastroDePlano.setValueAt(status, tabelaCadastroDePlano.getSelectedRow(), 5);
+            Plano plano = new Plano(codigo, nome, duracao, valor, fachada.getModalidade(modalidade), status);
+            fachada.editarPlano(plano);
+            JOptionPane.showMessageDialog(rootPane, "Plano Salvo com Sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            zerarCampos();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Não há Plano em Edição!", "Impossivel Salvar Plano!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void tabelaCadastroDePlanoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaCadastroDePlanoKeyReleased
@@ -438,15 +444,15 @@ public class TelaCadastroPlano extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tabelaCadastroDePlanoMousePressed
 
-    public void bloquearCampos(){
+    public void bloquearCampos() {
         liberar = false;
         campoCodigo.setEditable(true);
         campoCodigo.setText(Integer.toString((Integer) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 0)));
         campoCodigo.setEditable(false);
         campoNome.setText((String) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 1));
-        selecaoDuracao.setSelectedIndex((Integer)tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(),2));
+        selecaoDuracao.setSelectedIndex((Integer) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 2));
         selecaoModalidade.setSelectedItem((Object) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 3));
-        campoValor.setText(Double.toString((Double)tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 4)));
+        campoValor.setText(Double.toString((Double) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 4)));
         selecaoStatus.setSelectedItem((Object) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 5));
         campoCodigo.setEnabled(false);
         campoNome.setEnabled(false);
@@ -456,7 +462,7 @@ public class TelaCadastroPlano extends javax.swing.JFrame {
         selecaoStatus.setEnabled(false);
     }
 
-    public void ativaCampos(){
+    public void ativaCampos() {
         campoCodigo.setEnabled(true);
         campoNome.setEnabled(true);
         selecaoDuracao.setEnabled(true);
@@ -465,16 +471,14 @@ public class TelaCadastroPlano extends javax.swing.JFrame {
         selecaoStatus.setEnabled(true);
     }
 
-    public void zerarCampos(){
-       campoCodigo.setText(Integer.toString(fachada.proximoCodigo()));
-       campoNome.setText("");
-       selecaoDuracao.setSelectedIndex(0);
-       campoValor.setText("");
-       selecaoModalidade.setSelectedIndex(0);
-       selecaoStatus.setSelectedIndex(0);
+    public void zerarCampos() {
+        campoCodigo.setText(Integer.toString(fachada.proximoCodigo()));
+        campoNome.setText("");
+        selecaoDuracao.setSelectedIndex(0);
+        campoValor.setText("");
+        selecaoModalidade.setSelectedIndex(0);
+        selecaoStatus.setSelectedIndex(0);
     }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCadastrar;
     private javax.swing.JButton botaoEditar;
@@ -499,5 +503,4 @@ public class TelaCadastroPlano extends javax.swing.JFrame {
     private javax.swing.JComboBox selecaoStatus;
     private javax.swing.JTable tabelaCadastroDePlano;
     // End of variables declaration//GEN-END:variables
-
 }
