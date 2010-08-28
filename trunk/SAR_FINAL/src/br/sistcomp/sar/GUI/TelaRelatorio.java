@@ -14,8 +14,6 @@ import br.sistcomp.sar.dominio.Utilitario;
  */
 public class TelaRelatorio extends javax.swing.JFrame {
 
-    Utilitario utilitario = new Utilitario();
-
     /** Creates new form TelaAcessoModuloRelatorio */
     public TelaRelatorio() {
         initComponents();
@@ -446,7 +444,8 @@ public class TelaRelatorio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_alunosPlanosVencidosMouseClicked
 
-    private void botaoGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+    private void botaoGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {
+        Utilitario utilitario = new Utilitario();
         if (alunosBolsistas.isSelected() && selecaoBolsistas.getSelectedItem().equals("Todos")) {
             utilitario.geraRelatorio("relatorioAlunosBolsistas.jasper");
         } else if (alunosBolsistas.isSelected() && selecaoBolsistas.getSelectedItem().equals("Parcial")) {
@@ -488,8 +487,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
         } else if (alunosPlanosVencidos.isSelected()) {
             utilitario.geraRelatorio("relatorioAlunoComPlanosVencidos.jasper");
         }
-    }                                                   
-
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton alunosAniversariantes;
     private javax.swing.JRadioButton alunosBolsistas;

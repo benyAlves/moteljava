@@ -6,13 +6,8 @@
 package br.sistcomp.sar.GUI;
 
 import br.sistcomp.sar.dominio.Utilitario;
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.RoundRectangle2D;
 import javax.swing.JOptionPane;
-import org.jdesktop.swingx.icon.EmptyIcon;
-import org.jdesktop.swingx.painter.BusyPainter;
 
 /**
  *

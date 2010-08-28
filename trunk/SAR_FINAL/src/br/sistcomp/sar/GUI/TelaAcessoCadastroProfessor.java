@@ -118,7 +118,7 @@ public class TelaAcessoCadastroProfessor extends javax.swing.JFrame {
             }
         });
 
-        botaoPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/lupa.png"))); // NOI18N
+        botaoPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/lupaP.png"))); // NOI18N
         botaoPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoPesquisarActionPerformed(evt);

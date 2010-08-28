@@ -6,6 +6,8 @@
  */
 package br.sistcomp.sar.GUI;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Jefferson Araújo
@@ -164,7 +166,6 @@ public class TelaAcessoModuloCadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAlunoActionPerformed
-
         setVisible(false);
         new TelaAcessoCadastroAluno().setVisible(true);
         aluno = true;
