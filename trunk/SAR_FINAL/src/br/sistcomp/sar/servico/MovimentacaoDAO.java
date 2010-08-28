@@ -1,4 +1,3 @@
-
 package br.sistcomp.sar.servico;
 
 import br.sistcomp.sar.conexao.ConexaoDB;
@@ -7,6 +6,8 @@ import br.sistcomp.sar.dominio.Utilitario;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -90,5 +91,26 @@ public class MovimentacaoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Boolean mensalidadesLiberadas(List<Integer> mensalidades) {
+        ResultSet rs;
+        PreparedStatement ps;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            for (int mensalidade : mensalidades) {
+                ps = (PreparedStatement) con.prepareStatement("SELECT codMovimentacao FROM MOVIMENTACOES WHERE vencimento<'" + Utilitario.dataParaBanco(Utilitario.dataDoSistema()) + "' AND codMovimentacao='" + mensalidade + "' ");
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    con.close();
+                    return false;
+                }
+            }
+            con.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }

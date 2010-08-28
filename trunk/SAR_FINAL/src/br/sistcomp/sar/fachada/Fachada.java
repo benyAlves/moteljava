@@ -48,6 +48,7 @@ public class Fachada {
     }
 
     public void removerAdesao(int codAdesao){
+        MensalidadeDAO.getInstance().remover(codAdesao);
         AlunoTurmaDAO.getInstance().removeAlunoDaTurma(codAdesao);
         AdesaoDAO.getInstance().remover(codAdesao);
     }

@@ -59,7 +59,7 @@ public class MensalidadeDAO {
                 mensalidade.setHora(movimentacao.getHora());
                 mensalidade.setTipo(movimentacao.getTipo());
                 mensalidade.setAdesao(AdesaoDAO.getInstance().pesquisar(rs.getInt("codAdesao")));
-                if (rs.getDate("pagamento") != null){
+                if (rs.getDate("pagamento") != null) {
                     mensalidade.setPagamento(Utilitario.converteDateParaString(rs.getDate("pagamento")));
                 }
                 mensalidade.setDesconto(rs.getDouble("desconto"));
@@ -89,6 +89,18 @@ public class MensalidadeDAO {
         }
     }
 
+    public void remover(int codAdesao) {
+        PreparedStatement ps;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("DELETE FROM MENSALIDADES WHERE codAdesao ='" + codAdesao + "' ");
+            ps.execute();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public Vector<Mensalidade> todasMensalidadesDoAluno(int matricula) {
 
         ResultSet rs;
@@ -110,7 +122,7 @@ public class MensalidadeDAO {
                     mensalidade.setHora(movimentacao.getHora());
                     mensalidade.setTipo(movimentacao.getTipo());
                     mensalidade.setAdesao(adesao);
-                    if (rs.getDate("pagamento") != null){
+                    if (rs.getDate("pagamento") != null) {
                         mensalidade.setPagamento(Utilitario.converteDateParaString(rs.getDate("pagamento")));
                     }
                     mensalidade.setDesconto(rs.getDouble("desconto"));
@@ -142,7 +154,7 @@ public class MensalidadeDAO {
                 mensalidade.setHora(movimentacao.getHora());
                 mensalidade.setTipo(movimentacao.getTipo());
                 mensalidade.setAdesao(AdesaoDAO.getInstance().pesquisar(codAdesao));
-                if (rs.getDate("pagamento") != null){
+                if (rs.getDate("pagamento") != null) {
                     mensalidade.setPagamento(Utilitario.converteDateParaString(rs.getDate("pagamento")));
                 }
                 mensalidade.setDesconto(rs.getDouble("desconto"));
@@ -159,19 +171,19 @@ public class MensalidadeDAO {
     public Boolean liberarExclusaoAdesao(int codAdesao) {
         ResultSet rs;
         PreparedStatement ps;
+        List<Integer> mensalidades = new ArrayList<Integer>();
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             ps = (PreparedStatement) con.prepareStatement("SELECT * FROM MENSALIDADES WHERE codAdesao = '" + codAdesao + "' ");
             rs = ps.executeQuery();
             while (rs.next()) {
-                return false;
+                mensalidades.add(rs.getInt("codMovimentacao"));
             }
             con.close();
-            return true;
+            return MovimentacaoDAO.getInstance().mensalidadesLiberadas(mensalidades);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return true;
     }
-
 }
