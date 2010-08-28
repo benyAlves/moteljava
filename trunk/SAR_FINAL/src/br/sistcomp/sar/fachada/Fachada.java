@@ -27,8 +27,9 @@ public class Fachada {
             int codAdesao = AdesaoDAO.getInstance().aderirPlano(aluno.getIdPessoa(), adesao);
             AlunoTurmaDAO.getInstance().insereAlunoNaTurma(aluno.getIdPessoa(), adesao.getTurma().getCodigo(), codAdesao);
             for (Mensalidade mensalidade : adesao.getMensalidades()) {
-                mensalidade.setCodAdesao(codAdesao);
-                MensalidadeDAO.getInstance().cadastrar(mensalidade, aluno.getIdPessoa());
+                adesao.setCodAdesao(codAdesao);
+                mensalidade.setAdesao(adesao);
+                MensalidadeDAO.getInstance().cadastrar(mensalidade);
             }
         }
 
@@ -43,16 +44,17 @@ public class Fachada {
         int codAdesao = AdesaoDAO.getInstance().aderirPlano(matricula, adesao);
         AlunoTurmaDAO.getInstance().insereAlunoNaTurma(matricula, adesao.getTurma().getCodigo(), codAdesao);
         for (Mensalidade mensalidade : adesao.getMensalidades()) {
-            mensalidade.setCodAdesao(codAdesao);
-            MensalidadeDAO.getInstance().cadastrar(mensalidade, matricula);
+            adesao.setCodAdesao(codAdesao);
+            mensalidade.setAdesao(adesao);
+            MensalidadeDAO.getInstance().cadastrar(mensalidade);
         }
     }
 
-    public void removerAdesao(int codAdesao){
-        MensalidadeDAO.getInstance().remover(codAdesao);
-        AlunoTurmaDAO.getInstance().removeAlunoDaTurma(codAdesao);
-        AdesaoDAO.getInstance().remover(codAdesao);
-    }
+//    public void removerAdesao(int codAdesao){
+//        MensalidadeDAO.getInstance().remover(codAdesao);
+//        AlunoTurmaDAO.getInstance().removeAlunoDaTurma(codAdesao);
+//        AdesaoDAO.getInstance().remover(codAdesao);
+//    }
 
     public void trocarTurma(int codAdesao, int codTurma){
         AlunoTurmaDAO.getInstance().editaAlunoNaTurma(codAdesao, codTurma);
@@ -171,7 +173,7 @@ public class Fachada {
     }
 
     public Vector<Mensalidade> pesquisaTodosAsMensalidadesDoAluno(int matricula) {
-        return MensalidadeDAO.getInstance().pesquisaTodosAsMensalidadesDoAluno(matricula);
+        return MensalidadeDAO.getInstance().todasMensalidadesDoAluno(matricula);
     }
 
     public Vector<String> getNomesModalidades() {

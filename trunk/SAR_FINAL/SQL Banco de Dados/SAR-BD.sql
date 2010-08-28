@@ -81,19 +81,6 @@ CREATE TABLE ADESOES (
 	PRIMARY KEY (codAdesao)
 );
 
-CREATE TABLE MENSALIDADES (
-	codMensalidade int unsigned not null auto_increment,
-        matricula int not null,
-	valor numeric(7,2) not null,
-	desconto numeric(7,2) not null,
-	vencimento date not null,
-	pagamento date,
-        codAdesao int not null,
-        FOREIGN KEY (codAdesao) REFERENCES ADESOES(codAdesao),
-	PRIMARY KEY (codMensalidade),
-        FOREIGN KEY (matricula) REFERENCES alunos(matricula)
-);
-
 CREATE TABLE PROFESSORES (
         idPessoa int not null,
 	matricula int not null,
@@ -139,4 +126,62 @@ CREATE TABLE DIAS (
 	domingo bool,
 	FOREIGN KEY (codTurma) REFERENCES turmas(codTurma),
 	PRIMARY KEY (codTurma)
+);
+
+CREATE TABLE MOVIMENTACOES(
+	codMovimentacao int unsigned not null auto_increment,
+	matricula int,
+	desconto numeric(7,2),
+	valor numeric(7,2) not null,
+	vencimento date not null,
+	pagamento date,
+	horaPgto time,
+	tipo varchar(1) not null,
+	PRIMARY KEY (codMovimentacao),
+	FOREIGN KEY (matricula) REFERENCES FUNCIONARIOS(matricula)
+);
+
+CREATE TABLE MENSALIDADES(
+	codMovimentacao int unsigned not null,
+	codAdesao int not null,
+	FOREIGN KEY (codMovimentacao) REFERENCES MOVIMENTACOES(codMovimentacao),
+	PRIMARY KEY (codMovimentacao),
+	FOREIGN KEY (codAdesao) REFERENCES ADESOES(codAdesao)
+);
+
+CREATE TABLE CONTAS(
+	codMovimentacao int unsigned not null,
+	descricao varchar(70) not null
+);
+
+CREATE TABLE CAIXAS(
+	codCaixa int not null auto_increment,
+	status bool not null,
+	dia date not null,
+	saldo numeric(7,2) not null,
+	PRIMARY KEY (codCaixa)
+);
+
+CREATE TABLE TRANSACOES(
+	codCaixa int not null,
+	codMovimentacao int unsigned not null,
+	FOREIGN KEY (codCaixa) REFERENCES CAIXAS(codCaixa),
+	FOREIGN KEY (codMovimentacao) REFERENCES MOVIMENTACOES(codMovimentacao),
+	CONSTRAINT codTransferencia PRIMARY KEY (codCaixa, codMovimentacao)
+);
+
+CREATE TABLE ABRE(
+        codCaixa int not null,
+        matricula int not null,
+        FOREIGN KEY (codCaixa) REFERENCES CAIXAS(codCaixa),
+        FOREIGN KEY (matricula) REFERENCES FUNCIONARIOS(matricula),
+        CONSTRAINT codAbriu PRIMARY KEY (codCaixa,matricula)
+);
+
+CREATE TABLE FECHA(
+        codCaixa int not null,
+        matricula int not null,
+        FOREIGN KEY (codCaixa) REFERENCES CAIXAS(codCaixa),
+        FOREIGN KEY (matricula) REFERENCES FUNCIONARIOS(matricula),
+        CONSTRAINT codFechou PRIMARY KEY (codCaixa,matricula)
 );

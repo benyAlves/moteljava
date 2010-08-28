@@ -5,11 +5,13 @@ import com.mysql.jdbc.Connection;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.net.URL;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +38,25 @@ public class Utilitario {
     public void le_Hora() {
         Date horaAtual = new Date();
         hora = horaformatada.format(horaAtual);
+    }
+    
+    public static String getHora() {  
+   
+         // cria um StringBuilder  
+         StringBuilder sb = new StringBuilder();  
+
+         // cria um GregorianCalendar que vai conter a hora atual  
+         GregorianCalendar d = new GregorianCalendar();  
+
+         // anexa do StringBuilder os dados da hora  
+         sb.append( d.get( GregorianCalendar.HOUR_OF_DAY ) );  
+         sb.append( ":" );  
+         sb.append( d.get( GregorianCalendar.MINUTE ) );  
+         sb.append( ":" );  
+         sb.append( d.get( GregorianCalendar.SECOND ) );  
+
+         // retorna a String do StringBuilder  
+         return sb.toString(); 
     }
 
     public static String dataDoSistema() {

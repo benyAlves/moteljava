@@ -1,9 +1,9 @@
-
 package br.sistcomp.sar.servico;
 
 import br.sistcomp.sar.conexao.ConexaoDB;
+import br.sistcomp.sar.dominio.Adesao;
 import br.sistcomp.sar.dominio.Mensalidade;
-import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.dominio.Movimentacao;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,178 +11,162 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-
 public class MensalidadeDAO {
 
-    private static MensalidadeDAO mensalidadeDAO ;
+    private static MensalidadeDAO mensalidadeDAO;
 
-    public static MensalidadeDAO getInstance(){
-        synchronized(MensalidadeDAO.class){
-            if(mensalidadeDAO == null){
+    public static MensalidadeDAO getInstance() {
+        synchronized (MensalidadeDAO.class) {
+            if (mensalidadeDAO == null) {
                 mensalidadeDAO = new MensalidadeDAO();
             }
         }
         return mensalidadeDAO;
     }
 
-    public String cadastrar(Mensalidade mensalidade, int matricula){
+    public void cadastrar(Mensalidade mensalidade) {
+        Mensalidade mensalidadeOK = (Mensalidade) mensalidade;
+        int codMovimentacao = MovimentacaoDAO.getInstance().cadastrar(mensalidade);
         PreparedStatement ps;
-
         try {
-            Mensalidade mensalidadeOK = (Mensalidade) mensalidade;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("INSERT INTO MENSALIDADES (matricula, valor, desconto, vencimento, pagamento, codAdesao) VALUES (?,?,?,?,?,?)");
-            ps.setInt(1, matricula);
-            ps.setDouble(2, mensalidadeOK.getValor());
-            ps.setDouble(3, mensalidadeOK.getDesconto());
-            ps.setString(4, Utilitario.dataParaBanco(mensalidadeOK.getVencimento()));
-            ps.setString(5, mensalidadeOK.getPagamento());
-            ps.setInt(6, mensalidadeOK.getCodAdesao());
+            ps = (PreparedStatement) con.prepareStatement("INSERT INTO MENSALIDADES (codMovimentacao, codAdesao) VALUES (?,?)");
+            ps.setInt(1, codMovimentacao);
+            ps.setInt(2, mensalidadeOK.getAdesao().getCodAdesao());
             ps.execute();
             con.close();
-            return "Mensalidade Cadastrada com Sucesso!";
-          }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace(); // Sempre colocar o StackTrace, ajuda a identificar o erro.
-            return "Erro ao cadastrar Mensalidade!";
-         }
+        }
     }
 
-    public Mensalidade pesquisar(int codMensalidade){
-          ResultSet rs;
-	  PreparedStatement ps;
-          Mensalidade m = null;
+    public Mensalidade pesquisar(int codMovimentacao) {
+        ResultSet rs;
+        PreparedStatement ps;
+        Mensalidade mensalidade = new Mensalidade();
+        Movimentacao movimentacao = MovimentacaoDAO.getInstance().pesquisar(codMovimentacao);
 
-          try {
+        try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM MENSALIDADES WHERE codMensalidade = '"+codMensalidade+"'" );
-                rs = ps.executeQuery();
-                while(rs.next()){
-                    double valor = rs.getDouble("valor");
-                    double desconto = rs.getDouble("desconto");
-                    String vencimento = rs.getString("vencimento");
-                    String pagamento = rs.getString("pagamento");
-                    int codAdesao = rs.getInt("codAdesao");
-                    con.close();
-                    m = new Mensalidade(codMensalidade,valor,desconto,vencimento,pagamento,codAdesao);
-                    return m;
-                }
-          }
-          catch (Exception e) {
-              e.printStackTrace();
-              m.setValor(0);
-              return m;
-          }
-
-          return m;
-    }
-
-    public String alterar(Mensalidade mensalidade){
-          PreparedStatement ps;
-            try{
-                Mensalidade mensalidadeOK = (Mensalidade) mensalidade;
-                Connection con = (Connection) ConexaoDB.getInstance().getCon();
-                ps = (PreparedStatement) con.prepareStatement("UPDATE MENSALIDADES set valor = ?, desconto = ?, vencimento = ?, pagamento = ? WHERE codMensalidade = '"+mensalidadeOK.getCodigo()+"' ");
-                ps.setDouble(1, mensalidadeOK.getValor());
-                ps.setDouble(2, mensalidadeOK.getDesconto());
-                ps.setString(3, mensalidadeOK.getVencimento());
-                ps.setString(4, mensalidadeOK.getPagamento());
-                ps.execute();
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM MENSALIDADES WHERE codMovimentacao = '" + codMovimentacao + "'");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                mensalidade.setFuncionario(movimentacao.getFuncionario());
+                mensalidade.setDesconto(movimentacao.getDesconto());
+                mensalidade.setValor(movimentacao.getValor());
+                mensalidade.setVencimento(movimentacao.getVencimento());
+                mensalidade.setPagamento(movimentacao.getPagamento());
+                mensalidade.setHoraPgto(movimentacao.getHoraPgto());
+                mensalidade.setTipo(movimentacao.getTipo());
+                //Fazer método pesquisar adesao
+                //mensalidade.setAdesao(AdesaoDAO.getInstance());
                 con.close();
-                return "Mensalidade Alterada com Sucesso";
-            } catch (Exception e) {
-                return "Erro ao Alterar Mensalidade";
+                return mensalidade;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return mensalidade;
     }
 
-    public String remover(Mensalidade mensalidade){
-            PreparedStatement ps;
-
-                try{
-                    Mensalidade mensalidadeOK = (Mensalidade) mensalidade;
-                    Connection con = (Connection) ConexaoDB.getInstance().getCon();
-                    ps = (PreparedStatement) con.prepareStatement("DELETE FROM MENSALIDADES WHERE codMensalidade ='"+mensalidadeOK.getCodigo()+"' ");
-                    ps.execute();
-                    con.close();
-                    return "Mensalidade Removida com Sucesso";
-                }catch (Exception e) {
-                    e.printStackTrace();
-                    return "Erro ao Remover Modalidade";
-		}
+    public void alterar(Mensalidade mensalidade) {
+        MovimentacaoDAO.getInstance().alterar(mensalidade);
     }
 
-    public String remover(int codAdesao){
-            PreparedStatement ps;
+//    public String remover(Mensalidade mensalidade){
+//            PreparedStatement ps;
+//
+//                try{
+//                    Mensalidade mensalidadeOK = (Mensalidade) mensalidade;
+//                    Connection con = (Connection) ConexaoDB.getInstance().getCon();
+//                    ps = (PreparedStatement) con.prepareStatement("DELETE FROM MENSALIDADES WHERE codMensalidade ='"+mensalidadeOK.getCodigo()+"' ");
+//                    ps.execute();
+//                    con.close();
+//                    return "Mensalidade Removida com Sucesso";
+//                }catch (Exception e) {
+//                    e.printStackTrace();
+//                    return "Erro ao Remover Modalidade";
+//		}
+//    }
+//
+//    public String remover(int codAdesao){
+//            PreparedStatement ps;
+//
+//                try{
+//                    Connection con = (Connection) ConexaoDB.getInstance().getCon();
+//                    ps = (PreparedStatement) con.prepareStatement("DELETE FROM MENSALIDADES WHERE codAdesao ='"+codAdesao+"' ");
+//                    ps.execute();
+//                    con.close();
+//                    return "Mensalidade Removida com Sucesso";
+//                }catch (Exception e) {
+//                    e.printStackTrace();
+//                    return "Erro ao Remover Modalidade";
+//		}
+//    }
+//
+    public Vector<Mensalidade> todasMensalidadesDoAluno(int matricula) {
 
-                try{
-                    Connection con = (Connection) ConexaoDB.getInstance().getCon();
-                    ps = (PreparedStatement) con.prepareStatement("DELETE FROM MENSALIDADES WHERE codAdesao ='"+codAdesao+"' ");
-                    ps.execute();
-                    con.close();
-                    return "Mensalidade Removida com Sucesso";
-                }catch (Exception e) {
-                    e.printStackTrace();
-                    return "Erro ao Remover Modalidade";
-		}
-    }
+        ResultSet rs;
+        PreparedStatement ps;
+        Vector<Mensalidade> mensalidades = new Vector<Mensalidade>();
+        List<Adesao> adesoesDoAluno = AdesaoDAO.getInstance().todasAdesoesDoAluno(matricula);
 
-    public Vector<Mensalidade> pesquisaTodosAsMensalidadesDoAluno(int matricula){
-
-          ResultSet rs;
-	  PreparedStatement ps;
-          Mensalidade m = null;
-          Vector<Mensalidade> mensalidade = new Vector<Mensalidade>();
-
-          try {
+        try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM mensalidades WHERE matricula = '"+matricula+"'" );
+            for(Adesao adesao : adesoesDoAluno){
+                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM MENSALIDADES WHERE codAdesao = '" + adesao.getCodAdesao() + "'");
                 rs = ps.executeQuery();
-                while(rs.next()){
-                    long codMensalidade = rs.getInt("codMensalidade");
-                    double valor = rs.getDouble("valor");
-                    double desconto = rs.getDouble("desconto");
-                    String vencimento = rs.getString("vencimento");
-                    String pagamento =rs.getString("pagamento");
-                    int codAdesao = rs.getInt("codAdesao");
-                    m = new Mensalidade(codMensalidade,valor,desconto,vencimento,pagamento,codAdesao);
-                    mensalidade.add(m);
-                }
-                con.close();
-          }
-          catch (Exception e) {
-              e.printStackTrace();
-              System.out.print("ERRO");
-          }
-
-          return mensalidade;
-    }
-
-    public List<Mensalidade> mensalidadesDaAdesao(int codAdesao){
-          ResultSet rs;
-	  PreparedStatement ps;
-          List<Mensalidade> mensalidades = new ArrayList<Mensalidade>();
-
-          try {
-            Connection con = (Connection) ConexaoDB.getInstance().getCon();
-                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM MENSALIDADES WHERE codAdesao = '"+codAdesao+"'" );
-                rs = ps.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
+                    Movimentacao movimentacao = MovimentacaoDAO.getInstance().pesquisar(rs.getInt("codMovimentacao"));
                     Mensalidade mensalidade = new Mensalidade();
-                    mensalidade.setValor(rs.getDouble("valor"));
-                    mensalidade.setDesconto(rs.getDouble("desconto"));
-                    mensalidade.setVencimento(rs.getString("vencimento"));
-                    mensalidade.setPagamento(rs.getString("pagamento"));
-                    mensalidade.setCodAdesao(rs.getInt("codAdesao"));
+                    mensalidade.setFuncionario(movimentacao.getFuncionario());
+                    mensalidade.setDesconto(movimentacao.getDesconto());
+                    mensalidade.setValor(movimentacao.getValor());
+                    mensalidade.setVencimento(movimentacao.getVencimento());
+                    mensalidade.setPagamento(movimentacao.getPagamento());
+                    mensalidade.setHoraPgto(movimentacao.getHoraPgto());
+                    mensalidade.setTipo(movimentacao.getTipo());
+                    //Fazer método pesquisar adesao
+                    //mensalidade.setAdesao(AdesaoDAO.getInstance());
                     mensalidades.add(mensalidade);
                 }
-                con.close();
-                return mensalidades;
-          }
-          catch (Exception e) {
-              e.printStackTrace();
-          }
-
-          return mensalidades;
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mensalidades;
     }
 
+    public List<Mensalidade> mensalidadesDaAdesao(int codAdesao) {
+        ResultSet rs;
+        PreparedStatement ps;
+        List<Mensalidade> mensalidades = new ArrayList<Mensalidade>();
+
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM MENSALIDADES WHERE codAdesao = '" + codAdesao + "'");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Movimentacao movimentacao = MovimentacaoDAO.getInstance().pesquisar(rs.getInt("codMovimentacao"));
+                Mensalidade mensalidade = new Mensalidade();
+                mensalidade.setFuncionario(movimentacao.getFuncionario());
+                mensalidade.setDesconto(movimentacao.getDesconto());
+                mensalidade.setValor(movimentacao.getValor());
+                mensalidade.setVencimento(movimentacao.getVencimento());
+                mensalidade.setPagamento(movimentacao.getPagamento());
+                mensalidade.setHoraPgto(movimentacao.getHoraPgto());
+                mensalidade.setTipo(movimentacao.getTipo());
+                //Fazer método pesquisar adesao
+                //mensalidade.setAdesao(AdesaoDAO.getInstance());
+                mensalidades.add(mensalidade);
+            }
+            con.close();
+            return mensalidades;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mensalidades;
+    }
 }
