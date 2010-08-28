@@ -24,7 +24,7 @@ public class PlanoDAO {
         return planoDAO;
     }
 
-    public String cadastrar(Plano plano) {
+    public void cadastrar(Plano plano) {
         PreparedStatement ps;
 
         try {
@@ -38,12 +38,8 @@ public class PlanoDAO {
             ps.setString(5, planoOK.getStatus());
             ps.execute();
             con.close();
-            JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso!");
-            return "Plano Cadastrado com Sucesso!";
-
         } catch (Exception e) {
             e.printStackTrace(); // Sempre colocar o StackTrace, ajuda a identificar o erro.
-            return "Erro ao cadastrar Plano!";
         }
     }
 
@@ -269,6 +265,25 @@ public class PlanoDAO {
               e.printStackTrace();
           }
           return duracao; //tratar exceÃ§Ã£o
+    }
+
+    public Boolean liberarExclusaoModalidade(int codModalidade){
+          ResultSet rs;
+	  PreparedStatement ps;
+          try {
+                Connection con = (Connection) ConexaoDB.getInstance().getCon();
+                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM PLANOS WHERE codModalidade = '"+ codModalidade +"' ");
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    return false;
+                }
+                con.close();
+                return true;
+         }
+          catch (Exception e) {
+              e.printStackTrace();
+          }
+          return true;
     }
 
 }

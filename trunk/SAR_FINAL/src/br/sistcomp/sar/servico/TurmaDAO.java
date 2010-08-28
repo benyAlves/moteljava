@@ -1,6 +1,7 @@
 package br.sistcomp.sar.servico;
 
 import br.sistcomp.sar.conexao.ConexaoDB;
+import br.sistcomp.sar.dominio.Adesao;
 import br.sistcomp.sar.dominio.Professor;
 import br.sistcomp.sar.dominio.Turma;
 import com.mysql.jdbc.Connection;
@@ -38,15 +39,11 @@ public class TurmaDAO {
             ps.setInt(1, turmaOK.getProfessor().getIdPessoa());
             ps.setString(2, turmaOK.getHoraInicio());
             ps.setString(3, turmaOK.getHoraFinal());
-            System.out.println(turmaOK.getProfessor().getIdPessoa());
-            System.out.println(turmaOK.getHoraInicio());
             ps.execute();
             cadastrarDias(turmaOK.getDias());
             con.close();
-            JOptionPane.showMessageDialog(null, "Turma Cadastrada com Sucesso!");
         } catch (Exception e) {
             e.printStackTrace(); // Sempre colocar o StackTrace, ajuda a identificar o erro.
-            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Turma!");
         }
     }
 
@@ -138,15 +135,13 @@ public class TurmaDAO {
         try {
             Turma turmaOK = (Turma) turma;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("UPDATE turmas SET matricula = ?, horaInicio = ?, horaFinal = ?, dias = ? WHERE codTurma = '" + turmaOK.getCodigo() + "' ");
+            ps = (PreparedStatement) con.prepareStatement("UPDATE TURMAS SET matricula = ?, horaInicio = ?, horaFinal = ? WHERE codTurma = '" + turmaOK.getCodigo() + "' ");
             ps.setInt(1, turmaOK.getProfessor().getIdPessoa());
             ps.setString(2, turmaOK.getHoraInicio());
             ps.setString(3, turmaOK.getHoraFinal());
+            ps.execute();
             alterarDias(turmaOK.getCodigo(), turmaOK.getDias());
             con.close();
-
-
-            JOptionPane.showMessageDialog(null, "Turma Alterada com Sucesso");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao Alterar Turma");
@@ -167,7 +162,6 @@ public class TurmaDAO {
             ps.setBoolean(7, dias.get("Domingo"));
             ps.execute();
             con.close();
-            JOptionPane.showMessageDialog(null, "Dias alterados");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao alterar dias");
@@ -184,7 +178,7 @@ public class TurmaDAO {
             con.close();
             return "Turma Removida com Sucesso";
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
             return "Erro ao Remover Plano";
         }
     }
@@ -264,7 +258,7 @@ public class TurmaDAO {
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             for (int i : turmasComVaga) {
-                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM TURMAS WHERE codTurma ='"+i+"' AND matricula= '"+professor.getIdPessoa()+"' ");
+                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM TURMAS WHERE codTurma ='" + i + "' AND matricula= '" + professor.getIdPessoa() + "' ");
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     codigo = rs.getInt("codTurma");
@@ -336,4 +330,5 @@ public class TurmaDAO {
         }
         return turmas;
     }
+
 }

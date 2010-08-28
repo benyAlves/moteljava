@@ -47,11 +47,10 @@ public class Fachada {
         }
     }
 
-//    public void removerAdesao(int codAdesao){
-//        MensalidadeDAO.getInstance().remover(codAdesao);
-//        AlunoTurmaDAO.getInstance().removeAlunoDaTurma(codAdesao);
-//        AdesaoDAO.getInstance().remover(codAdesao);
-//    }
+    public void removerAdesao(int codAdesao){
+        AlunoTurmaDAO.getInstance().removeAlunoDaTurma(codAdesao);
+        AdesaoDAO.getInstance().remover(codAdesao);
+    }
 
     public void trocarTurma(int codAdesao, int codTurma){
         AlunoTurmaDAO.getInstance().editaAlunoNaTurma(codAdesao, codTurma);
@@ -135,7 +134,6 @@ public class Fachada {
         if (TelaWebCam.teste == true) {
             ImagemDAO.getInstance().alterarFoto(professor.getIdPessoa());
         }
-        //else ImagemDAO.getInstance().alterarFotoParaDefault(professor.getIdPessoa());
     }
 
     public Aluno pesquisarAluno(int matricula) {
@@ -297,4 +295,26 @@ public class Fachada {
     public void lancarConta(Conta conta){
         ContaDAO.getInstance().cadastrar(conta);
     }
+
+    public Boolean liberarExclusaoModalidade(int codModalidade){
+        Boolean plano = PlanoDAO.getInstance().liberarExclusaoModalidade(codModalidade);
+        Boolean professor = ProfessorDAO.getInstance().liberarExclusaoModalidade(codModalidade);
+        if (plano && professor){
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean liberarExclusaoTurma(int codTurma){
+        return AlunoTurmaDAO.getInstance().liberarExclusaoTurma(codTurma);
+    }
+
+    public Boolean liberarExclusaoPlano(int codPlano){
+        return AdesaoDAO.getInstance().liberarExclusaoPlano(codPlano);
+    }
+
+    public Boolean liberarExclusaoAdesao(int codAdesao){
+        return MensalidadeDAO.getInstance().liberarExclusaoAdesao(codAdesao);
+    }
+
 }

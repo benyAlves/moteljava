@@ -13,7 +13,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class TelaCadastroTurma extends javax.swing.JFrame {
 
     Fachada fachada = new Fachada();
@@ -59,7 +58,7 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
         campoHoraFim = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         botaoVoltarTurma = new javax.swing.JButton();
-        botaoCadastrarTurma = new javax.swing.JButton();
+        botaoRemoverTurma = new javax.swing.JButton();
         botaoEditarTurma = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         botaoCadastrar = new javax.swing.JButton();
@@ -295,10 +294,10 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
             }
         });
 
-        botaoCadastrarTurma.setText("Remover");
-        botaoCadastrarTurma.addActionListener(new java.awt.event.ActionListener() {
+        botaoRemoverTurma.setText("Remover");
+        botaoRemoverTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCadastrarTurmaActionPerformed(evt);
+                botaoRemoverTurmaActionPerformed(evt);
             }
         });
 
@@ -342,7 +341,7 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botaoEditarTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoCadastrarTurma)
+                        .addComponent(botaoRemoverTurma)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -358,7 +357,7 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoVoltarTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoSalvar)
-                    .addComponent(botaoCadastrarTurma)
+                    .addComponent(botaoRemoverTurma)
                     .addComponent(botaoEditarTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoCadastrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -370,7 +369,7 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
- public Map<String, Boolean> checaDiasDaSemana() {
+    public Map<String, Boolean> checaDiasDaSemana() {
         Map<String, Boolean> dias = new Hashtable<String, Boolean>();
         dias.put("Domingo", opcaoSemanaDomingo.isSelected());
         dias.put("Segunda", opcaoSemanaSegunda.isSelected());
@@ -390,7 +389,7 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
     }
 
     public void preencheTabela() {
-         int codigo = 0;
+        int codigo = 0;
         String nomeModalidade = "", nomeProfessor = "", horaInicio = "", horaFinal = "";
 
         tabelaCadastroDeTurma.getColumnModel().getColumn(0);
@@ -434,8 +433,8 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
         selecaoProfessor.setModel(new DefaultComboBoxModel(professores));
     }
 
-    public void ativaCampos(){
-                campoCodigo.setEnabled(true);
+    public void ativaCampos() {
+        campoCodigo.setEnabled(true);
         selecaoModalidade.setEnabled(true);
         selecaoProfessor.setEnabled(true);
         campoHoraFim.setEnabled(true);
@@ -483,42 +482,48 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoVoltarTurmaActionPerformed
 
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarActionPerformed
-        if(editar){
-            JOptionPane.showMessageDialog(null,"Salve as alterações antes de cadastrar uma nova turma!");
-        }
-        else {
-            if (liberar == false){
-                JOptionPane.showMessageDialog(null,"Preencha os campos da nova Turma!");
+        if (editar) {
+            JOptionPane.showMessageDialog(null, "Salve as alterações antes de cadastrar uma nova turma!");
+        } else {
+            if (liberar == false) {
+                JOptionPane.showMessageDialog(null, "Preencha os campos da nova Turma!");
                 ativaCampos();
                 zerarCampos();
                 liberar = true;
-            }
-            else{
-                List<String> diasDaSemana = new ArrayList<String>();
-                int codTurma = Integer.parseInt(campoCodigo.getText());
-                String horaInicio = campoHoraInicio.getText();
-                String horaFim = campoHoraFim.getText();
-                Map<String, Boolean> dias = checaDiasDaSemana();
-                Professor professor = fachada.pesquisarProfessorPorNome(selecaoProfessor.getSelectedItem().toString());
-                Turma turma = new Turma(codTurma, professor, horaInicio, horaFim, dias);
-                fachada.cadastrarTurma(turma);
+            } else {
+                if (selecaoModalidade.getSelectedItem().equals("- Selecione -")) {
+                    JOptionPane.showMessageDialog(rootPane, "Selecione uma Modalidade!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    if (selecaoProfessor.getSelectedItem().equals("- Selecione -")) {
+                        JOptionPane.showMessageDialog(rootPane, "Selecione um Professor!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        List<String> diasDaSemana = new ArrayList<String>();
+                        int codTurma = Integer.parseInt(campoCodigo.getText());
+                        String horaInicio = campoHoraInicio.getText();
+                        String horaFim = campoHoraFim.getText();
+                        Map<String, Boolean> dias = checaDiasDaSemana();
+                        Professor professor = fachada.pesquisarProfessorPorNome(selecaoProfessor.getSelectedItem().toString());
+                        Turma turma = new Turma(codTurma, professor, horaInicio, horaFim, dias);
+                        fachada.cadastrarTurma(turma);
 
-
-                //Inserindo na tabela
-                for (String key : turma.getDias().keySet()) {
-                        if (turma.getDias().get(key) == true) {
-                            diasDaSemana.add(key);
+                        //Inserindo na tabela
+                        for (String key : turma.getDias().keySet()) {
+                            if (turma.getDias().get(key) == true) {
+                                diasDaSemana.add(key);
+                            }
                         }
+                        tabelaCadastroDeTurma.getColumnModel().getColumn(0);
+                        tabelaCadastroDeTurma.getColumnModel().getColumn(1);
+                        tabelaCadastroDeTurma.getColumnModel().getColumn(2);
+                        tabelaCadastroDeTurma.getColumnModel().getColumn(3);
+                        tabelaCadastroDeTurma.getColumnModel().getColumn(4);
+                        tabelaCadastroDeTurma.getColumnModel().getColumn(5);
+                        DefaultTableModel modelo = (DefaultTableModel) tabelaCadastroDeTurma.getModel();
+                        modelo.addRow(new Object[]{codTurma, turma.getProfessor().getModalidade().getNome(), diasDaSemana, turma.getProfessor().getNome(), horaInicio, horaFim});
+                        zerarCampos();
+                        JOptionPane.showMessageDialog(rootPane, "Turma Cadastrada com Sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
-                tabelaCadastroDeTurma.getColumnModel().getColumn(0);
-                tabelaCadastroDeTurma.getColumnModel().getColumn(1);
-                tabelaCadastroDeTurma.getColumnModel().getColumn(2);
-                tabelaCadastroDeTurma.getColumnModel().getColumn(3);
-                tabelaCadastroDeTurma.getColumnModel().getColumn(4);
-                tabelaCadastroDeTurma.getColumnModel().getColumn(5);
-                DefaultTableModel modelo = (DefaultTableModel) tabelaCadastroDeTurma.getModel();
-                modelo.addRow(new Object[]{codTurma, turma.getProfessor().getModalidade().getNome(), diasDaSemana, turma.getProfessor().getNome(), horaInicio, horaFim});
-                zerarCampos();
             }
         }
     }//GEN-LAST:event_botaoCadastrarActionPerformed
@@ -529,7 +534,7 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
         setProfessores(modalidade);
     }//GEN-LAST:event_selecaoModalidadeActionPerformed
 
-     public void selecinaTurma(){
+    public void selecinaTurma() {
         liberar = false;
         campoCodigo.setEditable(true);
         campoCodigo.setText(Integer.toString((Integer) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 0)));
@@ -598,20 +603,24 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
         opcaoSemanaTerca.setEnabled(false);
     }
     private void botaoEditarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarTurmaActionPerformed
-        liberar = false;
-        editar = true;
-        campoCodigo.setEnabled(true);
-        selecaoModalidade.setEnabled(true);
-        selecaoProfessor.setEnabled(true);
-        campoHoraFim.setEnabled(true);
-        campoHoraInicio.setEnabled(true);
-        opcaoSemanaDomingo.setEnabled(true);
-        opcaoSemanaQuarta.setEnabled(true);
-        opcaoSemanaQuinta.setEnabled(true);
-        opcaoSemanaSegunda.setEnabled(true);
-        opcaoSemanaSabado.setEnabled(true);
-        opcaoSemanaSexta.setEnabled(true);
-        opcaoSemanaTerca.setEnabled(true);
+        if (tabelaCadastroDeTurma.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma Turma!", "Impossivel Editar Turma!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            liberar = false;
+            editar = true;
+            campoCodigo.setEnabled(true);
+            selecaoModalidade.setEnabled(true);
+            selecaoProfessor.setEnabled(true);
+            campoHoraFim.setEnabled(true);
+            campoHoraInicio.setEnabled(true);
+            opcaoSemanaDomingo.setEnabled(true);
+            opcaoSemanaQuarta.setEnabled(true);
+            opcaoSemanaQuinta.setEnabled(true);
+            opcaoSemanaSegunda.setEnabled(true);
+            opcaoSemanaSabado.setEnabled(true);
+            opcaoSemanaSexta.setEnabled(true);
+            opcaoSemanaTerca.setEnabled(true);
+        }
     }//GEN-LAST:event_botaoEditarTurmaActionPerformed
 
     private void tabelaCadastroDeTurmaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaCadastroDeTurmaKeyReleased
@@ -623,47 +632,61 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaCadastroDeTurmaMousePressed
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-        liberar = true;
-        editar = false;
-        List<String> diasDaSemana = new ArrayList<String>();
-        int codTurma = Integer.parseInt(campoCodigo.getText());
-        String horaInicio = campoHoraInicio.getText();
-        String horaFim = campoHoraFim.getText();
-        Map<String, Boolean> dias = checaDiasDaSemana();
-        Professor professor = fachada.pesquisarProfessorPorNome(selecaoProfessor.getSelectedItem().toString());
-        Turma turma = new Turma(codTurma, professor, horaInicio, horaFim, dias);
+        if (editar) {
+            liberar = true;
+            editar = false;
+            List<String> diasDaSemana = new ArrayList<String>();
+            int codTurma = Integer.parseInt(campoCodigo.getText());
+            String horaInicio = campoHoraInicio.getText();
+            String horaFim = campoHoraFim.getText();
+            Map<String, Boolean> dias = checaDiasDaSemana();
+            Professor professor = fachada.pesquisarProfessorPorNome(selecaoProfessor.getSelectedItem().toString());
+            Turma turmaEditada = new Turma(codTurma, professor, horaInicio, horaFim, dias);
 
+            fachada.editarTurma(turmaEditada);
 
-        for (String key : turma.getDias().keySet()) {
-                if (turma.getDias().get(key) == true) {
+            for (String key : turmaEditada.getDias().keySet()) {
+                if (turmaEditada.getDias().get(key) == true) {
                     diasDaSemana.add(key);
                 }
+            }
+            tabelaCadastroDeTurma.setValueAt(codTurma, tabelaCadastroDeTurma.getSelectedRow(), 0);
+            tabelaCadastroDeTurma.setValueAt(professor.getModalidade().getNome(), tabelaCadastroDeTurma.getSelectedRow(), 1);
+            tabelaCadastroDeTurma.setValueAt(diasDaSemana, tabelaCadastroDeTurma.getSelectedRow(), 2);
+            tabelaCadastroDeTurma.setValueAt(professor.getNome(), tabelaCadastroDeTurma.getSelectedRow(), 3);
+            tabelaCadastroDeTurma.setValueAt(horaInicio, tabelaCadastroDeTurma.getSelectedRow(), 4);
+            tabelaCadastroDeTurma.setValueAt(horaFim, tabelaCadastroDeTurma.getSelectedRow(), 5);
+
+            zerarCampos();
+            JOptionPane.showMessageDialog(rootPane, "Turma Salva com Sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Não há Turma em Edição!", "Impossivel Salvar Turma!", JOptionPane.ERROR_MESSAGE);
         }
-        tabelaCadastroDeTurma.setValueAt(codTurma, tabelaCadastroDeTurma.getSelectedRow(), 0);
-        tabelaCadastroDeTurma.setValueAt(professor.getModalidade().getNome(), tabelaCadastroDeTurma.getSelectedRow(), 1);
-        tabelaCadastroDeTurma.setValueAt(diasDaSemana, tabelaCadastroDeTurma.getSelectedRow(), 2);
-        tabelaCadastroDeTurma.setValueAt(professor.getNome(), tabelaCadastroDeTurma.getSelectedRow(), 3);
-        tabelaCadastroDeTurma.setValueAt(horaInicio, tabelaCadastroDeTurma.getSelectedRow(), 4);
-        tabelaCadastroDeTurma.setValueAt(horaFim, tabelaCadastroDeTurma.getSelectedRow(), 5);
-        fachada.editarTurma(turma);
-        zerarCampos();
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
-    private void botaoCadastrarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarTurmaActionPerformed
-        int codTurma = Integer.parseInt(campoCodigo.getText());
-        String horaInicio = campoHoraInicio.getText();
-        String horaFim = campoHoraFim.getText();
-        Map<String, Boolean> dias = checaDiasDaSemana();
-        Professor professor = fachada.pesquisarProfessorPorNome(selecaoProfessor.getSelectedItem().toString());
-        Turma turma = new Turma(codTurma, professor, horaInicio, horaFim, dias);
-        ((DefaultTableModel) tabelaCadastroDeTurma.getModel()).removeRow(tabelaCadastroDeTurma.getSelectedRow());
-        fachada.removerTurma(turma);
-    }//GEN-LAST:event_botaoCadastrarTurmaActionPerformed
-
+    private void botaoRemoverTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverTurmaActionPerformed
+        if (tabelaCadastroDeTurma.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione Uma Turma", "Turma Não Selecionada!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int codTurma = Integer.parseInt(campoCodigo.getText());
+            if (fachada.liberarExclusaoTurma(codTurma)) {
+                String horaInicio = campoHoraInicio.getText();
+                String horaFim = campoHoraFim.getText();
+                Map<String, Boolean> dias = checaDiasDaSemana();
+                Professor professor = fachada.pesquisarProfessorPorNome(selecaoProfessor.getSelectedItem().toString());
+                Turma turma = new Turma(codTurma, professor, horaInicio, horaFim, dias);
+                ((DefaultTableModel) tabelaCadastroDeTurma.getModel()).removeRow(tabelaCadastroDeTurma.getSelectedRow());
+                fachada.removerTurma(turma);
+                JOptionPane.showMessageDialog(rootPane, "Turma Excluída com Sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Há Alunos alocados nesta Turma!", "Impossivel Remover Turma!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_botaoRemoverTurmaActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCadastrar;
-    private javax.swing.JButton botaoCadastrarTurma;
     private javax.swing.JButton botaoEditarTurma;
+    private javax.swing.JButton botaoRemoverTurma;
     private javax.swing.JButton botaoSalvar;
     private javax.swing.JButton botaoVoltarTurma;
     private javax.swing.JTextField campoCodigo;

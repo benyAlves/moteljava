@@ -168,4 +168,25 @@ public class AlunoTurmaDAO {
         return codTurma;
     }
 
+    public Boolean liberarExclusaoTurma(int codTurma) {
+        List<Integer> adesoesAtivas = AdesaoDAO.getInstance().adesoesAtivas();
+        ResultSet rs;
+        PreparedStatement ps;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            for (int codAdesao : adesoesAtivas) {
+                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ALUNO_TURMA WHERE codTurma ='"+codTurma+"' AND codAdesao = '" + codAdesao + "' ");
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    return false;
+                }
+            }
+            con.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }
