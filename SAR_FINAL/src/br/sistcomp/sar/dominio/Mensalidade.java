@@ -2,80 +2,34 @@
 package br.sistcomp.sar.dominio;
 
 
-public class Mensalidade {
+public class Mensalidade extends Movimentacao {
 
-    private long codigo;
-    private double valor;
-    private double desconto;
-    private String vencimento;
-    private String pagamento;
-    private int codAdesao;
+    private Adesao adesao;
 
-    public Mensalidade(long codigo, double valor, double desconto, String vencimento, String pagamento, int codAdesao) {
-        this.codigo = codigo;
-        this.valor = valor;
-        this.desconto = desconto;
-        this.vencimento = vencimento;
-        this.pagamento = pagamento;
-        this.codAdesao = codAdesao;
+    public Mensalidade(int codMovimentacao, Funcionario funcionario, Double desconto, Double valor, String vencimento, String pagamento, String horaPgto, String tipo, Adesao adesao) {
+        super(codMovimentacao, funcionario, desconto, valor, vencimento, pagamento, horaPgto, tipo);
+        this.adesao = adesao;
     }
 
-    public Mensalidade(double valor, String vencimento) {
-        this.valor = valor;
-        this.vencimento = vencimento;
+    public Mensalidade(Double valor, String vencimento, String tipo, Adesao adesao) {
+        super(valor, vencimento, tipo);
+        this.adesao = adesao;
     }
 
-    public Mensalidade() {
+    public Mensalidade(Double valor, String vencimento, String tipo) {
+        super(valor, vencimento, tipo);
+    }
+
+    public Mensalidade(){
         
     }
 
-    public int getCodAdesao() {
-        return codAdesao;
+    public Adesao getAdesao() {
+        return adesao;
     }
 
-    public void setCodAdesao(int codAdesao) {
-        this.codAdesao = codAdesao;
-    }
-
-
-    public long getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(long codigo) {
-        this.codigo = codigo;
-    }
-
-    public double getDesconto() {
-        return desconto;
-    }
-
-    public void setDesconto(double desconto) {
-        this.desconto = desconto;
-    }
-
-    public String getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(String pagamento) {
-        this.pagamento = pagamento;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
-    public String getVencimento() {
-        return vencimento;
-    }
-
-    public void setVencimento(String vencimento) {
-        this.vencimento = vencimento;
+    public void setAdesao(Adesao adesao) {
+        this.adesao = adesao;
     }
 
 }

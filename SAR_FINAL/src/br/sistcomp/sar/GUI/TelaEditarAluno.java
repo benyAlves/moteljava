@@ -1009,18 +1009,18 @@ public class TelaEditarAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
-        for (Adesao adesao : adesoes) {
-            if (adesao.getCodAdesao() == (tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0))) {
-                fachada.removerAdesao(adesao.getCodAdesao());
-                adesoes.remove(adesao);
-                preencheAdesoes();
-                ativaCampos();
-                zeraCampoModalidade();
-                visualizar = false;
-                alterar = false;
-                break;
-            }
-        }
+//        for (Adesao adesao : adesoes) {
+//            if (adesao.getCodAdesao() == (tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 0))) {
+//                fachada.removerAdesao(adesao.getCodAdesao());
+//                adesoes.remove(adesao);
+//                preencheAdesoes();
+//                ativaCampos();
+//                zeraCampoModalidade();
+//                visualizar = false;
+//                alterar = false;
+//                break;
+//            }
+//        }
     }//GEN-LAST:event_botaoExcluirActionPerformed
 
     private void campoDescontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDescontoKeyReleased
@@ -1154,7 +1154,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
 
                                         Double valorMensalidade = valor/parcelas;
                                         for (int i = 0; i < parcelas; i++) {
-                                            Mensalidade mensalidade = new Mensalidade(valorMensalidade, Utilitario.somaDoMesParaVencimentoDoPlano(i));
+                                            Mensalidade mensalidade = new Mensalidade(valorMensalidade, Utilitario.somaDoMesParaVencimentoDoPlano(i),"c");
                                             mensalidadesPorAdesao.add(mensalidade);
                                         }
 

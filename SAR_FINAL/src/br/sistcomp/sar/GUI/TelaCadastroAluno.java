@@ -1198,7 +1198,7 @@ if (visualizar){
 
                                         Double valorMensalidade = valor/parcelas;
                                         for (int i = 0; i < parcelas; i++) {
-                                            Mensalidade mensalidade = new Mensalidade(valorMensalidade, Utilitario.somaDoMesParaVencimentoDoPlano(i));
+                                            Mensalidade mensalidade = new Mensalidade(valorMensalidade, Utilitario.somaDoMesParaVencimentoDoPlano(i),"c");
                                             mensalidadesPorAdesao.add(mensalidade);
                                         }
 
