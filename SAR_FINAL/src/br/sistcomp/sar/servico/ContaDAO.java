@@ -8,6 +8,7 @@ package br.sistcomp.sar.servico;
 import br.sistcomp.sar.conexao.ConexaoDB;
 import br.sistcomp.sar.dominio.Conta;
 import br.sistcomp.sar.dominio.Movimentacao;
+import br.sistcomp.sar.dominio.Utilitario;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,17 +56,19 @@ public class ContaDAO {
 
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM MENSALIDADES WHERE codMovimentacao = '" + codMovimentacao + "'");
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM CONTAS WHERE codMovimentacao = '" + codMovimentacao + "'");
             rs = ps.executeQuery();
             while (rs.next()) {
                 conta.setFuncionario(movimentacao.getFuncionario());
-                conta.setDesconto(movimentacao.getDesconto());
                 conta.setValor(movimentacao.getValor());
                 conta.setVencimento(movimentacao.getVencimento());
-                conta.setPagamento(movimentacao.getPagamento());
-                conta.setHoraPgto(movimentacao.getHoraPgto());
+                conta.setHora(movimentacao.getHora());
                 conta.setTipo(movimentacao.getTipo());
                 conta.setDescricao(rs.getString("descricao"));
+                if (rs.getDate("pagamento") != null){
+                    conta.setPagamento(Utilitario.converteDateParaString(rs.getDate("pagamento")));
+                }
+                conta.setDesconto(rs.getDouble("desconto"));
                 con.close();
                 return conta;
             }
@@ -78,6 +81,18 @@ public class ContaDAO {
 
     public void alterar(Conta conta) {
         MovimentacaoDAO.getInstance().alterar(conta);
+        PreparedStatement ps;
+        try {
+            Conta contaOK = (Conta) conta;
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("UPDATE CONTAS SET pagamento = ?, desconto = ? WHERE codMovimentacao = '" + contaOK.getCodMovimentacao() + "' ");
+            ps.setDate(1, (java.sql.Date) Utilitario.converteStringParaDate(contaOK.getPagamento()));
+            ps.setDouble(2, contaOK.getDesconto());
+            ps.execute();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -95,13 +110,15 @@ public class ContaDAO {
                 Movimentacao movimentacao = MovimentacaoDAO.getInstance().pesquisar(rs.getInt("codMovimentacao"));
                 Conta conta = new Conta();
                 conta.setFuncionario(movimentacao.getFuncionario());
-                conta.setDesconto(movimentacao.getDesconto());
                 conta.setValor(movimentacao.getValor());
                 conta.setVencimento(movimentacao.getVencimento());
-                conta.setPagamento(movimentacao.getPagamento());
-                conta.setHoraPgto(movimentacao.getHoraPgto());
+                conta.setHora(movimentacao.getHora());
                 conta.setTipo(movimentacao.getTipo());
                 conta.setDescricao(rs.getString("descricao"));
+                if (rs.getDate("pagamento") != null){
+                    conta.setPagamento(Utilitario.converteDateParaString(rs.getDate("pagamento")));
+                }
+                conta.setDesconto(rs.getDouble("desconto"));
                 contas.add(conta);
             }
             con.close();
@@ -110,7 +127,5 @@ public class ContaDAO {
         }
         return contas;
     }
-
     
-
 }

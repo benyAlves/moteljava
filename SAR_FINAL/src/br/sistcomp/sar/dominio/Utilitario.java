@@ -215,6 +215,7 @@ public class Utilitario {
 
         try {
             HashMap parametros = new HashMap();
+
             Connection con = (Connection) new ConexaoDBRelatorio().getConnection();
             JasperReport report = JasperManager.loadReport(urlFile.openStream());
             JasperPrint jp = JasperFillManager.fillReport(report, parametros, con);

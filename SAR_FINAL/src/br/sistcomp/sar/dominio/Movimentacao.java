@@ -13,21 +13,17 @@ public class Movimentacao {
 
     private int codMovimentacao;
     private Funcionario funcionario;
-    private Double desconto;
     private Double valor;
     private String vencimento;
-    private String pagamento;
-    private String horaPgto;
+    private String hora;
     private String tipo;
 
-    public Movimentacao(int codMovimentacao, Funcionario funcionario, Double desconto, Double valor, String vencimento, String pagamento, String horaPgto, String tipo) {
+    public Movimentacao(int codMovimentacao, Funcionario funcionario, Double valor, String vencimento, String hora, String tipo) {
         this.codMovimentacao = codMovimentacao;
         this.funcionario = funcionario;
-        this.desconto = desconto;
         this.valor = valor;
         this.vencimento = vencimento;
-        this.pagamento = pagamento;
-        this.horaPgto = horaPgto;
+        this.hora = hora;
         this.tipo = tipo;
     }
 
@@ -41,6 +37,14 @@ public class Movimentacao {
         
     }
 
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
     public int getCodMovimentacao() {
         return codMovimentacao;
     }
@@ -49,36 +53,12 @@ public class Movimentacao {
         this.codMovimentacao = codMovimentacao;
     }
 
-    public Double getDesconto() {
-        return desconto;
-    }
-
-    public void setDesconto(Double desconto) {
-        this.desconto = desconto;
-    }
-
     public Funcionario getFuncionario() {
         return funcionario;
     }
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
-    }
-
-    public String getHoraPgto() {
-        return horaPgto;
-    }
-
-    public void setHoraPgto(String horaPgto) {
-        this.horaPgto = horaPgto;
-    }
-
-    public String getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(String pagamento) {
-        this.pagamento = pagamento;
     }
 
     public String getTipo() {

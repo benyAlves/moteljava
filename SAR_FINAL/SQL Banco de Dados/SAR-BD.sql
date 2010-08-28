@@ -130,12 +130,10 @@ CREATE TABLE DIAS (
 
 CREATE TABLE MOVIMENTACOES(
 	codMovimentacao int unsigned not null auto_increment,
-	matricula int,
-	desconto numeric(7,2),
+	matricula int not null,
 	valor numeric(7,2) not null,
 	vencimento date not null,
-	pagamento date,
-	horaPgto time,
+	hora time,
 	tipo varchar(1) not null,
 	PRIMARY KEY (codMovimentacao),
 	FOREIGN KEY (matricula) REFERENCES FUNCIONARIOS(matricula)
@@ -144,6 +142,8 @@ CREATE TABLE MOVIMENTACOES(
 CREATE TABLE MENSALIDADES(
 	codMovimentacao int unsigned not null,
 	codAdesao int not null,
+	pagamento date,
+	desconto numeric(7,2),
 	FOREIGN KEY (codMovimentacao) REFERENCES MOVIMENTACOES(codMovimentacao),
 	PRIMARY KEY (codMovimentacao),
 	FOREIGN KEY (codAdesao) REFERENCES ADESOES(codAdesao)
@@ -151,7 +151,19 @@ CREATE TABLE MENSALIDADES(
 
 CREATE TABLE CONTAS(
 	codMovimentacao int unsigned not null,
-	descricao varchar(70) not null
+	descricao varchar(70) not null,
+	pagamento date,
+	desconto numeric(7,2),
+	FOREIGN KEY (codMovimentacao) REFERENCES MOVIMENTACOES(codMovimentacao),
+	PRIMARY KEY (codMovimentacao)
+);
+
+CREATE TABLE TRANSFERENCIAS(
+	codMovimentacao int unsigned not null,
+        forma varchar(9) not null,
+        historico varchar(50) not null,
+	FOREIGN KEY (codMovimentacao) REFERENCES MOVIMENTACOES(codMovimentacao),
+	PRIMARY KEY (codMovimentacao)
 );
 
 CREATE TABLE CAIXAS(

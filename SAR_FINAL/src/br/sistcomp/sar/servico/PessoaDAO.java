@@ -99,7 +99,7 @@ public class PessoaDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro no banco ao pesquisar aluno");
+            JOptionPane.showMessageDialog(null, "Erro no banco ao pesquisar PESSOA");
         }
         return null;
     }

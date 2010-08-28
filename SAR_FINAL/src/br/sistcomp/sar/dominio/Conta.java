@@ -12,14 +12,34 @@ package br.sistcomp.sar.dominio;
 public class Conta extends Movimentacao {
 
     private String descricao;
+    private String pagamento;
+    private Double desconto;
 
-    public Conta(int codMovimentacao, Funcionario funcionario, Double desconto, Double valor, String vencimento, String pagamento, String horaPgto, String tipo, String descricao) {
-        super(codMovimentacao, funcionario, desconto, valor, vencimento, pagamento, horaPgto, tipo);
+    public Conta(int codMovimentacao, Funcionario funcionario, Double valor, String vencimento, String hora, String tipo, String descricao, String pagamento, Double desconto) {
+        super(codMovimentacao, funcionario, valor, vencimento, hora, tipo);
         this.descricao = descricao;
+        this.pagamento = pagamento;
+        this.desconto = desconto;
     }
 
     public Conta(){
 
+    }
+
+    public Double getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(Double desconto) {
+        this.desconto = desconto;
+    }
+
+    public String getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(String pagamento) {
+        this.pagamento = pagamento;
     }
 
     public String getDescricao() {

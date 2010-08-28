@@ -66,10 +66,7 @@ public class ModalidadeDAO {
           }
           catch (Exception e) {
               e.printStackTrace();
-              m.setAlunosPorTurma(-1);
-              return m;
           }
-
           return m;
     }
 

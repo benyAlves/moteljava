@@ -11,20 +11,30 @@ public class Caixa {
     private Boolean status;
     private String dia;
     private Double saldo;
+    private Boolean saldoAnterior;
     private Funcionario abriu;
     private Funcionario fechou;
 
-    public Caixa(int codCaixa, Boolean status, String dia, Double saldo, Funcionario abriu, Funcionario fechou) {
+    public Caixa(int codCaixa, Boolean status, String dia, Double saldo, Boolean saldoAnterior, Funcionario abriu, Funcionario fechou) {
         this.codCaixa = codCaixa;
         this.status = status;
         this.dia = dia;
         this.saldo = saldo;
+        this.saldoAnterior = saldoAnterior;
         this.abriu = abriu;
         this.fechou = fechou;
     }
 
     public Caixa(){
 
+    }
+
+    public Boolean getSaldoAnterior() {
+        return saldoAnterior;
+    }
+
+    public void setSaldoAnterior(Boolean saldoAnterior) {
+        this.saldoAnterior = saldoAnterior;
     }
 
     public Funcionario getAbriu() {

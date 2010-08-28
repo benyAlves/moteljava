@@ -182,7 +182,7 @@ public class AdesaoDAO {
                 adesao.setParcelas(rs.getInt("parcelas"));
                 adesao.setFormaDePagamento(rs.getString("formaPagamento"));
                 adesao.setStatus(rs.getBoolean("status"));
-                adesao.setMensalidades(MensalidadeDAO.getInstance().mensalidadesDaAdesao(rs.getInt("codAdesao")));
+                //adesao.setMensalidades(MensalidadeDAO.getInstance().mensalidadesDaAdesao(rs.getInt("codAdesao")));
                 adesao.setTurma(TurmaDAO.getInstance().pesquisar(AlunoTurmaDAO.getInstance().turmaAderida(rs.getInt("codAdesao"))));
                 adesoes.add(adesao);
             }
@@ -194,4 +194,35 @@ public class AdesaoDAO {
         }
         return adesoes;
     }
+
+    public Adesao pesquisar(int codAdesao){
+        ResultSet rs;
+        PreparedStatement ps;
+        Adesao adesao = new Adesao();
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ADESOES WHERE codAdesao = '" + codAdesao + "'");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                adesao.setCodAdesao(rs.getInt("codAdesao"));
+                adesao.setMatriculaAluno(rs.getInt("matricula"));
+                adesao.setPlano(PlanoDAO.getInstance().pesquisar(rs.getInt("codPlano")));
+                adesao.setDataAdesao(Utilitario.converteDateParaString(rs.getDate("dataAdesao")));
+                adesao.setValor(rs.getDouble("valor"));
+                adesao.setDesconto(rs.getDouble("desconto"));
+                adesao.setParcelas(rs.getInt("parcelas"));
+                adesao.setFormaDePagamento(rs.getString("formaPagamento"));
+                adesao.setStatus(rs.getBoolean("status"));
+                //adesao.setMensalidades(MensalidadeDAO.getInstance().mensalidadesDaAdesao(rs.getInt("codAdesao")));
+                adesao.setTurma(TurmaDAO.getInstance().pesquisar(AlunoTurmaDAO.getInstance().turmaAderida(rs.getInt("codAdesao"))));
+            }
+            con.close();
+            return adesao;
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao Pesquisar Adesão!");
+        }
+        return adesao;
+    }
+
 }
