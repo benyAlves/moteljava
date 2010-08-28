@@ -56,8 +56,9 @@ public class CaixaDAO {
         try {
             Caixa caixaOK = (Caixa) caixa;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("UPDATE CAIXAS SET status = ? WHERE codCaixa = '" + caixaOK.getCodCaixa() + "' ");
+            ps = (PreparedStatement) con.prepareStatement("UPDATE CAIXAS SET status = ? saldo = ? WHERE codCaixa = '" + caixaOK.getCodCaixa() + "' ");
             ps.setBoolean(1, false);
+            ps.setDouble(2, caixaOK.getSaldo());
             ps.execute();
             con.close();
             FechaDAO.getInstance().fechar(caixa);
@@ -66,13 +67,13 @@ public class CaixaDAO {
         }
     }
 
-   public void alterarSaldo(Caixa caixa) {
+   public void alterarSaldo(Caixa caixa, Double valor) {
         PreparedStatement ps;
         try {
             Caixa caixaOK = (Caixa) caixa;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             ps = (PreparedStatement) con.prepareStatement("UPDATE CAIXAS SET saldo = ? WHERE codCaixa = '" + caixaOK.getCodCaixa() + "' ");
-            ps.setDouble(1, caixaOK.getSaldo());
+            ps.setDouble(1, caixaOK.getSaldo()+valor);
             ps.execute();
             con.close();
         } catch (Exception e) {
@@ -80,13 +81,10 @@ public class CaixaDAO {
         }
     }
 
-
     public List<Caixa> todosCaixas() {
-
         ResultSet rs;
         PreparedStatement ps;
         List<Caixa> caixas = new ArrayList<Caixa>();
-
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             ps = (PreparedStatement) con.prepareStatement("SELECT * FROM CAIXAS");
@@ -106,6 +104,44 @@ public class CaixaDAO {
             e.printStackTrace();
         }
         return caixas;
+    }
+
+    public Double saldoAnterior(Caixa caixa) {
+        PreparedStatement ps;
+        ResultSet rs;
+        Double saldoAnterior = 0.0;
+        try {
+            Caixa caixaOK = (Caixa) caixa;
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT saldo FROM CAIXAS WHERE codCaixa<"+caixaOK.getCodCaixa()+" ORDER BY codCaixa DESC LIMIT 1 ");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                saldoAnterior = rs.getDouble("saldo");
+            }
+            con.close();
+            return saldoAnterior;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return saldoAnterior;
+     }
+
+     public Double saldoTotal() {
+        PreparedStatement ps;
+        Double saldo = 0.0;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT SUM(saldo) FROM CAIXAS");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                saldo = rs.getDouble("SUM(saldo)");
+            }
+            con.close();
+            return saldo;
+        } catch (Exception e) {
+            e.printStackTrace(); // Sempre colocar o StackTrace, ajuda a identificar o erro.
+        }
+        return saldo;
     }
 
 }

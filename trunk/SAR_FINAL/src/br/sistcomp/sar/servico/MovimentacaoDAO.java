@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.sistcomp.sar.servico;
 
 import br.sistcomp.sar.conexao.ConexaoDB;
@@ -34,10 +31,12 @@ public class MovimentacaoDAO {
         try {
             Movimentacao movimentacaoOK = (Movimentacao) movimentacao; //Validando Objeto
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("INSERT INTO MOVIMENTACOES (valor, vencimento, tipo) VALUES (?,?,?)");
-            ps.setDouble(1, movimentacaoOK.getValor());
-            ps.setString(2, Utilitario.dataParaBanco(movimentacaoOK.getVencimento()));
-            ps.setString(3, movimentacaoOK.getTipo());
+            ps = (PreparedStatement) con.prepareStatement("INSERT INTO MOVIMENTACOES (matricula, valor, vencimento, hora, tipo) VALUES (?,?,?,?,?)");
+            ps.setInt(1, 20810); //GERENCIAR SECAO E TROCAR POR ESSE CODIGO: movimentacaoOK.getFuncionario().getIdPessoa()
+            ps.setDouble(2, movimentacaoOK.getValor());
+            ps.setString(3, Utilitario.dataParaBanco(movimentacaoOK.getVencimento()));
+            ps.setString(4, movimentacaoOK.getHora());
+            ps.setString(5, movimentacaoOK.getTipo());
             ps.execute();
             ps = (PreparedStatement) con.prepareStatement("SELECT MAX(codMovimentacao) FROM MOVIMENTACOES");
             ResultSet rs = ps.executeQuery();
@@ -65,10 +64,8 @@ public class MovimentacaoDAO {
             while (rs.next()) {
                 movimentacao.setCodMovimentacao(codMovimentacao);
                 movimentacao.setFuncionario(FuncionarioDAO.getInstance().pesquisaFuncionario(rs.getInt("matricula")));
-                movimentacao.setDesconto(rs.getDouble("desconto"));
                 movimentacao.setValor(rs.getDouble("valor"));
                 movimentacao.setVencimento(Utilitario.converteDateParaString(rs.getDate("vencimento")));
-                movimentacao.setPagamento(Utilitario.converteDateParaString(rs.getDate("pagamento")));
                 //movimentacao.setHoraPgto(null);
                 movimentacao.setTipo(rs.getString("tipo"));
                 con.close();
@@ -85,11 +82,9 @@ public class MovimentacaoDAO {
         try {
             Movimentacao movimentacaoOK = (Movimentacao) movimentacao;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("UPDATE MENSALIDADES set matricula = ?, desconto = ?, pagamento = ?, horaPgto = ? WHERE codMensalidade = '" + movimentacaoOK.getCodMovimentacao() + "' ");
+            ps = (PreparedStatement) con.prepareStatement("UPDATE MOVIMENTACOES SET matricula = ?, hora = ? WHERE codMovimentacao = '" + movimentacaoOK.getCodMovimentacao() + "' ");
             ps.setInt(1, movimentacaoOK.getFuncionario().getIdPessoa());
-            ps.setDouble(2, movimentacaoOK.getDesconto());
-            ps.setString(3, movimentacaoOK.getPagamento());
-            ps.setString(4, Utilitario.getHora());
+            ps.setString(2, Utilitario.getHora());
             ps.execute();
             con.close();
         } catch (Exception e) {

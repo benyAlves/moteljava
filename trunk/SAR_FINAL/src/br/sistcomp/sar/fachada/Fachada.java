@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.sistcomp.sar.fachada;
 
 import br.sistcomp.sar.GUI.TelaCadastroAluno;
@@ -62,11 +59,9 @@ public class Fachada {
 
     public void editarAluno(Aluno aluno) {
         AlunoDAO.getInstance().alterar(aluno);
-
         if(TelaWebCam.teste == true){
             ImagemDAO.getInstance().alterarFoto(aluno.getIdPessoa());
         }
-        // else ImagemDAO.getInstance().alterarFotoParaDefault(aluno.getIdPessoa());
     }
     public void cadastrarProfessor(Professor professor) {
         ProfessorDAO.getInstance().cadastrar(professor);
@@ -160,7 +155,6 @@ public class Fachada {
         if (TelaWebCam.teste == true) {
             ImagemDAO.getInstance().alterarFoto(Utilitario.retornaIdPessoa(funcionario.getIdPessoa()));
         }
-        //else ImagemDAO.getInstance().alterarFotoParaDefault(pessoa.getIdPessoa());
     }
 
     public void editarTurma(Turma turma) {
@@ -268,4 +262,39 @@ public class Fachada {
         return AdesaoDAO.getInstance().proximoCodigo();
     }
 
+    public void abrirCaixa(Caixa caixa){
+        CaixaDAO.getInstance().abrirCaixa(caixa);
+    }
+
+    public void fecharCaixa(Caixa caixa){
+        CaixaDAO.getInstance().fecharCaixa(caixa);
+    }
+
+    public void retirada(Caixa caixa, Transferencia transferencia){
+        TransferenciaDAO.getInstance().cadastrar(transferencia);
+        TransacaoDAO.getInstance().cadastrar(caixa,transferencia);
+        CaixaDAO.getInstance().alterarSaldo(caixa, -transferencia.getValor());
+    }
+
+    public void suprimento(Caixa caixa, Transferencia transferencia){
+        TransferenciaDAO.getInstance().cadastrar(transferencia);
+        TransacaoDAO.getInstance().cadastrar(caixa,transferencia);
+        CaixaDAO.getInstance().alterarSaldo(caixa, transferencia.getValor());
+    }
+
+    public void pagarConta(Caixa caixa, Conta conta){
+        ContaDAO.getInstance().alterar(conta);
+        TransacaoDAO.getInstance().cadastrar(caixa,conta);
+        CaixaDAO.getInstance().alterarSaldo(caixa, -conta.getValor());
+    }
+
+    public void receberMensalidade(Caixa caixa, Mensalidade mensalidade){
+        MensalidadeDAO.getInstance().alterar(mensalidade);
+        TransacaoDAO.getInstance().cadastrar(caixa, mensalidade);
+        CaixaDAO.getInstance().alterarSaldo(caixa, mensalidade.getValor());
+    }
+
+    public void lancarConta(Conta conta){
+        ContaDAO.getInstance().cadastrar(conta);
+    }
 }
