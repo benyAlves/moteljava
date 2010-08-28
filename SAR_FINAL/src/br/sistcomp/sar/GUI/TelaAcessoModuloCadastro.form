@@ -97,6 +97,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Aluno"/>
         <Property name="toolTipText" type="java.lang.String" value="M&#xf3;dulo Aluno"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoAlunoActionPerformed"/>
@@ -112,6 +115,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Professor"/>
         <Property name="toolTipText" type="java.lang.String" value="M&#xf3;dulo Professor"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoProfessorActionPerformed"/>
@@ -127,6 +133,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
         <Property name="toolTipText" type="java.lang.String" value="M&#xf3;dulo Funcion&#xe1;rio"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoFuncionarioActionPerformed"/>
@@ -142,6 +151,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Plano"/>
         <Property name="toolTipText" type="java.lang.String" value="M&#xf3;dulo Plano"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoPlanoActionPerformed"/>
@@ -154,6 +166,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Turma"/>
         <Property name="toolTipText" type="java.lang.String" value="M&#xf3;dulo Turma"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoTurmaActionPerformed"/>
@@ -166,6 +181,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Modalidade"/>
         <Property name="toolTipText" type="java.lang.String" value="M&#xf3;dulo Modalidade"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoModalidadeActionPerformed"/>

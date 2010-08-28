@@ -258,6 +258,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         botaoContasReceber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/contasReceber.png"))); // NOI18N
         botaoContasReceber.setToolTipText("Contas a Receber");
+        botaoContasReceber.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoContasReceber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoContasReceberActionPerformed(evt);
@@ -266,6 +267,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         botaoContasPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/contasPagar.png"))); // NOI18N
         botaoContasPagar.setToolTipText("Contas a Pagar");
+        botaoContasPagar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoContasPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoContasPagarActionPerformed(evt);
@@ -274,6 +276,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         botaoFinalizaCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/fechaCaixa.png"))); // NOI18N
         botaoFinalizaCaixa.setToolTipText("Fechar o Caixa");
+        botaoFinalizaCaixa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoFinalizaCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoFinalizaCaixaActionPerformed(evt);
@@ -282,6 +285,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         botaoAbreCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/abreCaixa.png"))); // NOI18N
         botaoAbreCaixa.setToolTipText("Abrir o Caixa");
+        botaoAbreCaixa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoAbreCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoAbreCaixaActionPerformed(evt);
@@ -290,6 +294,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         botaoSairFinanceiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/Home.png"))); // NOI18N
         botaoSairFinanceiro.setToolTipText("Voltar ao Menu Principal");
+        botaoSairFinanceiro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoSairFinanceiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoSairFinanceiroActionPerformed(evt);
@@ -298,6 +303,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         botaoMovimentacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/movimentacao.png"))); // NOI18N
         botaoMovimentacao.setToolTipText("Movimentação do Caixa");
+        botaoMovimentacao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoMovimentacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoMovimentacaoActionPerformed(evt);
@@ -306,6 +312,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/analise.png"))); // NOI18N
         jButton1.setToolTipText("Análise Financeira");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -880,14 +887,14 @@ public class TelaFinanceiro extends javax.swing.JFrame {
                             .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(painelConfirmaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoDescricaoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                            .addComponent(campoAlunoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                            .addComponent(campoDescricaoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                            .addComponent(campoAlunoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                             .addGroup(painelConfirmaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(campoPagamentoConfirma, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(campoValorConfirma, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(campoVencimentoConfirma, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(campoMesConfirma, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-                            .addComponent(campoObservacaoRecebe, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))
+                            .addComponent(campoObservacaoRecebe, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelConfirmaPagamentoLayout.createSequentialGroup()
                         .addComponent(botaoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1422,7 +1429,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         jLabel37.setText("Saldo do Caixa");
 
         campoSaldoDoCaixa.setEditable(false);
-        campoSaldoDoCaixa.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        campoSaldoDoCaixa.setFont(new java.awt.Font("sansserif", 1, 24));
         campoSaldoDoCaixa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoSaldoDoCaixa.setText("0.00");
         campoSaldoDoCaixa.setBackground(new java.awt.Color(0, 153, 0));
@@ -1437,7 +1444,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         jLabel39.setText("Dinheiro:");
 
         campoDinheiroInicial.setEditable(false);
-        campoDinheiroInicial.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        campoDinheiroInicial.setFont(new java.awt.Font("sansserif", 1, 14));
         campoDinheiroInicial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel40.setFont(new java.awt.Font("sansserif", 1, 18));
@@ -2422,7 +2429,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         String status;
         DefaultTableModel modelo = (DefaultTableModel) tabelaContasReceber.getModel();
         modelo.setNumRows(0);
-        fachada.alterarMensalidadeAposPagamento(tabelaContasReceber.getSelectedRow()+1);
+        //fachada.alterarMensalidadeAposPagamento(tabelaContasReceber.getSelectedRow()+1);
         Vector<Mensalidade> mensalidades = fachada.pesquisaTodosAsMensalidadesDoAluno(Integer.parseInt(campoMatricula.getText()));
         if (mensalidades != null) {
             for (int i = 0; i < mensalidades.size(); i++) {

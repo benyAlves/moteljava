@@ -17,7 +17,7 @@ public class ConexaoDBRelatorio {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String driver = "jdbc:mysql://localhost/sar";
-            Connection con = (Connection) DriverManager.getConnection(driver, "root", "123456");
+            Connection con = (Connection) DriverManager.getConnection(driver, "root", "sar");
             return con;
         } catch (Exception e) {
             e.printStackTrace();

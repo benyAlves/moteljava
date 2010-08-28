@@ -34,7 +34,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        labelCreditos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -58,10 +58,12 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/fundoLoginBaixo.png"))); // NOI18N
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/botaoInfo.png"))); // NOI18N
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        labelCreditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/botaoInfo.png"))); // NOI18N
+        labelCreditos.setToolTipText("Créditos");
+        labelCreditos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelCreditos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                labelCreditosMouseClicked(evt);
             }
         });
 
@@ -83,7 +85,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(labelCreditos)
                 .addContainerGap(466, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -108,7 +110,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoLogin)
                 .addGap(51, 51, 51)
-                .addComponent(jLabel3)
+                .addComponent(labelCreditos)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -129,9 +131,9 @@ public class TelaLogin extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_botaoLoginActionPerformed
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        JOptionPane.showMessageDialog(null, "By SistComp");
-    }//GEN-LAST:event_jLabel3MouseClicked
+    private void labelCreditosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCreditosMouseClicked
+        new TelaCreditos().setVisible(true);
+    }//GEN-LAST:event_labelCreditosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -166,9 +168,9 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField campoSenha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel labelCreditos;
     // End of variables declaration//GEN-END:variables
 }

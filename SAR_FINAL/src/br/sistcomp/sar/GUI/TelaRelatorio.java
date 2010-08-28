@@ -14,7 +14,7 @@ import br.sistcomp.sar.dominio.Utilitario;
  */
 public class TelaRelatorio extends javax.swing.JFrame {
 
-    Utilitario utilitario;
+    Utilitario utilitario = new Utilitario();
 
     /** Creates new form TelaAcessoModuloRelatorio */
     public TelaRelatorio() {
