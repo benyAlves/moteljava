@@ -1,9 +1,7 @@
 package br.sistcomp.sar.dominio;
 
-import br.sistcomp.sar.conexao.ConexaoDBRelatorio;
-import com.mysql.jdbc.Connection;
+import br.sistcomp.sar.conexao.ConexaoDB;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.net.URL;
 import java.sql.Time;
 import java.text.DateFormat;
@@ -207,7 +205,7 @@ public class Utilitario {
         if (urlFile == null) {
             try {
                 // try {
-                throw new Exception("RelatÃ³rio de nome " + nomeRelatorio + " nÃ£o foi localizado");
+                throw new Exception("Relatório de nome " + nomeRelatorio + " não foi localizado");
             } catch (Exception ex) {
                 Logger.getLogger(Utilitario.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -216,15 +214,13 @@ public class Utilitario {
         try {
             HashMap parametros = new HashMap();
 
-            Connection con = (Connection) new ConexaoDBRelatorio().getConnection();
             JasperReport report = JasperManager.loadReport(urlFile.openStream());
-            JasperPrint jp = JasperFillManager.fillReport(report, parametros, con);
+            JasperPrint jp = JasperFillManager.fillReport(report, parametros, ConexaoDB.getInstance().getCon());
             JasperViewer jrv = new JasperViewer(jp, false);
             jrv.resize(800, 600);
             jrv.setLocationRelativeTo(null);
             jrv.setVisible(true);
         } catch (Exception e) {
         }
-
     }
 }
