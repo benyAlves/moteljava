@@ -1104,7 +1104,6 @@
         </Container>
         <Container class="javax.swing.JInternalFrame" name="painelAbreCaixa">
           <Properties>
-            <Property name="closable" type="boolean" value="true"/>
             <Property name="defaultCloseOperation" type="int" value="1"/>
             <Property name="iconifiable" type="boolean" value="true"/>
             <Property name="title" type="java.lang.String" value="Abertura do Caixa"/>
@@ -1124,8 +1123,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jTabbedPane1" alignment="0" pref="516" max="32767" attributes="0"/>
-                          <Component id="jXTitledSeparator3" alignment="0" pref="516" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane1" alignment="0" pref="607" max="32767" attributes="0"/>
+                          <Component id="jXTitledSeparator3" alignment="0" pref="607" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="botaoAbreCaixaAberturaDoCaixa" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1217,7 +1216,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="selecaoFormaDeAbrir" pref="500" max="32767" attributes="0"/>
+                                      <Component id="selecaoFormaDeAbrir" pref="591" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -1226,8 +1225,8 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel22" alignment="0" pref="362" max="32767" attributes="0"/>
-                                                  <Component id="jXTitledSeparator4" alignment="0" pref="362" max="32767" attributes="0"/>
+                                                  <Component id="jLabel22" alignment="0" pref="453" max="32767" attributes="0"/>
+                                                  <Component id="jXTitledSeparator4" alignment="0" pref="453" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                           </Group>
@@ -1245,9 +1244,9 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jSeparator3" alignment="0" pref="512" max="32767" attributes="0"/>
+                          <Component id="jSeparator3" alignment="0" pref="603" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="194" max="32767" attributes="0"/>
+                              <EmptySpace pref="285" max="32767" attributes="0"/>
                               <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="campoValorInicialDoCaixa" min="-2" pref="123" max="-2" attributes="0"/>
@@ -1336,6 +1335,9 @@
                           </StringArray>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selecaoFormaDeAbrirActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel24">
                       <Properties>
@@ -1980,9 +1982,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="160" max="32767" attributes="0"/>
-                      <Component id="botaoFechamento" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
+                      <EmptySpace pref="215" max="32767" attributes="0"/>
+                      <Component id="botaoFechamento" min="-2" pref="104" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2023,9 +2025,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jXTitledSeparator7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                       <Component id="botaoFechamento" min="-2" pref="41" max="-2" attributes="0"/>
-                      <EmptySpace pref="8" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2152,7 +2154,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="botaoFechamento">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Confirmar o Fechamento do Caixa"/>
+                <Property name="text" type="java.lang.String" value="Fechar Caixa"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoFechamentoActionPerformed"/>

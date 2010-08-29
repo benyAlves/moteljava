@@ -209,7 +209,7 @@ public class Utilitario {
         URL urlFile = getClass().getClassLoader().getResource(nomeRelatorio);
         if (urlFile == null) {
             try {
-                // try {
+                // try  {
                 throw new Exception("Relatório de nome " + nomeRelatorio + " não foi localizado");
             } catch (Exception ex) {
                 Logger.getLogger(Utilitario.class.getName()).log(Level.SEVERE, null, ex);
@@ -228,4 +228,5 @@ public class Utilitario {
         } catch (Exception e) {
         }
     }
+
 }

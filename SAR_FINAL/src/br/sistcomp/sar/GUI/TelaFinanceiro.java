@@ -27,6 +27,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     Fachada fachada = new Fachada();
     ImageIcon image;
     Image i;
+    public static boolean teste = Fachada.verificaStatus();
 
     /** Creates new form Testando */
     public TelaFinanceiro() {
@@ -854,7 +855,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         jLabel18.setText("Valor");
 
         campoValorConfirma.setEditable(false);
-        campoValorConfirma.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        campoValorConfirma.setFont(new java.awt.Font("sansserif", 1, 12));
         campoValorConfirma.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel19.setText("Pagamento");
@@ -953,7 +954,6 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         painelConfirmaPagamento.setBounds(250, 80, 290, 310);
         jDesktopPane1.add(painelConfirmaPagamento, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        painelAbreCaixa.setClosable(true);
         painelAbreCaixa.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         painelAbreCaixa.setIconifiable(true);
         painelAbreCaixa.setTitle("Abertura do Caixa");
@@ -997,6 +997,11 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         labelNomeDoFuncionario.setText("Jefferson Araújo");
 
         selecaoFormaDeAbrir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ZERADO (R$ 0,00)", "COM O SALDO DO CAIXA ANTERIOR" }));
+        selecaoFormaDeAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecaoFormaDeAbrirActionPerformed(evt);
+            }
+        });
 
         jLabel24.setText("Abrir o Caixa da seguinte Forma:");
 
@@ -1483,7 +1488,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel43.setText("Saída");
 
-        botaoFechamento.setText("Confirmar o Fechamento do Caixa");
+        botaoFechamento.setText("Fechar Caixa");
         botaoFechamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoFechamentoActionPerformed(evt);
@@ -1538,9 +1543,9 @@ public class TelaFinanceiro extends javax.swing.JFrame {
                         .addComponent(jXTitledSeparator7, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFecharCaixaLayout.createSequentialGroup()
-                .addContainerGap(160, Short.MAX_VALUE)
-                .addComponent(botaoFechamento)
-                .addGap(152, 152, 152))
+                .addContainerGap(215, Short.MAX_VALUE)
+                .addComponent(botaoFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(209, 209, 209))
         );
         painelFecharCaixaLayout.setVerticalGroup(
             painelFecharCaixaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1573,9 +1578,9 @@ public class TelaFinanceiro extends javax.swing.JFrame {
                     .addComponent(campoDinheiroEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXTitledSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(botaoFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         painelFecharCaixa.setBounds(130, 100, 540, 310);
@@ -2133,7 +2138,13 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoContasPagarActionPerformed
 
     private void botaoAbreCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAbreCaixaActionPerformed
-        painelAbreCaixa.setVisible(true);
+
+        if (teste) {
+            JOptionPane.showMessageDialog(null, "O caixa já estar aberto!", "Informaçao", JOptionPane.ERROR_MESSAGE);
+        } else {
+            labelNomeDoFuncionario.setText(Fachada.funcionarioLogado().getNome());
+            painelAbreCaixa.setVisible(true);
+        }
     }//GEN-LAST:event_botaoAbreCaixaActionPerformed
 
     private void botaoSairFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairFinanceiroActionPerformed
@@ -2141,9 +2152,13 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoSairFinanceiroActionPerformed
 
     private void botaoMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMovimentacaoActionPerformed
-        labelAbertura.setText("");
-        labelDataHora.setText("");
-        painelMovimentacaoDoCaixa.setVisible(true);
+        if (teste == false) {
+            JOptionPane.showMessageDialog(null, "É necessário abrir o caixa!", "Informação", JOptionPane.ERROR_MESSAGE);
+        } else {
+            labelAbertura.setText("");
+            labelDataHora.setText("");
+            painelMovimentacaoDoCaixa.setVisible(true);
+        }
 
     }//GEN-LAST:event_botaoMovimentacaoActionPerformed
 
@@ -2243,12 +2258,14 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
     private void botaoSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSimActionPerformed
         dialogoAbertura.setVisible(false);
-        JOptionPane.showMessageDialog(null, "Caixa aberto com Sucesso", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Caixa aberto com Sucesso", "Informação", JOptionPane.INFORMATION_MESSAGE);
         painelAbreCaixa.setVisible(false);
         utilitario.le_Data();
         utilitario.le_Hora();
         labelDataHora.setText(utilitario.dia + " de " + utilitario.mes + " de " + utilitario.ano + "   " + utilitario.hora);
         painelMovimentacaoDoCaixa.setVisible(true);
+        fachada.abrirCaixa();
+        teste = Fachada.verificaStatus();
     }//GEN-LAST:event_botaoSimActionPerformed
 
     private void botaoSairMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairMovimentacaoActionPerformed
@@ -2256,12 +2273,26 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoSairMovimentacaoActionPerformed
 
     private void botaoFechamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFechamentoActionPerformed
-        JOptionPane.showMessageDialog(null, "Caixa Fechado com Sucesso !!!");
-        painelFecharCaixa.setVisible(false);
+        Object[] options = {"Sim", "Não"};
+        int sd =
+                JOptionPane.showOptionDialog(null, "Deseja realmente fechar o caixa?",
+                "Excluir Funcionário", JOptionPane.INFORMATION_MESSAGE,
+                JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
+        if (sd == 0) {
+            fachada.fecharCaixa();
+            painelFecharCaixa.setVisible(false);
+            teste = Fachada.verificaStatus();
+
+        }
     }//GEN-LAST:event_botaoFechamentoActionPerformed
 
     private void botaoFinalizaCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFinalizaCaixaActionPerformed
-        painelFecharCaixa.setVisible(true);
+        if (teste == false) {
+            JOptionPane.showMessageDialog(null, "O caixa já está fechado!", "Informaçao", JOptionPane.ERROR_MESSAGE);
+        } else {
+            painelFecharCaixa.setVisible(true);
+        }
     }//GEN-LAST:event_botaoFinalizaCaixaActionPerformed
 
     public void zerarCampo() {
@@ -2434,10 +2465,10 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabelaContasReceberMousePressed
 
-
     private void botaoConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmaActionPerformed
         double valor = 0, debito = 0;
         String status;
+        // if(fachada.pesquisarStatusDoCaixa(null))
         DefaultTableModel modelo = (DefaultTableModel) tabelaContasReceber.getModel();
         modelo.setNumRows(0);
         //fachada.alterarMensalidadeAposPagamento(tabelaContasReceber.getSelectedRow()+1);
@@ -2503,6 +2534,11 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         painelFluxoCaixa.setVisible(false);
     }//GEN-LAST:event_botaoSairFluxoCaixaActionPerformed
 
+    private void selecaoFormaDeAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecaoFormaDeAbrirActionPerformed
+        if (selecaoFormaDeAbrir.getSelectedItem().equals("ZERADO (R$ 0,00)")) {
+            campoValorInicialDoCaixa.setText("0.00");
+        }
+    }//GEN-LAST:event_selecaoFormaDeAbrirActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAbreCaixa;
     private javax.swing.JButton botaoAbreCaixaAberturaDoCaixa;
