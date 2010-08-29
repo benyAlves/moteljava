@@ -623,7 +623,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
 
         campoVencimento.setEditable(false);
         try {
-            campoVencimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            campoVencimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -647,7 +647,7 @@ public class TelaEditarAluno extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Modalidade", "Professor", "Plano", "Horário", "Valor"
+                "Cod.", "Modalidade", "Professor", "Plano", "Horário", "Valor"
             }
         ) {
             Class[] types = new Class [] {
@@ -677,16 +677,17 @@ public class TelaEditarAluno extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabelaModalidadeAluno);
         tabelaModalidadeAluno.getColumnModel().getColumn(0).setResizable(false);
-        tabelaModalidadeAluno.getColumnModel().getColumn(0).setPreferredWidth(4);
+        tabelaModalidadeAluno.getColumnModel().getColumn(0).setPreferredWidth(25);
         tabelaModalidadeAluno.getColumnModel().getColumn(1).setResizable(false);
-        tabelaModalidadeAluno.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tabelaModalidadeAluno.getColumnModel().getColumn(1).setPreferredWidth(120);
         tabelaModalidadeAluno.getColumnModel().getColumn(2).setResizable(false);
-        tabelaModalidadeAluno.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tabelaModalidadeAluno.getColumnModel().getColumn(2).setPreferredWidth(150);
         tabelaModalidadeAluno.getColumnModel().getColumn(3).setResizable(false);
+        tabelaModalidadeAluno.getColumnModel().getColumn(3).setPreferredWidth(100);
         tabelaModalidadeAluno.getColumnModel().getColumn(4).setResizable(false);
-        tabelaModalidadeAluno.getColumnModel().getColumn(4).setPreferredWidth(100);
+        tabelaModalidadeAluno.getColumnModel().getColumn(4).setPreferredWidth(180);
         tabelaModalidadeAluno.getColumnModel().getColumn(5).setResizable(false);
-        tabelaModalidadeAluno.getColumnModel().getColumn(5).setPreferredWidth(20);
+        tabelaModalidadeAluno.getColumnModel().getColumn(5).setPreferredWidth(40);
 
         botaoAdicionar1.setText("Adicionar");
         botaoAdicionar1.addActionListener(new java.awt.event.ActionListener() {
