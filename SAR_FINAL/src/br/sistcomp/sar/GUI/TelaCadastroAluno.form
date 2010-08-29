@@ -153,9 +153,9 @@
                                       <Group type="102" attributes="0">
                                           <Component id="campoEmailAluno" min="-2" pref="222" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="campoDataNascimentoAluno" pref="155" max="32767" attributes="0"/>
+                                          <Component id="campoIndicacao" pref="208" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="campoEnderecoAluno" alignment="1" pref="495" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
@@ -173,12 +173,16 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="campoCepAluno" pref="156" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="campoCidadeAluno" pref="410" max="32767" attributes="1"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="campoCidadeAluno" min="-2" pref="165" max="-2" attributes="1"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="selecaoEstadoAluno" min="-2" pref="57" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="campoDataNascimentoAluno" pref="127" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -186,24 +190,30 @@
                                               <Component id="campoTelefoneAluno" alignment="1" pref="144" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Group type="102" attributes="1">
                                                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="campoIdentidadeAluno" pref="128" max="32767" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="selecaoOrgaoEmissorAluno" min="-2" pref="57" max="-2" attributes="0"/>
+                                                  <Component id="campoIdentidadeAluno" max="32767" attributes="0"/>
                                               </Group>
-                                              <Group type="102" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="campoCelularAluno" min="-2" pref="143" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="selecaoSexoAluno" min="-2" pref="101" max="-2" attributes="0"/>
+                                                  <Component id="selecaoSexoAluno" pref="117" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="selecaoOrgaoEmissorAluno" min="-2" pref="63" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -256,6 +266,8 @@
                                       <Component id="campoCidadeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="selecaoEstadoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="campoDataNascimentoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -264,11 +276,11 @@
                               <Component id="botaoInserirFotoAluno" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="selecaoSexoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="campoCelularAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="campoTelefoneAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="campoCelularAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -277,15 +289,15 @@
                               <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="campoIdentidadeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="selecaoOrgaoEmissorAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="campoCpfAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="campoEmailAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoDataNascimentoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="campoIndicacao" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
@@ -483,6 +495,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="campoIdentidadeAluno">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel16">
                   <Properties>
@@ -622,6 +637,13 @@
                     <Property name="horizontalAlignment" type="int" value="0"/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JLabel" name="jLabel22">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Indica&#xe7;&#xe3;o"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="campoIndicacao">
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel5">
@@ -685,43 +707,37 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                          <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                                  <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="campoValor" min="-2" pref="57" max="-2" attributes="0"/>
-                                                      <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="campoDesconto" min="-2" pref="57" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="1"/>
-                                                      <Component id="selecaoPagamento" alignment="0" min="-2" pref="140" max="-2" attributes="1"/>
-                                                  </Group>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="campoIndicacao" min="-2" pref="245" max="-2" attributes="1"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="botaoAdicionar1" pref="81" max="32767" attributes="0"/>
-                                              </Group>
+                                              <Component id="campoValor" min="-2" pref="57" max="-2" attributes="0"/>
+                                              <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="jLabel27" alignment="1" pref="83" max="32767" attributes="1"/>
-                                              <Component id="campoParcelas" alignment="0" pref="83" max="32767" attributes="0"/>
-                                              <Component id="botaoExcluir" alignment="1" pref="83" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                                              <Component id="campoDesconto" min="-2" pref="57" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="1"/>
+                                              <Component id="selecaoPagamento" alignment="0" min="-2" pref="140" max="-2" attributes="1"/>
                                           </Group>
                                       </Group>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
+                                          <Component id="botaoAdicionar1" pref="81" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jLabel27" alignment="1" pref="83" max="32767" attributes="1"/>
+                                      <Component id="campoParcelas" alignment="0" pref="83" max="32767" attributes="0"/>
+                                      <Component id="botaoExcluir" alignment="1" pref="83" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -777,14 +793,10 @@
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="selecaoHorario" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoIndicacao" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="botaoExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="botaoAdicionar1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -796,8 +808,6 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="campoIndicacao">
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel19">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Desconto"/>
@@ -831,11 +841,6 @@
                 <Component class="javax.swing.JLabel" name="jLabel21">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Plano de Matr&#xed;cula"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel22">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Indica&#xe7;&#xe3;o"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel23">
