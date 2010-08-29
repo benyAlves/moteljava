@@ -294,6 +294,10 @@ public class Fachada {
         CaixaDAO.getInstance().alterarSaldo(caixa, mensalidade.getValor());
     }
 
+//    public boolean pesquisarStatusDoCaixa(Caixa caixa) {
+//        return CaixaDAO.getInstance().pesquisarStatusDoCaixa(caixa);
+//    }
+
     public void lancarConta(Conta conta){
         ContaDAO.getInstance().cadastrar(conta);
     }
@@ -326,8 +330,8 @@ public class Fachada {
         return false;
     }
 
-    public static int funcionarioLogado(){
-        return TelaLogin.matricula;
+    public static Pessoa funcionarioLogado(){
+        return FuncionarioDAO.getInstance().pesquisaFuncionario(TelaLogin.matricula);
     }
 
 }
