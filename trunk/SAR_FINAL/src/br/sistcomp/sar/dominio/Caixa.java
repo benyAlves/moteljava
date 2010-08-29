@@ -8,49 +8,27 @@ package br.sistcomp.sar.dominio;
 public class Caixa {
 
     private int codCaixa;
+    private Funcionario funcionario;
     private Boolean status;
-    private String dia;
+    private String diaAbriu;
+    private String horaAbriu;
+    private String diaFechou;
+    private String horaFechou;
     private Double saldo;
-    private Boolean saldoAnterior;
-    private Funcionario abriu;
-    private Funcionario fechou;
 
-    public Caixa(int codCaixa, Boolean status, String dia, Double saldo, Boolean saldoAnterior, Funcionario abriu, Funcionario fechou) {
+    public Caixa(int codCaixa, Funcionario funcionario, Boolean status, String diaAbriu, String horaAbriu, String diaFechou, String horaFechou, Double saldo) {
         this.codCaixa = codCaixa;
+        this.funcionario = funcionario;
         this.status = status;
-        this.dia = dia;
+        this.diaAbriu = diaAbriu;
+        this.horaAbriu = horaAbriu;
+        this.diaFechou = diaFechou;
+        this.horaFechou = horaFechou;
         this.saldo = saldo;
-        this.saldoAnterior = saldoAnterior;
-        this.abriu = abriu;
-        this.fechou = fechou;
     }
 
     public Caixa(){
-
-    }
-
-    public Boolean getSaldoAnterior() {
-        return saldoAnterior;
-    }
-
-    public void setSaldoAnterior(Boolean saldoAnterior) {
-        this.saldoAnterior = saldoAnterior;
-    }
-
-    public Funcionario getAbriu() {
-        return abriu;
-    }
-
-    public void setAbriu(Funcionario abriu) {
-        this.abriu = abriu;
-    }
-
-    public Funcionario getFechou() {
-        return fechou;
-    }
-
-    public void setFechou(Funcionario fechou) {
-        this.fechou = fechou;
+        
     }
 
     public int getCodCaixa() {
@@ -61,12 +39,44 @@ public class Caixa {
         this.codCaixa = codCaixa;
     }
 
-    public String getDia() {
-        return dia;
+    public String getDiaAbriu() {
+        return diaAbriu;
     }
 
-    public void setDia(String dia) {
-        this.dia = dia;
+    public void setDiaAbriu(String diaAbriu) {
+        this.diaAbriu = diaAbriu;
+    }
+
+    public String getDiaFechou() {
+        return diaFechou;
+    }
+
+    public void setDiaFechou(String diaFechou) {
+        this.diaFechou = diaFechou;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public String getHoraAbriu() {
+        return horaAbriu;
+    }
+
+    public void setHoraAbriu(String horaAbriu) {
+        this.horaAbriu = horaAbriu;
+    }
+
+    public String getHoraFechou() {
+        return horaFechou;
+    }
+
+    public void setHoraFechou(String horaFechou) {
+        this.horaFechou = horaFechou;
     }
 
     public Double getSaldo() {

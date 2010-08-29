@@ -168,9 +168,14 @@ CREATE TABLE TRANSFERENCIAS(
 
 CREATE TABLE CAIXAS(
 	codCaixa int not null auto_increment,
+        matricula int not null,
 	status bool not null,
-	dia date not null,
+	diaAbriu date not null,
+        diaFechou date,
+        horaAbriu time not null,
+        horaFechou time,
 	saldo numeric(7,2) not null,
+        FOREIGN KEY (matricula) REFERENCES FUNCIONARIOS(matricula),
 	PRIMARY KEY (codCaixa)
 );
 
@@ -180,22 +185,6 @@ CREATE TABLE TRANSACOES(
 	FOREIGN KEY (codCaixa) REFERENCES CAIXAS(codCaixa),
 	FOREIGN KEY (codMovimentacao) REFERENCES MOVIMENTACOES(codMovimentacao),
 	CONSTRAINT codTransferencia PRIMARY KEY (codCaixa, codMovimentacao)
-);
-
-CREATE TABLE ABRE(
-        codCaixa int not null,
-        matricula int not null,
-        FOREIGN KEY (codCaixa) REFERENCES CAIXAS(codCaixa),
-        FOREIGN KEY (matricula) REFERENCES FUNCIONARIOS(matricula),
-        CONSTRAINT codAbriu PRIMARY KEY (codCaixa,matricula)
-);
-
-CREATE TABLE FECHA(
-        codCaixa int not null,
-        matricula int not null,
-        FOREIGN KEY (codCaixa) REFERENCES CAIXAS(codCaixa),
-        FOREIGN KEY (matricula) REFERENCES FUNCIONARIOS(matricula),
-        CONSTRAINT codFechou PRIMARY KEY (codCaixa,matricula)
 );
 
 INSERT INTO PESSOAS (nome, email, nascimento, sexo, cpf, rgNumero,rgUf, endereco,bairro, cidade, estado, cep, telefone, celular, observacoes, dataCadastro)

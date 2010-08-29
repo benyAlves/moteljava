@@ -41,7 +41,7 @@ public class MensalidadeDAO {
         } catch (Exception e) {
             e.printStackTrace(); // Sempre colocar o StackTrace, ajuda a identificar o erro.
         }
-    }
+        }
 
     public Mensalidade pesquisar(int codMovimentacao) {
         ResultSet rs;
@@ -89,7 +89,6 @@ public class MensalidadeDAO {
             e.printStackTrace();
         }
     }
-
     public void remover(int codAdesao) {
         ResultSet rs, rs2;
         PreparedStatement ps, ps2;

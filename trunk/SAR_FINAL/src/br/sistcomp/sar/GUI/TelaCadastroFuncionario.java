@@ -555,6 +555,7 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
         campoDataNascimentoSecretaria.setText("");
         caixaObservacoesSecretaria.setText("");
         campoSenhaSecretaria.setText("");
+        labelFoto.setIcon(new ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/semFoto.png")));
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

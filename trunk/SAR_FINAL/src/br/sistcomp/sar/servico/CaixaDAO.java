@@ -4,11 +4,14 @@ package br.sistcomp.sar.servico;
 import br.sistcomp.sar.conexao.ConexaoDB;
 import br.sistcomp.sar.dominio.Caixa;
 import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.fachada.Fachada;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,41 +30,34 @@ public class CaixaDAO {
         return caixaDAO;
     }
 
-    public void abrirCaixa(Caixa caixa) {
-        Caixa caixaOK = (Caixa) caixa;
+    public void abrirCaixa() {
         PreparedStatement ps;
-        int codCaixa = -1;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("INSERT INTO CAIXAS (status, dia, saldo) VALUES (?,?,?)");
-            ps.setBoolean(1, caixaOK.getStatus());
-            ps.setString(2, Utilitario.dataParaBanco(caixaOK.getDia()));
-            ps.setDouble(3, caixaOK.getSaldo());
+            ps = (PreparedStatement) con.prepareStatement("INSERT INTO CAIXAS (matricula, status, diaAbriu, horaAbriu, saldo) VALUES (?,?,?,?,?)");
+            ps.setInt(1, Fachada.funcionarioLogado().getIdPessoa());
+            ps.setBoolean(2, true);
+            ps.setString(3, Utilitario.dataParaBanco(Utilitario.dataDoSistema()));
+            ps.setString(4, Utilitario.getHora());
+            ps.setDouble(5, 0.00);
             ps.execute();
-            ps = (PreparedStatement) con.prepareStatement("SELECT MAX(codCaixa) FROM CAIXAS");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                codCaixa = rs.getInt("MAX(codCaixa)");
-            }
-            caixaOK.setCodCaixa(codCaixa);
-            AbreDAO.getInstance().abrir(caixaOK);
             con.close();
         } catch (Exception e) {
             e.printStackTrace(); // Sempre colocar o StackTrace, ajuda a identificar o erro.
         }
     }
 
-    public void fecharCaixa(Caixa caixa) {
+    public void fecharCaixa() {
         PreparedStatement ps;
         try {
-            Caixa caixaOK = (Caixa) caixa;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("UPDATE CAIXAS SET status = ? saldo = ? WHERE codCaixa = '" + caixaOK.getCodCaixa() + "' ");
+            ps = (PreparedStatement) con.prepareStatement("UPDATE CAIXAS SET status = ?, diaFechou = ?, horaFechou = ? WHERE status = true ");
             ps.setBoolean(1, false);
-            ps.setDouble(2, caixaOK.getSaldo());
+            ps.setString(2, Utilitario.dataParaBanco(Utilitario.dataDoSistema()));
+            ps.setString(3, Utilitario.getHora());
             ps.execute();
             con.close();
-            FechaDAO.getInstance().fechar(caixa);
+            JOptionPane.showMessageDialog(null, "Caixa Fechado com Sucesso !!!");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,11 +88,13 @@ public class CaixaDAO {
             while (rs.next()) {
                 Caixa caixa = new Caixa();
                 caixa.setCodCaixa(rs.getInt("codCaixa"));
+                caixa.setFuncionario(FuncionarioDAO.getInstance().pesquisaFuncionario(rs.getInt("matricula")));
                 caixa.setStatus(rs.getBoolean("status"));
-                caixa.setDia(Utilitario.converteDateParaString(rs.getDate("dia")));
+                caixa.setDiaAbriu(Utilitario.converteDateParaString(rs.getDate("diaAbriu")));
+                caixa.setDiaFechou(Utilitario.converteDateParaString(rs.getDate("diaFechou")));
+                caixa.setHoraAbriu(rs.getString("horaAbriu"));
+                caixa.setHoraFechou(rs.getString("horaFechou"));
                 caixa.setSaldo(rs.getDouble("saldo"));
-                caixa.setAbriu(AbreDAO.getInstance().pesquisar(rs.getInt("codCaixa")));
-                caixa.setFechou(FechaDAO.getInstance().pesquisar(rs.getInt("codCaixa")));
                 caixas.add(caixa);
             }
             con.close();
@@ -124,6 +122,43 @@ public class CaixaDAO {
             e.printStackTrace();
         }
         return saldoAnterior;
+     }
+    public boolean pesquisarStatusDoCaixa() {
+        PreparedStatement ps;
+        ResultSet rs;
+        boolean status = false;
+       try {
+           Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT status FROM CAIXAS WHERE max(codCaixa)");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                status = rs.getBoolean("status");
+            }
+            con.close();
+            return status;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return status;
+     }
+
+    public boolean verificaStatus() {
+        PreparedStatement ps;
+        ResultSet rs;
+        boolean status = false;
+       try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT status FROM CAIXAS WHERE status = true");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                status = rs.getBoolean("status");
+            }
+            con.close();
+            return status;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return status;
      }
 
      public Double saldoTotal() {

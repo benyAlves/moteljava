@@ -34,7 +34,7 @@ public class MovimentacaoDAO {
             Movimentacao movimentacaoOK = (Movimentacao) movimentacao; //Validando Objeto
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             ps = (PreparedStatement) con.prepareStatement("INSERT INTO MOVIMENTACOES (matricula, valor, vencimento, hora, tipo) VALUES (?,?,?,?,?)");
-            ps.setInt(1, Fachada.funcionarioLogado());
+            ps.setInt(1, Fachada.funcionarioLogado().getIdPessoa());
             ps.setDouble(2, movimentacaoOK.getValor());
             ps.setString(3, Utilitario.dataParaBanco(movimentacaoOK.getVencimento()));
             ps.setString(4, movimentacaoOK.getHora());

@@ -567,6 +567,7 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
         campoEmailProfessor.setText("");
         campoDataNascimentoProfessor.setText("");
         caixaObservacoesProfessor.setText("");
+        labelFotoProfessor.setIcon(new ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/semFoto.png")));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCadastrarProfessor;

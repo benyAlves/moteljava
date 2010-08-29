@@ -262,12 +262,17 @@ public class Fachada {
         return AdesaoDAO.getInstance().proximoCodigo();
     }
 
-    public void abrirCaixa(Caixa caixa){
-        CaixaDAO.getInstance().abrirCaixa(caixa);
+    public void abrirCaixa(){
+        CaixaDAO.getInstance().abrirCaixa();
     }
 
-    public void fecharCaixa(Caixa caixa){
-        CaixaDAO.getInstance().fecharCaixa(caixa);
+
+     public static boolean verificaStatus() {
+         return CaixaDAO.getInstance().verificaStatus();
+     }
+
+    public void fecharCaixa(){
+        CaixaDAO.getInstance().fecharCaixa();
     }
 
     public void retirada(Caixa caixa, Transferencia transferencia){
