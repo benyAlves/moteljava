@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 public class MensalidadeDAO {
 
@@ -90,11 +91,18 @@ public class MensalidadeDAO {
     }
 
     public void remover(int codAdesao) {
-        PreparedStatement ps;
+        ResultSet rs, rs2;
+        PreparedStatement ps, ps2;
+
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("DELETE FROM MENSALIDADES WHERE codAdesao ='" + codAdesao + "' ");
-            ps.execute();
+            ps = (PreparedStatement) con.prepareStatement("SELECT codMovimentacao FROM MENSALIDADES WHERE codAdesao = '" + codAdesao + "'");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ps2 = (PreparedStatement) con.prepareStatement("DELETE FROM MENSALIDADES WHERE codMovimentacao='" + rs.getInt("codMovimentacao") + "' ");
+                ps2.execute();
+                MovimentacaoDAO.getInstance().remover(rs.getInt("codMovimentacao"));
+            }
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,12 +182,15 @@ public class MensalidadeDAO {
         List<Integer> mensalidades = new ArrayList<Integer>();
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM MENSALIDADES WHERE codAdesao = '" + codAdesao + "' ");
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM MENSALIDADES WHERE codAdesao = '" + codAdesao + "' AND pagamento IS NULL");
             rs = ps.executeQuery();
             while (rs.next()) {
                 mensalidades.add(rs.getInt("codMovimentacao"));
             }
             con.close();
+            if(mensalidades.isEmpty()){
+                return false;
+            }
             return MovimentacaoDAO.getInstance().mensalidadesLiberadas(mensalidades);
         } catch (Exception e) {
             e.printStackTrace();

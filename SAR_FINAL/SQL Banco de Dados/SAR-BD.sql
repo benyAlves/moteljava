@@ -197,3 +197,9 @@ CREATE TABLE FECHA(
         FOREIGN KEY (matricula) REFERENCES FUNCIONARIOS(matricula),
         CONSTRAINT codFechou PRIMARY KEY (codCaixa,matricula)
 );
+
+INSERT INTO PESSOAS (nome, email, nascimento, sexo, cpf, rgNumero,rgUf, endereco,bairro, cidade, estado, cep, telefone, celular, observacoes, dataCadastro)
+VALUES ('PADRAO','PADRAO@PADRAO','2010-08-28','MASCULINO','111.111.111-11','111111','PB','PADRAO','PADRAO','PADRAO','PB','00.000-000','(  )     -    ','(  )     -    ','PADRAO','2010-08-28');
+
+INSERT INTO FUNCIONARIOS (idPessoa, matricula, funcao)
+VALUES (1,10810,'PADRAO');
