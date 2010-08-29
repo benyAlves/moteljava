@@ -937,15 +937,15 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="campoDescricaoConfirma" alignment="0" pref="194" max="32767" attributes="0"/>
-                                  <Component id="campoAlunoConfirma" alignment="0" pref="194" max="32767" attributes="0"/>
+                                  <Component id="campoDescricaoConfirma" alignment="0" pref="195" max="32767" attributes="0"/>
+                                  <Component id="campoAlunoConfirma" alignment="0" pref="195" max="32767" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="campoObservacaoRecebe" alignment="0" max="32767" attributes="1"/>
                                       <Component id="campoPagamentoConfirma" alignment="0" max="32767" attributes="1"/>
                                       <Component id="campoValorConfirma" alignment="0" max="32767" attributes="1"/>
                                       <Component id="campoVencimentoConfirma" alignment="0" max="32767" attributes="1"/>
                                       <Component id="campoMesConfirma" alignment="0" pref="107" max="32767" attributes="1"/>
                                   </Group>
-                                  <Component id="campoObservacaoRecebe" alignment="0" pref="194" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -1013,6 +1013,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="campoAlunoConfirma">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
@@ -1020,6 +1023,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="campoDescricaoConfirma">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
@@ -1028,6 +1034,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoMesConfirma">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
@@ -1038,6 +1045,7 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="campoVencimentoConfirma">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
@@ -1048,6 +1056,10 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoValorConfirma">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="sansserif" size="12" style="1"/>
+                </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
@@ -1058,15 +1070,19 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="campoPagamentoConfirma">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Observa&#xe7;&#xe3;o"/>
+                <Property name="text" type="java.lang.String" value="Desconto"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="campoObservacaoRecebe">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="botaoConfirma">
               <Properties>

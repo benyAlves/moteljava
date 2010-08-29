@@ -835,25 +835,36 @@ public class TelaFinanceiro extends javax.swing.JFrame {
 
         jLabel14.setText("Aluno");
 
+        campoAlunoConfirma.setEditable(false);
+
         jLabel15.setText("Descrição");
+
+        campoDescricaoConfirma.setEditable(false);
 
         jLabel16.setText("Mês");
 
+        campoMesConfirma.setEditable(false);
         campoMesConfirma.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel17.setText("Vencimento");
 
+        campoVencimentoConfirma.setEditable(false);
         campoVencimentoConfirma.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel18.setText("Valor");
 
+        campoValorConfirma.setEditable(false);
+        campoValorConfirma.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         campoValorConfirma.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel19.setText("Pagamento");
 
+        campoPagamentoConfirma.setEditable(false);
         campoPagamentoConfirma.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jLabel20.setText("Observação");
+        jLabel20.setText("Desconto");
+
+        campoObservacaoRecebe.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         botaoConfirma.setText("Confirmar");
         botaoConfirma.addActionListener(new java.awt.event.ActionListener() {
@@ -887,14 +898,14 @@ public class TelaFinanceiro extends javax.swing.JFrame {
                             .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(painelConfirmaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoDescricaoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                            .addComponent(campoAlunoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                            .addComponent(campoDescricaoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                            .addComponent(campoAlunoConfirma, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                             .addGroup(painelConfirmaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(campoObservacaoRecebe, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(campoPagamentoConfirma, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(campoValorConfirma, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(campoVencimentoConfirma, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(campoMesConfirma, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-                            .addComponent(campoObservacaoRecebe, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)))
+                                .addComponent(campoMesConfirma, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelConfirmaPagamentoLayout.createSequentialGroup()
                         .addComponent(botaoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
