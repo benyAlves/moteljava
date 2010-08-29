@@ -1,29 +1,18 @@
 package br.sistcomp.sar.dominio;
 
-import br.sistcomp.sar.conexao.ConexaoDB;
 import java.awt.Cursor;
-import java.net.URL;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
 
 public class Utilitario {
 
-    public static int mesAtual(){
+    public static int mesAtual() {
         GregorianCalendar calendar = new GregorianCalendar();
-        return calendar.get(GregorianCalendar.MONTH)+1;
+        return calendar.get(GregorianCalendar.MONTH) + 1;
     }
 
     public static int retornaIdPessoa(int matricula) {
@@ -42,24 +31,24 @@ public class Utilitario {
         Date horaAtual = new Date();
         hora = horaformatada.format(horaAtual);
     }
-    
-    public static String getHora() {  
-   
-         // cria um StringBuilder  
-         StringBuilder sb = new StringBuilder();  
 
-         // cria um GregorianCalendar que vai conter a hora atual  
-         GregorianCalendar d = new GregorianCalendar();  
+    public static String getHora() {
 
-         // anexa do StringBuilder os dados da hora  
-         sb.append( d.get( GregorianCalendar.HOUR_OF_DAY ) );  
-         sb.append( ":" );  
-         sb.append( d.get( GregorianCalendar.MINUTE ) );  
-         sb.append( ":" );  
-         sb.append( d.get( GregorianCalendar.SECOND ) );  
+        // cria um StringBuilder
+        StringBuilder sb = new StringBuilder();
 
-         // retorna a String do StringBuilder  
-         return sb.toString(); 
+        // cria um GregorianCalendar que vai conter a hora atual
+        GregorianCalendar d = new GregorianCalendar();
+
+        // anexa do StringBuilder os dados da hora
+        sb.append(d.get(GregorianCalendar.HOUR_OF_DAY));
+        sb.append(":");
+        sb.append(d.get(GregorianCalendar.MINUTE));
+        sb.append(":");
+        sb.append(d.get(GregorianCalendar.SECOND));
+
+        // retorna a String do StringBuilder
+        return sb.toString();
     }
 
     public static String dataDoSistema() {
@@ -205,28 +194,27 @@ public class Utilitario {
     }
 
     public void geraRelatorio(String nome) {
-        String nomeRelatorio = "br/sistcomp/sar/impressao/" + nome;
-        URL urlFile = getClass().getClassLoader().getResource(nomeRelatorio);
-        if (urlFile == null) {
-            try {
-                // try  {
-                throw new Exception("Relatório de nome " + nomeRelatorio + " não foi localizado");
-            } catch (Exception ex) {
-                Logger.getLogger(Utilitario.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        try {
-            HashMap parametros = new HashMap();
-
-            JasperReport report = JasperManager.loadReport(urlFile.openStream());
-            JasperPrint jp = JasperFillManager.fillReport(report, parametros, ConexaoDB.getInstance().getCon());
-            JasperViewer jrv = new JasperViewer(jp, false);
-            jrv.resize(800, 600);
-            jrv.setLocationRelativeTo(null);
-            jrv.setVisible(true);
-        } catch (Exception e) {
-        }
+//        String nomeRelatorio = "br/sistcomp/sar/impressao/" + nome;
+//        URL urlFile = getClass().getClassLoader().getResource(nomeRelatorio);
+//        if (urlFile == null) {
+//            try {
+//                // try  {
+//                throw new Exception("Relatório de nome " + nomeRelatorio + " não foi localizado");
+//            } catch (Exception ex) {
+//                Logger.getLogger(Utilitario.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//
+//        try {
+//            HashMap parametros = new HashMap();
+        // JasperReport report = JasperManager.loadReport(urlFile.openStream());
+        // JasperPrint jp = JasperFillManager.fillReport(report, parametros, ConexaoDB.getInstance().getCon());
+//        Fachada fachada = new Fachada();
+//        JasperViewer jrv = new JasperViewer(RelatorioDAO.getInstance().relatorioAlunos(), false);
+//            jrv.resize(800, 600);
+//            jrv.setLocationRelativeTo(null);
+//            jrv.setVisible(true);
+//        } catch (Exception e) {
+//        }
     }
-
 }
