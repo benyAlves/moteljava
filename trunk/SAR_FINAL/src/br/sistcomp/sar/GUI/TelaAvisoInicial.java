@@ -6,6 +6,13 @@
 
 package br.sistcomp.sar.GUI;
 
+import br.sistcomp.sar.dominio.Pessoa;
+import br.sistcomp.sar.fachada.Fachada;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import java.util.Vector;
+
 
 /**
  *
@@ -13,10 +20,13 @@ package br.sistcomp.sar.GUI;
  */
 public class TelaAvisoInicial extends javax.swing.JFrame {
 
+    Fachada fachada = new Fachada();
+
     /** Creates new form telaAvisoInicial */
     public TelaAvisoInicial() {
         initComponents();
         setLocationRelativeTo(null);
+        preencheTabela();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -49,7 +59,7 @@ public class TelaAvisoInicial extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaAniversariantes = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
 
@@ -230,7 +240,7 @@ public class TelaAvisoInicial extends javax.swing.JFrame {
 
         jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 102), 1, true));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaAniversariantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -238,13 +248,13 @@ public class TelaAvisoInicial extends javax.swing.JFrame {
                 "Nome", "Dia", "Telefone", "Celular"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setResizable(false);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(230);
-        jTable1.getColumnModel().getColumn(1).setResizable(false);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(30);
-        jTable1.getColumnModel().getColumn(2).setResizable(false);
-        jTable1.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane1.setViewportView(tabelaAniversariantes);
+        tabelaAniversariantes.getColumnModel().getColumn(0).setResizable(false);
+        tabelaAniversariantes.getColumnModel().getColumn(0).setPreferredWidth(230);
+        tabelaAniversariantes.getColumnModel().getColumn(1).setResizable(false);
+        tabelaAniversariantes.getColumnModel().getColumn(1).setPreferredWidth(30);
+        tabelaAniversariantes.getColumnModel().getColumn(2).setResizable(false);
+        tabelaAniversariantes.getColumnModel().getColumn(3).setResizable(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -350,6 +360,31 @@ public class TelaAvisoInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     public void preencheTabela() {
+        tabelaAniversariantes.getColumnModel().getColumn(0);
+        tabelaAniversariantes.getColumnModel().getColumn(1);
+        tabelaAniversariantes.getColumnModel().getColumn(2);
+        tabelaAniversariantes.getColumnModel().getColumn(3);
+
+        DefaultTableModel modelo = (DefaultTableModel) tabelaAniversariantes.getModel();
+        modelo.setNumRows(0);
+
+        Vector<Pessoa> aniversariantes = fachada.aniversariantes();
+
+        if (aniversariantes != null) {
+            for (Pessoa pessoa : aniversariantes) {
+                String nome = pessoa.getNome();
+                String dia = pessoa.getNascimento();
+                dia = dia.substring(0,2);
+                String telefone = pessoa.getTelefone();
+                telefone = telefone.substring(5);
+                String celular = pessoa.getCelular();
+                celular = celular.substring(5);
+                modelo.addRow(new Object[]{nome, dia, telefone, celular});
+            }
+        }
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -381,9 +416,9 @@ public class TelaAvisoInicial extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTable tabelaAniversariantes;
     // End of variables declaration//GEN-END:variables
 }

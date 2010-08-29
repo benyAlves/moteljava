@@ -334,4 +334,8 @@ public class Fachada {
         return FuncionarioDAO.getInstance().pesquisaFuncionario(TelaLogin.matricula);
     }
 
+    public Vector<Pessoa> aniversariantes(){
+        return PessoaDAO.getInstance().aniversariantes();
+    }
+
 }

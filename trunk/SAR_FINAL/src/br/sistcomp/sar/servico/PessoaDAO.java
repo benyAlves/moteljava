@@ -1,5 +1,3 @@
-
-
 package br.sistcomp.sar.servico;
 
 import br.sistcomp.sar.conexao.ConexaoDB;
@@ -39,7 +37,7 @@ public class PessoaDAO {
                     + "(nome, email, nascimento, sexo, cpf, rgNumero, rgUf, endereco,"
                     + " bairro, cidade, estado, cep, telefone, celular, observacoes, dataCadastro)"
                     + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            
+
             ps.setString(1, pessoaOK.getNome());
             ps.setString(2, pessoaOK.getEmail());
             ps.setDate(3, (java.sql.Date) Utilitario.converteStringParaDate(pessoaOK.getNascimento()));
@@ -59,7 +57,7 @@ public class PessoaDAO {
             ps.execute();
             ps = (PreparedStatement) con.prepareStatement("SELECT * FROM PESSOAS p WHERE p.cpf = '" + pessoaOK.getCpf() + "'");
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 int idPessoa = rs.getInt("idPessoa");
                 con.close();
                 return idPessoa;
@@ -94,7 +92,7 @@ public class PessoaDAO {
                 String observacoes = rs.getString("observacoes");
                 String dataCadastro = Utilitario.converteDateParaString(rs.getDate("dataCadastro"));
                 con.close();
-                Pessoa pessoa = new Pessoa(idPessoa, nome, email, nascimento, sexo, cpf, rgNumero,rgUf, endereco, bairro, cidade, estado, cep, telefone, celular, observacoes, dataCadastro);
+                Pessoa pessoa = new Pessoa(idPessoa, nome, email, nascimento, sexo, cpf, rgNumero, rgUf, endereco, bairro, cidade, estado, cep, telefone, celular, observacoes, dataCadastro);
                 return pessoa;
             }
         } catch (Exception e) {
@@ -127,7 +125,7 @@ public class PessoaDAO {
                 String observacoes = rs.getString("observacoes");
                 String dataCadastro = Utilitario.converteDateParaString(rs.getDate("dataCadastro"));
                 con.close();
-                Pessoa pessoa = new Pessoa(idPessoa, nome, email, nascimento, sexo, cpf, rgNumero,rgUf, endereco, bairro, cidade, estado, cep, telefone, celular, observacoes, dataCadastro);
+                Pessoa pessoa = new Pessoa(idPessoa, nome, email, nascimento, sexo, cpf, rgNumero, rgUf, endereco, bairro, cidade, estado, cep, telefone, celular, observacoes, dataCadastro);
                 return pessoa;
             }
         } catch (Exception e) {
@@ -141,7 +139,7 @@ public class PessoaDAO {
         Vector<Integer> idPessoas = new Vector<Integer>();
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM PESSOAS WHERE nome like '" + "%"+nome+"%"+ "'");
+            PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM PESSOAS WHERE nome like '" + "%" + nome + "%" + "'");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int idPessoa = rs.getInt("idPessoa");
@@ -204,7 +202,7 @@ public class PessoaDAO {
         }
     }
 
-    public int proximaMatricula(){
+    public int proximaMatricula() {
         int proximaMatricula = -1;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
@@ -214,13 +212,38 @@ public class PessoaDAO {
                 proximaMatricula = rs.getInt("Auto_increment");
             }
             con.close();
-            String matriculaCompleta = (proximaMatricula) + Utilitario.dataDoSistema().substring(3,5) + Utilitario.dataDoSistema().substring(8,10);
+            String matriculaCompleta = (proximaMatricula) + Utilitario.dataDoSistema().substring(3, 5) + Utilitario.dataDoSistema().substring(8, 10);
             proximaMatricula = Integer.parseInt(matriculaCompleta);
             return proximaMatricula;
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-       return proximaMatricula;
+        return proximaMatricula;
+    }
+
+    public Vector<Pessoa> aniversariantes() {
+        ResultSet rs;
+        PreparedStatement ps;
+        Vector<Pessoa> pessoas = new Vector<Pessoa>();
+
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("select nome,nascimento,telefone,celular from pessoas where month(nascimento) = " + Utilitario.mesAtual() + " order by day(nascimento)");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Pessoa pessoa = new Pessoa();
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setNascimento(Utilitario.converteDateParaString(rs.getDate("nascimento")));
+                pessoa.setTelefone(rs.getString("telefone"));
+                pessoa.setCelular(rs.getString("celular"));
+                pessoas.add(pessoa);
+            }
+            con.close();
+            return pessoas;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pessoas;
     }
 }

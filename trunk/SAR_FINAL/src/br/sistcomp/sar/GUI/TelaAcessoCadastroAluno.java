@@ -43,7 +43,6 @@ public class TelaAcessoCadastroAluno extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         preencheTabela();
         informacoes();
-
     }
 
     @SuppressWarnings("unchecked")
