@@ -7,6 +7,7 @@
 package br.sistcomp.sar.GUI;
 
 import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.servico.RelatorioDAO;
 
 /**
  *
@@ -453,7 +454,8 @@ public class TelaRelatorio extends javax.swing.JFrame {
         } else if (alunosBolsistas.isSelected() && selecaoBolsistas.getSelectedItem().equals("Integral")) {
             utilitario.geraRelatorio("relatorioAlunosBolsistasIntegral.jasper");
         } else if (relacaoAlunos.isSelected() && selecaoRelacao.getSelectedItem().equals("Todos")) {
-            utilitario.geraRelatorio("relatorioAlunos.jasper");
+            //utilitario.geraRelatorio("relatorioAlunos.jasper");
+            RelatorioDAO.getInstance().relatorioAlunos();
         } else if (relacaoAlunos.isSelected() && selecaoRelacao.getSelectedItem().equals("Masculino")) {
             utilitario.geraRelatorio("relatorioAlunosSexoMasculino.jasper");
         } else if (relacaoAlunos.isSelected() && selecaoRelacao.getSelectedItem().equals("Feminino")) {

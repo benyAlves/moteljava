@@ -1,4 +1,3 @@
-
 package br.sistcomp.sar.fachada;
 
 import br.sistcomp.sar.GUI.TelaCadastroAluno;
@@ -8,7 +7,6 @@ import br.sistcomp.sar.GUI.TelaLogin;
 import br.sistcomp.sar.GUI.TelaWebCam;
 import br.sistcomp.sar.dominio.*;
 import br.sistcomp.sar.servico.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.ImageIcon;
@@ -48,22 +46,23 @@ public class Fachada {
         }
     }
 
-    public void removerAdesao(int codAdesao){
+    public void removerAdesao(int codAdesao) {
         MensalidadeDAO.getInstance().remover(codAdesao);
         AlunoTurmaDAO.getInstance().removeAlunoDaTurma(codAdesao);
         AdesaoDAO.getInstance().remover(codAdesao);
     }
 
-    public void trocarTurma(int codAdesao, int codTurma){
+    public void trocarTurma(int codAdesao, int codTurma) {
         AlunoTurmaDAO.getInstance().editaAlunoNaTurma(codAdesao, codTurma);
     }
 
     public void editarAluno(Aluno aluno) {
         AlunoDAO.getInstance().alterar(aluno);
-        if(TelaWebCam.teste == true){
+        if (TelaWebCam.teste == true) {
             ImagemDAO.getInstance().alterarFoto(aluno.getIdPessoa());
         }
     }
+
     public void cadastrarProfessor(Professor professor) {
         ProfessorDAO.getInstance().cadastrar(professor);
         if (TelaWebCam.teste == true) {
@@ -262,38 +261,37 @@ public class Fachada {
         return AdesaoDAO.getInstance().proximoCodigo();
     }
 
-    public void abrirCaixa(){
+    public void abrirCaixa() {
         CaixaDAO.getInstance().abrirCaixa();
     }
 
+    public static boolean verificaStatus() {
+        return CaixaDAO.getInstance().verificaStatus();
+    }
 
-     public static boolean verificaStatus() {
-         return CaixaDAO.getInstance().verificaStatus();
-     }
-
-    public void fecharCaixa(){
+    public void fecharCaixa() {
         CaixaDAO.getInstance().fecharCaixa();
     }
 
-    public void retirada(Caixa caixa, Transferencia transferencia){
+    public void retirada(Caixa caixa, Transferencia transferencia) {
         TransferenciaDAO.getInstance().cadastrar(transferencia);
-        TransacaoDAO.getInstance().cadastrar(caixa,transferencia);
+        TransacaoDAO.getInstance().cadastrar(caixa, transferencia);
         CaixaDAO.getInstance().alterarSaldo(caixa, -transferencia.getValor());
     }
 
-    public void suprimento(Caixa caixa, Transferencia transferencia){
+    public void suprimento(Caixa caixa, Transferencia transferencia) {
         TransferenciaDAO.getInstance().cadastrar(transferencia);
-        TransacaoDAO.getInstance().cadastrar(caixa,transferencia);
+        TransacaoDAO.getInstance().cadastrar(caixa, transferencia);
         CaixaDAO.getInstance().alterarSaldo(caixa, transferencia.getValor());
     }
 
-    public void pagarConta(Caixa caixa, Conta conta){
+    public void pagarConta(Caixa caixa, Conta conta) {
         ContaDAO.getInstance().alterar(conta);
-        TransacaoDAO.getInstance().cadastrar(caixa,conta);
+        TransacaoDAO.getInstance().cadastrar(caixa, conta);
         CaixaDAO.getInstance().alterarSaldo(caixa, -conta.getValor());
     }
 
-    public void receberMensalidade(Caixa caixa, Mensalidade mensalidade){
+    public void receberMensalidade(Caixa caixa, Mensalidade mensalidade) {
         MensalidadeDAO.getInstance().alterar(mensalidade);
         TransacaoDAO.getInstance().cadastrar(caixa, mensalidade);
         CaixaDAO.getInstance().alterarSaldo(caixa, mensalidade.getValor());
@@ -302,45 +300,43 @@ public class Fachada {
 //    public boolean pesquisarStatusDoCaixa(Caixa caixa) {
 //        return CaixaDAO.getInstance().pesquisarStatusDoCaixa(caixa);
 //    }
-
-    public void lancarConta(Conta conta){
+    public void lancarConta(Conta conta) {
         ContaDAO.getInstance().cadastrar(conta);
     }
 
-    public Boolean liberarExclusaoModalidade(int codModalidade){
+    public Boolean liberarExclusaoModalidade(int codModalidade) {
         Boolean plano = PlanoDAO.getInstance().liberarExclusaoModalidade(codModalidade);
         Boolean professor = ProfessorDAO.getInstance().liberarExclusaoModalidade(codModalidade);
-        if (plano && professor){
+        if (plano && professor) {
             return true;
         }
         return false;
     }
 
-    public Boolean liberarExclusaoTurma(int codTurma){
+    public Boolean liberarExclusaoTurma(int codTurma) {
         return AlunoTurmaDAO.getInstance().liberarExclusaoTurma(codTurma);
     }
 
-    public Boolean liberarExclusaoPlano(int codPlano){
+    public Boolean liberarExclusaoPlano(int codPlano) {
         return AdesaoDAO.getInstance().liberarExclusaoPlano(codPlano);
     }
 
-    public Boolean liberarExclusaoAdesao(int codAdesao){
+    public Boolean liberarExclusaoAdesao(int codAdesao) {
         return MensalidadeDAO.getInstance().liberarExclusaoAdesao(codAdesao);
     }
 
-    public Boolean login(int matricula){
-        if(FuncionarioDAO.getInstance().logarFuncionario(matricula)){
+    public Boolean login(int matricula) {
+        if (FuncionarioDAO.getInstance().logarFuncionario(matricula)) {
             return true;
         }
         return false;
     }
 
-    public static Pessoa funcionarioLogado(){
+    public static Pessoa funcionarioLogado() {
         return FuncionarioDAO.getInstance().pesquisaFuncionario(TelaLogin.matricula);
     }
 
-    public Vector<Pessoa> aniversariantes(){
+    public Vector<Pessoa> aniversariantes() {
         return PessoaDAO.getInstance().aniversariantes();
     }
-
 }
