@@ -21,6 +21,11 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class Utilitario {
 
+    public static int mesAtual(){
+        GregorianCalendar calendar = new GregorianCalendar();
+        return calendar.get(GregorianCalendar.MONTH)+1;
+    }
+
     public static int retornaIdPessoa(int matricula) {
         String idPessoa = Integer.toString(matricula);
         return Integer.parseInt(idPessoa.substring(0, idPessoa.length() - 4));
