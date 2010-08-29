@@ -4,6 +4,7 @@ package br.sistcomp.sar.fachada;
 import br.sistcomp.sar.GUI.TelaCadastroAluno;
 import br.sistcomp.sar.GUI.TelaCadastroFuncionario;
 import br.sistcomp.sar.GUI.TelaCadastroProfessor;
+import br.sistcomp.sar.GUI.TelaLogin;
 import br.sistcomp.sar.GUI.TelaWebCam;
 import br.sistcomp.sar.dominio.*;
 import br.sistcomp.sar.servico.*;
@@ -316,6 +317,17 @@ public class Fachada {
 
     public Boolean liberarExclusaoAdesao(int codAdesao){
         return MensalidadeDAO.getInstance().liberarExclusaoAdesao(codAdesao);
+    }
+
+    public Boolean login(int matricula){
+        if(FuncionarioDAO.getInstance().logarFuncionario(matricula)){
+            return true;
+        }
+        return false;
+    }
+
+    public static int funcionarioLogado(){
+        return TelaLogin.matricula;
     }
 
 }

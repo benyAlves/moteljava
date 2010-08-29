@@ -5,6 +5,7 @@
  */
 package br.sistcomp.sar.GUI;
 
+import br.sistcomp.sar.fachada.Fachada;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -15,6 +16,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Jefferson Araújo
  */
 public class TelaLogin extends javax.swing.JFrame {
+
+    private Fachada fachada = new Fachada();
+    public static int matricula;
 
     /** Creates new form TelaLogin */
     public TelaLogin() {
@@ -127,8 +131,18 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginActionPerformed
-        new TelaMenuPrincipal().setVisible(true);
-        dispose();
+        if (campoLogin.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Digite o Login!", "Campo em Branco!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int mat = Integer.parseInt(campoLogin.getText());
+            if (fachada.login(mat)) {
+                matricula = mat;
+                new TelaMenuPrincipal().setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Funcionário Não Existe!");
+            }
+        }
     }//GEN-LAST:event_botaoLoginActionPerformed
 
     private void labelCreditosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCreditosMouseClicked

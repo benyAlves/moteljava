@@ -3,6 +3,7 @@ package br.sistcomp.sar.servico;
 import br.sistcomp.sar.conexao.ConexaoDB;
 import br.sistcomp.sar.dominio.Movimentacao;
 import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.fachada.Fachada;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +34,7 @@ public class MovimentacaoDAO {
             Movimentacao movimentacaoOK = (Movimentacao) movimentacao; //Validando Objeto
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             ps = (PreparedStatement) con.prepareStatement("INSERT INTO MOVIMENTACOES (matricula, valor, vencimento, hora, tipo) VALUES (?,?,?,?,?)");
-            ps.setInt(1, 20810); //GERENCIAR SECAO E TROCAR POR ESSE CODIGO: movimentacaoOK.getFuncionario().getIdPessoa()
+            ps.setInt(1, Fachada.funcionarioLogado());
             ps.setDouble(2, movimentacaoOK.getValor());
             ps.setString(3, Utilitario.dataParaBanco(movimentacaoOK.getVencimento()));
             ps.setString(4, movimentacaoOK.getHora());
@@ -86,6 +87,18 @@ public class MovimentacaoDAO {
             ps = (PreparedStatement) con.prepareStatement("UPDATE MOVIMENTACOES SET matricula = ?, hora = ? WHERE codMovimentacao = '" + movimentacaoOK.getCodMovimentacao() + "' ");
             ps.setInt(1, movimentacaoOK.getFuncionario().getIdPessoa());
             ps.setString(2, Utilitario.getHora());
+            ps.execute();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void remover(int codMovimentacao) {
+        PreparedStatement ps;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("DELETE FROM MOVIMENTACOES WHERE codMovimentacao ='" + codMovimentacao + "' ");
             ps.execute();
             con.close();
         } catch (Exception e) {

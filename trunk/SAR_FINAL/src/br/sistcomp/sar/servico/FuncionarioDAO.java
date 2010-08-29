@@ -122,7 +122,6 @@ public class FuncionarioDAO {
         return funcionarios;
     }
 
-
     //Método que remove senha da secretaria
     public void removerSecretaria(int matricula) {
         removerSenhaSecretaria(matricula);
@@ -144,7 +143,7 @@ public class FuncionarioDAO {
         return secretaria;
     }
 
-     public Vector<Pessoa> todosFuncionario() {
+    public Vector<Pessoa> todosFuncionario() {
 
         ResultSet rs, rs2;
         PreparedStatement ps, ps2;
@@ -186,5 +185,22 @@ public class FuncionarioDAO {
         return pessoas;
     }
 
+    public Boolean logarFuncionario(int matricula) {
+        ResultSet rs;
+        PreparedStatement ps;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM FUNCIONARIOS WHERE matricula = '" + matricula + "'");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+            con.close();
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }
