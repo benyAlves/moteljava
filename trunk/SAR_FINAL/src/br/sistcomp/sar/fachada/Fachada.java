@@ -21,7 +21,7 @@ public class Fachada {
         AlunoDAO.getInstance().cadastrar(aluno);
         for (Adesao adesao : aluno.getAdesoes()) {
             int codAdesao = AdesaoDAO.getInstance().aderirPlano(aluno.getIdPessoa(), adesao);
-            AlunoTurmaDAO.getInstance().insereAlunoNaTurma(aluno.getIdPessoa(), adesao.getTurma().getCodigo(), codAdesao);
+            //AlunoTurmaDAO.getInstance().insereAlunoNaTurma(aluno.getIdPessoa(), adesao.getTurma().getCodigo(), codAdesao);
             for (Mensalidade mensalidade : adesao.getMensalidades()) {
                 adesao.setCodAdesao(codAdesao);
                 mensalidade.setAdesao(adesao);
@@ -38,7 +38,7 @@ public class Fachada {
 
     public void inserirAdesao(int matricula, Adesao adesao) {
         int codAdesao = AdesaoDAO.getInstance().aderirPlano(matricula, adesao);
-        AlunoTurmaDAO.getInstance().insereAlunoNaTurma(matricula, adesao.getTurma().getCodigo(), codAdesao);
+        //AlunoTurmaDAO.getInstance().insereAlunoNaTurma(matricula, adesao.getTurma().getCodigo(), codAdesao);
         for (Mensalidade mensalidade : adesao.getMensalidades()) {
             adesao.setCodAdesao(codAdesao);
             mensalidade.setAdesao(adesao);
@@ -48,12 +48,12 @@ public class Fachada {
 
     public void removerAdesao(int codAdesao) {
         MensalidadeDAO.getInstance().remover(codAdesao);
-        AlunoTurmaDAO.getInstance().removeAlunoDaTurma(codAdesao);
+        //AlunoTurmaDAO.getInstance().removeAlunoDaTurma(codAdesao);
         AdesaoDAO.getInstance().remover(codAdesao);
     }
 
     public void trocarTurma(int codAdesao, int codTurma) {
-        AlunoTurmaDAO.getInstance().editaAlunoNaTurma(codAdesao, codTurma);
+        AdesaoDAO.getInstance().trocarTurma(codAdesao, codTurma);
     }
 
     public void editarAluno(Aluno aluno) {
@@ -314,7 +314,7 @@ public class Fachada {
     }
 
     public Boolean liberarExclusaoTurma(int codTurma) {
-        return AlunoTurmaDAO.getInstance().liberarExclusaoTurma(codTurma);
+        return AdesaoDAO.getInstance().liberarExclusaoTurma(codTurma);
     }
 
     public Boolean liberarExclusaoPlano(int codPlano) {

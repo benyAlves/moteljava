@@ -70,6 +70,7 @@ CREATE TABLE ADESOES (
         codAdesao int not null auto_increment,
 	matricula int not null,
 	codPlano int not null,
+        codTurma int not null,
         dataAdesao date not null,
         valor numeric(5,2) not null,
         desconto numeric(5,2) not null,
@@ -78,6 +79,7 @@ CREATE TABLE ADESOES (
         status bool not null,
 	FOREIGN KEY (matricula) REFERENCES alunos(matricula),
 	FOREIGN KEY (codPlano) REFERENCES planos(codPlano),
+        FOREIGN KEY (codTurma) REFERENCES turmas(codTurma),
 	PRIMARY KEY (codAdesao)
 );
 
@@ -97,15 +99,6 @@ CREATE TABLE TURMAS (
 	horaFinal time not null,
 	PRIMARY KEY (codTurma),
 	FOREIGN KEY (matricula) REFERENCES professores(matricula)
-);
-
-CREATE TABLE ALUNO_TURMA(
-	matricula int not null,
-	codTurma int not null,
-        codAdesao int not null,
-	FOREIGN KEY (matricula) REFERENCES alunos(matricula),
-	FOREIGN KEY (codTurma) REFERENCES turmas(codTurma),
-        FOREIGN KEY (codAdesao) REFERENCES ADESOES(codAdesao)
 );
 
 CREATE TABLE IMAGENS(

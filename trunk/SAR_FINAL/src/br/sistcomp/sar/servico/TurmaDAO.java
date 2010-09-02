@@ -307,7 +307,7 @@ public class TurmaDAO {
         ResultSet rs;
         PreparedStatement ps;
         ModalidadeDAO modalidade = ModalidadeDAO.getInstance();
-        AlunoTurmaDAO alunoturma = AlunoTurmaDAO.getInstance();
+        AdesaoDAO adesao = AdesaoDAO.getInstance();
         ProfessorDAO professor = ProfessorDAO.getInstance();
         List<Integer> turmas = new ArrayList<Integer>();
         int codTurma = 0, matricula = 0, codModalidade = 0;
@@ -319,7 +319,7 @@ public class TurmaDAO {
                 codTurma = rs.getInt("codTurma");
                 matricula = rs.getInt("matricula");
                 codModalidade = professor.pesquisarCodModalidade(matricula);
-                if (modalidade.alunosPorTurma(codModalidade) > alunoturma.alunosNaTurma(codTurma)) {
+                if (modalidade.alunosPorTurma(codModalidade) > adesao.alunosNaTurma(codTurma)) {
                     turmas.add(codTurma);
                 }
             }

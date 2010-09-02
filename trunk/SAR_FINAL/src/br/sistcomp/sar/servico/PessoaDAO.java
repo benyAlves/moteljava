@@ -226,7 +226,6 @@ public class PessoaDAO {
         ResultSet rs;
         PreparedStatement ps;
         Vector<Pessoa> pessoas = new Vector<Pessoa>();
-
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
             ps = (PreparedStatement) con.prepareStatement("select nome,nascimento,telefone,celular from pessoas where month(nascimento) = " + Utilitario.mesAtual() + " order by day(nascimento)");

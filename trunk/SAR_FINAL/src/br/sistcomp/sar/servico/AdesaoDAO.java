@@ -37,15 +37,16 @@ public class AdesaoDAO {
         try {
             int mat = (int) matricula;
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("INSERT INTO ADESOES (matricula, codPlano, dataAdesao, valor, desconto, parcelas, formaPagamento, status) VALUES (?,?,?,?,?,?,?,?)");
+            ps = (PreparedStatement) con.prepareStatement("INSERT INTO ADESOES (matricula, codPlano, codTurma, dataAdesao, valor, desconto, parcelas, formaPagamento, status) VALUES (?,?,?,?,?,?,?,?,?)");
             ps.setInt(1, mat);
             ps.setInt(2, adesao.getPlano().getCodigo());
-            ps.setString(3, Utilitario.dataParaBanco(Utilitario.dataDoSistema()));
-            ps.setDouble(4, adesao.getValor());
-            ps.setDouble(5, adesao.getDesconto());
-            ps.setInt(6, adesao.getParcelas());
-            ps.setString(7, adesao.getFormaDePagamento());
-            ps.setBoolean(8, adesao.getStatus());
+            ps.setInt(3, adesao.getTurma().getCodigo());
+            ps.setString(4, Utilitario.dataParaBanco(Utilitario.dataDoSistema()));
+            ps.setDouble(5, adesao.getValor());
+            ps.setDouble(6, adesao.getDesconto());
+            ps.setInt(7, adesao.getParcelas());
+            ps.setString(8, adesao.getFormaDePagamento());
+            ps.setBoolean(9, adesao.getStatus());
             ps.execute();
             con.close();
             return codAdesao;
@@ -89,11 +90,11 @@ public class AdesaoDAO {
         }
     }
 
-    public void alterarCodTurma(int matricula, int codPlano, int codTurma) {
+    public void trocarTurma(int codAdesao, int codTurma) {
         PreparedStatement ps;
         try {
             Connection con = (Connection) ConexaoDB.getInstance().getCon();
-            ps = (PreparedStatement) con.prepareStatement("UPDATE ADESOES set codTurma = ? WHERE matricula = '" + matricula + "' and codPlano = '" + codPlano + "'");
+            ps = (PreparedStatement) con.prepareStatement("UPDATE ADESOES set codTurma = ? WHERE codAdesao = '" + codAdesao + "' ");
             ps.setInt(1, codTurma);
             ps.execute();
             con.close();
@@ -154,6 +155,7 @@ public class AdesaoDAO {
                 adesao.setCodAdesao(rs.getInt("codAdesao"));
                 adesao.setMatriculaAluno(matricula);
                 adesao.setPlano(PlanoDAO.getInstance().pesquisar(rs.getInt("codPlano")));
+                adesao.setTurma(TurmaDAO.getInstance().pesquisar(rs.getInt("codTurma")));
                 adesao.setDataAdesao(Utilitario.converteDateParaString(rs.getDate("dataAdesao")));
                 adesao.setValor(rs.getDouble("valor"));
                 adesao.setDesconto(rs.getDouble("desconto"));
@@ -161,7 +163,6 @@ public class AdesaoDAO {
                 adesao.setFormaDePagamento(rs.getString("formaPagamento"));
                 adesao.setStatus(rs.getBoolean("status"));
                 //adesao.setMensalidades(MensalidadeDAO.getInstance().mensalidadesDaAdesao(rs.getInt("codAdesao")));
-                adesao.setTurma(TurmaDAO.getInstance().pesquisar(AlunoTurmaDAO.getInstance().turmaAderida(rs.getInt("codAdesao"))));
                 adesoes.add(adesao);
             }
             con.close();
@@ -185,6 +186,7 @@ public class AdesaoDAO {
                 adesao.setCodAdesao(rs.getInt("codAdesao"));
                 adesao.setMatriculaAluno(rs.getInt("matricula"));
                 adesao.setPlano(PlanoDAO.getInstance().pesquisar(rs.getInt("codPlano")));
+                adesao.setTurma(TurmaDAO.getInstance().pesquisar(rs.getInt("codTurma")));
                 adesao.setDataAdesao(Utilitario.converteDateParaString(rs.getDate("dataAdesao")));
                 adesao.setValor(rs.getDouble("valor"));
                 adesao.setDesconto(rs.getDouble("desconto"));
@@ -192,7 +194,6 @@ public class AdesaoDAO {
                 adesao.setFormaDePagamento(rs.getString("formaPagamento"));
                 adesao.setStatus(rs.getBoolean("status"));
                 //adesao.setMensalidades(MensalidadeDAO.getInstance().mensalidadesDaAdesao(rs.getInt("codAdesao")));
-                adesao.setTurma(TurmaDAO.getInstance().pesquisar(AlunoTurmaDAO.getInstance().turmaAderida(rs.getInt("codAdesao"))));
             }
             con.close();
             return adesao;
@@ -220,4 +221,46 @@ public class AdesaoDAO {
         }
         return true;
     }
+
+    public int alunosNaTurma(int codTurma) {
+        ResultSet rs;
+        PreparedStatement ps;
+        int qtde = 0;
+        List<Integer> adesoesAtivas = adesoesAtivas();
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            for (int codAdesao : adesoesAtivas){
+                ps = (PreparedStatement) con.prepareStatement("SELECT count(codTurma) FROM ADESOES WHERE codTurma ='"+codTurma+"' AND codAdesao='"+codAdesao+"' ");
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    qtde = rs.getInt("count(codTurma)");
+                }
+            }
+            con.close();
+            return qtde;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return qtde;
+    }
+
+    public Boolean liberarExclusaoTurma(int codTurma) {
+        ResultSet rs;
+        PreparedStatement ps;
+        try {
+            Connection con = (Connection) ConexaoDB.getInstance().getCon();
+            ps = (PreparedStatement) con.prepareStatement("SELECT * FROM ADESOES WHERE codTurma ='" + codTurma + "' ");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return false;
+            }
+            con.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }
