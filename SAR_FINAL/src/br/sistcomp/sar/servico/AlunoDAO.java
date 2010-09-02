@@ -201,15 +201,4 @@ public class AlunoDAO {
         return pessoas;
     }
 
-    public List<Turma> turmasDoAluno(int matricula){
-        List<Integer> codTurmas = AlunoTurmaDAO.getInstance().turmasDoAluno(matricula);
-        List<Turma> turmas = new ArrayList<Turma>();
-        Turma turma;
-        for (int i: codTurmas){
-            turma = TurmaDAO.getInstance().pesquisar(i);
-            turmas.add(turma);
-        }
-        return turmas;
-    }
-
 }
