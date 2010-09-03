@@ -66,23 +66,6 @@ CREATE TABLE PLANOS (
         UNIQUE(nome)
 );
 
-CREATE TABLE ADESOES (
-        codAdesao int not null auto_increment,
-	matricula int not null,
-	codPlano int not null,
-        codTurma int not null,
-        dataAdesao date not null,
-        valor numeric(5,2) not null,
-        desconto numeric(5,2) not null,
-        parcelas int not null,
-        formaPagamento varchar(17) not null,
-        status bool not null,
-	FOREIGN KEY (matricula) REFERENCES alunos(matricula),
-	FOREIGN KEY (codPlano) REFERENCES planos(codPlano),
-        FOREIGN KEY (codTurma) REFERENCES turmas(codTurma),
-	PRIMARY KEY (codAdesao)
-);
-
 CREATE TABLE PROFESSORES (
         idPessoa int not null,
 	matricula int not null,
@@ -119,6 +102,23 @@ CREATE TABLE DIAS (
 	domingo bool,
 	FOREIGN KEY (codTurma) REFERENCES turmas(codTurma),
 	PRIMARY KEY (codTurma)
+);
+
+CREATE TABLE ADESOES (
+        codAdesao int not null auto_increment,
+	matricula int not null,
+	codPlano int not null,
+        codTurma int not null,
+        dataAdesao date not null,
+        valor numeric(5,2) not null,
+        desconto numeric(5,2) not null,
+        parcelas int not null,
+        formaPagamento varchar(17) not null,
+        status bool not null,
+	FOREIGN KEY (matricula) REFERENCES alunos(matricula),
+	FOREIGN KEY (codPlano) REFERENCES planos(codPlano),
+        FOREIGN KEY (codTurma) REFERENCES turmas(codTurma),
+	PRIMARY KEY (codAdesao)
 );
 
 CREATE TABLE MOVIMENTACOES(
