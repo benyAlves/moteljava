@@ -223,22 +223,22 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(opcaoSemanaSegunda, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                                .addComponent(opcaoSemanaSegunda, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(opcaoSemanaTerca, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                                .addComponent(opcaoSemanaTerca, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(opcaoSemanaQuarta, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                                .addComponent(opcaoSemanaQuarta, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(opcaoSemanaQuinta, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                                .addComponent(opcaoSemanaQuinta, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(opcaoSemanaSexta, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                                .addComponent(opcaoSemanaSexta, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(76, 76, 76)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)))
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(opcaoSemanaSabado, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                        .addComponent(opcaoSemanaSabado, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(opcaoSemanaDomingo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(opcaoSemanaDomingo, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                         .addGap(18, 18, 18))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -334,8 +334,8 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(botaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -546,72 +546,74 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
     }//GEN-LAST:event_selecaoModalidadeActionPerformed
 
     public void selecinaTurma() {
-        liberar = false;
-        campoCodigo.setEditable(true);
-        campoCodigo.setText(Integer.toString((Integer) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 0)));
-        campoCodigo.setEditable(false);
-        selecaoModalidade.setSelectedItem((String) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 1));
-        List<String> dias = (List<String>) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 2);
+        if (tabelaCadastroDeTurma.getModel().getRowCount() > 0) {
+            liberar = false;
+            campoCodigo.setEditable(true);
+            campoCodigo.setText(Integer.toString((Integer) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 0)));
+            campoCodigo.setEditable(false);
+            selecaoModalidade.setSelectedItem((String) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 1));
+            List<String> dias = (List<String>) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 2);
 
 
-        if (dias.contains("Segunda")) {
-            opcaoSemanaSegunda.setSelected(true);
-        } else {
-            opcaoSemanaSegunda.setSelected(false);
+            if (dias.contains("Segunda")) {
+                opcaoSemanaSegunda.setSelected(true);
+            } else {
+                opcaoSemanaSegunda.setSelected(false);
+            }
+
+            if (dias.contains("Terca")) {
+                opcaoSemanaTerca.setSelected(true);
+            } else {
+                opcaoSemanaTerca.setSelected(false);
+            }
+
+            if (dias.contains("Quarta")) {
+                opcaoSemanaQuarta.setSelected(true);
+            } else {
+                opcaoSemanaQuarta.setSelected(false);
+            }
+
+
+            if (dias.contains("Quinta")) {
+                opcaoSemanaQuinta.setSelected(true);
+            } else {
+                opcaoSemanaQuinta.setSelected(false);
+            }
+
+            if (dias.contains("Sexta")) {
+                opcaoSemanaSexta.setSelected(true);
+            } else {
+                opcaoSemanaSexta.setSelected(false);
+            }
+
+            if (dias.contains("Sabado")) {
+                opcaoSemanaSabado.setSelected(true);
+            } else {
+                opcaoSemanaSabado.setSelected(false);
+            }
+
+            if (dias.contains("Domingo")) {
+                opcaoSemanaDomingo.setSelected(true);
+            } else {
+                opcaoSemanaDomingo.setSelected(false);
+            }
+
+            selecaoProfessor.setSelectedItem((String) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 3));
+            campoHoraInicio.setText(((String) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 4)));
+            campoHoraFim.setText(((String) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 5)));
+            campoCodigo.setEnabled(false);
+            selecaoModalidade.setEnabled(false);
+            selecaoProfessor.setEnabled(false);
+            campoHoraFim.setEnabled(false);
+            campoHoraInicio.setEnabled(false);
+            opcaoSemanaDomingo.setEnabled(false);
+            opcaoSemanaQuarta.setEnabled(false);
+            opcaoSemanaQuinta.setEnabled(false);
+            opcaoSemanaSegunda.setEnabled(false);
+            opcaoSemanaSabado.setEnabled(false);
+            opcaoSemanaSexta.setEnabled(false);
+            opcaoSemanaTerca.setEnabled(false);
         }
-
-        if (dias.contains("Terca")) {
-            opcaoSemanaTerca.setSelected(true);
-        } else {
-            opcaoSemanaTerca.setSelected(false);
-        }
-
-        if (dias.contains("Quarta")) {
-            opcaoSemanaQuarta.setSelected(true);
-        } else {
-            opcaoSemanaQuarta.setSelected(false);
-        }
-
-
-        if (dias.contains("Quinta")) {
-            opcaoSemanaQuinta.setSelected(true);
-        } else {
-            opcaoSemanaQuinta.setSelected(false);
-        }
-
-        if (dias.contains("Sexta")) {
-            opcaoSemanaSexta.setSelected(true);
-        } else {
-            opcaoSemanaSexta.setSelected(false);
-        }
-
-        if (dias.contains("Sabado")) {
-            opcaoSemanaSabado.setSelected(true);
-        } else {
-            opcaoSemanaSabado.setSelected(false);
-        }
-
-        if (dias.contains("Domingo")) {
-            opcaoSemanaDomingo.setSelected(true);
-        } else {
-            opcaoSemanaDomingo.setSelected(false);
-        }
-
-        selecaoProfessor.setSelectedItem((String) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 3));
-        campoHoraInicio.setText(((String) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 4)));
-        campoHoraFim.setText(((String) tabelaCadastroDeTurma.getValueAt(tabelaCadastroDeTurma.getSelectedRow(), 5)));
-        campoCodigo.setEnabled(false);
-        selecaoModalidade.setEnabled(false);
-        selecaoProfessor.setEnabled(false);
-        campoHoraFim.setEnabled(false);
-        campoHoraInicio.setEnabled(false);
-        opcaoSemanaDomingo.setEnabled(false);
-        opcaoSemanaQuarta.setEnabled(false);
-        opcaoSemanaQuinta.setEnabled(false);
-        opcaoSemanaSegunda.setEnabled(false);
-        opcaoSemanaSabado.setEnabled(false);
-        opcaoSemanaSexta.setEnabled(false);
-        opcaoSemanaTerca.setEnabled(false);
     }
     private void botaoEditarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarTurmaActionPerformed
         if (tabelaCadastroDeTurma.getSelectedRow() == -1) {

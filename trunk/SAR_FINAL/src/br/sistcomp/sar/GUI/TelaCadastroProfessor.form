@@ -42,8 +42,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" pref="722" max="32767" attributes="0"/>
-                  <Component id="jSeparator1" alignment="1" pref="722" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" pref="730" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" alignment="1" pref="730" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="botaoCadastrarProfessor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -152,26 +152,26 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="campoDataNascimentoProfessor" pref="139" max="32767" attributes="0"/>
+                                          <Component id="campoDataNascimentoProfessor" pref="157" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="campoEnderecoProfessor" alignment="1" pref="486" max="32767" attributes="0"/>
+                                      <Component id="campoEnderecoProfessor" alignment="1" pref="483" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="campoMatriculaProfessor" min="-2" pref="169" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="selecaoModalidadeProfessor" pref="241" max="32767" attributes="0"/>
+                                          <Component id="selecaoModalidadeProfessor" pref="252" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="campoNomeProfessor" alignment="0" pref="486" max="32767" attributes="0"/>
+                                      <Component id="campoNomeProfessor" alignment="0" pref="483" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="campoBairroProfessor" min="-2" pref="304" max="-2" attributes="1"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="campoCepProfessor" pref="147" max="32767" attributes="0"/>
+                                          <Component id="campoCepProfessor" pref="152" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Component id="campoCidadeProfessor" pref="395" max="32767" attributes="1"/>
+                                          <Component id="campoCidadeProfessor" pref="399" max="32767" attributes="1"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
@@ -179,15 +179,15 @@
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="campoCpfProfessor" pref="137" max="32767" attributes="0"/>
-                                              <Component id="campoTelefoneProfessor" alignment="1" pref="137" max="32767" attributes="0"/>
+                                              <Component id="campoCpfProfessor" pref="149" max="32767" attributes="0"/>
+                                              <Component id="campoTelefoneProfessor" alignment="1" pref="149" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Group type="102" attributes="0">
                                                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="campoIdentidadeProfessor" pref="126" max="32767" attributes="0"/>
+                                                  <Component id="campoIdentidadeProfessor" pref="140" max="32767" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
@@ -288,7 +288,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="39" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -536,7 +536,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" pref="666" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="669" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">

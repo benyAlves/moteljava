@@ -51,11 +51,15 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
         //selecaoHorario.setModel(new DefaultComboBoxModel(getTurmas()));
     }
 
-    public void proximaMatricula(){
+    public void zerarAdesoes(){
+        adesoes.clear();
+    }
+
+    public void proximaMatricula() {
         campoMatricula.setText(Integer.toString(fachada.getProximaMatricula()));
     }
 
-    public void caixaAlta(){
+    public void caixaAlta() {
         campoNomeAluno.setDocument(new CaixaAlta());
         campoEnderecoAluno.setDocument(new CaixaAlta());
         campoBairroAluno.setDocument(new CaixaAlta());
@@ -82,7 +86,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
         selecaoPlano.setModel(new DefaultComboBoxModel(planos));
     }
 
-    public void travaCampos(){
+    public void travaCampos() {
         selecaoModalidade.setEnabled(false);
         selecaoProfessor.setEnabled(false);
         selecaoPlano.setEnabled(false);
@@ -95,7 +99,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
         selecaoHorario.setEnabled(false);
     }
 
-    public void ativaCampos(){
+    public void ativaCampos() {
         selecaoModalidade.setEnabled(true);
         selecaoProfessor.setEnabled(true);
         selecaoPlano.setEnabled(true);
@@ -126,7 +130,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
         labelFoto.setIcon(new ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/semFoto.png")));
     }
 
-    public void zeraCampoModalidade() {
+    public void zerarCamposAdesoes() {
         selecaoModalidade.setSelectedIndex(0);
         selecaoHorario.setSelectedIndex(0);
         campoValor.setText("");
@@ -137,7 +141,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
         campoDiaPagamento.setText("");
     }
 
-    public void preenchePagamentos(){
+    public void preenchePagamentos() {
         selecaoPagamento.addItem("A Vista");
         selecaoPagamento.addItem("Parcelado");
         selecaoPagamento.addItem("Bolsista Parcial");
@@ -186,35 +190,35 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
     public static String getHorarioTurmas(Turma turma) {
         String dias = "", texto = "";
 
-            if (turma.getDias().get("Segunda")) {
-                dias += "Seg ";
-            }
-            if (turma.getDias().get("Terca")) {
-                dias += "Ter ";
-            }
-            if (turma.getDias().get("Quarta")) {
-                dias += "Qua ";
-            }
-            if (turma.getDias().get("Quinta")) {
-                dias += "Qui ";
-            }
-            if (turma.getDias().get("Sexta")) {
-                dias += "Sex ";
-            }
-            if (turma.getDias().get("Sabado")) {
-                dias += "Sab ";
-            }
-            if (turma.getDias().get("Domingo")) {
-                dias += "Dom ";
-            }
-         texto = turma.getCodigo() + "| " + dias + "  [" + turma.getHoraInicio().substring(0, 5) + " as " + turma.getHoraFinal().substring(0, 5) + "]";
-        
+        if (turma.getDias().get("Segunda")) {
+            dias += "Seg ";
+        }
+        if (turma.getDias().get("Terca")) {
+            dias += "Ter ";
+        }
+        if (turma.getDias().get("Quarta")) {
+            dias += "Qua ";
+        }
+        if (turma.getDias().get("Quinta")) {
+            dias += "Qui ";
+        }
+        if (turma.getDias().get("Sexta")) {
+            dias += "Sex ";
+        }
+        if (turma.getDias().get("Sabado")) {
+            dias += "Sab ";
+        }
+        if (turma.getDias().get("Domingo")) {
+            dias += "Dom ";
+        }
+        texto = turma.getCodigo() + "| " + dias + "  [" + turma.getHoraInicio().substring(0, 5) + " as " + turma.getHoraFinal().substring(0, 5) + "]";
+
 
 
         return texto;
     }
 
-    public void preencheAdesoes(){
+    public void preencheAdesoes() {
         tabelaModalidadeAluno.getColumnModel().getColumn(0);
         tabelaModalidadeAluno.getColumnModel().getColumn(1);
         tabelaModalidadeAluno.getColumnModel().getColumn(2);
@@ -234,7 +238,6 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
 
         }
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -412,7 +415,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,21 +491,21 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel22)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoIndicacao, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
-                            .addComponent(campoEnderecoAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+                                .addComponent(campoIndicacao, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+                            .addComponent(campoEnderecoAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(campoMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(campoDataMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(campoNomeAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+                            .addComponent(campoNomeAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(campoBairroAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoCepAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+                                .addComponent(campoCepAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(campoCidadeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -512,11 +515,11 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoDataNascimentoAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                                .addComponent(campoDataNascimentoAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campoCpfAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                                    .addComponent(campoTelefoneAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                                    .addComponent(campoCpfAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(campoTelefoneAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -532,7 +535,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel13)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(selecaoSexoAluno, 0, 117, Short.MAX_VALUE))
+                                        .addComponent(selecaoSexoAluno, 0, 122, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                         .addGap(3, 3, 3)
                                         .addComponent(jLabel16)
@@ -605,7 +608,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
                     .addComponent(campoIndicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Dados Cadastrais", jPanel2);
@@ -758,7 +761,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(selecaoModalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -770,7 +773,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel21)
-                            .addComponent(selecaoPlano, 0, 175, Short.MAX_VALUE)))
+                            .addComponent(selecaoPlano, 0, 158, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -805,12 +808,12 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
                                     .addComponent(selecaoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(263, 263, 263)
-                                .addComponent(botaoAdicionar1, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)))
+                                .addComponent(botaoAdicionar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .addComponent(campoParcelas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .addComponent(botaoExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))))
+                            .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(campoParcelas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                            .addComponent(botaoExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -859,7 +862,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
                     .addComponent(botaoExcluir)
                     .addComponent(botaoAdicionar1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -871,14 +874,14 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -914,8 +917,8 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botaoCadastrar)
                         .addGap(18, 18, 18)
@@ -977,7 +980,7 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
                             file = busca_foto.getSelectedFile();
                             Image image = ImageIO.read(file);
                             labelFoto.setIcon(new ImageIcon(image.getScaledInstance(labelFoto.getWidth(), labelFoto.getHeight(), image.SCALE_DEFAULT)));
-                           // ImagemDAO.getInstance().inserirFoto(Integer.parseInt(campoMatricula.getText()));
+                            // ImagemDAO.getInstance().inserirFoto(Integer.parseInt(campoMatricula.getText()));
 
                         }
                     }
@@ -1021,10 +1024,10 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
                         String email = campoEmailAluno.getText();
                         String dataNascimento = campoDataNascimentoAluno.getText();
                         String observacoes = caixaObservacoesAluno.getText();
+                        String indicacao = campoIndicacao.getText();
 
                         // SEGUNDA ABA
-
-                        String indicacao = campoIndicacao.getText();
+                        
                         String bolsista = "";
                         if (selecaoPagamento.getSelectedItem().toString().equals("Bolsista Integral")) {
                             bolsista = "integral";
@@ -1042,6 +1045,10 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
 
                         fachada.cadastraAluno(aluno);
                         zerarCampos();
+                        zerarCamposAdesoes();
+                        zerarAdesoes();
+                        preencheAdesoes();
+                        jTabbedPane1.setSelectedIndex(0);
                         proximaMatricula();
                         //prenche tabela apos cadastrar aluno
                         TelaAcessoCadastroAluno.tabelaCadastroDeAluno.getColumnModel().getColumn(0);
@@ -1056,15 +1063,26 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCadastrarActionPerformed
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
-        for (Adesao adesao: adesoes){
-            if (adesao.getPlano().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))){
-                adesoes.remove(adesao);
-                preencheAdesoes();
-                ativaCampos();
-                zeraCampoModalidade();
-                visualizar = false;
-                JOptionPane.showMessageDialog(null,"Plano Excluído");
-                break;
+        if (tabelaModalidadeAluno.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione Uma Adesão", "Adesão Não Selecionada!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Object[] options = {"Sim", "Não"};
+            int i = JOptionPane.showOptionDialog(null,
+                    "Tem certeza que deseja excluir esta Adesão?", "Confirmar Exclusão",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                    options, options[0]);
+            if (i == JOptionPane.YES_OPTION) {
+                for (Adesao adesao : adesoes) {
+                    if (adesao.getPlano().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))) {
+                        adesoes.remove(adesao);
+                        preencheAdesoes();
+                        ativaCampos();
+                        zerarCamposAdesoes();
+                        visualizar = false;
+                        JOptionPane.showMessageDialog(null, "Plano Excluído");
+                        break;
+                    }
+                }
             }
         }
     }//GEN-LAST:event_botaoExcluirActionPerformed
@@ -1110,16 +1128,14 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
     private void selecaoModalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecaoModalidadeActionPerformed
         selecaoProfessor.setModel(new DefaultComboBoxModel());
         String modalidade = selecaoModalidade.getSelectedItem().toString();
-        if (modalidade.equals("- Selecione -")) {
-        } else {
-            setProfessores(modalidade);
-            selecaoPlano.setModel(new DefaultComboBoxModel());
-            String modalidadePlano = selecaoModalidade.getSelectedItem().toString();
-            setPlanos(modalidadePlano);
+        setProfessores(modalidade);
 
-            selecaoPagamento.setModel(new DefaultComboBoxModel());
-            selecaoPagamento.addItem("- Selecione -");
-        }
+        selecaoPlano.setModel(new DefaultComboBoxModel());
+        String modalidadePlano = selecaoModalidade.getSelectedItem().toString();
+        setPlanos(modalidadePlano);
+
+        selecaoPagamento.setModel(new DefaultComboBoxModel());
+        selecaoPagamento.addItem("- Selecione -");
 
     }//GEN-LAST:event_selecaoModalidadeActionPerformed
 
@@ -1149,14 +1165,13 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_selecaoPagamentoActionPerformed
 
     private void botaoAdicionar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionar1ActionPerformed
-if (visualizar){
+        if (visualizar) {
             JOptionPane.showMessageDialog(null, "Preencha os Campos!");
             visualizar = false;
             ativaCampos();
-            zeraCampoModalidade();
-        }
-     else {
-        if (selecaoModalidade.getSelectedItem().toString().equals("- Selecione -")) {
+            zerarCamposAdesoes();
+        } else {
+            if (selecaoModalidade.getSelectedItem().toString().equals("- Selecione -")) {
                 JOptionPane.showMessageDialog(null, "Selecione uma Modalidade!");
             } else {
                 if (selecaoProfessor.getSelectedItem().toString().equals("- Selecione -")) {
@@ -1180,9 +1195,9 @@ if (visualizar){
                                     Boolean pode = true;
                                     String modalidadeSelecionada = selecaoModalidade.getSelectedItem().toString();
                                     String modalidadeAdesao = "";
-                                    for (Adesao adesao: adesoes){
+                                    for (Adesao adesao : adesoes) {
                                         modalidadeAdesao = adesao.getPlano().getModalidade().getNome();
-                                        if (modalidadeAdesao.equals(modalidadeSelecionada)){
+                                        if (modalidadeAdesao.equals(modalidadeSelecionada)) {
                                             pode = false;
                                             JOptionPane.showMessageDialog(rootPane, "O Aluno já está matriculado nessa Modalidade!");
                                             break;
@@ -1200,9 +1215,9 @@ if (visualizar){
                                         Boolean status = true;
                                         List<Mensalidade> mensalidadesPorAdesao = new ArrayList<Mensalidade>();
 
-                                        Double valorMensalidade = valor/parcelas;
+                                        Double valorMensalidade = valor / parcelas;
                                         for (int i = 0; i < parcelas; i++) {
-                                            Mensalidade mensalidade = new Mensalidade(valorMensalidade, Utilitario.somaDoMesParaVencimentoDoPlano(i),"c");
+                                            Mensalidade mensalidade = new Mensalidade(valorMensalidade, Utilitario.somaDoMesParaVencimentoDoPlano(i), "c");
                                             mensalidadesPorAdesao.add(mensalidade);
                                         }
 
@@ -1213,12 +1228,12 @@ if (visualizar){
                                         codTurma = Integer.parseInt(codigoString);
                                         Turma turma = fachada.pesquisarTurma(codTurma);
 
-                                        Adesao adesao = new Adesao(codAdesao,matriculaAluno,plano,dataAdesao,valor,desconto,parcelas,formaDePagamento,status,mensalidadesPorAdesao,turma);
+                                        Adesao adesao = new Adesao(codAdesao, matriculaAluno, plano, dataAdesao, valor, desconto, parcelas, formaDePagamento, status, mensalidadesPorAdesao, turma);
 
                                         adesoes.add(adesao);
                                         preencheAdesoes();
                                         JOptionPane.showMessageDialog(null, "Plano Adicionado com Sucesso");
-                                        zeraCampoModalidade();
+                                        zerarCamposAdesoes();
                                     }
                                 }
                             }
@@ -1235,8 +1250,8 @@ if (visualizar){
 
     private void tabelaModalidadeAlunoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaModalidadeAlunoKeyReleased
         Adesao a = null;
-        for (Adesao adesao: adesoes){
-            if (adesao.getPlano().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))){
+        for (Adesao adesao : adesoes) {
+            if (adesao.getPlano().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))) {
                 a = adesao;
                 break;
             }
@@ -1257,8 +1272,8 @@ if (visualizar){
 
     private void tabelaModalidadeAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaModalidadeAlunoMouseClicked
         Adesao a = null;
-        for (Adesao adesao: adesoes){
-            if (adesao.getPlano().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))){
+        for (Adesao adesao : adesoes) {
+            if (adesao.getPlano().getNome().equals((tabelaModalidadeAluno.getValueAt(tabelaModalidadeAluno.getSelectedRow(), 2)))) {
                 a = adesao;
                 break;
             }
@@ -1276,7 +1291,6 @@ if (visualizar){
         visualizar = true;
         travaCampos();
     }//GEN-LAST:event_tabelaModalidadeAlunoMouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAdicionar1;
     private javax.swing.JButton botaoCadastrar;

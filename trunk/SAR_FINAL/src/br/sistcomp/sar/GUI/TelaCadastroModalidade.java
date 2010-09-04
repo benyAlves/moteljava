@@ -292,23 +292,23 @@ public class TelaCadastroModalidade extends javax.swing.JFrame {
     }
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarActionPerformed
         if (editar) {
-            JOptionPane.showMessageDialog(rootPane, "Salve as Alterações Antes de Cadastrar uma Nova Modalidade!","Erro!",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Salve as Alterações Antes de Cadastrar uma Nova Modalidade!", "Erro!", JOptionPane.WARNING_MESSAGE);
         } else {
             if (liberar == false) {
-                JOptionPane.showMessageDialog(rootPane, "Preencha os Campos na Nova Modalidade!","Novo!",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Preencha os Campos na Nova Modalidade!", "Novo!", JOptionPane.INFORMATION_MESSAGE);
                 ativaCampos();
                 setValorDoCodigo();
                 zerarCampos();
                 liberar = true;
             } else {
                 if (campoNome.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(rootPane, "Digite o Nome!","Erro!",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(rootPane, "Digite o Nome!", "Erro!", JOptionPane.ERROR_MESSAGE);
                 } else {
                     if (campoAmbiente.getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(rootPane, "Digite o Ambiente!","Erro!",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(rootPane, "Digite o Ambiente!", "Erro!", JOptionPane.ERROR_MESSAGE);
                     } else {
                         if ((Integer) caixaNumeroDeAlunos.getValue() == 0) {
-                            JOptionPane.showMessageDialog(rootPane, "Digite a Quantidade de Alunos","Erro!",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(rootPane, "Digite a Quantidade de Alunos", "Erro!", JOptionPane.ERROR_MESSAGE);
                         } else {
                             int codigo = Integer.parseInt(campoCodigo.getText());
                             String nome = campoNome.getText();
@@ -325,7 +325,7 @@ public class TelaCadastroModalidade extends javax.swing.JFrame {
                             modelo.addRow(new Object[]{codigo, nome, ambiente, qtdeAlunos});
                             zerarCampos();
                             setValorDoCodigo();
-                            JOptionPane.showMessageDialog(rootPane, "Modalidade Cadastrada com Sucesso!","Sucesso!",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(rootPane, "Modalidade Cadastrada com Sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
 
@@ -342,10 +342,9 @@ public class TelaCadastroModalidade extends javax.swing.JFrame {
         caixaNumeroDeAlunos.setValue(0);
     }
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
-        if (tabelaCadastroDeModalidade.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(rootPane, "Selecione Uma Modalidade","Modalidade Não Selecionada!",JOptionPane.ERROR_MESSAGE);
-        }
-        else{
+        if (tabelaCadastroDeModalidade.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione Uma Modalidade", "Modalidade Não Selecionada!", JOptionPane.ERROR_MESSAGE);
+        } else {
             int codModalidade = (Integer) (tabelaCadastroDeModalidade.getValueAt(tabelaCadastroDeModalidade.getSelectedRow(), 0));
             if (fachada.liberarExclusaoModalidade(codModalidade)) {
                 int row = tabelaCadastroDeModalidade.getSelectedRow();
@@ -353,18 +352,17 @@ public class TelaCadastroModalidade extends javax.swing.JFrame {
                 ((DefaultTableModel) tabelaCadastroDeModalidade.getModel()).removeRow(tabelaCadastroDeModalidade.getSelectedRow());
                 fachada.removerModalidade(nome);
                 coluna = 0;
-                JOptionPane.showMessageDialog(rootPane, "Modalidade Excluída com Sucesso","Sucesso!",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Modalidade Excluída com Sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Modalidade pertence há algum Plano ou Professor!","Impossivel Remover Modalidade!",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Modalidade pertence há algum Plano ou Professor!", "Impossivel Remover Modalidade!", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_botaoRemoverActionPerformed
 
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
-        if (tabelaCadastroDeModalidade.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(rootPane, "Selecione uma Modalidade!","Impossivel Editar Modalidade!",JOptionPane.ERROR_MESSAGE);
-        }
-        else{
+        if (tabelaCadastroDeModalidade.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma Modalidade!", "Impossivel Editar Modalidade!", JOptionPane.ERROR_MESSAGE);
+        } else {
             liberar = false;
             editar = true;
             campoCodigo.setEnabled(true);
@@ -374,20 +372,22 @@ public class TelaCadastroModalidade extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoEditarActionPerformed
     public void bloquearCampos() {
-        liberar = false;
-        campoCodigo.setEditable(true);
-        campoCodigo.setText(Integer.toString((Integer) tabelaCadastroDeModalidade.getValueAt(tabelaCadastroDeModalidade.getSelectedRow(), 0)));
-        campoCodigo.setEditable(false);
-        campoNome.setText((String) tabelaCadastroDeModalidade.getValueAt(tabelaCadastroDeModalidade.getSelectedRow(), 1));
-        campoAmbiente.setText((String) tabelaCadastroDeModalidade.getValueAt(tabelaCadastroDeModalidade.getSelectedRow(), 2));
-        caixaNumeroDeAlunos.setValue((Object) tabelaCadastroDeModalidade.getValueAt(tabelaCadastroDeModalidade.getSelectedRow(), 3));
-        campoCodigo.setEnabled(false);
-        campoNome.setEnabled(false);
-        campoAmbiente.setEnabled(false);
-        caixaNumeroDeAlunos.setEnabled(false);
+        if (tabelaCadastroDeModalidade.getModel().getRowCount() > 0) {
+            liberar = false;
+            campoCodigo.setEditable(true);
+            campoCodigo.setText(Integer.toString((Integer) tabelaCadastroDeModalidade.getValueAt(tabelaCadastroDeModalidade.getSelectedRow(), 0)));
+            campoCodigo.setEditable(false);
+            campoNome.setText((String) tabelaCadastroDeModalidade.getValueAt(tabelaCadastroDeModalidade.getSelectedRow(), 1));
+            campoAmbiente.setText((String) tabelaCadastroDeModalidade.getValueAt(tabelaCadastroDeModalidade.getSelectedRow(), 2));
+            caixaNumeroDeAlunos.setValue((Object) tabelaCadastroDeModalidade.getValueAt(tabelaCadastroDeModalidade.getSelectedRow(), 3));
+            campoCodigo.setEnabled(false);
+            campoNome.setEnabled(false);
+            campoAmbiente.setEnabled(false);
+            caixaNumeroDeAlunos.setEnabled(false);
+        }
     }
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-        if (editar){
+        if (editar) {
             liberar = true;
             editar = false;
             int codigo = Integer.parseInt(campoCodigo.getText());
@@ -400,11 +400,11 @@ public class TelaCadastroModalidade extends javax.swing.JFrame {
             tabelaCadastroDeModalidade.setValueAt(qtdeAlunos, tabelaCadastroDeModalidade.getSelectedRow(), 3);
             Modalidade modalidade = new Modalidade(codigo, nome, ambiente, qtdeAlunos);
             fachada.editarModalidade(modalidade);
-            JOptionPane.showMessageDialog(rootPane, "Modalidade Salva com Sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Modalidade Salva com Sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             zerarCampos();
             setValorDoCodigo();
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Não há Modalidade em Edição!","Impossivel Salvar Modalidade!",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Não há Modalidade em Edição!", "Impossivel Salvar Modalidade!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
