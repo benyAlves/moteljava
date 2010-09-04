@@ -445,21 +445,23 @@ public class TelaCadastroPlano extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaCadastroDePlanoMousePressed
 
     public void bloquearCampos() {
-        liberar = false;
-        campoCodigo.setEditable(true);
-        campoCodigo.setText(Integer.toString((Integer) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 0)));
-        campoCodigo.setEditable(false);
-        campoNome.setText((String) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 1));
-        selecaoDuracao.setSelectedIndex((Integer) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 2));
-        selecaoModalidade.setSelectedItem((Object) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 3));
-        campoValor.setText(Double.toString((Double) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 4)));
-        selecaoStatus.setSelectedItem((Object) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 5));
-        campoCodigo.setEnabled(false);
-        campoNome.setEnabled(false);
-        selecaoDuracao.setEnabled(false);
-        selecaoModalidade.setEnabled(false);
-        campoValor.setEnabled(false);
-        selecaoStatus.setEnabled(false);
+        if (tabelaCadastroDePlano.getModel().getRowCount() > 0) {
+            liberar = false;
+            campoCodigo.setEditable(true);
+            campoCodigo.setText(Integer.toString((Integer) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 0)));
+            campoCodigo.setEditable(false);
+            campoNome.setText((String) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 1));
+            selecaoDuracao.setSelectedIndex((Integer) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 2));
+            selecaoModalidade.setSelectedItem((Object) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 3));
+            campoValor.setText(Double.toString((Double) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 4)));
+            selecaoStatus.setSelectedItem((Object) tabelaCadastroDePlano.getValueAt(tabelaCadastroDePlano.getSelectedRow(), 5));
+            campoCodigo.setEnabled(false);
+            campoNome.setEnabled(false);
+            selecaoDuracao.setEnabled(false);
+            selecaoModalidade.setEnabled(false);
+            campoValor.setEnabled(false);
+            selecaoStatus.setEnabled(false);
+        }
     }
 
     public void ativaCampos() {

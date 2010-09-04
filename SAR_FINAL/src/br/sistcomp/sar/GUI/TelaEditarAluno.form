@@ -45,8 +45,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" pref="731" max="32767" attributes="0"/>
-                  <Component id="jSeparator1" alignment="1" pref="731" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" pref="735" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" alignment="1" pref="735" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="botaoSalvar" min="-2" pref="83" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -93,7 +93,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTabbedPane1" pref="717" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane1" pref="713" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -102,7 +102,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTabbedPane1" pref="456" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane1" pref="436" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -155,23 +155,23 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="campoIndicacao" pref="208" max="32767" attributes="0"/>
+                                          <Component id="campoIndicacao" pref="212" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="campoEnderecoAluno" alignment="1" pref="495" max="32767" attributes="0"/>
+                                      <Component id="campoEnderecoAluno" alignment="1" pref="488" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="campoMatricula" min="-2" pref="169" max="-2" attributes="0"/>
-                                          <EmptySpace pref="87" max="32767" attributes="0"/>
+                                          <EmptySpace pref="91" max="32767" attributes="0"/>
                                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="campoDataMatricula" min="-2" pref="155" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="campoNomeAluno" alignment="0" pref="495" max="32767" attributes="0"/>
+                                      <Component id="campoNomeAluno" alignment="0" pref="488" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="campoBairroAluno" min="-2" pref="304" max="-2" attributes="1"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="campoCepAluno" pref="156" max="32767" attributes="0"/>
+                                          <Component id="campoCepAluno" pref="157" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="campoCidadeAluno" min="-2" pref="162" max="-2" attributes="1"/>
@@ -182,12 +182,12 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="campoDataNascimentoAluno" pref="130" max="32767" attributes="0"/>
+                                          <Component id="campoDataNascimentoAluno" pref="149" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="campoCpfAluno" pref="144" max="32767" attributes="0"/>
-                                              <Component id="campoTelefoneAluno" alignment="1" pref="144" max="32767" attributes="0"/>
+                                              <Component id="campoCpfAluno" pref="150" max="32767" attributes="0"/>
+                                              <Component id="campoTelefoneAluno" alignment="1" pref="150" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -207,7 +207,7 @@
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="selecaoSexoAluno" pref="117" max="32767" attributes="0"/>
+                                                  <Component id="selecaoSexoAluno" pref="122" max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
                                                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
@@ -301,7 +301,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="24" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -590,7 +590,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" pref="675" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="674" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -634,7 +634,7 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                      <Color id="Cursor padr&#xe3;o"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -721,7 +721,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jScrollPane2" alignment="0" pref="703" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" pref="686" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="selecaoModalidade" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
@@ -740,7 +740,7 @@
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel21" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="selecaoPlano" alignment="0" pref="175" max="32767" attributes="0"/>
+                                      <Component id="selecaoPlano" alignment="0" pref="158" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -786,14 +786,14 @@
                                           <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
                                           <Component id="alterarTurma" min="-2" pref="83" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="botaoAdicionar1" pref="81" max="32767" attributes="0"/>
+                                          <Component id="botaoAdicionar1" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel27" alignment="1" pref="83" max="32767" attributes="1"/>
-                                      <Component id="campoParcelas" alignment="0" pref="83" max="32767" attributes="0"/>
-                                      <Component id="botaoExcluir" alignment="1" pref="83" max="32767" attributes="0"/>
+                                      <Component id="jLabel27" alignment="1" max="32767" attributes="1"/>
+                                      <Component id="campoParcelas" alignment="0" pref="70" max="32767" attributes="0"/>
+                                      <Component id="botaoExcluir" alignment="1" pref="70" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -858,7 +858,7 @@
                               <Component id="alterarTurma" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" pref="246" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="243" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -997,7 +997,7 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                      <Format format="" subtype="-1" type="5"/>
+                      <Format format="##/##/####" subtype="-1" type="5"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                   </Properties>
@@ -1009,7 +1009,7 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                      <Color id="Cursor padr&#xe3;o"/>
                     </Property>
                   </Properties>
                 </Component>

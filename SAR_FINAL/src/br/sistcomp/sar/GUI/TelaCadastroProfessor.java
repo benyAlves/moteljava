@@ -20,10 +20,11 @@ import javax.swing.table.DefaultTableModel;
  * @author Jefferson Araujo.
  */
 public class TelaCadastroProfessor extends javax.swing.JFrame {
-  
+
     private boolean entrou;
     public static File file = new File(System.getProperty("user.dir") + "\\src\\br\\sistcomp\\sar\\imagens\\semFoto.png");
     Fachada fachada = new Fachada();
+
     /** Creates new form TelaCadastroAluno */
     public TelaCadastroProfessor() {
         initComponents();
@@ -32,13 +33,15 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
         setModalidades();
         proximaMatricula();
     }
-     public void caixaAlta(){
+
+    public void caixaAlta() {
         campoNomeProfessor.setDocument(new CaixaAlta());
         campoEnderecoProfessor.setDocument(new CaixaAlta());
         campoBairroProfessor.setDocument(new CaixaAlta());
         campoCidadeProfessor.setDocument(new CaixaAlta());
 
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -176,7 +179,7 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,37 +249,37 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoDataNascimentoProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
-                            .addComponent(campoEnderecoProfessor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                                .addComponent(campoDataNascimentoProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
+                            .addComponent(campoEnderecoProfessor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(campoMatriculaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(selecaoModalidadeProfessor, 0, 241, Short.MAX_VALUE))
-                            .addComponent(campoNomeProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                                .addComponent(selecaoModalidadeProfessor, 0, 252, Short.MAX_VALUE))
+                            .addComponent(campoNomeProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(campoBairroProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoCepProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
+                                .addComponent(campoCepProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(campoCidadeProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                                .addComponent(campoCidadeProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(selecaoEstadoProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campoCpfProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                                    .addComponent(campoTelefoneProfessor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+                                    .addComponent(campoCpfProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                                    .addComponent(campoTelefoneProfessor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel15)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(campoIdentidadeProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                                        .addComponent(campoIdentidadeProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel16)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -355,7 +358,7 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
                     .addComponent(campoDataNascimentoProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Dados Cadastrais", jPanel2);
@@ -409,8 +412,8 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botaoCadastrarProfessor)
                         .addGap(18, 18, 18)
@@ -436,12 +439,13 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     public void proximaMatricula(){
+    public void proximaMatricula() {
         campoMatriculaProfessor.setText(Integer.toString(fachada.getProximaMatricula()));
     }
-    public void setModalidades(){
+
+    public void setModalidades() {
         Vector<String> nomes = fachada.getNomesModalidades();
-        nomes.add(0,"- Selecione -");
+        nomes.add(0, "- Selecione -");
         selecaoModalidadeProfessor.setModel(new DefaultComboBoxModel(nomes));
     }
 
@@ -457,7 +461,7 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoVoltarProfessorActionPerformed
 
     private void botaoInserirFotoProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInserirFotoProfessorActionPerformed
-        
+
         String opcoes[] = {"1. Da WebCam", "2. Do Arquivo"};
         String op = (String) JOptionPane.showInputDialog(null, "Escolha uma Opção", "Inserir Imagem", JOptionPane.INFORMATION_MESSAGE, null, opcoes, "1. teste");
         if (op != null) {
@@ -492,61 +496,59 @@ public class TelaCadastroProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoInserirFotoProfessorActionPerformed
 
     private void botaoCadastrarProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarProfessorActionPerformed
-        if (campoNomeProfessor.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Digite o Nome");
-        }
-        else {
-            if (campoDataNascimentoProfessor.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Digite a Data do Nascimento");
-            }
-            else {
-                if (campoCpfProfessor.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null,"Digite o CPF");
-                }
-                else {
-                    if (campoIdentidadeProfessor.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Digite a Identidade");
+        if (campoNomeProfessor.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Digite o Nome");
+        } else {
+            if (campoDataNascimentoProfessor.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Digite a Data do Nascimento");
+            } else {
+                if (campoCpfProfessor.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Digite o CPF");
+                } else {
+                    if (campoIdentidadeProfessor.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Digite a Identidade");
+                    } else {
+                        if (selecaoModalidadeProfessor.getSelectedItem().toString().equals("- Selecione -")) {
+                            JOptionPane.showMessageDialog(null, "Selecione uma Modalidade!");
+                        } else {
+                            if (Utilitario.validarData(campoDataNascimentoProfessor.getText()) == false) {
+                                JOptionPane.showMessageDialog(null, "Data Inválida");
+                            } else {
+                                int matricula = Integer.parseInt(campoMatriculaProfessor.getText());
+                                String modalidadeProfessor = selecaoModalidadeProfessor.getSelectedItem().toString();
+                                String nomeProfessor = campoNomeProfessor.getText();
+                                String endereco = campoEnderecoProfessor.getText();
+                                String bairro = campoBairroProfessor.getText();
+                                String cep = campoCepProfessor.getText();
+                                String cidade = campoCidadeProfessor.getText();
+                                String estado = selecaoEstadoProfessor.getSelectedItem().toString();
+                                String telefone = campoTelefoneProfessor.getText();
+                                String celular = campoCelularProfessor.getText();
+                                String sexo = selecaoSexoProfessor.getSelectedItem().toString();
+                                String cpf = campoCpfProfessor.getText();
+                                String identidade = campoIdentidadeProfessor.getText();
+                                String orgaoEmissor = selecaoOrgaoEmissorProfessor.getSelectedItem().toString();
+                                String email = campoEmailProfessor.getText();
+                                String dataNascimento = campoDataNascimentoProfessor.getText();
+                                String observacoes = caixaObservacoesProfessor.getText();
+
+                                Professor professor = new Professor(matricula, nomeProfessor, email, dataNascimento, sexo, cpf, identidade,
+                                        orgaoEmissor, endereco, bairro, cidade, estado, cep, telefone, celular, observacoes, fachada.getModalidade(modalidadeProfessor));
+
+                                fachada.cadastrarProfessor(professor);
+                                TelaAcessoCadastroProfessor.tabelaAcessoProfessor.getColumnModel().getColumn(0);
+                                TelaAcessoCadastroProfessor.tabelaAcessoProfessor.getColumnModel().getColumn(1);
+                                TelaAcessoCadastroProfessor.tabelaAcessoProfessor.getColumnModel().getColumn(2);
+                                DefaultTableModel modelo = (DefaultTableModel) TelaAcessoCadastroProfessor.tabelaAcessoProfessor.getModel();
+                                modelo.addRow(new Object[]{professor.getIdPessoa(), professor.getNome(), professor.getTelefone()});
+                                zerarCampos();
+                                proximaMatricula();
+                            }
+                        }
                     }
-                    else {
-                         if (selecaoModalidadeProfessor.getSelectedItem().toString().equals("- Selecione -"))   {
-                             JOptionPane.showMessageDialog(null,"Selecione uma Modalidade!");
-                         }
-                        else {
-                            int matricula = Integer.parseInt(campoMatriculaProfessor.getText());
-                            String modalidadeProfessor = selecaoModalidadeProfessor.getSelectedItem().toString();
-                            String nomeProfessor = campoNomeProfessor.getText();
-                            String endereco = campoEnderecoProfessor.getText();
-                            String bairro = campoBairroProfessor.getText();
-                            String cep = campoCepProfessor.getText();
-                            String cidade = campoCidadeProfessor.getText();
-                            String estado = selecaoEstadoProfessor.getSelectedItem().toString();
-                            String telefone = campoTelefoneProfessor.getText();
-                            String celular = campoCelularProfessor.getText();
-                            String sexo = selecaoSexoProfessor.getSelectedItem().toString();
-                            String cpf = campoCpfProfessor.getText();
-                            String identidade = campoIdentidadeProfessor.getText();
-                            String orgaoEmissor = selecaoOrgaoEmissorProfessor.getSelectedItem().toString();
-                            String email = campoEmailProfessor.getText();
-                            String dataNascimento = campoDataNascimentoProfessor.getText();
-                            String observacoes = caixaObservacoesProfessor.getText();
-
-                            Professor professor = new Professor(matricula, nomeProfessor, email, dataNascimento, sexo, cpf, identidade,
-                                    orgaoEmissor, endereco, bairro, cidade, estado, cep, telefone, celular, observacoes, fachada.getModalidade(modalidadeProfessor));
-
-                            fachada.cadastrarProfessor(professor);
-                            TelaAcessoCadastroProfessor.tabelaAcessoProfessor.getColumnModel().getColumn(0) ;
-                            TelaAcessoCadastroProfessor.tabelaAcessoProfessor.getColumnModel().getColumn(1);
-                            TelaAcessoCadastroProfessor.tabelaAcessoProfessor.getColumnModel().getColumn(2);
-                            DefaultTableModel modelo = (DefaultTableModel) TelaAcessoCadastroProfessor.tabelaAcessoProfessor.getModel();
-                            modelo.addRow(new Object[]{professor.getIdPessoa(), professor.getNome(),professor.getTelefone()});
-                            zerarCampos();
-                            proximaMatricula();
-                                                    }
-                    }
                 }
             }
         }
-
     }//GEN-LAST:event_botaoCadastrarProfessorActionPerformed
 
     public void zerarCampos() {

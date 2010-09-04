@@ -50,8 +50,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" pref="722" max="32767" attributes="0"/>
-                  <Component id="jSeparator1" alignment="1" pref="722" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" pref="730" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" alignment="1" pref="730" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="botaoCadastrar" min="-2" pref="83" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -140,25 +140,25 @@
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="opcaoSemanaSegunda" pref="35" max="32767" attributes="0"/>
+                                  <Component id="opcaoSemanaSegunda" pref="40" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Component id="opcaoSemanaTerca" pref="32" max="32767" attributes="0"/>
+                                  <Component id="opcaoSemanaTerca" pref="40" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Component id="opcaoSemanaQuarta" pref="34" max="32767" attributes="0"/>
+                                  <Component id="opcaoSemanaQuarta" pref="39" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Component id="opcaoSemanaQuinta" pref="34" max="32767" attributes="0"/>
+                                  <Component id="opcaoSemanaQuinta" pref="39" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Component id="opcaoSemanaSexta" pref="35" max="32767" attributes="0"/>
+                                  <Component id="opcaoSemanaSexta" pref="40" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="76" pref="76" max="76" attributes="0"/>
-                                  <Component id="jLabel6" pref="118" max="32767" attributes="0"/>
+                                  <Component id="jLabel6" pref="122" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="opcaoSemanaSabado" pref="31" max="32767" attributes="0"/>
+                          <Component id="opcaoSemanaSabado" pref="37" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="opcaoSemanaDomingo" max="32767" attributes="0"/>
+                          <Component id="opcaoSemanaDomingo" pref="37" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -273,7 +273,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value=" Professor"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor padr&#xe3;o"/>
             </Property>
             <Property name="verticalTextPosition" type="int" value="1"/>
           </Properties>
@@ -347,7 +347,7 @@
             <Property name="text" type="java.lang.String" value="S"/>
             <Property name="toolTipText" type="java.lang.String" value="Segunda"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor padr&#xe3;o"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>

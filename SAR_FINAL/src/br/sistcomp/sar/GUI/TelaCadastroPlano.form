@@ -31,8 +31,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" pref="722" max="32767" attributes="0"/>
-                  <Component id="jSeparator1" alignment="1" pref="722" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" pref="714" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" alignment="1" pref="714" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="botaoCadastrar" min="-2" pref="83" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -89,13 +89,13 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="708" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="692" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                      <Component id="selecaoModalidade" pref="346" max="32767" attributes="0"/>
+                                      <Component id="selecaoModalidade" pref="330" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -111,7 +111,7 @@
                                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="campoNome" pref="331" max="32767" attributes="0"/>
+                                      <Component id="campoNome" pref="315" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -178,7 +178,7 @@
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="344" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="334" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
