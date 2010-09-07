@@ -6,8 +6,12 @@
  */
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.Utilitario;
-import br.sistcomp.sar.servico.RelatorioDAO;
+import br.sistcomp.sar.fachada.Fachada;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -15,10 +19,13 @@ import br.sistcomp.sar.servico.RelatorioDAO;
  */
 public class TelaRelatorio extends javax.swing.JFrame {
 
+    Fachada fachada;
+
     /** Creates new form TelaAcessoModuloRelatorio */
     public TelaRelatorio() {
         initComponents();
         setLocationRelativeTo(null);
+        fachada = new Fachada();
     }
 
     @SuppressWarnings("unchecked")
@@ -335,6 +342,26 @@ public class TelaRelatorio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setModalidade() {
+        Vector<String> modalidades = fachada.getNomesModalidades();
+        modalidades.add(0, "- Selecione -");
+        selecaoModalidade.setModel(new DefaultComboBoxModel(modalidades));
+    }
+
+    public void visualizarRelatorio(JasperPrint relatorio) {
+
+        try {
+            JasperViewer jrv = new JasperViewer(relatorio, false);
+            jrv.resize(850, 650);
+            jrv.setLocationRelativeTo(null);
+            jrv.setVisible(true);
+
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Não foi possível visualizar o Relatório");
+        }
+    }
+
     public void atualizaCampos() {
         relacaoAlunos.setSelected(false);
         alunosHorario.setSelected(false);
@@ -352,7 +379,18 @@ public class TelaRelatorio extends javax.swing.JFrame {
         campoIdadeInicio.setEnabled(true);
     }
 
+    public void zeraCampos() {
+        selecaoBolsistas.setSelectedIndex(0);
+        selecaoAniversariantes.setSelectedIndex(0);
+        selecaoModalidade.setSelectedIndex(0);
+        selecaoRelacao.setSelectedIndex(0);
+        campoHorario.setText("");
+        campoIdadeFim.setText("");
+        campoIdadeInicio.setText("");
+    }
+
     private void itemAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAlunosActionPerformed
+        setModalidade();
         ((java.awt.CardLayout) painelPrincipal.getLayout()).show(painelPrincipal, "painelAlunos");
     }//GEN-LAST:event_itemAlunosActionPerformed
 
@@ -363,6 +401,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
     private void alunosBolsistasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunosBolsistasMouseClicked
         if (alunosBolsistas.isSelected()) {
+            zeraCampos();
             selecaoBolsistas.setEnabled(true);
             selecaoAniversariantes.setEnabled(false);
             selecaoModalidade.setEnabled(false);
@@ -375,6 +414,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
     private void relacaoAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_relacaoAlunosMouseClicked
         if (relacaoAlunos.isSelected()) {
+            zeraCampos();
             selecaoAniversariantes.setEnabled(false);
             selecaoModalidade.setEnabled(false);
             selecaoBolsistas.setEnabled(false);
@@ -387,6 +427,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
     private void alunosHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunosHorarioMouseClicked
         if (alunosHorario.isSelected()) {
+            zeraCampos();
             selecaoBolsistas.setEnabled(false);
             selecaoAniversariantes.setEnabled(false);
             selecaoModalidade.setEnabled(false);
@@ -399,6 +440,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
     private void alunosAniversariantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunosAniversariantesMouseClicked
         if (alunosAniversariantes.isSelected()) {
+            zeraCampos();
             selecaoAniversariantes.setEnabled(true);
             selecaoModalidade.setEnabled(false);
             selecaoBolsistas.setEnabled(false);
@@ -411,6 +453,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
     private void alunosIdadeEntreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunosIdadeEntreMouseClicked
         if (alunosIdadeEntre.isSelected()) {
+            zeraCampos();
             selecaoAniversariantes.setEnabled(false);
             selecaoModalidade.setEnabled(false);
             selecaoBolsistas.setEnabled(false);
@@ -423,6 +466,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
     private void alunosModalidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunosModalidadeMouseClicked
         if (alunosModalidade.isSelected()) {
+            zeraCampos();
             selecaoAniversariantes.setEnabled(false);
             selecaoModalidade.setEnabled(true);
             selecaoBolsistas.setEnabled(false);
@@ -435,6 +479,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
     private void alunosPlanosVencidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunosPlanosVencidosMouseClicked
         if (alunosPlanosVencidos.isSelected()) {
+            zeraCampos();
             selecaoBolsistas.setEnabled(false);
             selecaoAniversariantes.setEnabled(false);
             selecaoModalidade.setEnabled(false);
@@ -446,49 +491,80 @@ public class TelaRelatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_alunosPlanosVencidosMouseClicked
 
     private void botaoGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {
-        Utilitario utilitario = new Utilitario();
-        if (alunosBolsistas.isSelected() && selecaoBolsistas.getSelectedItem().equals("Todos")) {
-            utilitario.geraRelatorio("relatorioAlunosBolsistas.jasper");
-        } else if (alunosBolsistas.isSelected() && selecaoBolsistas.getSelectedItem().equals("Parcial")) {
-            utilitario.geraRelatorio("relatorioAlunosBolsistasParcial.jasper");
-        } else if (alunosBolsistas.isSelected() && selecaoBolsistas.getSelectedItem().equals("Integral")) {
-            utilitario.geraRelatorio("relatorioAlunosBolsistasIntegral.jasper");
-        } else if (relacaoAlunos.isSelected() && selecaoRelacao.getSelectedItem().equals("Todos")) {
-            utilitario.geraRelatorio("relatorioTodosAlunos.jasper");
-            //RelatorioDAO.getInstance().relatorioAlunos();
-        } else if (relacaoAlunos.isSelected() && selecaoRelacao.getSelectedItem().equals("Masculino")) {
-            utilitario.geraRelatorio("relatorioAlunosSexoMasculino.jasper");
-        } else if (relacaoAlunos.isSelected() && selecaoRelacao.getSelectedItem().equals("Feminino")) {
-            utilitario.geraRelatorio("relatorioAlunosSexoFeminino.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Janeiro")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesJaneiro.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Fevereiro")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesFevereiro.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Março")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesMarco.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Abril")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesAbril.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Maio")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesMaio.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Junho")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesJunho.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Julho")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesJulho.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Agosto")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesAgosto.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Setembro")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesSetembro.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Outubro")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesOutubro.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Novembro")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesNovembro.jasper");
-        } else if (alunosAniversariantes.isSelected() && selecaoAniversariantes.getSelectedItem().equals("Dezembro")) {
-            utilitario.geraRelatorio("relatorioAlunosAniversariantesDezembro.jasper");
+        //------------------------------------------------------------------
+        // RELATORIO DE ALUNOS BOLSISTAS
+        if (alunosBolsistas.isSelected()) {
+            try {
+                if (selecaoBolsistas.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(null, "Escolha uma opção válida.");
+                } else {
+                    visualizarRelatorio(fachada.relatorioBolsista(selecaoBolsistas.getSelectedItem().toString()));
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Relatório não pode ser carregado !!!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            //------------------------------------------------------------------
+            // RELATORIO DE ALUNOS GERAL
+        } else if (relacaoAlunos.isSelected()) {
+            try {
+                if (selecaoRelacao.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(null, "Escolha uma opção válida.");
+                } else {
+                    visualizarRelatorio(fachada.relatorioTodosAlunos(selecaoRelacao.getSelectedItem().toString()));
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Relatório não pode ser carregado !!!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            //------------------------------------------------------------------
+            // RELATORIO DE ALUNOS ANIVERSARIANTES
+        } else if (alunosAniversariantes.isSelected()) {
+            try {
+                if (selecaoAniversariantes.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(null, "Escolha uma opção válida.");
+                } else {
+                    visualizarRelatorio(fachada.relatorioAniversariantes(selecaoAniversariantes.getSelectedIndex()));
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Relatório não pode ser carregado !!!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            //------------------------------------------------------------------
+            // RELATORIO DE ALUNOS POR MODALIDADE
         } else if (alunosModalidade.isSelected()) {
-            utilitario.geraRelatorio("relatorioAlunosPorModalidade.jasper");
+            try {
+                if (selecaoModalidade.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(null, "Escolha uma opção válida.");
+                } else {
+                    visualizarRelatorio(fachada.relatorioModalidade(selecaoModalidade.getSelectedItem().toString()));
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Relatório não pode ser carregado !!!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            //------------------------------------------------------------------
+            // RELATORIO DE ALUNOS COM PLANOS VENCIDOS
         } else if (alunosPlanosVencidos.isSelected()) {
-            utilitario.geraRelatorio("relatorioAlunoComPlanosVencidos.jasper");
+            try {
+                visualizarRelatorio(fachada.relatorioPlanosVencidos());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Relatório não pode ser carregado !!!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            //------------------------------------------------------------------
+            // RELATORIO DE ALUNOS POR HORÁRIO
+        } else if (alunosHorario.isSelected()) {
+            try {
+                visualizarRelatorio(fachada.relatorioHorario(campoHorario.getText()));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Relatório não pode ser carregado !!!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+            //------------------------------------------------------------------
+            // RELATORIO DE ALUNOS POR IDADE
+        } else if (alunosIdadeEntre.isSelected()) {
+            try {
+                visualizarRelatorio(fachada.relatorioIdade(campoIdadeInicio.getText(), campoIdadeFim.getText()));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Relatório não pode ser carregado !!!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
+        zeraCampos();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton alunosAniversariantes;
