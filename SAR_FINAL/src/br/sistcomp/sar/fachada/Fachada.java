@@ -10,6 +10,7 @@ import br.sistcomp.sar.servico.*;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.ImageIcon;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  *
@@ -338,5 +339,33 @@ public class Fachada {
 
     public Vector<Pessoa> aniversariantes() {
         return PessoaDAO.getInstance().aniversariantes();
+    }
+
+    public JasperPrint relatorioAniversariantes(int mes) throws Exception {
+        return RelatorioDAO.getInstance().relatorioAniversariantes(mes);
+    }
+
+    public JasperPrint relatorioTodosAlunos(String tipo) throws Exception {
+        return RelatorioDAO.getInstance().relatorioTodosAlunos(tipo);
+    }
+
+    public JasperPrint relatorioModalidade(String modalidade) throws Exception {
+        return RelatorioDAO.getInstance().relatorioModalidade(modalidade);
+    }
+
+    public JasperPrint relatorioBolsista(String tipo) throws Exception {
+        return RelatorioDAO.getInstance().relatorioBolsista(tipo);
+    }
+
+    public JasperPrint relatorioPlanosVencidos() throws Exception {
+        return RelatorioDAO.getInstance().relatorioPlanosVencidos();
+    }
+
+    public JasperPrint relatorioHorario(String horaInicio) throws Exception {
+        return RelatorioDAO.getInstance().relatorioHorario(horaInicio);
+    }
+
+    public JasperPrint relatorioIdade(String idadeInicial, String idadeFinal) throws Exception {
+        return RelatorioDAO.getInstance().relatorioIdade(idadeInicial, idadeFinal);
     }
 }

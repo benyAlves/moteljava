@@ -12,10 +12,14 @@ import br.sistcomp.sar.dominio.Utilitario;
 import br.sistcomp.sar.fachada.Fachada;
 import java.awt.Image;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
@@ -39,6 +43,17 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         linkData.setText("Hoje é " + utilitario.dia + " de " + utilitario.mes + " de " + utilitario.ano);
         tabelaContasReceber.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+    }
+
+    public void visualizarRelatorio(JasperPrint relatorio) {
+        try {
+            JRViewer jrviewer = new JRViewer(relatorio);
+            jrviewer.setBounds(1, 1, 788, 459);
+            jrviewer.setVisible(true);
+            subPainelRelatorio.add(jrviewer);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Não foi possível visualizar o Relatório");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -250,6 +265,8 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         botaoGeraRelatorioFluxo = new javax.swing.JButton();
         jXPanel1 = new org.jdesktop.swingx.JXPanel();
         jLabel66 = new javax.swing.JLabel();
+        painelRelatorio = new javax.swing.JInternalFrame();
+        subPainelRelatorio = new org.jdesktop.swingx.JXPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciamento Financeiro");
@@ -1173,7 +1190,6 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         painelMovimentacaoDoCaixa.setClosable(true);
         painelMovimentacaoDoCaixa.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         painelMovimentacaoDoCaixa.setIconifiable(true);
-        painelMovimentacaoDoCaixa.setMaximizable(true);
         painelMovimentacaoDoCaixa.setTitle("Movimentação do Caixa");
 
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/financas.png"))); // NOI18N
@@ -1261,6 +1277,11 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         linkRelatorio.setClickedColor(new java.awt.Color(0, 51, 255));
         linkRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sistcomp/sar/imagens/relatorio.png"))); // NOI18N
         linkRelatorio.setText("Relatório");
+        linkRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkRelatorioActionPerformed(evt);
+            }
+        });
         jXTaskPane1.getContentPane().add(linkRelatorio);
 
         jXTaskPaneContainer2.add(jXTaskPane1);
@@ -1344,7 +1365,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         labelAbertura.setText("Abertura:");
@@ -1406,18 +1427,19 @@ public class TelaFinanceiro extends javax.swing.JFrame {
                     .addGroup(painelMovimentacaoDoCaixaLayout.createSequentialGroup()
                         .addGroup(painelMovimentacaoDoCaixaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(painelMovimentacaoDoCaixaLayout.createSequentialGroup()
-                                .addComponent(jLabel28)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE))
+                                .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(11, 11, 11))
                             .addGroup(painelMovimentacaoDoCaixaLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
                                 .addGroup(painelMovimentacaoDoCaixaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel34)
-                                    .addComponent(jLabel35)
-                                    .addComponent(jLabel36))
+                                    .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(painelMovimentacaoDoCaixaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(selecaoFiltra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(selecaoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(selecaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(selecaoFiltra)
+                                    .addComponent(selecaoMostrar)
+                                    .addComponent(selecaoFuncionario))
                                 .addGap(18, 18, 18)))
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -2110,6 +2132,41 @@ public class TelaFinanceiro extends javax.swing.JFrame {
         jXPanel1.setBounds(200, 170, 410, 160);
         jDesktopPane1.add(jXPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        painelRelatorio.setClosable(true);
+        painelRelatorio.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        painelRelatorio.setIconifiable(true);
+        painelRelatorio.setMaximizable(true);
+        painelRelatorio.setTitle("Relatório");
+
+        javax.swing.GroupLayout subPainelRelatorioLayout = new javax.swing.GroupLayout(subPainelRelatorio);
+        subPainelRelatorio.setLayout(subPainelRelatorioLayout);
+        subPainelRelatorioLayout.setHorizontalGroup(
+            subPainelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 788, Short.MAX_VALUE)
+        );
+        subPainelRelatorioLayout.setVerticalGroup(
+            subPainelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 459, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout painelRelatorioLayout = new javax.swing.GroupLayout(painelRelatorio.getContentPane());
+        painelRelatorio.getContentPane().setLayout(painelRelatorioLayout);
+        painelRelatorioLayout.setHorizontalGroup(
+            painelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 788, Short.MAX_VALUE)
+            .addGroup(painelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(subPainelRelatorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        painelRelatorioLayout.setVerticalGroup(
+            painelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 459, Short.MAX_VALUE)
+            .addGroup(painelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(subPainelRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        painelRelatorio.setBounds(0, 0, 800, 490);
+        jDesktopPane1.add(painelRelatorio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -2539,6 +2596,15 @@ public class TelaFinanceiro extends javax.swing.JFrame {
             campoValorInicialDoCaixa.setText("0.00");
         }
     }//GEN-LAST:event_selecaoFormaDeAbrirActionPerformed
+
+    private void linkRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkRelatorioActionPerformed
+        try {
+            visualizarRelatorio(fachada.relatorioTodosAlunos("Todos"));
+            painelRelatorio.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(TelaFinanceiro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_linkRelatorioActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAbreCaixa;
     private javax.swing.JButton botaoAbreCaixaAberturaDoCaixa;
@@ -2729,6 +2795,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     private javax.swing.JInternalFrame painelFluxoCaixa;
     private javax.swing.JInternalFrame painelMovimentacaoDoCaixa;
     private javax.swing.JInternalFrame painelPesquisar;
+    private javax.swing.JInternalFrame painelRelatorio;
     private javax.swing.JInternalFrame painelRetiradaCaixa;
     private javax.swing.JInternalFrame painelSaldoDetalhado;
     private javax.swing.JInternalFrame painelSuprimentoCaixa;
@@ -2740,6 +2807,7 @@ public class TelaFinanceiro extends javax.swing.JFrame {
     private javax.swing.JComboBox selecaoFuncionario;
     private javax.swing.JComboBox selecaoMes;
     private javax.swing.JComboBox selecaoMostrar;
+    private org.jdesktop.swingx.JXPanel subPainelRelatorio;
     private javax.swing.JTable tabelaAnaliseFinanceira;
     private javax.swing.JTable tabelaContasPagar;
     public static javax.swing.JTable tabelaContasReceber;
