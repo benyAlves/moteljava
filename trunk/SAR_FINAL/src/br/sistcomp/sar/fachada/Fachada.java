@@ -1,5 +1,6 @@
 package br.sistcomp.sar.fachada;
 
+import br.sistcomp.sar.utilidades.Utilitario;
 import br.sistcomp.sar.GUI.TelaCadastroAluno;
 import br.sistcomp.sar.GUI.TelaCadastroFuncionario;
 import br.sistcomp.sar.GUI.TelaCadastroProfessor;

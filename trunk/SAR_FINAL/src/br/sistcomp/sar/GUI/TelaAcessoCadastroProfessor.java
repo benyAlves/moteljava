@@ -5,10 +5,10 @@
  */
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.CaixaAlta;
+import br.sistcomp.sar.utilidades.CaixaAlta;
 import br.sistcomp.sar.dominio.Pessoa;
 import br.sistcomp.sar.dominio.Professor;
-import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.utilidades.Utilitario;
 import br.sistcomp.sar.fachada.Fachada;
 import br.sistcomp.sar.servico.TurmaDAO;
 import java.awt.Image;

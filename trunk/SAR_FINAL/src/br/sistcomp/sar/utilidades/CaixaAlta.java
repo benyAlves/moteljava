@@ -1,4 +1,4 @@
-package br.sistcomp.sar.dominio;
+package br.sistcomp.sar.utilidades;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;

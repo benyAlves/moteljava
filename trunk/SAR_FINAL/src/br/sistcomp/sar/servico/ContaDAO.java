@@ -8,7 +8,7 @@ package br.sistcomp.sar.servico;
 import br.sistcomp.sar.conexao.ConexaoDB;
 import br.sistcomp.sar.dominio.Conta;
 import br.sistcomp.sar.dominio.Movimentacao;
-import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.utilidades.Utilitario;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;

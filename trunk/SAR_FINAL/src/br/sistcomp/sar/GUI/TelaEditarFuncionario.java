@@ -1,13 +1,13 @@
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.CaixaAlta;
+import br.sistcomp.sar.utilidades.CaixaAlta;
 import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import br.sistcomp.sar.dominio.Funcionario;
-import br.sistcomp.sar.dominio.MetodosWebCam;
+import br.sistcomp.sar.utilidades.MetodosWebCam;
 import br.sistcomp.sar.fachada.Fachada;
 import javax.swing.JOptionPane;
 

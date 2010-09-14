@@ -5,7 +5,7 @@
  */
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.CaixaAlta;
+import br.sistcomp.sar.utilidades.CaixaAlta;
 import br.sistcomp.sar.dominio.Modalidade;
 import br.sistcomp.sar.fachada.Fachada;
 import br.sistcomp.sar.servico.ModalidadeDAO;

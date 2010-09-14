@@ -4,7 +4,7 @@ import br.sistcomp.sar.conexao.ConexaoDB;
 import br.sistcomp.sar.dominio.Adesao;
 import br.sistcomp.sar.dominio.Mensalidade;
 import br.sistcomp.sar.dominio.Movimentacao;
-import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.utilidades.Utilitario;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.Date;
