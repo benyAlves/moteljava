@@ -1,9 +1,9 @@
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.CaixaAlta;
-import br.sistcomp.sar.dominio.MetodosWebCam;
+import br.sistcomp.sar.utilidades.CaixaAlta;
+import br.sistcomp.sar.utilidades.MetodosWebCam;
 import br.sistcomp.sar.dominio.Professor;
-import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.utilidades.Utilitario;
 import br.sistcomp.sar.fachada.Fachada;
 import java.awt.Image;
 import java.io.File;

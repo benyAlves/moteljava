@@ -3,7 +3,7 @@ package br.sistcomp.sar.servico;
 import br.sistcomp.sar.conexao.ConexaoDB;
 import br.sistcomp.sar.dominio.Pessoa;
 import br.sistcomp.sar.dominio.Professor;
-import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.utilidades.Utilitario;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.lang.String;

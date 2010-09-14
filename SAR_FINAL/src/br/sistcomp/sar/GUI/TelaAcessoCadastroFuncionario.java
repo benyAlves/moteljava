@@ -6,10 +6,10 @@
 
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.CaixaAlta;
+import br.sistcomp.sar.utilidades.CaixaAlta;
 import br.sistcomp.sar.dominio.Funcionario;
 import br.sistcomp.sar.dominio.Pessoa;
-import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.utilidades.Utilitario;
 import br.sistcomp.sar.fachada.Fachada;
 import br.sistcomp.sar.servico.FuncionarioDAO;
 import java.awt.Image;

@@ -4,7 +4,7 @@ import br.sistcomp.sar.conexao.ConexaoDB;
 import br.sistcomp.sar.dominio.Aluno;
 import br.sistcomp.sar.dominio.Pessoa;
 import br.sistcomp.sar.dominio.Turma;
-import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.utilidades.Utilitario;
 import br.sistcomp.sar.fachada.Fachada;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

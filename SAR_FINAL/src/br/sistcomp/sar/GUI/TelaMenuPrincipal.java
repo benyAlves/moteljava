@@ -5,7 +5,7 @@
  */
 package br.sistcomp.sar.GUI;
 
-import br.sistcomp.sar.dominio.Utilitario;
+import br.sistcomp.sar.utilidades.Utilitario;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 

@@ -7,7 +7,7 @@ package br.sistcomp.sar.GUI;
 
 import br.sistcomp.sar.dominio.Adesao;
 import br.sistcomp.sar.dominio.Aluno;
-import br.sistcomp.sar.dominio.CaixaAlta;
+import br.sistcomp.sar.utilidades.CaixaAlta;
 import br.sistcomp.sar.dominio.Pessoa;
 import br.sistcomp.sar.dominio.Plano;
 import br.sistcomp.sar.dominio.Turma;

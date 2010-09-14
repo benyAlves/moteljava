@@ -1,4 +1,4 @@
-package br.sistcomp.sar.dominio;
+package br.sistcomp.sar.utilidades;
 
 import java.awt.Cursor;
 import java.text.DateFormat;
